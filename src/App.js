@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadRecipes } from './actions/recipeCardsAction';
+import RecipeCard from './components/RecipeCard';
 
 function App() {
+  const recipeCards = useSelector((state) => state.recipeCards);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(recipeCards);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => dispatch(loadRecipes(3))}>TEST</button>
+      <div>
+        {recipeCards &&
+          recipeCards.recipes.map((recipe) => {
+            return <RecipeCard recipe={recipe} />;
+          })}
+      </div>
     </div>
   );
 }
