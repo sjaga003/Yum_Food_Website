@@ -5,18 +5,24 @@ import styled from 'styled-components';
 
 const RecipeCard = ({ recipe }) => {
   return (
-    <Card key={recipe.title}>
-      <FoodImage src={recipe.image} alt={`${recipe.title}`} />
-      <FoodInfo>
-        <Title>{recipe.title}</Title>
-        <BottomRow>
-          <SourceName>{recipe.sourceName}</SourceName>
-          <CookTime>
-            <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
-          </CookTime>
-        </BottomRow>
-      </FoodInfo>
-    </Card>
+    recipe.image && (
+      <Card data-testid="recipeCard">
+        <FoodImage
+          data-testid="recipeCardImage"
+          src={recipe.image}
+          alt={`${recipe.title}`}
+        />
+        <FoodInfo>
+          <Title>{recipe.title}</Title>
+          <BottomRow>
+            <SourceName>{recipe.sourceName}</SourceName>
+            <CookTime>
+              <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
+            </CookTime>
+          </BottomRow>
+        </FoodInfo>
+      </Card>
+    )
   );
 };
 
