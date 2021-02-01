@@ -2,27 +2,29 @@ import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
+import MissingImage from '../../images/card_image_missing.svg';
 
 const RecipeCard = ({ recipe }) => {
+  if (!recipe.image) {
+    console.log(recipe);
+  }
   return (
-    recipe.image && (
-      <Card data-testid="recipeCard">
-        <FoodImage
-          data-testid="recipeCardImage"
-          src={recipe.image}
-          alt={`${recipe.title}`}
-        />
-        <FoodInfo>
-          <Title>{recipe.title}</Title>
-          <BottomRow>
-            <SourceName>{recipe.sourceName}</SourceName>
-            <CookTime>
-              <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
-            </CookTime>
-          </BottomRow>
-        </FoodInfo>
-      </Card>
-    )
+    <Card data-testid="recipeCard">
+      <FoodImage
+        data-testid="recipeCardImage"
+        src={recipe.image ? recipe.image : MissingImage}
+        alt={`${recipe.title}`}
+      />
+      <FoodInfo>
+        <Title>{recipe.title}</Title>
+        <BottomRow>
+          <SourceName>{recipe.sourceName}</SourceName>
+          <CookTime>
+            <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
+          </CookTime>
+        </BottomRow>
+      </FoodInfo>
+    </Card>
   );
 };
 

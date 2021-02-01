@@ -17,7 +17,9 @@ function App() {
   const recipeCards = mockRecipeCards();
   // const recipeCards = useSelector((state) => state.recipeCards);
   const dispatch = useDispatch();
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // dispatch(loadRecipes(5));
+  }, []);
 
   return (
     <div className="App">
