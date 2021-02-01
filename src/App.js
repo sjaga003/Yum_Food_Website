@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
-import './App.css';
+
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadRecipes } from './actions/recipeCardsAction';
 import RecipeCard from './components/RecipeCard/RecipeCard';
 import styled from 'styled-components';
 import '@fontsource/prompt';
+import '@fontsource/roboto';
+import '@fontsource/montserrat';
 import { mockRecipeCards } from './api';
+import Nav from './components/Nav';
+import Home from './components/Home';
+import { GlobalStyle } from './components/GlobalStyles';
 
 function App() {
   const recipeCards = mockRecipeCards();
@@ -16,18 +21,30 @@ function App() {
 
   return (
     <div className="App">
-      <button data-testid="button" onClick={() => dispatch(loadRecipes(3))}>
-        TEST
-      </button>
-      <CardContainer>
-        {recipeCards &&
-          recipeCards.recipes.map((recipe) => {
-            return <RecipeCard key={recipe.title} recipe={recipe} />;
-          })}
-      </CardContainer>
+      <GlobalStyle />
+      <Content>
+        <Nav />
+        <Home />
+        <CardContainer>
+          {recipeCards &&
+            recipeCards.recipes.map((recipe) => {
+              return <RecipeCard key={recipe.title} recipe={recipe} />;
+            })}
+        </CardContainer>
+      </Content>
     </div>
   );
 }
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+  min-height: 100vh;
+  padding: 0px 15vw;
+  overflow-x: hidden;
+  height: 200vh;
+`;
 
 const CardContainer = styled.div`
   display: grid;

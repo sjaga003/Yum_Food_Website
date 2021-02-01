@@ -29,14 +29,14 @@ const RecipeCard = ({ recipe }) => {
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  /* border: 3px solid black; */
+  border-radius: 8px;
+  /* border: 1px solid lightgray; */
   overflow: hidden;
-  background: #eeeeee;
+  background: #f4f7fc;
   width: 268px;
   height: 343px;
   justify-content: left;
-  filter: drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
 `;
 
 const FoodImage = styled.img`
@@ -53,11 +53,11 @@ const FoodInfo = styled.div`
 `;
 
 const Title = styled.div`
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   align-self: flex-start;
   text-align: left;
-  color: black;
+  color: var(--text-color);
 `;
 
 const BottomRow = styled.div`
@@ -66,7 +66,7 @@ const BottomRow = styled.div`
 `;
 
 const SourceName = styled.div`
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   align-self: flex-start;
   text-align: left;
@@ -74,6 +74,8 @@ const SourceName = styled.div`
   color: #696969;
 `;
 
-const CookTime = styled.div``;
+const CookTime = styled.div`
+  font-weight: 600;
+`;
 
 export default RecipeCard;
