@@ -1,16 +1,71 @@
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import { motion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, dragData, setDragData, cookBookList }) => {
   if (!recipe.image) {
-    console.log(recipe);
+    // console.log(recipe);
   }
+  const [testState, setTestState] = useState(false);
+
+  const CardRef = useRef();
+  const test = (info) => {
+    setDragData({
+      ...dragData,
+      x: info.point.x,
+      y: info.point.y,
+    });
+  };
+
   return (
-    <Card data-testid="recipeCard">
+    <Card
+      // animate={
+      //   cookBookList.filter(
+      //     (recipe) =>
+      //       CardRef.current.getAttribute('data-recipe-id') == recipe.id
+      //   ).length != 0
+      //     ? { opacity: 0 }
+      //     : { opacity: 1 }
+      // }
+      inital={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      ref={CardRef}
+      layoutId={recipe.id}
+      layout="position"
+      drag
+      dragConstraints={false}
+      // dragConstraints={CardRef}
+      // dragElastic={1}
+      data-testid="recipeCard"
+      onDragStart={(event, info) => {
+        // console.log();
+        setDragData({
+          ...dragData,
+          lastDraggedId: event.target.offsetParent.getAttribute(
+            'data-recipe-id'
+          ),
+          isDragging: true,
+        });
+      }}
+      onDragEnd={(event, info) => {
+        // console.log(info.point.y);
+        // console.log(info);
+        // console.log(event);
+        test(info);
+        console.log('start');
+        // setTestState(!testState);
+        // console.log(testState);
+        // console.log('notfalse');
+        // console.log(dragData);
+      }}
+      data-recipe-id={recipe.id}
+    >
       <FoodImage
+        layout
+        draggable={false}
         data-testid="recipeCardImage"
         src={recipe.image ? recipe.image : MissingImage}
         alt={`${recipe.title}`}
@@ -28,7 +83,7 @@ const RecipeCard = ({ recipe }) => {
   );
 };
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -39,6 +94,7 @@ const Card = styled.div`
   height: 343px;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+  z-index: 3;
 `;
 
 const FoodImage = styled.img`
@@ -54,7 +110,7 @@ const FoodInfo = styled.div`
   justify-content: space-between;
 `;
 
-const Title = styled.div`
+const Title = styled(motion.div)`
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   align-self: flex-start;

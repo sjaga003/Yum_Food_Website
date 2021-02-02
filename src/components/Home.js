@@ -55,7 +55,6 @@ const HeroDescription = styled.div`
 const ImageContainer = styled.div`
   display: flex;
   align-items: center;
-  user-select: none;
 `;
 
 const HeaderImg = styled.img`
