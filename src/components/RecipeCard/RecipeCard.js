@@ -5,66 +5,66 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
 
-const RecipeCard = ({ recipe, dragData, setDragData, cookBookList }) => {
-  if (!recipe.image) {
-    // console.log(recipe);
-  }
-  const [testState, setTestState] = useState(false);
+const RecipeCard = ({ recipe, cookBookRef, cookBookList, setCookBookList }) => {
+  const cardRef = useRef();
 
-  const CardRef = useRef();
-  const test = (info) => {
-    setDragData({
-      ...dragData,
-      x: info.point.x,
-      y: info.point.y,
-    });
+  const [isDocked, setIsDocked] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const isWithinCookBook = (cardRect, cookBookRef, threshold) => {
+    if (
+      cardRect.top - threshold + cardRect.height > cookBookRef.top &&
+      cardRect.left - threshold + cardRect.width > cookBookRef.left &&
+      cardRect.bottom + threshold - cardRect.height < cookBookRef.bottom &&
+      cardRect.right + threshold - cardRect.width < cookBookRef.right
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
-  return (
+  const modifyDrag = (event, info) => {
+    const cardRect = cardRef.current.getBoundingClientRect();
+    const cookBookRect = cookBookRef.current.getBoundingClientRect();
+    const result = isWithinCookBook(cardRect, cookBookRect, 100);
+    if (isDocked != result) {
+      setIsDocked(result);
+    }
+  };
+
+  const endDrag = (event, info) => {
+    const newArray = isDocked
+      ? [...cookBookList, recipe.id]
+      : [...cookBookList].filter((e) => e != recipe.id);
+    setCookBookList(newArray);
+    setIsDragging(false);
+  };
+
+  const onTop = { zIndex: 1 };
+  const flat = {
+    zIndex: 0,
+    transition: { delay: 0.3 },
+  };
+
+  return cookBookList.includes(recipe.id) ? (
+    ''
+  ) : (
     <Card
-      // animate={
-      //   cookBookList.filter(
-      //     (recipe) =>
-      //       CardRef.current.getAttribute('data-recipe-id') == recipe.id
-      //   ).length != 0
-      //     ? { opacity: 0 }
-      //     : { opacity: 1 }
-      // }
-      inital={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      ref={CardRef}
-      layoutId={recipe.id}
-      layout="position"
+      ref={cardRef}
       drag
-      dragConstraints={false}
-      // dragConstraints={CardRef}
-      // dragElastic={1}
+      dragConstraints={cardRef}
+      dragElastic={1}
+      onDragStart={() => setIsDragging(true)}
+      onDrag={modifyDrag}
+      onDragEnd={endDrag}
+      layout
+      layoutId={`recipeCard-${recipe.id}`}
       data-testid="recipeCard"
-      onDragStart={(event, info) => {
-        // console.log();
-        setDragData({
-          ...dragData,
-          lastDraggedId: event.target.offsetParent.getAttribute(
-            'data-recipe-id'
-          ),
-          isDragging: true,
-        });
-      }}
-      onDragEnd={(event, info) => {
-        // console.log(info.point.y);
-        // console.log(info);
-        // console.log(event);
-        test(info);
-        console.log('start');
-        // setTestState(!testState);
-        // console.log(testState);
-        // console.log('notfalse');
-        // console.log(dragData);
-      }}
       data-recipe-id={recipe.id}
+      animate={isDragging ? onTop : flat}
     >
       <FoodImage
-        layout
         draggable={false}
         data-testid="recipeCardImage"
         src={recipe.image ? recipe.image : MissingImage}
@@ -95,6 +95,7 @@ const Card = styled(motion.div)`
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   z-index: 3;
+  cursor: pointer;
 `;
 
 const FoodImage = styled.img`

@@ -11,22 +11,27 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import { GlobalStyle } from './components/GlobalStyles';
 import Recipes from './components/Recipes';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 function App() {
-  const [isCookBookOpen, setIsCookBookOpen] = useState(true);
+  const [isCookBookOpen, setIsCookBookOpen] = useState(false);
   return (
     <div className="App">
       <GlobalStyle />
       <Content>
-        <Nav
-          isCookBookOpen={isCookBookOpen}
-          setIsCookBookOpen={setIsCookBookOpen}
-        />
-        <Home />
-        <Recipes
-          isCookBookOpen={isCookBookOpen}
-          setIsCookBookOpen={setIsCookBookOpen}
-        />
+        <AnimateSharedLayout type="switch">
+          <AnimatePresence>
+            <Nav
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+            />
+            <Home />
+            <Recipes
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+            />
+          </AnimatePresence>
+        </AnimateSharedLayout>
       </Content>
     </div>
   );

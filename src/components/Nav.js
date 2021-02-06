@@ -1,8 +1,9 @@
-import React from 'react';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import YumLogo from '../images/Yum_Logo.svg';
 
-const Nav = () => {
+const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   return (
     <Navigation>
       <Logo>
@@ -14,7 +15,7 @@ const Nav = () => {
         <NavItem href="#">Event</NavItem>
         <NavItem href="#">Team</NavItem>
         <NavItem href="#">Shop</NavItem>
-        <ContactButton href="#">Contact</ContactButton>
+        <NavItem href="#">Contact</NavItem>
       </NavLinks>
     </Navigation>
   );
@@ -51,11 +52,12 @@ const NavItem = styled.a`
   font-size: 20px;
 `;
 
-const ContactButton = styled(NavItem)`
+const ContactButton = styled(motion.div)`
   padding: 10px 30px;
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);
+  position: relative;
 `;
 
 export default Nav;

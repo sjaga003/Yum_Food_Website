@@ -8,188 +8,109 @@ import { mockRecipeCards } from '../api';
 import MissingImage from '../images/card_image_missing.svg';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-const Recipes = () => {
+const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const recipeCards = mockRecipeCards();
   // const recipeCards = useSelector((state) => state.recipeCards);
   const dispatch = useDispatch();
-  useEffect(() => {
-    // dispatch(loadRecipes(5));
-    handleResize();
-    window.addEventListener('resize', handleResize, true);
-
-    return () => {
-      window.removeEventListener('resize', handleResize, true);
-    };
-  }, []);
-
-  const [dragData, setDragData] = useState({
-    x: 0,
-    y: 0,
-    x1: 0,
-    y1: 0,
-    x2: 0,
-    y2: 0,
-    isDragging: false,
-    lastDraggedId: null,
-  });
-
+  const cookBookRef = useRef();
   const [cookBookList, setCookBookList] = useState([]);
 
-  useEffect(() => {
-    // console.log(dragData);
-    if (
-      isWithin(
-        dragData.x1,
-        dragData.y1,
-        dragData.x2,
-        dragData.y2,
-        dragData.x,
-        dragData.y
-      ) &&
-      dragData.isDragging
-    ) {
-      // console.log(dragData.lastDraggedId);
-      console.log('here');
-      setCookBookList([
-        ...cookBookList,
-        recipeCards.recipes.filter(
-          (card) => dragData.lastDraggedId == card.id
-        )[0],
-      ]);
-      setDragData({
-        ...dragData,
-        isDragging: false,
-      });
-    }
-  }, [dragData.x]);
-
-  const isWithin = (x1, y1, x2, y2, x, y) => {
-    return x > x1 && x < x2 && y > y1 && y < y2;
-  };
-
-  const ref = useRef();
-
-  const handleResize = () => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-
-    setDragData({
-      ...dragData,
-      x1: rect.x + window.pageXOffset,
-      y1: rect.y + window.pageYOffset,
-      x2: rect.x + window.pageXOffset + rect.width,
-      y2: rect.y + window.pageYOffset + rect.height,
-    });
+  const cookBookButtonVariant = {
+    show: {
+      opacity: 1,
+    },
+    hide: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
   };
 
   return (
     <RecipeContainer>
-      <AnimateSharedLayout type="crossfade">
-        <CardContainer>
-          <AnimatePresence>
-            {recipeCards &&
-              recipeCards.recipes.map((recipe) => {
-                return (
-                  <RecipeCard
-                    setDragData={setDragData}
-                    dragData={dragData}
-                    key={recipe.title}
-                    recipe={recipe}
-                    cookBookList={cookBookList}
-                  />
-                );
-              })}
-          </AnimatePresence>
-        </CardContainer>
+      <CardContainer>
+        {recipeCards &&
+          recipeCards.recipes.map((recipe) => {
+            return (
+              <RecipeCard
+                cookBookRef={cookBookRef}
+                setCookBookList={setCookBookList}
+                cookBookList={cookBookList}
+                key={`recipe-${recipe.id}`}
+                recipe={recipe}
+              />
+            );
+          })}
+      </CardContainer>
 
-        <CookBook
-          ref={ref}
-          on={() => {
-            // console.log('HELLO');
-            // console.log(dragData);
-            // console.log(
-            //   isWithin(
-            //     dragData.x1,
-            //     dragData.y1,
-            //     dragData.x2,
-            //     dragData.y2,
-            //     dragData.x,
-            //     dragData.y
-            //   )
-            // );
-          }}
+      <CookBook
+        initial={{ right: -320 }}
+        animate={
+          isCookBookOpen
+            ? { right: 0, transition: { type: 'spring', damping: 15 } }
+            : { right: -320, transition: { type: 'spring', damping: 13 } }
+        }
+        ref={cookBookRef}
+      >
+        <ButtonContainer
+          variants={cookBookButtonVariant}
+          animate={!isCookBookOpen ? 'show' : 'hide'}
+          whileHover={'show'}
         >
-          <AnimatePresence>
-            DRAG HERE
-            {cookBookList.map((recipe) => {
-              // console.log(id);
-              // const recipe = recipeCards.recipes.find((card) => id == card.id);
-              // console.log(recipe);
-              // const recipe = recipeCards.recipes[0];
-              console.log(recipe);
+          <ToggleButton
+            onClick={() => setIsCookBookOpen(!isCookBookOpen)}
+          ></ToggleButton>
+        </ButtonContainer>
+
+        <CookBookCards>
+          {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
+          {isCookBookOpen &&
+            cookBookList.map((entryId) => {
+              const recipe = recipeCards.recipes.find(
+                (element) => element.id === entryId
+              );
               return (
-                <Card
-                  exit={{ opacity: 0 }}
-                  key={recipe.id}
-                  layoutId={recipe.id}
-                  layout="position"
-                  drag
-                  dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                  dragElastic={1}
-                  data-recipe-id={recipe.id}
-                  onDragStart={(event, info) => {
-                    console.log('dragstart');
-
-                    setDragData({
-                      ...dragData,
-                      lastDraggedId: event.target.offsetParent.getAttribute(
-                        'data-recipe-id'
-                      ),
-                      isDragging: true,
-                    });
-                  }}
-                  onDragEnd={(event, info) => {
-                    console.log('hello');
-                    if (
-                      !isWithin(
-                        dragData.x1,
-                        dragData.y1,
-                        dragData.x2,
-                        dragData.y2,
-                        info.point.x,
-                        info.point.y
-                      )
-                    ) {
-                      console.log('heyo');
-                      console.log(dragData.lastDraggedId);
-
-                      setCookBookList(
-                        cookBookList.filter(
-                          (recipe) => recipe.id != dragData.lastDraggedId
-                        )
-                      );
-                      setDragData({
-                        ...dragData,
-                        isDragging: false,
-                      });
-                    }
-                  }}
-                >
-                  <FoodImage
-                    draggable={false}
-                    data-testid="recipeCardImage"
-                    src={recipe.image ? recipe.image : MissingImage}
-                    alt={`${recipe.title}`}
-                  />
-                  <FoodInfo>
-                    <Title>{recipe.title}</Title>
-                  </FoodInfo>
-                </Card>
+                <>
+                  <Card
+                    key={`cookBookList-${recipe.id}`}
+                    layout
+                    layoutId={`recipeCard-${recipe.id}`}
+                  >
+                    <FoodImage
+                      draggable={false}
+                      data-testid="recipeCardImage"
+                      src={recipe.image ? recipe.image : MissingImage}
+                      alt={`${recipe.title}`}
+                    />
+                    <FoodInfo>
+                      <Title>{recipe.title}</Title>
+                    </FoodInfo>{' '}
+                    <CloseButton
+                      initial={{
+                        fill: 'black',
+                      }}
+                      whileHover={{
+                        fill: 'red',
+                      }}
+                      onClick={() => {
+                        setCookBookList(
+                          [...cookBookList].filter((e) => e != recipe.id)
+                        );
+                      }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <motion.path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z" />
+                    </CloseButton>
+                  </Card>
+                </>
               );
             })}
-          </AnimatePresence>
-        </CookBook>
-      </AnimateSharedLayout>
+        </CookBookCards>
+      </CookBook>
     </RecipeContainer>
   );
 };
@@ -216,9 +137,52 @@ const CookBook = styled(motion.div)`
   position: fixed;
   top: -300px;
   right: 0;
-  width: 300px;
+  width: 400px;
   height: 100vh;
   border-radius: 50px 0px 0px 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CookBookCards = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+`;
+
+const ToggleButton = styled(motion.button)`
+  width: 12px;
+  height: 500px;
+  border-radius: 99999px;
+  border: 0;
+  padding: 0;
+  font-size: 100%;
+  background: #e89209;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const ButtonContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  margin-right: 20px;
+  width: 30px;
+`;
+
+const CookBookTitle = styled(motion.span)`
+  color: var(--bg-color);
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
 `;
 
 const Card = styled(motion.div)`
@@ -228,19 +192,31 @@ const Card = styled(motion.div)`
   /* border: 1px solid lightgray; */
   overflow: hidden;
   background: #f4f7fc;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 150px;
+  height: 100px;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
-  z-index: 3;
+  z-index: 2;
   margin-bottom: 10px;
 `;
 
+const CloseButton = styled(motion.svg)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  transition: fill 0.5s ease;
+`;
+
 const FoodImage = styled(motion.img)`
-  height: 100%;
-  width: 70%;
+  height: 80px;
+  width: 80px;
   object-fit: cover;
-  position: relative;
+  border-radius: 50%;
+  margin-left: 10px;
+  z-index: 3;
 `;
 
 const FoodInfo = styled.div`
@@ -249,6 +225,7 @@ const FoodInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-right: 20px;
 `;
 
 const Title = styled(motion.div)`
