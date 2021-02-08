@@ -5,7 +5,14 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
 
-const RecipeCard = ({ recipe, cookBookRef, cookBookList, setCookBookList }) => {
+const RecipeCard = ({
+  recipe,
+  cookBookRef,
+  cookBookList,
+  setCookBookList,
+  isCookBookOpen,
+  setIsCookBookOpen,
+}) => {
   const cardRef = useRef();
 
   const [isDocked, setIsDocked] = useState(false);
@@ -25,11 +32,13 @@ const RecipeCard = ({ recipe, cookBookRef, cookBookList, setCookBookList }) => {
   };
 
   const modifyDrag = (event, info) => {
-    const cardRect = cardRef.current.getBoundingClientRect();
-    const cookBookRect = cookBookRef.current.getBoundingClientRect();
-    const result = isWithinCookBook(cardRect, cookBookRect, 100);
-    if (isDocked != result) {
-      setIsDocked(result);
+    if (isCookBookOpen) {
+      const cardRect = cardRef.current.getBoundingClientRect();
+      const cookBookRect = cookBookRef.current.getBoundingClientRect();
+      const result = isWithinCookBook(cardRect, cookBookRect, 100);
+      if (isDocked != result) {
+        setIsDocked(result);
+      }
     }
   };
 
@@ -55,7 +64,12 @@ const RecipeCard = ({ recipe, cookBookRef, cookBookList, setCookBookList }) => {
       drag
       dragConstraints={cardRef}
       dragElastic={1}
-      onDragStart={() => setIsDragging(true)}
+      onDragStart={() => {
+        setIsDragging(true);
+        if (!isCookBookOpen) {
+          setIsCookBookOpen(true);
+        }
+      }}
       onDrag={modifyDrag}
       onDragEnd={endDrag}
       layout

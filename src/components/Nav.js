@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import YumLogo from '../images/Yum_Logo.svg';
 
-const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
+const Nav = () => {
   return (
     <Navigation>
       <Logo>

@@ -19,19 +19,15 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <Content>
-        <AnimateSharedLayout type="switch">
-          <AnimatePresence>
-            <Nav
-              isCookBookOpen={isCookBookOpen}
-              setIsCookBookOpen={setIsCookBookOpen}
-            />
-            <Home />
-            <Recipes
-              isCookBookOpen={isCookBookOpen}
-              setIsCookBookOpen={setIsCookBookOpen}
-            />
-          </AnimatePresence>
-        </AnimateSharedLayout>
+        <Nav
+          isCookBookOpen={isCookBookOpen}
+          setIsCookBookOpen={setIsCookBookOpen}
+        />
+        <Home />
+        <Recipes
+          isCookBookOpen={isCookBookOpen}
+          setIsCookBookOpen={setIsCookBookOpen}
+        />
       </Content>
     </div>
   );

@@ -18,60 +18,66 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const cookBookButtonVariant = {
     show: {
       opacity: 1,
+      transition: {
+        duration: 0.1,
+      },
     },
     hide: {
       opacity: 0,
       transition: {
-        duration: 0.2,
+        duration: 0.1,
       },
     },
   };
 
   return (
     <RecipeContainer>
-      <CardContainer>
-        {recipeCards &&
-          recipeCards.recipes.map((recipe) => {
-            return (
-              <RecipeCard
-                cookBookRef={cookBookRef}
-                setCookBookList={setCookBookList}
-                cookBookList={cookBookList}
-                key={`recipe-${recipe.id}`}
-                recipe={recipe}
-              />
-            );
-          })}
-      </CardContainer>
-
-      <CookBook
-        initial={{ right: -320 }}
-        animate={
-          isCookBookOpen
-            ? { right: 0, transition: { type: 'spring', damping: 15 } }
-            : { right: -320, transition: { type: 'spring', damping: 13 } }
-        }
-        ref={cookBookRef}
-      >
-        <ButtonContainer
-          variants={cookBookButtonVariant}
-          animate={!isCookBookOpen ? 'show' : 'hide'}
-          whileHover={'show'}
-        >
-          <ToggleButton
-            onClick={() => setIsCookBookOpen(!isCookBookOpen)}
-          ></ToggleButton>
-        </ButtonContainer>
-
-        <CookBookCards>
-          {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
-          {isCookBookOpen &&
-            cookBookList.map((entryId) => {
-              const recipe = recipeCards.recipes.find(
-                (element) => element.id === entryId
-              );
+      <AnimateSharedLayout type="switch">
+        <CardContainer>
+          {recipeCards &&
+            recipeCards.recipes.map((recipe) => {
               return (
-                <>
+                <RecipeCard
+                  cookBookRef={cookBookRef}
+                  setCookBookList={setCookBookList}
+                  cookBookList={cookBookList}
+                  isCookBookOpen={isCookBookOpen}
+                  setIsCookBookOpen={setIsCookBookOpen}
+                  key={`recipe-${recipe.id}`}
+                  recipe={recipe}
+                />
+              );
+            })}
+        </CardContainer>
+
+        <CookBook
+          initial={{ right: -320 }}
+          animate={
+            isCookBookOpen
+              ? { right: -10, transition: { type: 'spring', damping: 15 } }
+              : { right: -320, transition: { type: 'spring', damping: 13 } }
+          }
+          ref={cookBookRef}
+        >
+          <ButtonContainer
+            variants={cookBookButtonVariant}
+            animate={!isCookBookOpen ? 'show' : 'hide'}
+            whileHover={'show'}
+          >
+            <ToggleButton
+              onClick={() => setIsCookBookOpen(!isCookBookOpen)}
+            ></ToggleButton>
+          </ButtonContainer>
+
+          <CookBookCards>
+            {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
+            {isCookBookOpen &&
+              cookBookList &&
+              cookBookList.map((entryId) => {
+                const recipe = recipeCards.recipes.find(
+                  (element) => element.id === entryId
+                );
+                return (
                   <Card
                     key={`cookBookList-${recipe.id}`}
                     layout
@@ -106,18 +112,18 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
                       <motion.path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z" />
                     </CloseButton>
                   </Card>
-                </>
-              );
-            })}
-        </CookBookCards>
-      </CookBook>
+                );
+              })}
+          </CookBookCards>
+        </CookBook>
+      </AnimateSharedLayout>
     </RecipeContainer>
   );
 };
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fill, 300px);
   grid-column-gap: 64px;
   grid-row-gap: 32px;
   justify-content: center;
