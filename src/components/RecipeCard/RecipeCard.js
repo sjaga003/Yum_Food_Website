@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
+import RecipeDetail from '../RecipeDetail';
 
 const RecipeCard = ({
   recipe,
@@ -17,6 +18,7 @@ const RecipeCard = ({
 
   const [isDocked, setIsDocked] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   const isWithinCookBook = (cardRect, cookBookRef, threshold) => {
     if (
@@ -32,13 +34,15 @@ const RecipeCard = ({
   };
 
   const modifyDrag = (event, info) => {
-    if (isCookBookOpen) {
-      const cardRect = cardRef.current.getBoundingClientRect();
-      const cookBookRect = cookBookRef.current.getBoundingClientRect();
-      const result = isWithinCookBook(cardRect, cookBookRect, 100);
-      if (isDocked != result) {
-        setIsDocked(result);
-      }
+    const cardRect = cardRef.current.getBoundingClientRect();
+    const cookBookRect = cookBookRef.current.getBoundingClientRect();
+    const result = isWithinCookBook(cardRect, cookBookRect, 100);
+    if (isDocked != result) {
+      setIsDocked(result);
+    }
+
+    if (!isCookBookOpen && result) {
+      setIsCookBookOpen(true);
     }
   };
 
@@ -59,41 +63,54 @@ const RecipeCard = ({
   return cookBookList.includes(recipe.id) ? (
     ''
   ) : (
-    <Card
-      ref={cardRef}
-      drag
-      dragConstraints={cardRef}
-      dragElastic={1}
-      onDragStart={() => {
-        setIsDragging(true);
-        if (!isCookBookOpen) {
-          setIsCookBookOpen(true);
-        }
-      }}
-      onDrag={modifyDrag}
-      onDragEnd={endDrag}
-      layout
-      layoutId={`recipeCard-${recipe.id}`}
-      data-testid="recipeCard"
-      data-recipe-id={recipe.id}
-      animate={isDragging ? onTop : flat}
-    >
-      <FoodImage
-        draggable={false}
-        data-testid="recipeCardImage"
-        src={recipe.image ? recipe.image : MissingImage}
-        alt={`${recipe.title}`}
-      />
-      <FoodInfo>
-        <Title>{recipe.title}</Title>
-        <BottomRow>
-          <SourceName>{recipe.sourceName}</SourceName>
-          <CookTime>
-            <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
-          </CookTime>
-        </BottomRow>
-      </FoodInfo>
-    </Card>
+    <>
+      {isDetailOpen && (
+        <RecipeDetail
+          isDetailOpen={isDetailOpen}
+          setIsDetailOpen={setIsDetailOpen}
+          recipe={recipe}
+        />
+      )}
+      <Card
+        ref={cardRef}
+        drag
+        dragConstraints={cardRef}
+        dragElastic={1}
+        onDragStart={(event, info) => {
+          setIsDragging(true);
+        }}
+        onDrag={modifyDrag}
+        onDragEnd={endDrag}
+        layout
+        layoutId={`recipeCard-${recipe.id}`}
+        data-testid="recipeCard"
+        data-recipe-id={recipe.id}
+        animate={isDragging ? onTop : flat}
+        onClick={(e) => {
+          console.log('HELLO');
+          if (!cardRef.current.style.transform) {
+            setIsDetailOpen(true);
+            document.body.style.overflow = 'hidden';
+          }
+        }}
+      >
+        <FoodImage
+          draggable={false}
+          data-testid="recipeCardImage"
+          src={recipe.image ? recipe.image : MissingImage}
+          alt={`${recipe.title}`}
+        />
+        <FoodInfo>
+          <Title>{recipe.title}</Title>
+          <BottomRow>
+            <SourceName>{recipe.sourceName}</SourceName>
+            <CookTime>
+              <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
+            </CookTime>
+          </BottomRow>
+        </FoodInfo>
+      </Card>
+    </>
   );
 };
 
@@ -110,6 +127,7 @@ const Card = styled(motion.div)`
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   z-index: 3;
   cursor: pointer;
+  will-change: transform;
 `;
 
 const FoodImage = styled.img`

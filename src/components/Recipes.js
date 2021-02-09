@@ -15,6 +15,14 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const cookBookRef = useRef();
   const [cookBookList, setCookBookList] = useState([]);
 
+  // useEffect(() => {
+  //   dispatch(loadRecipes(10));
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(recipeCards);
+  // }, [recipeCards]);
+
   const cookBookButtonVariant = {
     show: {
       opacity: 1,
@@ -33,89 +41,92 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
   return (
     <RecipeContainer>
       <AnimateSharedLayout type="switch">
-        <CardContainer>
-          {recipeCards &&
-            recipeCards.recipes.map((recipe) => {
-              return (
-                <RecipeCard
-                  cookBookRef={cookBookRef}
-                  setCookBookList={setCookBookList}
-                  cookBookList={cookBookList}
-                  isCookBookOpen={isCookBookOpen}
-                  setIsCookBookOpen={setIsCookBookOpen}
-                  key={`recipe-${recipe.id}`}
-                  recipe={recipe}
-                />
-              );
-            })}
-        </CardContainer>
-
-        <CookBook
-          initial={{ right: -320 }}
-          animate={
-            isCookBookOpen
-              ? { right: -10, transition: { type: 'spring', damping: 15 } }
-              : { right: -320, transition: { type: 'spring', damping: 13 } }
-          }
-          ref={cookBookRef}
-        >
-          <ButtonContainer
-            variants={cookBookButtonVariant}
-            animate={!isCookBookOpen ? 'show' : 'hide'}
-            whileHover={'show'}
-          >
-            <ToggleButton
-              onClick={() => setIsCookBookOpen(!isCookBookOpen)}
-            ></ToggleButton>
-          </ButtonContainer>
-
-          <CookBookCards>
-            {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
-            {isCookBookOpen &&
-              cookBookList &&
-              cookBookList.map((entryId) => {
-                const recipe = recipeCards.recipes.find(
-                  (element) => element.id === entryId
-                );
+        <AnimatePresence>
+          <CardContainer>
+            {recipeCards &&
+              recipeCards.recipes.map((recipe) => {
                 return (
-                  <Card
-                    key={`cookBookList-${recipe.id}`}
-                    layout
-                    layoutId={`recipeCard-${recipe.id}`}
-                  >
-                    <FoodImage
-                      draggable={false}
-                      data-testid="recipeCardImage"
-                      src={recipe.image ? recipe.image : MissingImage}
-                      alt={`${recipe.title}`}
-                    />
-                    <FoodInfo>
-                      <Title>{recipe.title}</Title>
-                    </FoodInfo>{' '}
-                    <CloseButton
-                      initial={{
-                        fill: 'black',
-                      }}
-                      whileHover={{
-                        fill: 'red',
-                      }}
-                      onClick={() => {
-                        setCookBookList(
-                          [...cookBookList].filter((e) => e != recipe.id)
-                        );
-                      }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                    >
-                      <motion.path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z" />
-                    </CloseButton>
-                  </Card>
+                  <RecipeCard
+                    cookBookRef={cookBookRef}
+                    setCookBookList={setCookBookList}
+                    cookBookList={cookBookList}
+                    isCookBookOpen={isCookBookOpen}
+                    setIsCookBookOpen={setIsCookBookOpen}
+                    key={`recipe-${recipe.id}`}
+                    recipe={recipe}
+                  />
                 );
               })}
-          </CookBookCards>
-        </CookBook>
+          </CardContainer>
+
+          <CookBook
+            initial={{ right: -320 }}
+            animate={
+              isCookBookOpen
+                ? { right: -10, transition: { type: 'spring', damping: 15 } }
+                : { right: -320, transition: { type: 'spring', damping: 13 } }
+            }
+            key="cookbook"
+            ref={cookBookRef}
+          >
+            <ButtonContainer
+              variants={cookBookButtonVariant}
+              animate={!isCookBookOpen ? 'show' : 'hide'}
+              whileHover={'show'}
+            >
+              <ToggleButton
+                onClick={() => setIsCookBookOpen(!isCookBookOpen)}
+              ></ToggleButton>
+            </ButtonContainer>
+
+            <CookBookCards>
+              {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
+              {isCookBookOpen &&
+                cookBookList &&
+                cookBookList.map((entryId) => {
+                  const recipe = recipeCards.recipes.find(
+                    (element) => element.id === entryId
+                  );
+                  return (
+                    <Card
+                      key={`cookBookList-${recipe.id}`}
+                      layout
+                      layoutId={`recipeCard-${recipe.id}`}
+                    >
+                      <FoodImage
+                        draggable={false}
+                        data-testid="recipeCardImage"
+                        src={recipe.image ? recipe.image : MissingImage}
+                        alt={`${recipe.title}`}
+                      />
+                      <FoodInfo>
+                        <Title>{recipe.title}</Title>
+                      </FoodInfo>{' '}
+                      <CloseButton
+                        initial={{
+                          fill: 'black',
+                        }}
+                        whileHover={{
+                          fill: 'red',
+                        }}
+                        onClick={() => {
+                          setCookBookList(
+                            [...cookBookList].filter((e) => e != recipe.id)
+                          );
+                        }}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <motion.path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z" />
+                      </CloseButton>
+                    </Card>
+                  );
+                })}
+            </CookBookCards>
+          </CookBook>
+        </AnimatePresence>
       </AnimateSharedLayout>
     </RecipeContainer>
   );
@@ -158,6 +169,7 @@ const CookBookCards = styled(motion.div)`
   justify-content: flex-start;
   height: 100%;
   width: 100%;
+  overflow-y: auto;
 `;
 
 const ToggleButton = styled(motion.button)`
@@ -201,7 +213,7 @@ const Card = styled(motion.div)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   z-index: 2;

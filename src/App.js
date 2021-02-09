@@ -12,6 +12,7 @@ import Home from './components/Home';
 import { GlobalStyle } from './components/GlobalStyles';
 import Recipes from './components/Recipes';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import RecipeDetail from './components/RecipeDetail';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
