@@ -11,15 +11,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const recipeCards = mockRecipeCards();
   // const recipeCards = useSelector((state) => state.recipeCards);
+  // console.log(recipeCards);
   const dispatch = useDispatch();
   const cookBookRef = useRef();
   const [cookBookList, setCookBookList] = useState([]);
 
   // useEffect(() => {
   //   dispatch(loadRecipes(10));
+  //   console.log('HELLO');
+  //   console.log(recipeCards.recipes.results);
   // }, []);
 
   // useEffect(() => {
+  //   console.log('HI');
   //   console.log(recipeCards);
   // }, [recipeCards]);
 
@@ -43,8 +47,8 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
       <AnimateSharedLayout type="switch">
         <AnimatePresence>
           <CardContainer>
-            {recipeCards &&
-              recipeCards.recipes.map((recipe) => {
+            {recipeCards.recipes.results &&
+              recipeCards.recipes.results.map((recipe) => {
                 return (
                   <RecipeCard
                     cookBookRef={cookBookRef}
@@ -84,7 +88,7 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
               {isCookBookOpen &&
                 cookBookList &&
                 cookBookList.map((entryId) => {
-                  const recipe = recipeCards.recipes.find(
+                  const recipe = recipeCards.recipes.results.find(
                     (element) => element.id === entryId
                   );
                   return (
@@ -160,6 +164,7 @@ const CookBook = styled(motion.div)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 const CookBookCards = styled(motion.div)`
@@ -170,6 +175,7 @@ const CookBookCards = styled(motion.div)`
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const ToggleButton = styled(motion.button)`

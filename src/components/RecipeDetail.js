@@ -3,14 +3,18 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   faBreadSlice,
+  faCircleNotch,
   faLeaf,
   faSeedling,
+  faSpinner,
+  faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DairyIcon from '../images/Dairy.svg';
+import NoImageFound from '../images/no_ingredient_image.jpg';
 
-const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe }) => {
-  return (
+const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe, recipeId }) => {
+  return recipe ? (
     <CardShadow
       className="shadow"
       onClick={(e) => {
@@ -95,8 +99,12 @@ const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe }) => {
                   <IngredientCard key={`IngredientCard-${item.id}`}>
                     <IngredientImage>
                       <img
-                        src={`https://spoonacular.com/cdn/ingredients_250x250/${item.image}`}
-                        alt=""
+                        src={
+                          item.image
+                            ? `https://spoonacular.com/cdn/ingredients_250x250/${item.image}`
+                            : NoImageFound
+                        }
+                        alt={item.name}
                       />
                     </IngredientImage>
                     <IngredientName>{item.name}</IngredientName>
@@ -123,8 +131,28 @@ const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe }) => {
         </CardContent>
       </Card>
     </CardShadow>
+  ) : (
+    <CardShadow>
+      <Card
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        layoutId={`recipeCard-${recipeId}`}
+      >
+        <SpinnerIcon size="lg" icon={faSync} spin />
+      </Card>
+    </CardShadow>
   );
 };
+
+const SpinnerIcon = styled(FontAwesomeIcon)`
+  font-size: 160px;
+  color: #ccc;
+  will-change: transform;
+  display: inline-block;
+`;
 
 const CardShadow = styled(motion.div)`
   width: 100%;

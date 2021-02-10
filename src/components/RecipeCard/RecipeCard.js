@@ -1,10 +1,12 @@
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
 import RecipeDetail from '../RecipeDetail';
+import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
 
 const RecipeCard = ({
   recipe,
@@ -14,11 +16,26 @@ const RecipeCard = ({
   isCookBookOpen,
   setIsCookBookOpen,
 }) => {
+  const recipeDetails = useSelector((state) => state.recipeDetails);
+  const dispatch = useDispatch();
   const cardRef = useRef();
 
   const [isDocked, setIsDocked] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [recipeDetail, setRecipeDetail] = useState({});
+  const [loadingDetail, setLoadingDetail] = useState(false);
+
+  // useEffect(() => {
+  //   console.log(recipeDetails);
+  //   console.log('HEO');
+  //   console.log(recipeDetail);
+  // }, [recipeDetails, recipeDetail]);
+  useEffect(() => {
+    setRecipeDetail(
+      recipeDetails.recipes.find((element) => element.id === recipe.id)
+    );
+  }, [recipeDetails]);
 
   const isWithinCookBook = (cardRect, cookBookRef, threshold) => {
     if (
@@ -60,6 +77,25 @@ const RecipeCard = ({
     transition: { delay: 0.3 },
   };
 
+  const onCardClick = () => {
+    console.log('HELLO');
+    if (!cardRef.current.style.transform) {
+      if (!recipeDetails.recipes.some((el) => el.id === recipe.id)) {
+        console.log('NOT FOUND');
+        setLoadingDetail(true);
+        dispatch(loadRecipeDetails(recipe.id));
+        //useEffect updates recipeDetail when recipeDetails is updated
+      } else {
+        setRecipeDetail(
+          recipeDetails.recipes.find((element) => element.id === recipe.id)
+        );
+      }
+
+      setIsDetailOpen(true);
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
   return cookBookList.includes(recipe.id) ? (
     ''
   ) : (
@@ -68,7 +104,8 @@ const RecipeCard = ({
         <RecipeDetail
           isDetailOpen={isDetailOpen}
           setIsDetailOpen={setIsDetailOpen}
-          recipe={recipe}
+          recipe={recipeDetail}
+          recipeId={recipe.id}
         />
       )}
       <Card
@@ -86,13 +123,7 @@ const RecipeCard = ({
         data-testid="recipeCard"
         data-recipe-id={recipe.id}
         animate={isDragging ? onTop : flat}
-        onClick={(e) => {
-          console.log('HELLO');
-          if (!cardRef.current.style.transform) {
-            setIsDetailOpen(true);
-            document.body.style.overflow = 'hidden';
-          }
-        }}
+        onClick={onCardClick}
       >
         <FoodImage
           draggable={false}
@@ -103,10 +134,10 @@ const RecipeCard = ({
         <FoodInfo>
           <Title>{recipe.title}</Title>
           <BottomRow>
-            <SourceName>{recipe.sourceName}</SourceName>
+            {/* <SourceName>{recipe.sourceName}</SourceName>
             <CookTime>
               <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
-            </CookTime>
+            </CookTime> */}
           </BottomRow>
         </FoodInfo>
       </Card>
