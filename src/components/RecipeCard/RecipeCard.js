@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
 import RecipeDetail from '../RecipeDetail';
 import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
+import { mockRecipeDetails } from '../../api';
 
 const RecipeCard = ({
   recipe,
@@ -16,7 +17,8 @@ const RecipeCard = ({
   isCookBookOpen,
   setIsCookBookOpen,
 }) => {
-  const recipeDetails = useSelector((state) => state.recipeDetails);
+  const recipeDetails = mockRecipeDetails();
+  // const recipeDetails = useSelector((state) => state.recipeDetails);
   const dispatch = useDispatch();
   const cardRef = useRef();
 
@@ -31,11 +33,11 @@ const RecipeCard = ({
   //   console.log('HEO');
   //   console.log(recipeDetail);
   // }, [recipeDetails, recipeDetail]);
-  useEffect(() => {
-    setRecipeDetail(
-      recipeDetails.recipes.find((element) => element.id === recipe.id)
-    );
-  }, [recipeDetails]);
+  // useEffect(() => {
+  //   setRecipeDetail(
+  //     recipeDetails.recipes.find((element) => element.id === recipe.id)
+  //   );
+  // }, [recipeDetails]);
 
   const isWithinCookBook = (cardRect, cookBookRef, threshold) => {
     if (
@@ -54,7 +56,7 @@ const RecipeCard = ({
     const cardRect = cardRef.current.getBoundingClientRect();
     const cookBookRect = cookBookRef.current.getBoundingClientRect();
     const result = isWithinCookBook(cardRect, cookBookRect, 100);
-    if (isDocked != result) {
+    if (isDocked !== result) {
       setIsDocked(result);
     }
 
@@ -66,7 +68,7 @@ const RecipeCard = ({
   const endDrag = (event, info) => {
     const newArray = isDocked
       ? [...cookBookList, recipe.id]
-      : [...cookBookList].filter((e) => e != recipe.id);
+      : [...cookBookList].filter((e) => e !== recipe.id);
     setCookBookList(newArray);
     setIsDragging(false);
   };

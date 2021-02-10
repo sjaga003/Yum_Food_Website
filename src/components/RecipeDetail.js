@@ -3,10 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   faBreadSlice,
-  faCircleNotch,
   faLeaf,
   faSeedling,
-  faSpinner,
   faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -120,7 +118,9 @@ const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe, recipeId }) => {
               <SubtitleHeader>Instructions</SubtitleHeader>
               <RecipeInstructions>
                 {recipe.analyzedInstructions[0].steps.map((instruction) => (
-                  <RecipeInstruction>
+                  <RecipeInstruction
+                    key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
+                  >
                     <InstructionNumber>#{instruction.number}</InstructionNumber>
                     <InstructionText>{instruction.step}</InstructionText>
                   </RecipeInstruction>
@@ -148,7 +148,7 @@ const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe, recipeId }) => {
 };
 
 const SpinnerIcon = styled(FontAwesomeIcon)`
-  font-size: 160px;
+  font-size: 100px;
   color: #ccc;
   will-change: transform;
   display: inline-block;

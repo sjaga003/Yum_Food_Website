@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-import axios from 'axios';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import '@fontsource/prompt';
@@ -11,8 +9,6 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import { GlobalStyle } from './components/GlobalStyles';
 import Recipes from './components/Recipes';
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import RecipeDetail from './components/RecipeDetail';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);

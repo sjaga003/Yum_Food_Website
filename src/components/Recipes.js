@@ -115,7 +115,7 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
                         }}
                         onClick={() => {
                           setCookBookList(
-                            [...cookBookList].filter((e) => e != recipe.id)
+                            [...cookBookList].filter((e) => e !== recipe.id)
                           );
                         }}
                         xmlns="http://www.w3.org/2000/svg"
