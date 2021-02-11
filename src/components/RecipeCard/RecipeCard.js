@@ -5,9 +5,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
-import RecipeDetail from '../RecipeDetail';
+
 import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
 import { mockRecipeDetails } from '../../api';
+import RecipeDetail from './RecipeDetail/RecipeDetail';
 
 const RecipeCard = ({
   recipe,
@@ -22,17 +23,15 @@ const RecipeCard = ({
   const dispatch = useDispatch();
   const cardRef = useRef();
 
-  const [isDocked, setIsDocked] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [recipeDetail, setRecipeDetail] = useState({});
-  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [recipeCardState, setRecipeCardState] = useState({
+    isDocked: false,
+    isDragging: false,
+    isDetailOpen: false,
+    recipeDetail: {},
+  });
 
-  // useEffect(() => {
-  //   console.log(recipeDetails);
-  //   console.log('HEO');
-  //   console.log(recipeDetail);
-  // }, [recipeDetails, recipeDetail]);
+  const [recipeDetail, setRecipeDetail] = useState({});
+
   // useEffect(() => {
   //   setRecipeDetail(
   //     recipeDetails.recipes.find((element) => element.id === recipe.id)
@@ -56,8 +55,8 @@ const RecipeCard = ({
     const cardRect = cardRef.current.getBoundingClientRect();
     const cookBookRect = cookBookRef.current.getBoundingClientRect();
     const result = isWithinCookBook(cardRect, cookBookRect, 100);
-    if (isDocked !== result) {
-      setIsDocked(result);
+    if (recipeCardState.isDocked !== result) {
+      setRecipeCardState({ ...recipeCardState, isDocked: result });
     }
 
     if (!isCookBookOpen && result) {
@@ -66,11 +65,11 @@ const RecipeCard = ({
   };
 
   const endDrag = (event, info) => {
-    const newArray = isDocked
+    const newArray = recipeCardState.isDocked
       ? [...cookBookList, recipe.id]
       : [...cookBookList].filter((e) => e !== recipe.id);
     setCookBookList(newArray);
-    setIsDragging(false);
+    setRecipeCardState({ ...recipeCardState, isDragging: false });
   };
 
   const onTop = { zIndex: 1 };
@@ -80,11 +79,9 @@ const RecipeCard = ({
   };
 
   const onCardClick = () => {
-    console.log('HELLO');
     if (!cardRef.current.style.transform) {
       if (!recipeDetails.recipes.some((el) => el.id === recipe.id)) {
         console.log('NOT FOUND');
-        setLoadingDetail(true);
         dispatch(loadRecipeDetails(recipe.id));
         //useEffect updates recipeDetail when recipeDetails is updated
       } else {
@@ -93,57 +90,51 @@ const RecipeCard = ({
         );
       }
 
-      setIsDetailOpen(true);
+      setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
       document.body.style.overflow = 'hidden';
     }
   };
 
-  return cookBookList.includes(recipe.id) ? (
-    ''
-  ) : (
-    <>
-      {isDetailOpen && (
-        <RecipeDetail
-          isDetailOpen={isDetailOpen}
-          setIsDetailOpen={setIsDetailOpen}
-          recipe={recipeDetail}
-          recipeId={recipe.id}
-        />
-      )}
-      <Card
-        ref={cardRef}
-        drag
-        dragConstraints={cardRef}
-        dragElastic={1}
-        onDragStart={(event, info) => {
-          setIsDragging(true);
-        }}
-        onDrag={modifyDrag}
-        onDragEnd={endDrag}
-        layout
-        layoutId={`recipeCard-${recipe.id}`}
-        data-testid="recipeCard"
-        data-recipe-id={recipe.id}
-        animate={isDragging ? onTop : flat}
-        onClick={onCardClick}
-      >
-        <FoodImage
-          draggable={false}
-          data-testid="recipeCardImage"
-          src={recipe.image ? recipe.image : MissingImage}
-          alt={`${recipe.title}`}
-        />
-        <FoodInfo>
-          <Title>{recipe.title}</Title>
-          <BottomRow>
-            {/* <SourceName>{recipe.sourceName}</SourceName>
-            <CookTime>
-              <FontAwesomeIcon icon={faStopwatch} /> {recipe.readyInMinutes}
-            </CookTime> */}
-          </BottomRow>
-        </FoodInfo>
-      </Card>
-    </>
+  return (
+    !cookBookList.includes(recipe.id) && (
+      <>
+        {recipeCardState.isDetailOpen && (
+          <RecipeDetail
+            recipeCardState={recipeCardState.isDetailOpen}
+            setRecipeCardState={setRecipeCardState}
+            recipe={recipeDetail}
+            recipeId={recipe.id}
+          />
+        )}
+        <Card
+          ref={cardRef}
+          drag
+          dragConstraints={cardRef}
+          dragElastic={1}
+          onDragStart={() =>
+            setRecipeCardState({ ...recipeCardState, isDragging: true })
+          }
+          onDrag={modifyDrag}
+          onDragEnd={endDrag}
+          layout
+          layoutId={`recipeCard-${recipe.id}`}
+          data-testid="recipeCard"
+          data-recipe-id={recipe.id}
+          animate={recipeCardState.isDragging ? onTop : flat}
+          onClick={onCardClick}
+        >
+          <FoodImage
+            draggable={false}
+            data-testid="recipeCardImage"
+            src={recipe.image ? recipe.image : MissingImage}
+            alt={`${recipe.title}`}
+          />
+          <FoodInfo>
+            <Title>{recipe.title}</Title>
+          </FoodInfo>
+        </Card>
+      </>
+    )
   );
 };
 
@@ -151,11 +142,11 @@ const Card = styled(motion.div)`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  /* border: 1px solid lightgray; */
+  border: 1px solid lightgray;
   overflow: hidden;
   background: #f4f7fc;
   width: 268px;
-  height: 343px;
+  height: 300px;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   z-index: 3;
@@ -174,31 +165,15 @@ const FoodInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Title = styled(motion.div)`
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  align-self: flex-start;
-  text-align: left;
+  font-size: 16px;
+
+  text-align: center;
   color: var(--text-color);
-`;
-
-const BottomRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const SourceName = styled.div`
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  align-self: flex-start;
-  text-align: left;
-  font-style: italic;
-  color: #696969;
-`;
-
-const CookTime = styled.div`
   font-weight: 600;
 `;
 

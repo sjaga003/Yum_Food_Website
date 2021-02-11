@@ -8,16 +8,23 @@ import {
   faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import DairyIcon from '../images/Dairy.svg';
-import NoImageFound from '../images/no_ingredient_image.jpg';
+import DairyIcon from '../../../images/Dairy.svg';
+import AllergyMarker from './AllergyMarker';
+import RecipeDetailIngredient from './RecipeDetailIngredient';
+import RecipeDetailInstruction from './RecipeDetailInstruction';
 
-const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe, recipeId }) => {
+const RecipeDetail = ({
+  recipeCardState,
+  setRecipeCardState,
+  recipe,
+  recipeId,
+}) => {
   return recipe ? (
     <CardShadow
       className="shadow"
       onClick={(e) => {
         if (e.target.classList.contains('shadow')) {
-          setIsDetailOpen(false);
+          setRecipeCardState({ ...recipeCardState, isDetailOpen: false });
           document.body.style.overflow = 'auto';
         }
       }}
@@ -41,36 +48,32 @@ const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe, recipeId }) => {
               </DividerLine>
               <AllergyInfo>
                 {recipe.glutenFree && (
-                  <AllergyContainer>
-                    <AllergyIconContainer>
-                      <AllergyIcon icon={faBreadSlice} />
-                    </AllergyIconContainer>
-                    <AllergyLabel>Gluten Free</AllergyLabel>
-                  </AllergyContainer>
+                  <AllergyMarker
+                    iconName={faBreadSlice}
+                    labelName={'Gluten Free'}
+                    external={false}
+                  />
                 )}
                 {recipe.dairyFree && (
-                  <AllergyContainer>
-                    <AllergyIconContainer>
-                      <img src={DairyIcon} alt="" />
-                    </AllergyIconContainer>
-                    <AllergyLabel>Dairy Free</AllergyLabel>
-                  </AllergyContainer>
+                  <AllergyMarker
+                    iconName={DairyIcon}
+                    labelName={'Dairy Free'}
+                    external={true}
+                  />
                 )}
                 {recipe.vegetarian && (
-                  <AllergyContainer>
-                    <AllergyIconContainer>
-                      <AllergyIcon icon={faLeaf} />
-                    </AllergyIconContainer>
-                    <AllergyLabel>Vegetarian</AllergyLabel>
-                  </AllergyContainer>
+                  <AllergyMarker
+                    iconName={faLeaf}
+                    labelName={'Vegetarian'}
+                    external={false}
+                  />
                 )}
-                {recipe.began && (
-                  <AllergyContainer>
-                    <AllergyIconContainer>
-                      <AllergyIcon icon={faSeedling} />
-                    </AllergyIconContainer>
-                    <AllergyLabel>Vegan</AllergyLabel>
-                  </AllergyContainer>
+                {recipe.vegan && (
+                  <AllergyMarker
+                    iconName={faSeedling}
+                    labelName={'Vegan'}
+                    external={false}
+                  />
                 )}
               </AllergyInfo>
               <RecipeStats>
@@ -93,38 +96,22 @@ const RecipeDetail = ({ isDetailOpen, setIsDetailOpen, recipe, recipeId }) => {
             <div>
               <SubtitleHeader>Ingredients</SubtitleHeader>
               <IngredientCards>
-                {recipe.extendedIngredients.map((item) => (
-                  <IngredientCard key={`IngredientCard-${item.id}`}>
-                    <IngredientImage>
-                      <img
-                        src={
-                          item.image
-                            ? `https://spoonacular.com/cdn/ingredients_250x250/${item.image}`
-                            : NoImageFound
-                        }
-                        alt={item.name}
-                      />
-                    </IngredientImage>
-                    <IngredientName>{item.name}</IngredientName>
-                    <IngredientAmount>
-                      {Math.round((item.amount + Number.EPSILON) * 100) / 100}{' '}
-                      {item.unit}
-                    </IngredientAmount>
-                  </IngredientCard>
-                ))}
+                {recipe.extendedIngredients &&
+                  recipe.extendedIngredients.map((item) => (
+                    <RecipeDetailIngredient item={item} />
+                  ))}
               </IngredientCards>
             </div>
             <div>
               <SubtitleHeader>Instructions</SubtitleHeader>
               <RecipeInstructions>
-                {recipe.analyzedInstructions[0].steps.map((instruction) => (
-                  <RecipeInstruction
-                    key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
-                  >
-                    <InstructionNumber>#{instruction.number}</InstructionNumber>
-                    <InstructionText>{instruction.step}</InstructionText>
-                  </RecipeInstruction>
-                ))}
+                {recipe.analyzedInstructions[0] &&
+                  recipe.analyzedInstructions[0].steps.map((instruction) => (
+                    <RecipeDetailInstruction
+                      instruction={instruction}
+                      recipe={recipe}
+                    />
+                  ))}
               </RecipeInstructions>
             </div>
           </RecipeBody>
@@ -223,6 +210,11 @@ const InfoContainer = styled(motion.div)`
   height: 350px;
   justify-content: center;
 `;
+
+const AllergyInfo = styled(motion.div)`
+  margin-bottom: 20px;
+`;
+
 const RecipeName = styled(motion.div)`
   font-size: 36px;
   margin-bottom: 20px;
@@ -231,27 +223,6 @@ const RecipeName = styled(motion.div)`
 const DividerLine = styled(motion.svg)`
   margin-bottom: 20px;
 `;
-
-const AllergyInfo = styled(motion.div)`
-  margin-bottom: 20px;
-`;
-
-const AllergyContainer = styled(motion.div)`
-  margin-bottom: 11px;
-  display: flex;
-  flex-direction: row;
-`;
-
-const AllergyIconContainer = styled(motion.div)`
-  width: 30px;
-  text-align: center;
-`;
-const AllergyIcon = styled(FontAwesomeIcon)`
-  font-size: 18px;
-  width: 18px;
-`;
-
-const AllergyLabel = styled(motion.span)``;
 
 const RecipeStats = styled(motion.div)`
   display: flex;
@@ -290,56 +261,7 @@ const IngredientCards = styled(motion.div)`
   justify-content: center;
   align-items: center;
 `;
-const IngredientCard = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 100%;
-  width: 100%;
-  border-radius: 8px;
-  background: white;
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
-  padding: 15px;
-`;
-const IngredientImage = styled(motion.div)`
-  width: 80px;
-  height: 80px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const IngredientName = styled(motion.span)`
-  text-align: center;
-  text-transform: capitalize;
-  justify-self: flex-end;
-  margin-top: 10px;
-`;
-
-const IngredientAmount = styled(motion.div)`
-  word-wrap: break-word;
-  margin-top: 10px;
-`;
 
 const RecipeInstructions = styled(motion.div)``;
-const RecipeInstruction = styled(motion.div)`
-  display: flex;
-  align-items: flex-start;
-  padding: 30px;
-`;
-const InstructionNumber = styled(motion.span)`
-  font-weight: 600;
-  font-size: 24px;
-  color: var(--highlight-color);
-  margin-right: 100px;
-`;
-const InstructionText = styled(motion.span)`
-  font-size: 18px;
-`;
+
 export default RecipeDetail;
