@@ -40,10 +40,10 @@ export const mockRecipeDetails = () => {
   return {
     recipes: [
       {
-        vegetarian: false,
-        vegan: false,
+        vegetarian: true,
+        vegan: true,
         glutenFree: true,
-        dairyFree: false,
+        dairyFree: true,
         veryHealthy: false,
         cheap: false,
         veryPopular: false,

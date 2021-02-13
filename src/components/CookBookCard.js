@@ -82,7 +82,7 @@ const FoodInfo = styled.div`
 `;
 
 const Title = styled(motion.span)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--header-font);
   font-size: 16px;
   font-weight: 600;
   text-align: left;

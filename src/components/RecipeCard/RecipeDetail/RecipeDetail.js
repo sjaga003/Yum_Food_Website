@@ -48,7 +48,11 @@ const RecipeDetail = ({
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M0 5H198" stroke="#FFB902" strokeWidth="9" />
+                <path
+                  d="M0 5H198"
+                  stroke="var(--highlight-color)"
+                  strokeWidth="9"
+                />
               </DividerLine>
               <AllergyInfo>
                 {recipe.glutenFree && (
@@ -131,16 +135,18 @@ const RecipeDetail = ({
             </div>
             <div>
               <SubtitleHeader>Instructions</SubtitleHeader>
-              <RecipeInstructions>
-                {recipe.analyzedInstructions[0] &&
-                  recipe.analyzedInstructions[0].steps.map((instruction) => (
-                    <RecipeDetailInstruction
-                      key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
-                      instruction={instruction}
-                      recipe={recipe}
-                    />
-                  ))}
-              </RecipeInstructions>
+              <>
+                <RecipeInstructions>
+                  {recipe.analyzedInstructions[0] &&
+                    recipe.analyzedInstructions[0].steps.map((instruction) => (
+                      <RecipeDetailInstruction
+                        key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
+                        instruction={instruction}
+                        recipe={recipe}
+                      />
+                    ))}
+                </RecipeInstructions>
+              </>
             </div>
             <div>
               <SubtitleHeader>Nutritional Information</SubtitleHeader>
@@ -169,7 +175,7 @@ const RecipeDetail = ({
 };
 
 const SpinnerIcon = styled(FontAwesomeIcon)`
-  font-size: 100px;
+  font-size: 10rem;
   color: #ccc;
   will-change: transform;
   display: inline-block;
@@ -178,7 +184,6 @@ const SpinnerIcon = styled(FontAwesomeIcon)`
 const CardShadow = styled(motion.div)`
   width: 100%;
   min-height: 100vh;
-  /* overflow-y: scroll; */
   background: rgba(0, 0, 0, 0.7);
   position: fixed;
   z-index: 5;
@@ -188,7 +193,7 @@ const CardShadow = styled(motion.div)`
   justify-content: center;
   align-items: center;
   &::-webkit-scrollbar {
-    width: 0.4rem;
+    width: 1rem;
     height: 0.5rem;
     border-radius: 8px;
   }
@@ -202,7 +207,7 @@ const CardShadow = styled(motion.div)`
   &::-webkit-resizer {
     display: none;
   }
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 const Card = styled(motion.div)`
@@ -214,12 +219,12 @@ const Card = styled(motion.div)`
   will-change: transform;
   z-index: 10;
   color: black;
-  top: 0px;
-  background: #f4f7fc;
+  top: 0;
+  background: var(--card-color);
 `;
 
 const CardContent = styled(motion.div)`
-  padding: 20px;
+  padding: 2rem;
 `;
 
 const RecipeImage = styled(motion.img)`
@@ -230,16 +235,15 @@ const RecipeImage = styled(motion.img)`
 const Header = styled(motion.div)`
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
 `;
 const ImageContainer = styled(motion.div)``;
+
 const InfoContainer = styled(motion.div)`
   width: 50%;
-  padding-left: 30px;
+  padding-left: 3rem;
   display: flex;
   flex-direction: column;
-  height: 350px;
-  justify-content: center;
 `;
 
 const AllergyInfo = styled(motion.div)`
@@ -247,12 +251,12 @@ const AllergyInfo = styled(motion.div)`
 `;
 
 const RecipeName = styled(motion.div)`
-  font-size: 36px;
-  margin-bottom: 20px;
+  font-size: 3.6rem;
+  margin-bottom: 2rem;
 `;
 
 const DividerLine = styled(motion.svg)`
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 `;
 
 const RecipeStats = styled(motion.div)`
@@ -274,6 +278,7 @@ const ServingContainer = styled(motion.div)`
     cursor: pointer;
     background: #e2e8f0;
     border: 0;
+    font-size: 1.8rem;
     &:focus {
       outline: 0;
       border: 0;
@@ -292,7 +297,7 @@ const ServingContainer = styled(motion.div)`
     align-items: center;
     background: #e2e8f0;
     font-family: Roboto, sans-serif;
-    font-size: 18px;
+    font-size: 1.8rem;
   }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -311,37 +316,49 @@ const StatBox = styled(motion.div)`
 `;
 
 const StatLabel = styled(motion.span)`
-  color: rgba(155, 155, 155);
-  font-size: 18px;
+  color: var(--secondary-color);
+  font-size: 1.8rem;
 `;
 const StatData = styled(motion.span)`
-  font-size: 18px;
+  font-size: 1.8rem;
 `;
 
 const RecipeBody = styled(motion.div)``;
 
 const SubtitleHeader = styled(motion.div)`
-  margin-top: 30px;
-  font-size: 32px;
-  margin-bottom: 32px;
+  margin-top: 3rem;
+  font-size: 3.2rem;
+  margin-bottom: 3.2rem;
+`;
+
+const InstructionContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
 `;
 
 const IngredientCards = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 180px);
-  grid-column-gap: 30px;
-  grid-row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 18rem);
+  grid-column-gap: 3rem;
+  grid-row-gap: 2rem;
   justify-content: center;
   align-items: center;
 `;
 
-const RecipeInstructions = styled(motion.div)``;
+const RecipeInstructions = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-self: center;
+`;
 
 const NutritionContainer = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 350px);
+  grid-template-columns: repeat(auto-fill, 40rem);
+  justify-items: center;
+  padding-bottom: 3rem;
   justify-content: center;
-  padding-bottom: 30px;
+  font-size: 1.6rem;
 `;
 
 export default RecipeDetail;

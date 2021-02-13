@@ -19,20 +19,29 @@ const AllergyMarker = ({ iconName, labelName, external }) => {
 };
 
 const AllergyContainer = styled(motion.div)`
-  margin-bottom: 11px;
+  margin-bottom: 1.1rem;
   display: flex;
   flex-direction: row;
 `;
 
 const AllergyIconContainer = styled(motion.div)`
-  width: 30px;
-  text-align: center;
+  width: 2rem;
+  margin-right: 2rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 1.4rem;
+  }
 `;
 const AllergyIcon = styled(FontAwesomeIcon)`
-  font-size: 18px;
-  width: 18px;
+  font-size: 1.8rem;
+  width: 1.8rem;
 `;
 
-const AllergyLabel = styled(motion.span)``;
+const AllergyLabel = styled(motion.span)`
+  font-size: 1.8rem;
+`;
 
 export default AllergyMarker;

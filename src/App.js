@@ -33,11 +33,10 @@ function App() {
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px auto;
-  min-height: 100vh;
-  padding: 0px 15vw;
+  margin: 0 auto;
+  min-height: 100%;
+  padding: 0 15vw;
   overflow-x: hidden;
-  height: 100%;
 `;
 
 export default App;

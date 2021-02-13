@@ -14,16 +14,16 @@ const RecipeDetailInstruction = ({ instruction, recipe }) => {
 const RecipeInstruction = styled(motion.div)`
   display: flex;
   align-items: flex-start;
-  padding: 30px;
+  padding: 3rem;
 `;
 const InstructionNumber = styled(motion.span)`
   font-weight: 600;
-  font-size: 24px;
+  font-size: 2.4rem;
   color: var(--highlight-color);
-  margin-right: 100px;
+  margin-right: 6rem;
 `;
 const InstructionText = styled(motion.span)`
-  font-size: 18px;
+  font-size: 1.8rem;
 `;
 
 export default RecipeDetailInstruction;

@@ -107,28 +107,28 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
-  grid-column-gap: 64px;
-  grid-row-gap: 32px;
+  grid-template-columns: repeat(auto-fill, 30rem);
+  grid-column-gap: 3.2rem;
+  grid-row-gap: 3.2rem;
   justify-content: center;
 `;
 
 const RecipeContainer = styled.div`
-  height: 300vh;
+  padding: 10rem 0;
+  height: 100vh; //Keeps div from disappearing without cards
   display: flex;
   flex-direction: column;
 `;
 
 const CookBook = styled(motion.div)`
   background: var(--highlight-color);
-  font-family: 'Montserrat', sans-serif;
-  margin-top: 300px;
-  padding: 30px;
+  font-family: var(--header-font);
+  padding: 3rem;
   position: fixed;
-  top: -300px;
+  top: 0;
   right: 0;
   width: 400px;
-  height: 100vh;
+  height: 100%;
   border-radius: 50px 0px 0px 50px;
   display: flex;
   flex-direction: row;
@@ -173,8 +173,8 @@ const ButtonContainer = styled(motion.div)`
 
 const CookBookTitle = styled(motion.span)`
   color: var(--bg-color);
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 1rem;
   font-weight: 600;
 `;
 

@@ -145,8 +145,8 @@ const Card = styled(motion.div)`
   border: 1px solid lightgray;
   overflow: hidden;
   background: #f4f7fc;
-  width: 268px;
-  height: 300px;
+  width: 26.8rem;
+  height: 30rem;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   z-index: 3;
@@ -155,13 +155,12 @@ const Card = styled(motion.div)`
 `;
 
 const FoodImage = styled.img`
-  height: 236px;
+  height: 23.6rem;
   object-fit: cover;
 `;
 
 const FoodInfo = styled.div`
-  padding: 10px;
-  height: 100%;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -169,8 +168,8 @@ const FoodInfo = styled.div`
 `;
 
 const Title = styled(motion.div)`
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+  font-family: var(--header-font);
+  font-size: 1.6rem;
 
   text-align: center;
   color: var(--text-color);

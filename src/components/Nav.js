@@ -21,16 +21,15 @@ const Nav = () => {
   );
 };
 
-const Navigation = styled.nav`
+const Navigation = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px 0px;
+  padding: 2rem 0;
 `;
 
 const Logo = styled.div`
-  margin: 0px 30px;
-  width: 5vw;
+  width: 8rem;
 
   img {
     width: 100%;
@@ -45,15 +44,15 @@ const NavLinks = styled.div`
 `;
 
 const NavItem = styled.a`
-  margin: 0px 30px;
+  margin: 0px 3rem;
 
   text-decoration: none;
   color: var(--text-color);
-  font-size: 20px;
+  font-size: 2rem;
 `;
 
 const ContactButton = styled(motion.div)`
-  padding: 10px 30px;
+  padding: 1rem 3rem;
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);

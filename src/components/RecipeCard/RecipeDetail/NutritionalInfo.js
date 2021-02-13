@@ -133,8 +133,8 @@ const NutritionalInfo = ({ recipe }) => {
     <>
       <RadarChart
         outerRadius={90}
-        width={350}
-        height={350}
+        width={450}
+        height={400}
         data={nutrientData.vitamins}
         innerRadius={'10%'}
       >
@@ -156,7 +156,7 @@ const NutritionalInfo = ({ recipe }) => {
         />
         <Tooltip />
       </RadarChart>
-      <PieChart width={350} height={350}>
+      <PieChart width={450} height={400}>
         <Pie
           data={nutrientData.macros}
           outerRadius={80}
@@ -179,8 +179,8 @@ const NutritionalInfo = ({ recipe }) => {
       </PieChart>
       <RadarChart
         outerRadius={90}
-        width={350}
-        height={350}
+        width={450}
+        height={400}
         data={nutrientData.minerals}
         innerRadius={'10%'}
       >

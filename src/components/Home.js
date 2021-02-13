@@ -28,7 +28,7 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 60vh;
+  height: 75vh;
   margin: 0 0 600px 0;
 `;
 
@@ -38,18 +38,19 @@ const HomeContent = styled.div`
   justify-content: center;
 `;
 
-const Hero = styled.div`
-  font-family: 'Montserrat', sans-serif;
-  font-size: 72px;
+const Hero = styled.h1`
+  font-family: var(--header-font);
+  font-size: 7.2rem;
   font-weight: 600;
+  line-height: 1.3;
 `;
 
-const HeroDescription = styled.div`
-  font-family: 'Roboto', sans-serif;
+const HeroDescription = styled.p`
+  font-family: var(--text-font);
   color: var(--secondary-color);
-  font-size: 20px;
+  font-size: 2rem;
   width: 75%;
-  margin: 30px 0px 40px 0px;
+  margin: 3rem 0 4rem 0;
 `;
 
 const ImageContainer = styled.div`
@@ -61,15 +62,14 @@ const HeaderImg = styled.img`
   mask-image: url(${HeaderMask});
   mask-repeat: no-repeat;
   mask-size: contain;
-
-  width: 500px;
+  width: 50rem;
 `;
 
 const LearnMoreButton = styled.a`
-  margin: 0px 0px;
+  margin: 0;
   text-decoration: none;
-  font-size: 20px;
-  padding: 10px 30px;
+  font-size: 2rem;
+  padding: 1rem 3rem;
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);
