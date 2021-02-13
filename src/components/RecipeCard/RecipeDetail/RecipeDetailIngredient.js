@@ -3,9 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 import NoImageFound from '../../../images/no_ingredient_image.jpg';
 
-const RecipeDetailIngredient = ({ item }) => {
+const RecipeDetailIngredient = ({ item, serving, defaultServing }) => {
+  console.log(`hello ${typeof serving}, ${typeof defaultServing}}`);
   return (
-    <IngredientCard key={`IngredientCard-${item.id}`}>
+    <IngredientCard>
       <IngredientImage>
         <img
           src={
@@ -18,7 +19,12 @@ const RecipeDetailIngredient = ({ item }) => {
       </IngredientImage>
       <IngredientName>{item.name}</IngredientName>
       <IngredientAmount>
-        {Math.round((item.amount + Number.EPSILON) * 100) / 100} {item.unit}
+        {Math.round(
+          ((item.measures.us.amount / defaultServing) * serving +
+            Number.EPSILON) *
+            100
+        ) / 100}{' '}
+        {item.measures.us.unitShort}
       </IngredientAmount>
     </IngredientCard>
   );
@@ -35,6 +41,10 @@ const IngredientCard = styled(motion.div)`
   background: white;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   padding: 15px;
+  max-height: 180px;
+  max-width: 180px;
+  min-height: 180px;
+  min-width: 180px;
 `;
 const IngredientImage = styled(motion.div)`
   width: 80px;

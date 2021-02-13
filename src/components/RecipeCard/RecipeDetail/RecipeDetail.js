@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   faBreadSlice,
@@ -13,12 +13,16 @@ import AllergyMarker from './AllergyMarker';
 import RecipeDetailIngredient from './RecipeDetailIngredient';
 import RecipeDetailInstruction from './RecipeDetailInstruction';
 
+import NutritionalInfo from './NutritionalInfo';
+
 const RecipeDetail = ({
   recipeCardState,
   setRecipeCardState,
   recipe,
   recipeId,
 }) => {
+  const [servingSize, setServingSize] = useState(recipe.servings);
+
   return recipe ? (
     <CardShadow
       className="shadow"
@@ -87,7 +91,25 @@ const RecipeDetail = ({
                 </StatBox>
                 <StatBox>
                   <StatLabel>Servings</StatLabel>
-                  <StatData>{recipe.servings}</StatData>
+                  <StatData>
+                    <ServingContainer>
+                      <button
+                        onClick={() =>
+                          servingSize > 1 ? setServingSize(servingSize - 1) : ''
+                        }
+                      >
+                        -
+                      </button>
+                      <input
+                        readOnly={true}
+                        type="number"
+                        value={servingSize}
+                      />
+                      <button onClick={() => setServingSize(servingSize + 1)}>
+                        +
+                      </button>
+                    </ServingContainer>
+                  </StatData>
                 </StatBox>
               </RecipeStats>
             </InfoContainer>
@@ -98,7 +120,12 @@ const RecipeDetail = ({
               <IngredientCards>
                 {recipe.extendedIngredients &&
                   recipe.extendedIngredients.map((item) => (
-                    <RecipeDetailIngredient item={item} />
+                    <RecipeDetailIngredient
+                      key={`RecipeDetailIngredient-${recipe.id}-${item.id}`}
+                      item={item}
+                      defaultServing={recipe.servings}
+                      serving={servingSize}
+                    />
                   ))}
               </IngredientCards>
             </div>
@@ -108,11 +135,18 @@ const RecipeDetail = ({
                 {recipe.analyzedInstructions[0] &&
                   recipe.analyzedInstructions[0].steps.map((instruction) => (
                     <RecipeDetailInstruction
+                      key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
                       instruction={instruction}
                       recipe={recipe}
                     />
                   ))}
               </RecipeInstructions>
+            </div>
+            <div>
+              <SubtitleHeader>Nutritional Information</SubtitleHeader>
+              <NutritionContainer>
+                <NutritionalInfo recipe={recipe} />
+              </NutritionContainer>
             </div>
           </RecipeBody>
         </CardContent>
@@ -145,7 +179,7 @@ const CardShadow = styled(motion.div)`
   width: 100%;
   min-height: 100vh;
   /* overflow-y: scroll; */
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   position: fixed;
   z-index: 5;
   top: 0;
@@ -153,25 +187,6 @@ const CardShadow = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const Card = styled(motion.div)`
-  width: 70%;
-  border-radius: 1rem;
-  padding: 2rem 2rem;
-  background: white;
-  position: absolute;
-  will-change: transform;
-  z-index: 10;
-  color: black;
-  height: 90vh;
-  background: #f4f7fc;
-`;
-
-const CardContent = styled(motion.div)`
-  overflow: auto;
-  height: 100%;
-  padding: 20px;
   &::-webkit-scrollbar {
     width: 0.4rem;
     height: 0.5rem;
@@ -187,6 +202,24 @@ const CardContent = styled(motion.div)`
   &::-webkit-resizer {
     display: none;
   }
+  overflow-y: auto;
+`;
+
+const Card = styled(motion.div)`
+  width: 70%;
+  border-radius: 1rem;
+  padding: 2rem 2rem;
+  background: white;
+  position: absolute;
+  will-change: transform;
+  z-index: 10;
+  color: black;
+  top: 0px;
+  background: #f4f7fc;
+`;
+
+const CardContent = styled(motion.div)`
+  padding: 20px;
 `;
 
 const RecipeImage = styled(motion.img)`
@@ -199,9 +232,7 @@ const Header = styled(motion.div)`
   justify-content: space-around;
   align-items: flex-start;
 `;
-const ImageContainer = styled(motion.div)`
-  width: 50%;
-`;
+const ImageContainer = styled(motion.div)``;
 const InfoContainer = styled(motion.div)`
   width: 50%;
   padding-left: 30px;
@@ -231,6 +262,48 @@ const RecipeStats = styled(motion.div)`
   justify-content: space-between;
 `;
 
+const ServingContainer = styled(motion.div)`
+  display: flex;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+
+  button {
+    width: 2rem;
+    color: #718096;
+    height: 100%;
+    cursor: pointer;
+    background: #e2e8f0;
+    border: 0;
+    &:focus {
+      outline: 0;
+      border: 0;
+    }
+    &:hover {
+      background: #cbd5e0;
+    }
+  }
+
+  input {
+    width: 3rem;
+    outline: 0;
+    border: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    background: #e2e8f0;
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
+
 const StatBox = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -255,7 +328,7 @@ const SubtitleHeader = styled(motion.div)`
 
 const IngredientCards = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-columns: repeat(auto-fill, 180px);
   grid-column-gap: 30px;
   grid-row-gap: 20px;
   justify-content: center;
@@ -263,5 +336,12 @@ const IngredientCards = styled(motion.div)`
 `;
 
 const RecipeInstructions = styled(motion.div)``;
+
+const NutritionContainer = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  justify-content: center;
+  padding-bottom: 30px;
+`;
 
 export default RecipeDetail;

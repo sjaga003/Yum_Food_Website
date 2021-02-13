@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const RecipeDetailInstruction = ({ instruction, recipe }) => {
   return (
-    <RecipeInstruction
-      key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
-    >
+    <RecipeInstruction>
       <InstructionNumber>#{instruction.number}</InstructionNumber>
       <InstructionText>{instruction.step}</InstructionText>
     </RecipeInstruction>
