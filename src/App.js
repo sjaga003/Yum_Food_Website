@@ -9,23 +9,30 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import { GlobalStyle } from './components/GlobalStyles';
 import Recipes from './components/Recipes';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
   return (
     <div className="App">
       <GlobalStyle />
-      <Content>
-        <Nav
-          isCookBookOpen={isCookBookOpen}
-          setIsCookBookOpen={setIsCookBookOpen}
-        />
-        <Home />
-        <Recipes
-          isCookBookOpen={isCookBookOpen}
-          setIsCookBookOpen={setIsCookBookOpen}
-        />
-      </Content>
+      <BrowserRouter>
+        <Route exact path="/">
+          <Content>
+            <Nav
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+            />
+            <Home />
+          </Content>
+        </Route>
+        <Route path="/search">
+          <Recipes
+            isCookBookOpen={isCookBookOpen}
+            setIsCookBookOpen={setIsCookBookOpen}
+          />
+        </Route>
+      </BrowserRouter>
     </div>
   );
 }
