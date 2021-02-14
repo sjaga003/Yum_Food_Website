@@ -7,11 +7,7 @@ const AllergyMarker = ({ iconName, labelName, external }) => {
   return (
     <AllergyContainer>
       <AllergyIconContainer>
-        {external ? (
-          <img src={iconName} alt={labelName} />
-        ) : (
-          <AllergyIcon icon={iconName} />
-        )}
+        {external ? iconName : <AllergyIcon icon={iconName} />}
       </AllergyIconContainer>
       <AllergyLabel>{labelName}</AllergyLabel>
     </AllergyContainer>
@@ -22,6 +18,7 @@ const AllergyContainer = styled(motion.div)`
   margin-bottom: 1.1rem;
   display: flex;
   flex-direction: row;
+  color: var(--text-color);
 `;
 
 const AllergyIconContainer = styled(motion.div)`
@@ -31,7 +28,7 @@ const AllergyIconContainer = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  img {
+  svg {
     width: 1.4rem;
   }
 `;
