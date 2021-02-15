@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
           props.home ? `url(${HomeBackground}) no-repeat` : ''} ;
         background-size: cover;
         line-height: 1.6;
+        font-size: 1.6rem;
     }
     * {
         padding: 0;

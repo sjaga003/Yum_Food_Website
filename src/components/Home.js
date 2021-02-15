@@ -29,7 +29,7 @@ const HomeContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: 75vh;
-  margin: 0 0 600px 0;
+  /* margin: 0 0 600px 0; */
 `;
 
 const HomeContent = styled.div`

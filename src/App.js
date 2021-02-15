@@ -11,6 +11,7 @@ import { GlobalStyle } from './components/GlobalStyles';
 import Recipes from './components/Recipes';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Search from './components/Search';
+import Welcome from './components/Welcome';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Content>
             <Nav />
             <Home />
+            <Welcome />
           </Content>
         </Route>
         <Route path="/search">
