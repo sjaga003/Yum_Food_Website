@@ -21,7 +21,11 @@ const RecipeDetail = ({
   recipe,
   recipeId,
 }) => {
-  const [servingSize, setServingSize] = useState(recipe.servings);
+  const [servingSize, setServingSize] = useState(0);
+
+  useEffect(() => {
+    recipe && setServingSize(recipe.servings);
+  }, [recipe]);
 
   return recipe ? (
     <CardShadow

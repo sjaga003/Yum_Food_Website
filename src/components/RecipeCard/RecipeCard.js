@@ -18,8 +18,8 @@ const RecipeCard = ({
   isCookBookOpen,
   setIsCookBookOpen,
 }) => {
-  const recipeDetails = mockRecipeDetails();
-  // const recipeDetails = useSelector((state) => state.recipeDetails);
+  // const recipeDetails = mockRecipeDetails();
+  const recipeDetails = useSelector((state) => state.recipeDetails);
   const dispatch = useDispatch();
   const cardRef = useRef();
 
@@ -32,11 +32,11 @@ const RecipeCard = ({
 
   const [recipeDetail, setRecipeDetail] = useState({});
 
-  // useEffect(() => {
-  //   setRecipeDetail(
-  //     recipeDetails.recipes.find((element) => element.id === recipe.id)
-  //   );
-  // }, [recipeDetails]);
+  useEffect(() => {
+    setRecipeDetail(
+      recipeDetails.recipes.find((element) => element.id === recipe.id)
+    );
+  }, [recipeDetails]);
 
   const isWithinCookBook = (cardRect, cookBookRef, threshold) => {
     if (

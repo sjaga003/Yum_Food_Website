@@ -15,7 +15,8 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         position: relative;
         overflow-x: hidden;
-        background: url(${HomeBackground}) no-repeat;
+        background: ${(props) =>
+          props.home ? `url(${HomeBackground}) no-repeat` : ''} ;
         background-size: cover;
         line-height: 1.6;
     }

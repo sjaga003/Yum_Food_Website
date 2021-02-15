@@ -2,21 +2,21 @@ import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadRecipes } from '../actions/recipeCardsAction';
+import { loadRandomRecipes } from '../actions/recipeCardsAction';
 import RecipeCard from './RecipeCard/RecipeCard';
 import { mockRecipeCards } from '../api';
 
 import CookBookCard from './CookBookCard';
 const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
-  const recipeCards = mockRecipeCards();
-  // const recipeCards = useSelector((state) => state.recipeCards);
+  // const recipeCards = mockRecipeCards();
+  const recipeCards = useSelector((state) => state.recipeCards);
   // console.log(recipeCards);
   const dispatch = useDispatch();
   const cookBookRef = useRef();
   const [cookBookList, setCookBookList] = useState([]);
 
   // useEffect(() => {
-  //   dispatch(loadRecipes(10));
+  //   dispatch(loadRandomRecipes(5));
   // }, []);
 
   // useEffect(() => {

@@ -10,27 +10,22 @@ import Home from './components/Home';
 import { GlobalStyle } from './components/GlobalStyles';
 import Recipes from './components/Recipes';
 import { BrowserRouter, Route } from 'react-router-dom';
+import Search from './components/Search';
 
 function App() {
-  const [isCookBookOpen, setIsCookBookOpen] = useState(false);
   return (
     <div className="App">
-      <GlobalStyle />
       <BrowserRouter>
         <Route exact path="/">
+          <GlobalStyle home />
           <Content>
-            <Nav
-              isCookBookOpen={isCookBookOpen}
-              setIsCookBookOpen={setIsCookBookOpen}
-            />
+            <Nav />
             <Home />
           </Content>
         </Route>
         <Route path="/search">
-          <Recipes
-            isCookBookOpen={isCookBookOpen}
-            setIsCookBookOpen={setIsCookBookOpen}
-          />
+          <GlobalStyle />
+          <Search />
         </Route>
       </BrowserRouter>
     </div>

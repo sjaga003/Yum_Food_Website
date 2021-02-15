@@ -1,5 +1,8 @@
 const baseURL = 'https://api.spoonacular.com';
 
+export const searchURL = (numberToLoad, query) =>
+  `${baseURL}/recipes/complexSearch?number=${numberToLoad}&sort=popularity&query=${query}&apiKey=${process.env.REACT_APP_API_KEY}`; //DONT FORGET TO FIX THIS
+
 export const randomCardURL = (numberToLoad) =>
   `${baseURL}/recipes/complexSearch?number=${numberToLoad}&sort=random&apiKey=${process.env.REACT_APP_API_KEY}`; //DONT FORGET TO FIX THIS
 
