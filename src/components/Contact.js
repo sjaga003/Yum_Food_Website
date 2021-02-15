@@ -28,8 +28,8 @@ const ContactBox = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 80%;
-  height: 30%;
+  width: 80rem;
+  height: 30rem;
   padding: 2rem;
   color: white;
   font-family: var(--header-font);
