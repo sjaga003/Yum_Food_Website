@@ -12,6 +12,7 @@ import Recipes from './components/Recipes';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Nav />
             <Home />
             <Welcome />
+            <Contact />
           </Content>
         </Route>
         <Route path="/search">
