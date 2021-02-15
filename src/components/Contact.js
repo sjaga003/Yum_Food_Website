@@ -28,7 +28,7 @@ const ContactBox = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 80rem;
+  width: 100rem;
   height: 30rem;
   padding: 2rem;
   color: white;
