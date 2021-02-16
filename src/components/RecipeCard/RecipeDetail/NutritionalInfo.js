@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {} from 'module';
 import {
+  Bar,
+  BarChart,
+  CartesianGrid,
   Cell,
   Legend,
   Pie,
@@ -14,6 +17,8 @@ import {
   RadarChart,
   ResponsiveContainer,
   Tooltip,
+  XAxis,
+  YAxis,
 } from 'recharts';
 
 const NutritionalInfo = ({ recipe }) => {
@@ -131,77 +136,127 @@ const NutritionalInfo = ({ recipe }) => {
 
   return (
     <>
-      <RadarChart
-        outerRadius={90}
-        width={450}
-        height={400}
-        data={nutrientData.vitamins}
-        innerRadius={'10%'}
-      >
-        <PolarGrid />
-        <PolarAngleAxis dataKey="name" />
-        <PolarRadiusAxis
-          tick={false}
-          axisLine={false}
-          angle={30}
-          domain={[0, 100]}
-        />
-        <Radar
-          name="Percent of Daily Needs"
-          dataKey="value"
-          unit="%"
-          stroke="#8884d8"
-          fill="#8884d8"
-          fillOpacity={0.6}
-        />
-        <Tooltip />
-      </RadarChart>
-      <PieChart width={450} height={400}>
-        <Pie
-          data={nutrientData.macros}
-          outerRadius={80}
-          label={renderCustomizedLabel}
-          labelLine={false}
-          unit="%"
-        >
-          {nutrientData.macros &&
-            nutrientData.macros.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-                stroke={COLORS[index % COLORS.length]}
+      <ResponsiveContainer width="33%">
+        {Array.isArray(nutrientData.vitamins) || nutrientData.length ? (
+          nutrientData.vitamins.length > 2 ? (
+            <RadarChart
+              outerRadius={90}
+              width={450}
+              height={400}
+              data={nutrientData.vitamins}
+              innerRadius={'10%'}
+            >
+              <PolarGrid />
+              <PolarAngleAxis dataKey="name" />
+              <PolarRadiusAxis
+                tick={false}
+                axisLine={false}
+                angle={30}
+                domain={[0, 100]}
+              />
+              <Radar
+                name="Percent of Daily Needs"
+                dataKey="value"
+                unit="%"
+                stroke="#8884d8"
+                fill="#8884d8"
                 fillOpacity={0.6}
               />
-            ))}
-        </Pie>
-        <Tooltip formatter={(value, name) => [`${name}: ${value}%`]} />
-        <Legend verticalAlign="bottom" />
-      </PieChart>
-      <RadarChart
-        outerRadius={90}
-        width={450}
-        height={400}
-        data={nutrientData.minerals}
-        innerRadius={'10%'}
-      >
-        <PolarGrid />
-        <PolarAngleAxis dataKey="name" />
-        <PolarRadiusAxis
-          tick={false}
-          axisLine={false}
-          angle={30}
-          domain={[0, 100]}
-        />
-        <Radar
-          name="Percent of Daily Needs"
-          dataKey="value"
-          unit="%"
-          stroke="#e98a4b"
-          fill="#e98a4b"
-          fillOpacity={0.6}
-        />
-        <Tooltip />
-      </RadarChart>
+              <Tooltip />
+            </RadarChart>
+          ) : (
+            <BarChart width={450} height={400} data={nutrientData.vitamins}>
+              <CartesianGrid />
+              <XAxis dataKey="name" />
+              <YAxis domain={[0, 100]} />
+              <Tooltip cursor={false} />
+              <Bar
+                dataKey="value"
+                name="Percent of Daily Needs"
+                dataKey="value"
+                unit="%"
+                stroke="#8884d8"
+                fill="#8884d8"
+                fillOpacity={0.6}
+              />
+            </BarChart>
+          )
+        ) : (
+          ''
+        )}
+      </ResponsiveContainer>
+      <ResponsiveContainer width="33%">
+        <PieChart width={450} height={400}>
+          <Pie
+            data={nutrientData.macros}
+            outerRadius={80}
+            label={renderCustomizedLabel}
+            labelLine={false}
+            unit="%"
+          >
+            {nutrientData.macros &&
+              nutrientData.macros.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                  stroke={COLORS[index % COLORS.length]}
+                  fillOpacity={0.6}
+                />
+              ))}
+          </Pie>
+          <Tooltip formatter={(value, name) => [`${name}: ${value}%`]} />
+          <Legend verticalAlign="bottom" />
+        </PieChart>
+      </ResponsiveContainer>
+      <ResponsiveContainer width="33%">
+        {nutrientData.minerals ? (
+          nutrientData.minerals.length > 2 ? (
+            <RadarChart
+              outerRadius={90}
+              width={450}
+              height={400}
+              data={nutrientData.minerals}
+              innerRadius={'10%'}
+            >
+              <PolarGrid />
+              <PolarAngleAxis dataKey="name" />
+              <PolarRadiusAxis
+                tick={false}
+                axisLine={false}
+                angle={30}
+                domain={[0, 100]}
+              />
+              <Radar
+                name="Percent of Daily Needs"
+                dataKey="value"
+                unit="%"
+                stroke="#e98a4b"
+                fill="#e98a4b"
+                fillOpacity={0.6}
+              />
+              <Tooltip />
+            </RadarChart>
+          ) : (
+            <BarChart width={450} height={400} data={nutrientData.minerals}>
+              <CartesianGrid />
+              <XAxis dataKey="name" />
+              <YAxis domain={[0, 100]} />
+              <Tooltip cursor={false} />
+              <Bar
+                dataKey="value"
+                name="Percent of Daily Needs"
+                dataKey="value"
+                unit="%"
+                stroke="#e98a4b"
+                fill="#e98a4b"
+                fillOpacity={0.6}
+              />
+            </BarChart>
+          )
+        ) : (
+          ''
+        )}
+      </ResponsiveContainer>
     </>
   );
 };

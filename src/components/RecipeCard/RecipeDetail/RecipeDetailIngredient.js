@@ -1,17 +1,33 @@
-import { motion } from 'framer-motion';
-import React from 'react';
+import { motion, useExternalRef } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import NoImageFound from '../../../images/no_ingredient_image.jpg';
 
-const RecipeDetailIngredient = ({ item, serving, defaultServing }) => {
-  console.log(`hello ${typeof serving}, ${typeof defaultServing}}`);
+const RecipeDetailIngredient = ({
+  item,
+  serving,
+  defaultServing,
+  ingredientsList,
+}) => {
   return (
     <IngredientCard>
       <IngredientImage>
         <img
           src={
-            item.image
-              ? `https://spoonacular.com/cdn/ingredients_250x250/${item.image}`
+            ingredientsList.find(
+              (el) =>
+                el.id === item.id ||
+                item.name.match(new RegExp('\\b' + el.name + '\\b')) != null
+            ) !== undefined
+              ? `https://spoonacular.com/cdn/ingredients_250x250/${
+                  ingredientsList.filter((el) => {
+                    return (
+                      el.id === item.id ||
+                      item.name.match(new RegExp('\\b' + el.name + '\\b')) !=
+                        null
+                    );
+                  })[0].image
+                }`
               : NoImageFound
           }
           alt={item.name}
@@ -20,11 +36,9 @@ const RecipeDetailIngredient = ({ item, serving, defaultServing }) => {
       <IngredientName>{item.name}</IngredientName>
       <IngredientAmount>
         {Math.round(
-          ((item.measures.us.amount / defaultServing) * serving +
-            Number.EPSILON) *
-            100
+          ((item.amount / defaultServing) * serving + Number.EPSILON) * 100
         ) / 100}{' '}
-        {item.measures.us.unitShort}
+        {item.unit}
       </IngredientAmount>
     </IngredientCard>
   );

@@ -19,9 +19,13 @@ const RecipeCard = ({
   setIsCookBookOpen,
 }) => {
   // const recipeDetails = mockRecipeDetails();
-  const recipeDetails = useSelector((state) => state.recipeDetails);
+  const recipeDetails = useSelector((state) => state.recipeCards);
   const dispatch = useDispatch();
   const cardRef = useRef();
+
+  useEffect(() => {
+    console.log(recipeDetails);
+  }, [recipeDetails]);
 
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
@@ -34,7 +38,7 @@ const RecipeCard = ({
 
   useEffect(() => {
     setRecipeDetail(
-      recipeDetails.recipes.find((element) => element.id === recipe.id)
+      recipeDetails.recipes.results.find((element) => element.id === recipe.id)
     );
   }, [recipeDetails]);
 
@@ -80,15 +84,11 @@ const RecipeCard = ({
 
   const onCardClick = () => {
     if (!cardRef.current.style.transform) {
-      if (!recipeDetails.recipes.some((el) => el.id === recipe.id)) {
-        console.log('NOT FOUND');
-        dispatch(loadRecipeDetails(recipe.id));
-        //useEffect updates recipeDetail when recipeDetails is updated
-      } else {
-        setRecipeDetail(
-          recipeDetails.recipes.find((element) => element.id === recipe.id)
-        );
-      }
+      setRecipeDetail(
+        recipeDetails.recipes.results.find(
+          (element) => element.id === recipe.id
+        )
+      );
 
       setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
       document.body.style.overflow = 'hidden';

@@ -22,6 +22,30 @@ const RecipeDetail = ({
   recipeId,
 }) => {
   const [servingSize, setServingSize] = useState(0);
+  const [ingredientsList, setIngredientsList] = useState([]);
+
+  const createIngredientsList = () => {
+    let ingredients = [];
+    recipe.analyzedInstructions[0].steps.map((step) => {
+      step.ingredients.map((ingredient) => {
+        if (
+          ingredient.image &&
+          !ingredients.some((el) => el.id === ingredient.id)
+        ) {
+          ingredients.push({
+            id: ingredient.id,
+            image: ingredient.image,
+            name: ingredient.name,
+          });
+        }
+      });
+    });
+    return ingredients;
+  };
+
+  useEffect(() => {
+    setIngredientsList(createIngredientsList());
+  }, []);
 
   useEffect(() => {
     recipe && setServingSize(recipe.servings);
@@ -145,11 +169,12 @@ const RecipeDetail = ({
             <div>
               <SubtitleHeader>Ingredients</SubtitleHeader>
               <IngredientCards>
-                {recipe.extendedIngredients &&
-                  recipe.extendedIngredients.map((item) => (
+                {recipe.nutrition.ingredients &&
+                  recipe.nutrition.ingredients.map((item) => (
                     <RecipeDetailIngredient
                       key={`RecipeDetailIngredient-${recipe.id}-${item.id}`}
                       item={item}
+                      ingredientsList={ingredientsList}
                       defaultServing={recipe.servings}
                       serving={servingSize}
                     />
@@ -376,9 +401,10 @@ const RecipeInstructions = styled(motion.div)`
 `;
 
 const NutritionContainer = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 40rem);
+  display: flex;
   justify-items: center;
+  width: 100%;
+  height: 30rem;
   padding-bottom: 3rem;
   justify-content: center;
   font-size: 1.6rem;
