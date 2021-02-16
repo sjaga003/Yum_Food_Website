@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SushiImage from '../images/sushi.jpg';
+import SushiImage2 from '../images/sushi2.jpeg';
 import HeaderMask from '../images/header_mask.svg';
 
 const Home = () => {
