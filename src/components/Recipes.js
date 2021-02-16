@@ -7,13 +7,17 @@ import RecipeCard from './RecipeCard/RecipeCard';
 import { mockRecipeCards } from '../api';
 
 import CookBookCard from './CookBookCard';
-const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
+const Recipes = ({
+  isCookBookOpen,
+  setIsCookBookOpen,
+  cookBookList,
+  setCookBookList,
+}) => {
   // const recipeCards = mockRecipeCards();
   const recipeCards = useSelector((state) => state.recipeCards);
   // console.log(recipeCards);
   const dispatch = useDispatch();
   const cookBookRef = useRef();
-  const [cookBookList, setCookBookList] = useState([]);
 
   // useEffect(() => {
   //   dispatch(loadRandomRecipes(5));
@@ -46,17 +50,19 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
           <CardContainer>
             {recipeCards.recipes.results &&
               recipeCards.recipes.results.map((recipe) => {
-                return (
-                  <RecipeCard
-                    cookBookRef={cookBookRef}
-                    setCookBookList={setCookBookList}
-                    cookBookList={cookBookList}
-                    isCookBookOpen={isCookBookOpen}
-                    setIsCookBookOpen={setIsCookBookOpen}
-                    key={`recipe-${recipe.id}`}
-                    recipe={recipe}
-                  />
-                );
+                if (!cookBookList.some((el) => el.id === recipe.id)) {
+                  return (
+                    <RecipeCard
+                      cookBookRef={cookBookRef}
+                      setCookBookList={setCookBookList}
+                      cookBookList={cookBookList}
+                      isCookBookOpen={isCookBookOpen}
+                      setIsCookBookOpen={setIsCookBookOpen}
+                      key={`recipe-${recipe.id}`}
+                      recipe={recipe}
+                    />
+                  );
+                }
               })}
           </CardContainer>
 
@@ -76,7 +82,10 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
               whileHover={'show'}
             >
               <ToggleButton
-                onClick={() => setIsCookBookOpen(!isCookBookOpen)}
+                onClick={() => {
+                  console.log(`${isCookBookOpen} hello`);
+                  setIsCookBookOpen(!isCookBookOpen);
+                }}
               ></ToggleButton>
             </ButtonContainer>
 
@@ -84,14 +93,11 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
               {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
               {isCookBookOpen &&
                 cookBookList &&
-                cookBookList.map((entryId) => {
-                  const recipe = recipeCards.recipes.results.find(
-                    (element) => element.id === entryId
-                  );
+                cookBookList.map((entry) => {
                   return (
                     <CookBookCard
-                      key={`cookBookList-${recipe.id}`}
-                      recipe={recipe}
+                      key={`cookBookList-${entry.id}`}
+                      recipe={entry}
                       setCookBookList={setCookBookList}
                       cookBookList={cookBookList}
                     />
@@ -107,7 +113,7 @@ const Recipes = ({ isCookBookOpen, setIsCookBookOpen }) => {
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 30rem);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 3.2rem;
   grid-row-gap: 3.2rem;
   justify-content: center;

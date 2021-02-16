@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Recipes from './Recipes';
-import { loadSearchedRecipes } from '../actions/recipeCardsAction';
+import {
+  loadRandomRecipes,
+  loadSearchedRecipes,
+} from '../actions/recipeCardsAction';
 
-const Search = () => {
-  const [isCookBookOpen, setIsCookBookOpen] = useState(false);
+const Search = ({
+  isCookBookOpen,
+  setIsCookBookOpen,
+  cookBookList,
+  setCookBookList,
+}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const dispatch = useDispatch();
 
   return (
     <div>
+      <button onClick={() => dispatch(loadRandomRecipes(3))}>Test</button>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -25,6 +33,8 @@ const Search = () => {
       </form>
       <div>{searchQuery}</div>
       <Recipes
+        cookBookList={cookBookList}
+        setCookBookList={setCookBookList}
         isCookBookOpen={isCookBookOpen}
         setIsCookBookOpen={setIsCookBookOpen}
       />

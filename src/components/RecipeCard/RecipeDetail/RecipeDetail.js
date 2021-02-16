@@ -26,6 +26,9 @@ const RecipeDetail = ({
 
   const createIngredientsList = () => {
     let ingredients = [];
+    if (!recipe.analyzedInstructions[0]) {
+      return ingredients;
+    }
     recipe.analyzedInstructions[0].steps.map((step) => {
       step.ingredients.map((ingredient) => {
         if (

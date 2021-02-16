@@ -15,8 +15,11 @@ import Welcome from './components/Welcome';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FooterBackground from './images/footer_background.svg';
+import RecipePreview from './components/RecipePreview';
 
 function App() {
+  const [isCookBookOpen, setIsCookBookOpen] = useState(false);
+  const [cookBookList, setCookBookList] = useState([]);
   return (
     <div className="App">
       <BrowserRouter>
@@ -26,6 +29,12 @@ function App() {
             <Nav />
             <Home />
             <Welcome />
+            <RecipePreview
+              cookBookList={cookBookList}
+              setCookBookList={setCookBookList}
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+            />
             <Contact />
             <Footer />
           </Content>
@@ -33,7 +42,12 @@ function App() {
         </Route>
         <Route path="/search">
           <GlobalStyle />
-          <Search />
+          <Search
+            cookBookList={cookBookList}
+            setCookBookList={setCookBookList}
+            isCookBookOpen={isCookBookOpen}
+            setIsCookBookOpen={setIsCookBookOpen}
+          />
         </Route>
       </BrowserRouter>
     </div>

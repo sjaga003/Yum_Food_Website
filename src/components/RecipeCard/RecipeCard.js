@@ -23,10 +23,6 @@ const RecipeCard = ({
   const dispatch = useDispatch();
   const cardRef = useRef();
 
-  useEffect(() => {
-    console.log(recipeDetails);
-  }, [recipeDetails]);
-
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
     isDragging: false,
@@ -70,7 +66,7 @@ const RecipeCard = ({
 
   const endDrag = (event, info) => {
     const newArray = recipeCardState.isDocked
-      ? [...cookBookList, recipe.id]
+      ? [...cookBookList, recipe]
       : [...cookBookList].filter((e) => e !== recipe.id);
     setCookBookList(newArray);
     setRecipeCardState({ ...recipeCardState, isDragging: false });
@@ -96,7 +92,7 @@ const RecipeCard = ({
   };
 
   return (
-    !cookBookList.includes(recipe.id) && (
+    !cookBookList.includes(recipe) && (
       <>
         {recipeCardState.isDetailOpen && (
           <RecipeDetail

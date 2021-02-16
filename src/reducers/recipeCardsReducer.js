@@ -14,6 +14,12 @@ const recipeCardsReducer = (state = initialState, action) => {
         recipes: action.payload.recipes,
         isLoading: false,
       };
+    case 'recipeCards/loadPreviewRecipes':
+      return {
+        ...state,
+        recipes: action.payload,
+        isLoading: false,
+      };
     default:
       return { ...state };
   }

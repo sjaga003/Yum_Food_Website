@@ -24,3 +24,10 @@ export const loadSearchedRecipes = (numberToLoad, query) => async (
     },
   });
 };
+
+export const loadPreviewRecipes = (recipes) => {
+  return {
+    type: 'recipeCards/loadPreviewRecipes',
+    payload: recipes,
+  };
+};
