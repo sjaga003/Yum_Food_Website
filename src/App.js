@@ -16,6 +16,8 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FooterBackground from './images/footer_background.svg';
 import RecipePreview from './components/RecipePreview';
+import Carousel from './components/Carousel';
+import CarouselCard from './components/CarouselCard';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -29,6 +31,7 @@ function App() {
             <Nav />
             <Home />
             <Welcome />
+            <Carousel />
             <RecipePreview
               cookBookList={cookBookList}
               setCookBookList={setCookBookList}
