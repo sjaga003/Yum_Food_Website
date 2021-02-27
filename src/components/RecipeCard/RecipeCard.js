@@ -72,7 +72,7 @@ const RecipeCard = ({
     setRecipeCardState({ ...recipeCardState, isDragging: false });
   };
 
-  const onTop = { zIndex: 1 };
+  const onTop = { zIndex: 2 };
   const flat = {
     zIndex: 0,
     transition: { delay: 0.3 },
@@ -145,7 +145,7 @@ const Card = styled(motion.div)`
   height: 30rem;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
-  z-index: 3;
+  z-index: 0;
   cursor: pointer;
   will-change: transform;
 `;

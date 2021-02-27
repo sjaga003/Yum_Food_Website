@@ -38,7 +38,7 @@ const Card = styled(motion.div)`
   background: #ffffff;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 92%;
   min-height: 100px;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));

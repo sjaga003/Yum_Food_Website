@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { loadPreviewRecipes } from '../actions/recipeCardsAction';
@@ -9,6 +10,7 @@ import {
   recipePreviewDessert,
   recipePreviewVegetarian,
 } from '../recipePreviewData';
+import CookBookSidebar from './CookBookSidebar';
 import Recipes from './Recipes';
 
 const RecipePreview = ({
@@ -16,6 +18,7 @@ const RecipePreview = ({
   setIsCookBookOpen,
   cookBookList,
   setCookBookList,
+  cookBookRef,
 }) => {
   const dispatch = useDispatch();
 
@@ -26,10 +29,6 @@ const RecipePreview = ({
 
   const [activeButton, setActiveButton] = useState('');
 
-  const activeButtonStyle = {
-    background: 'red',
-  };
-
   return (
     <RecipePreviewSection>
       <Navigation>
@@ -38,7 +37,6 @@ const RecipePreview = ({
         </Header>
         <ButtonContainer>
           <Button
-            style={activeButton === 'A' ? { activeButtonStyle } : {}}
             active={activeButton === 'A'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewPopular()));
@@ -48,7 +46,6 @@ const RecipePreview = ({
             Popular
           </Button>
           <Button
-            style={activeButton === 'B' ? { activeButtonStyle } : {}}
             active={activeButton === 'B'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewBreakfast()));
@@ -58,7 +55,6 @@ const RecipePreview = ({
             Breakfast
           </Button>
           <Button
-            style={activeButton === 'C' ? { activeButtonStyle } : {}}
             active={activeButton === 'C'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewAppetizer()));
@@ -69,7 +65,6 @@ const RecipePreview = ({
             Appetizer
           </Button>
           <Button
-            style={activeButton === 'D' ? { activeButtonStyle } : {}}
             active={activeButton === 'D'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewDessert()));
@@ -79,7 +74,6 @@ const RecipePreview = ({
             Dessert
           </Button>
           <Button
-            style={activeButton === 'E' ? { activeButtonStyle } : {}}
             active={activeButton === 'E'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewVegetarian()));
@@ -90,14 +84,14 @@ const RecipePreview = ({
           </Button>
         </ButtonContainer>
       </Navigation>
-      <div>
-        <Recipes
-          cookBookList={cookBookList}
-          setCookBookList={setCookBookList}
-          isCookBookOpen={isCookBookOpen}
-          setIsCookBookOpen={setIsCookBookOpen}
-        />
-      </div>
+
+      <Recipes
+        cookBookList={cookBookList}
+        setCookBookList={setCookBookList}
+        isCookBookOpen={isCookBookOpen}
+        setIsCookBookOpen={setIsCookBookOpen}
+        cookBookRef={cookBookRef}
+      />
     </RecipePreviewSection>
   );
 };

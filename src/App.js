@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import styled from 'styled-components';
 import '@fontsource/prompt';
@@ -18,28 +18,45 @@ import FooterBackground from './images/footer_background.svg';
 import RecipePreview from './components/RecipePreview';
 import Carousel from './components/Carousel';
 import CarouselCard from './components/CarouselCard';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import CookBookSidebar from './components/CookBookSidebar';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
   const [cookBookList, setCookBookList] = useState([]);
+
+  const cookBookRef = useRef();
   return (
     <div className="App">
       <BrowserRouter>
         <Route exact path="/">
           <GlobalStyle home />
           <Content>
-            <Nav />
-            <Home />
-            <Welcome />
-            <Carousel />
-            <RecipePreview
-              cookBookList={cookBookList}
-              setCookBookList={setCookBookList}
-              isCookBookOpen={isCookBookOpen}
-              setIsCookBookOpen={setIsCookBookOpen}
-            />
-            <Contact />
-            <Footer />
+            <AnimateSharedLayout type="switch">
+              <AnimatePresence>
+                <Nav />
+                <Home />
+                <Welcome />
+                <Carousel />
+                <CookBookSidebar
+                  cookBookRef={cookBookRef}
+                  isCookBookOpen={isCookBookOpen}
+                  setIsCookBookOpen={setIsCookBookOpen}
+                  cookBookList={cookBookList}
+                  setCookBookList={setCookBookList}
+                  cookBookRef={cookBookRef}
+                />
+                <RecipePreview
+                  cookBookRef={cookBookRef}
+                  cookBookList={cookBookList}
+                  setCookBookList={setCookBookList}
+                  isCookBookOpen={isCookBookOpen}
+                  setIsCookBookOpen={setIsCookBookOpen}
+                />
+                <Contact />
+                <Footer />
+              </AnimatePresence>
+            </AnimateSharedLayout>
           </Content>
           <FooterBackgroundCover> </FooterBackgroundCover>
         </Route>
