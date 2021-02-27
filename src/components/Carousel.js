@@ -1,3 +1,5 @@
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   AnimatePresence,
   motion,
@@ -5,7 +7,7 @@ import {
   useDragControls,
 } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const items = [
   'red',
@@ -413,7 +415,7 @@ const Carousel = () => {
   const boundsRef = useRef();
   const testRef = useRef(new Array());
   const controls = useAnimation();
-  const elementWidth = 500;
+  const elementWidth = 250;
 
   const eucDistance = (x1, y1, x2, y2) => {
     const a = x1 - x2;
@@ -427,7 +429,7 @@ const Carousel = () => {
     for (const item of cardRef.current.children) {
       const card = item.getBoundingClientRect();
       const cardCenterX = card.left + card.width / 2;
-      const cardCenterY = card.right + card.height / 2;
+      const cardCenterY = card.top + card.height / 2;
       arr.push({
         index: idx,
         distance: eucDistance(
@@ -445,7 +447,8 @@ const Carousel = () => {
   const handleDrag = (event, info) => {
     const bounds = boundsRef.current.getBoundingClientRect();
     const boundsCenterX = bounds.left + bounds.width / 2;
-    const boundsCenterY = bounds.right + bounds.height / 2;
+    const boundsCenterY = bounds.top + bounds.height / 2;
+    console.log(bounds);
 
     const itemCoords = generateItemCoords(
       cardRef,
@@ -473,12 +476,12 @@ const Carousel = () => {
     if (!position.fromDrag) {
       if (position.direction > 0) {
         controls.start({
-          x: elementWidth / 2 - elementWidth * position.index,
+          x: (elementWidth / 2) * 3 - elementWidth * position.index,
           transition: { type: 'tween' },
         });
       } else {
         controls.start({
-          x: elementWidth / 2 - elementWidth * position.index,
+          x: (elementWidth / 2) * 3 - elementWidth * position.index,
           transition: { type: 'tween' },
         });
       }
@@ -487,41 +490,59 @@ const Carousel = () => {
 
   return (
     <AnimatePresence>
-      <button
-        onClick={(event) => {
-          if (position.index > items.length - 2) {
-            setPosition({ index: 0, direction: 1, fromDrag: false });
-          } else {
-            setPosition({
-              index: position.index + 1,
-              direction: 1,
-              fromDrag: false,
-            });
-          }
-        }}
-      >
-        right
-      </button>
-      <button
-        onClick={() => {
-          if (position.index <= 0) {
-            setPosition({
-              index: items.length - 1,
-              direction: -1,
-              fromDrag: false,
-            });
-          } else {
-            setPosition({
-              index: position.index - 1,
-              direction: -1,
-              fromDrag: false,
-            });
-          }
-        }}
-      >
-        left
-      </button>
-      <Bounds ref={boundsRef}>
+      <ButtonContainer>
+        <CarouselButton
+          initial={{
+            color: 'var(--highlight-color)',
+            background: 'transparent',
+          }}
+          whileHover={{
+            color: 'white',
+            background: 'var(--highlight-color)',
+          }}
+          onClick={() => {
+            if (position.index <= 0) {
+              setPosition({
+                index: quickSearchCards.length - 1,
+                direction: -1,
+                fromDrag: false,
+              });
+            } else {
+              setPosition({
+                index: position.index - 1,
+                direction: -1,
+                fromDrag: false,
+              });
+            }
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </CarouselButton>
+        <CarouselButton
+          initial={{
+            color: 'var(--highlight-color)',
+            background: 'transparent',
+          }}
+          whileHover={{
+            color: 'white',
+            background: 'var(--highlight-color)',
+          }}
+          onClick={(event) => {
+            if (position.index > quickSearchCards.length - 2) {
+              setPosition({ index: 0, direction: 1, fromDrag: false });
+            } else {
+              setPosition({
+                index: position.index + 1,
+                direction: 1,
+                fromDrag: false,
+              });
+            }
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowRight} />
+        </CarouselButton>
+      </ButtonContainer>
+      <Bounds id="test" ref={boundsRef}>
         <Container
           ref={cardRef}
           drag="x"
@@ -529,24 +550,31 @@ const Carousel = () => {
           onDrag={(event, info) => handleDrag(event, info)}
           //   onDragTransitionEnd={(event, info) => handleDrag(event, info)}
           dragConstraints={{
-            left: elementWidth / 2 - elementWidth * position.index,
-            right: elementWidth / 2 - elementWidth * position.index,
+            left: (elementWidth / 2) * 3 - elementWidth * position.index,
+            right: (elementWidth / 2) * 3 - elementWidth * position.index,
           }}
-          initial={{ x: elementWidth / 2 - elementWidth * position.index }}
+          initial={{}}
           animate={controls}
         >
-          {items.map((value, index) => (
-            <TestDiv
+          {quickSearchCards.map((item, index) => (
+            <CarouselDiv
               ref={(element) => testRef.current.push(element)}
               key={`val-${index}`}
-              style={{ background: value }}
+              style={{ background: item }}
               initial={{
                 scale: index === position.index ? 1 : 0.7,
+                opacity: index === position.index ? 1 : 0.4,
               }}
               animate={{
                 scale: index === position.index ? 1 : 0.7,
+                opacity: index === position.index ? 1 : 0.4,
               }}
-            ></TestDiv>
+            >
+              <CardBackground key={`quickCard-${item.name}`}>
+                {item.icon}
+                <CardText>{item.name}</CardText>
+              </CardBackground>
+            </CarouselDiv>
           ))}
         </Container>
       </Bounds>
@@ -558,14 +586,66 @@ const Bounds = styled(motion.div)`
   overflow: hidden;
   height: 300px;
   width: 1000px;
+  display: flex;
+  align-self: center;
 `;
 
 const Container = styled(motion.div)`
   display: flex;
 `;
-const TestDiv = styled(motion.div)`
-  min-width: 500px; //make sure to change element width variable
-  min-height: 500px;
+const CarouselDiv = styled(motion.div)`
+  min-width: 250px; //make sure to change element width variable
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ButtonContainer = styled(motion.div)`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const CarouselButton = styled(motion.button)`
+  background: transparent;
+  border: 0;
+  color: var(--highlight-color);
+  border-radius: 50%;
+  border: 2px solid var(--highlight-color);
+  width: 3.6rem;
+  height: 3.6rem;
+  font-size: 2.4rem;
+  margin: 0rem 0.5rem;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
+`;
+
+const CardBackground = styled(motion.div)`
+  height: 25rem;
+  width: 20rem;
+  background: #f4f7fc;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 2rem;
+  align-items: center;
+  justify-content: space-evenly;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+  border: 1px #eee solid;
+
+  svg {
+    height: 12rem;
+    justify-self: center;
+  }
+`;
+
+const CardText = styled.span`
+  justify-self: flex-end;
+  font-size: 2.4rem;
+  font-family: var(--text-font);
 `;
 
 export default Carousel;
