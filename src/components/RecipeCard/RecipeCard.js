@@ -17,6 +17,7 @@ const RecipeCard = ({
   setCookBookList,
   isCookBookOpen,
   setIsCookBookOpen,
+  index,
 }) => {
   // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
@@ -54,7 +55,7 @@ const RecipeCard = ({
   const modifyDrag = (event, info) => {
     const cardRect = cardRef.current.getBoundingClientRect();
     const cookBookRect = cookBookRef.current.getBoundingClientRect();
-    const result = isWithinCookBook(cardRect, cookBookRect, 100);
+    const result = isWithinCookBook(cardRect, cookBookRect, 50);
     if (recipeCardState.isDocked !== result) {
       setRecipeCardState({ ...recipeCardState, isDocked: result });
     }
@@ -72,14 +73,21 @@ const RecipeCard = ({
     setRecipeCardState({ ...recipeCardState, isDragging: false });
   };
 
-  const onTop = { zIndex: 2 };
-  const flat = {
-    zIndex: 0,
-    transition: { delay: 0.3 },
+  const variants = {
+    onTop: { zIndex: 2, opacity: 1, y: 0 },
+    flat: (index) => ({
+      zIndex: 0,
+      opacity: 1,
+      y: 0,
+      transition: { delay: 0.1 * index, type: 'tween' },
+    }),
   };
 
   const onCardClick = () => {
-    if (!cardRef.current.style.transform) {
+    if (
+      cardRef.current.style.transform ===
+      'translate3d(0px, 0px, 0px) scale(1, 1)'
+    ) {
       setRecipeDetail(
         recipeDetails.recipes.results.find(
           (element) => element.id === recipe.id
@@ -116,7 +124,10 @@ const RecipeCard = ({
           layoutId={`recipeCard-${recipe.id}`}
           data-testid="recipeCard"
           data-recipe-id={recipe.id}
-          animate={recipeCardState.isDragging ? onTop : flat}
+          variants={variants}
+          custom={index}
+          initial={{ opacity: 0, y: 100 }}
+          animate={recipeCardState.isDragging ? 'onTop' : 'flat'}
           onClick={onCardClick}
         >
           <FoodImage

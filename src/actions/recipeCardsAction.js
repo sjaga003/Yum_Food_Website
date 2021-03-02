@@ -12,13 +12,24 @@ export const loadRandomRecipes = (numberToLoad) => async (dispatch) => {
   });
 };
 
-export const loadSearchedRecipes = (numberToLoad, query) => async (
-  dispatch
-) => {
-  const searchedRecipeData = await axios.get(searchURL(numberToLoad, query));
+export const loadSearchedRecipes = (offset, query) => async (dispatch) => {
+  const searchedRecipeData = await axios.get(searchURL(offset, query));
 
   dispatch({
     type: 'recipeCards/loadSearchedRecipes',
+    payload: {
+      recipes: searchedRecipeData.data,
+    },
+  });
+};
+
+export const loadAdditionalSearchedRecipes = (offset, query) => async (
+  dispatch
+) => {
+  const searchedRecipeData = await axios.get(searchURL(offset, query));
+
+  dispatch({
+    type: 'recipeCards/loadAdditionalSearchedRecipes',
     payload: {
       recipes: searchedRecipeData.data,
     },

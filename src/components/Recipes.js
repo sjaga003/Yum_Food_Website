@@ -7,6 +7,7 @@ import RecipeCard from './RecipeCard/RecipeCard';
 import { mockRecipeCards } from '../api';
 
 import CookBookSidebar from './CookBookSidebar';
+
 const Recipes = ({
   isCookBookOpen,
   setIsCookBookOpen,
@@ -33,7 +34,7 @@ const Recipes = ({
       <RecipeContainer>
         <CardContainer>
           {recipeCards.recipes.results &&
-            recipeCards.recipes.results.map((recipe) => {
+            recipeCards.recipes.results.map((recipe, index) => {
               if (!cookBookList.some((el) => el.id === recipe.id)) {
                 return (
                   <RecipeCard
@@ -43,6 +44,7 @@ const Recipes = ({
                     isCookBookOpen={isCookBookOpen}
                     setIsCookBookOpen={setIsCookBookOpen}
                     key={`recipe-${recipe.id}`}
+                    index={index}
                     recipe={recipe}
                   />
                 );
@@ -54,7 +56,7 @@ const Recipes = ({
   );
 };
 
-const CardContainer = styled.div`
+const CardContainer = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 3.2rem;
