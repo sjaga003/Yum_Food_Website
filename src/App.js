@@ -44,7 +44,6 @@ function App() {
                   setIsCookBookOpen={setIsCookBookOpen}
                   cookBookList={cookBookList}
                   setCookBookList={setCookBookList}
-                  cookBookRef={cookBookRef}
                 />
                 <RecipePreview
                   cookBookRef={cookBookRef}
@@ -62,12 +61,17 @@ function App() {
         </Route>
         <Route path="/search">
           <GlobalStyle />
-          <Search
-            cookBookList={cookBookList}
-            setCookBookList={setCookBookList}
-            isCookBookOpen={isCookBookOpen}
-            setIsCookBookOpen={setIsCookBookOpen}
-          />
+          <AnimateSharedLayout type="switch">
+            <AnimatePresence>
+              <Search
+                cookBookRef={cookBookRef}
+                cookBookList={cookBookList}
+                setCookBookList={setCookBookList}
+                isCookBookOpen={isCookBookOpen}
+                setIsCookBookOpen={setIsCookBookOpen}
+              />
+            </AnimatePresence>
+          </AnimateSharedLayout>
         </Route>
       </BrowserRouter>
     </div>

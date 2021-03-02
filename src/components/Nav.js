@@ -24,8 +24,13 @@ const Nav = () => {
 const Navigation = styled.ul`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 2rem 0;
+  width: 100%;
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  /* background: white; */
 `;
 
 const Logo = styled.div`

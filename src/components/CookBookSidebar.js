@@ -121,7 +121,7 @@ const ButtonContainer = styled(motion.div)`
   position: absolute;
   align-self: flex-start;
   left: -80px;
-  top: 20px;
+  top: 16px;
   height: 60px;
   width: 80px;
   display: flex;
@@ -130,6 +130,9 @@ const ButtonContainer = styled(motion.div)`
   background: var(--highlight-color);
   border-radius: 30px 0px 0px 30px;
   cursor: pointer;
+  &:hover svg {
+    color: #f4f5f7;
+  }
 `;
 
 const CookBookTitle = styled(motion.span)`

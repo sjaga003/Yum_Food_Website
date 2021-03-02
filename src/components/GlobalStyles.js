@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import HomeBackground from '../images/home_background.svg';
+import SearchBackground from '../images/search_background.svg';
 export const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
@@ -10,13 +11,14 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         width: 100%;
-        background: white;
         color: black;
         font-family: 'Roboto', sans-serif;
         position: relative;
         overflow-x: hidden;
         background: ${(props) =>
-          props.home ? `url(${HomeBackground}) no-repeat` : ''} ;
+          props.home
+            ? `url(${HomeBackground}) no-repeat`
+            : `url(${SearchBackground}) no-repeat`} ;
         background-size: cover;
         line-height: 1.6;
         font-size: 1.6rem;
