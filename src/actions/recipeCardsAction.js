@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { randomCardURL, searchURL } from '../api';
+import { randomCardURL, searchSortedURL, searchURL } from '../api';
 
 export const loadRandomRecipes = (numberToLoad) => async (dispatch) => {
   const randomRecipeData = await axios.get(randomCardURL(numberToLoad));
@@ -12,8 +12,12 @@ export const loadRandomRecipes = (numberToLoad) => async (dispatch) => {
   });
 };
 
-export const loadSearchedRecipes = (offset, query) => async (dispatch) => {
-  const searchedRecipeData = await axios.get(searchURL(offset, query));
+export const loadSearchedRecipes = (offset, query, sortType = '') => async (
+  dispatch
+) => {
+  const searchedRecipeData = await axios.get(
+    searchURL(offset, query, sortType)
+  );
 
   dispatch({
     type: 'recipeCards/loadSearchedRecipes',
@@ -23,10 +27,14 @@ export const loadSearchedRecipes = (offset, query) => async (dispatch) => {
   });
 };
 
-export const loadAdditionalSearchedRecipes = (offset, query) => async (
-  dispatch
-) => {
-  const searchedRecipeData = await axios.get(searchURL(offset, query));
+export const loadAdditionalSearchedRecipes = (
+  offset,
+  query,
+  sortType = ''
+) => async (dispatch) => {
+  const searchedRecipeData = await axios.get(
+    searchURL(offset, query, sortType)
+  );
 
   dispatch({
     type: 'recipeCards/loadAdditionalSearchedRecipes',
@@ -40,5 +48,11 @@ export const loadPreviewRecipes = (recipes) => {
   return {
     type: 'recipeCards/loadPreviewRecipes',
     payload: recipes,
+  };
+};
+
+export const sortRecipesByTime = () => {
+  return {
+    type: 'recipeCards/sortRecipesByTime',
   };
 };

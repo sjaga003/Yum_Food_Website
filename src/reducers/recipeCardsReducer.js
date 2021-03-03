@@ -36,6 +36,20 @@ const recipeCardsReducer = (state = initialState, action) => {
         },
         isDone: !action.payload.recipes.results.length,
       };
+    case 'recipeCards/sortRecipesByTime':
+      const sorted = state.recipes.results.sort(
+        (a, b) => a.readyInMinutes - b.readyInMinutes
+      );
+      return {
+        ...state,
+        recipes: {
+          number: state.recipes.number,
+          offset: state.recipes.offset,
+          results: sorted,
+          totalResults: state.totalResults,
+        },
+      };
+
     default:
       return { ...state };
   }

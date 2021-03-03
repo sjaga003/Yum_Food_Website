@@ -14,6 +14,7 @@ const Recipes = ({
   cookBookList,
   setCookBookList,
   cookBookRef,
+  fromPreview,
 }) => {
   // const recipeCards = mockRecipeCards();
   const recipeCards = useSelector((state) => state.recipeCards);
@@ -46,6 +47,7 @@ const Recipes = ({
                     key={`recipe-${recipe.id}`}
                     index={index}
                     recipe={recipe}
+                    fromPreview={fromPreview}
                   />
                 );
               }
@@ -66,7 +68,7 @@ const CardContainer = styled(motion.div)`
 
 const RecipeContainer = styled.div`
   padding: 10rem 0;
-  height: 100vh; //Keeps div from disappearing without cards
+  /* height: 100vh; //Keeps div from disappearing without cards */
   display: flex;
   flex-direction: column;
 `;

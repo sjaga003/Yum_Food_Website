@@ -91,6 +91,7 @@ const RecipePreview = ({
         isCookBookOpen={isCookBookOpen}
         setIsCookBookOpen={setIsCookBookOpen}
         cookBookRef={cookBookRef}
+        fromPreview={true}
       />
     </RecipePreviewSection>
   );

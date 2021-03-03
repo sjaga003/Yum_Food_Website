@@ -1,7 +1,7 @@
 const baseURL = 'https://api.spoonacular.com';
 
-export const searchURL = (offset, query) =>
-  `${baseURL}/recipes/complexSearch?number=4&offset=${offset}&addRecipeInformation=true&addRecipeNutrition=true&sort=popularity&query=${query}&apiKey=${process.env.REACT_APP_API_KEY}`; //DONT FORGET TO FIX THIS
+export const searchURL = (offset, query, sortType) =>
+  `${baseURL}/recipes/complexSearch?number=16&offset=${offset}&sort=${sortType}&addRecipeInformation=true&addRecipeNutrition=true&sort=popularity&query=${query}&apiKey=${process.env.REACT_APP_API_KEY}`; //DONT FORGET TO FIX THIS
 
 export const randomCardURL = (numberToLoad) =>
   `${baseURL}/recipes/complexSearch?number=${numberToLoad}&addRecipeInformation=true&addRecipeNutrition=true&sort=random&apiKey=${process.env.REACT_APP_API_KEY}`; //DONT FORGET TO FIX THIS

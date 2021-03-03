@@ -18,6 +18,7 @@ const RecipeCard = ({
   isCookBookOpen,
   setIsCookBookOpen,
   index,
+  fromPreview,
 }) => {
   // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
@@ -73,13 +74,23 @@ const RecipeCard = ({
     setRecipeCardState({ ...recipeCardState, isDragging: false });
   };
 
-  const variants = {
+  const previewVariants = {
     onTop: { zIndex: 2, opacity: 1, y: 0 },
     flat: (index) => ({
       zIndex: 0,
       opacity: 1,
       y: 0,
       transition: { delay: 0.1 * index, type: 'tween' },
+    }),
+  };
+
+  const searchVariants = {
+    onTop: { zIndex: 2, opacity: 1, y: 0 },
+    flat: (index) => ({
+      zIndex: 0,
+      opacity: 1,
+      y: 0,
+      transition: { type: 'tween' },
     }),
   };
 
@@ -124,7 +135,7 @@ const RecipeCard = ({
           layoutId={`recipeCard-${recipe.id}`}
           data-testid="recipeCard"
           data-recipe-id={recipe.id}
-          variants={variants}
+          variants={fromPreview ? previewVariants : searchVariants}
           custom={index}
           initial={{ opacity: 0, y: 100 }}
           animate={recipeCardState.isDragging ? 'onTop' : 'flat'}

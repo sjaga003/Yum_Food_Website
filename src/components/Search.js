@@ -6,13 +6,14 @@ import {
   loadPreviewRecipes,
   loadRandomRecipes,
   loadSearchedRecipes,
+  sortRecipesByTime,
 } from '../actions/recipeCardsAction';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Nav from './Nav';
 import CookBookSidebar from './CookBookSidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { mockRecipeCards } from '../api';
@@ -32,30 +33,32 @@ const Search = ({
   const query = useQuery();
   const [searchQuery, setSearchQuery] = useState(query.get('query'));
   const [lastSearch, setLastSearch] = useState('');
+  const [sortSelected, setSortSelected] = useState('meta-score');
   const dispatch = useDispatch();
   const [items, setItems] = useState(Array.from({ length: 20 }));
+  // const recipeCards = { recipes: [], isLoading: true, isDone: false };
   const recipeCards = useSelector((state) => state.recipeCards);
   useEffect(() => {
     if (searchQuery) {
       dispatch(loadSearchedRecipes(5, searchQuery));
     }
   }, []);
+  useEffect(() => {
+    console.log(sortSelected);
+  }, [sortSelected]);
 
   const fetchMore = () => {
     console.log('FETCH');
+    // setTimeout(() => {
+    //   setItems(items.concat(Array.from({ length: 20 })));
+    // }, 1000);
     dispatch(
       loadAdditionalSearchedRecipes(
         recipeCards.recipes.results.length,
-        lastSearch
+        lastSearch,
+        sortSelected
       )
     ); //fix this loading issue
-  };
-
-  const sortByTime = () => {
-    const sorted = recipeCards.recipes.results.sort(
-      (a, b) => a.readyInMinutes - b.readyInMinutes
-    );
-    console.log(sorted);
   };
 
   return (
@@ -70,14 +73,14 @@ const Search = ({
         cookBookRef={cookBookRef}
       />
       <SearchBackground>
-        <button onClick={() => sortByTime()}>Test</button>
         <SearchTitle>Browse Hundreds of Recipes</SearchTitle>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             console.log(searchQuery);
-            // dispatch(loadSearchedRecipes(0, searchQuery));
-            dispatch(loadPreviewRecipes(recipePreviewPopular()));
+            dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
+
+            // dispatch(loadPreviewRecipes(recipePreviewPopular()));
             setLastSearch(searchQuery);
             setSearchQuery('');
             console.log('HERE');
@@ -121,8 +124,18 @@ const Search = ({
           </PillBody>
         </PillContainer>
       </SearchBackground>
-      {recipeCards.recipes.results && (
+
+      <button onClick={() => dispatch(sortRecipesByTime())}>Test</button>
+      <SortSelect onChange={(e) => setSortSelected(e.target.value)}>
+        <label>Sort By:</label>
+        <option value="meta-score">Best</option>
+        <option value="time">Time to Cook</option>
+        <option value="price">Price</option>
+      </SortSelect>
+      {recipeCards.recipes.results ? (
         <InfiniteScroll
+          scrollableTarget={'body'}
+          pullDownToRefresh={false}
           style={{ overflow: 'unset' }}
           dataLength={parseInt(recipeCards.recipes.results.length)}
           next={fetchMore}
@@ -132,7 +145,14 @@ const Search = ({
               recipeCards.recipes.totalResults
           }
           loader={<FontAwesomeIcon icon={faSync} spin />}
-          endMessage={<div>That's it..</div>}
+          endMessage={
+            recipeCards.recipes.results.length === 0 && (
+              <EndMessage>
+                <FontAwesomeIcon icon={faStop} />
+                <span>No more search results found...</span>
+              </EndMessage>
+            )
+          }
         >
           <Recipes
             cookBookList={cookBookList}
@@ -140,9 +160,29 @@ const Search = ({
             isCookBookOpen={isCookBookOpen}
             setIsCookBookOpen={setIsCookBookOpen}
             cookBookRef={cookBookRef}
+            fromPreview={false}
           />
         </InfiniteScroll>
+      ) : (
+        lastSearch !== '' && (
+          <EndMessage>
+            <FontAwesomeIcon icon={faStop} />
+            <span>No search results found...</span>
+          </EndMessage>
+        )
       )}
+      {/* {items !== undefined && (
+        <InfiniteScroll
+          dataLength={items.length}
+          next={fetchMore}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          {items.map((i, index) => (
+            <div key={index}>div - #{index}</div>
+          ))}
+        </InfiniteScroll>
+      )} */}
     </PageContainer>
   );
 };
@@ -153,6 +193,22 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin: 0 auto;
+  padding: 0 15vw;
+  overflow-x: hidden;
+`;
+
+const SortSelect = styled.select`
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  background: white;
+  color: var(--secondary-color);
+  font-family: var(--text-font);
+  align-self: flex-start;
+  font-size: 1.8rem;
+  &:focus {
+    outline: 0;
+  }
 `;
 
 const SearchTitle = styled.span`
@@ -215,6 +271,17 @@ const PillBody = styled.div`
 
 const PillTitle = styled.span`
   font-size: 1.8rem;
+`;
+
+const EndMessage = styled.div`
+  font-size: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color);
+  span {
+    margin-left: 1rem;
+  }
 `;
 
 export default Search;
