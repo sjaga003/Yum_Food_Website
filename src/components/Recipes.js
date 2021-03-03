@@ -6,7 +6,19 @@ import { loadRandomRecipes } from '../actions/recipeCardsAction';
 import RecipeCard from './RecipeCard/RecipeCard';
 import { mockRecipeCards } from '../api';
 
-import CookBookSidebar from './CookBookSidebar';
+const containerFadeIn = {
+  flat: {
+    opacity: 1,
+    y: 0,
+  },
+  hidden: {
+    opacity: 0,
+    y: 100,
+    transition: {
+      type: 'tween',
+    },
+  },
+};
 
 const Recipes = ({
   isCookBookOpen,
@@ -33,7 +45,11 @@ const Recipes = ({
   return (
     <>
       <RecipeContainer>
-        <CardContainer>
+        <CardContainer
+          variants={containerFadeIn}
+          initial="hidden"
+          animate="flat"
+        >
           {recipeCards.recipes.results &&
             recipeCards.recipes.results.map((recipe, index) => {
               if (!cookBookList.some((el) => el.id === recipe.id)) {

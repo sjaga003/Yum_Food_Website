@@ -10,6 +10,17 @@ import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
 import { mockRecipeDetails } from '../../api';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
 
+const variant = {
+  onTop: { zIndex: 2, opacity: 1, y: 0 },
+  flat: {
+    zIndex: 0,
+    opacity: 1,
+    y: 0,
+    transition: { type: 'tween' },
+  },
+  hidden: { opacity: 0, y: 100 },
+};
+
 const RecipeCard = ({
   recipe,
   cookBookRef,
@@ -33,12 +44,6 @@ const RecipeCard = ({
   });
 
   const [recipeDetail, setRecipeDetail] = useState({});
-
-  useEffect(() => {
-    setRecipeDetail(
-      recipeDetails.recipes.results.find((element) => element.id === recipe.id)
-    );
-  }, [recipeDetails]);
 
   const isWithinCookBook = (cardRect, cookBookRef, threshold) => {
     if (
@@ -72,26 +77,6 @@ const RecipeCard = ({
       : [...cookBookList].filter((e) => e !== recipe.id);
     setCookBookList(newArray);
     setRecipeCardState({ ...recipeCardState, isDragging: false });
-  };
-
-  const previewVariants = {
-    onTop: { zIndex: 2, opacity: 1, y: 0 },
-    flat: (index) => ({
-      zIndex: 0,
-      opacity: 1,
-      y: 0,
-      transition: { delay: 0.1 * index, type: 'tween' },
-    }),
-  };
-
-  const searchVariants = {
-    onTop: { zIndex: 2, opacity: 1, y: 0 },
-    flat: (index) => ({
-      zIndex: 0,
-      opacity: 1,
-      y: 0,
-      transition: { type: 'tween' },
-    }),
   };
 
   const onCardClick = () => {
@@ -131,14 +116,13 @@ const RecipeCard = ({
           }
           onDrag={modifyDrag}
           onDragEnd={endDrag}
+          whileDrag="onTop"
           layout
           layoutId={`recipeCard-${recipe.id}`}
           data-testid="recipeCard"
           data-recipe-id={recipe.id}
-          variants={fromPreview ? previewVariants : searchVariants}
+          variants={variant}
           custom={index}
-          initial={{ opacity: 0, y: 100 }}
-          animate={recipeCardState.isDragging ? 'onTop' : 'flat'}
           onClick={onCardClick}
         >
           <FoodImage

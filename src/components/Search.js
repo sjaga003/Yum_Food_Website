@@ -74,13 +74,13 @@ const Search = ({
       />
       <SearchBackground>
         <SearchTitle>Browse Hundreds of Recipes</SearchTitle>
-        <form
+        <SearchForm
           onSubmit={(e) => {
             e.preventDefault();
             console.log(searchQuery);
-            dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
+            // dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
 
-            // dispatch(loadPreviewRecipes(recipePreviewPopular()));
+            dispatch(loadPreviewRecipes(recipePreviewPopular()));
             setLastSearch(searchQuery);
             setSearchQuery('');
             console.log('HERE');
@@ -99,7 +99,8 @@ const Search = ({
               />
             )}
           </SearchContainer>
-        </form>
+          <SearchButton>Search</SearchButton>
+        </SearchForm>
         <PillContainer>
           <PillBody
             onClick={() => {
@@ -206,6 +207,29 @@ const SortSelect = styled.select`
   font-family: var(--text-font);
   align-self: flex-start;
   font-size: 1.8rem;
+  padding-right: 10px;
+  &:focus {
+    outline: 0;
+  }
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+`;
+
+const SearchButton = styled.button`
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  background: var(--highlight-color);
+  border: 0;
+  height: 100%;
+  color: var(--bg-color);
+  font-family: var(--text-font);
+  cursor: pointer;
+  border-radius: 0px 8px 8px 0px;
   &:focus {
     outline: 0;
   }
@@ -227,17 +251,19 @@ const SearchBackground = styled(motion.div)`
 `;
 
 const SearchContainer = styled.div`
-  margin-bottom: 3rem;
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   border: 1px solid lightgray;
   border-radius: 8px;
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   background: white;
-  width: 80rem;
+  width: 75rem;
 `;
 
 const SearchInput = styled.input`
   outline: none;
   border: 0;
+  border-radius: 8px;
   height: 8rem;
   width: 95%;
   font-size: 2.4rem;
@@ -254,15 +280,16 @@ const RemoveSearchIcon = styled(FontAwesomeIcon)`
 const PillContainer = styled.div`
   display: flex;
   width: 80rem;
+  margin-right: 45px;
 `;
 
 const PillBody = styled.div`
   background: white;
-  border-radius: 27px;
+  border-radius: 8px;
   height: 4rem;
   display: flex;
   align-items: center;
-  border-left: #343c64 25px solid;
+  border-left: var(--highlight-color) 25px solid;
   padding: 0rem 2rem;
   margin-right: 3rem;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
