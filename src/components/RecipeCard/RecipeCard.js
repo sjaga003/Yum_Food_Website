@@ -11,9 +11,7 @@ import { mockRecipeDetails } from '../../api';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
 
 const variant = {
-  onTop: { zIndex: 2, opacity: 1, y: 0 },
   flat: {
-    zIndex: 0,
     opacity: 1,
     y: 0,
     transition: { type: 'tween' },
@@ -111,12 +109,13 @@ const RecipeCard = ({
           drag
           dragConstraints={cardRef}
           dragElastic={1}
-          onDragStart={() =>
-            setRecipeCardState({ ...recipeCardState, isDragging: true })
-          }
+          onDragStart={() => {
+            setRecipeCardState({ ...recipeCardState, isDragging: true });
+            cardRef.current.style.zIndex = 2;
+            console.log('hello');
+          }}
           onDrag={modifyDrag}
           onDragEnd={endDrag}
-          whileDrag="onTop"
           layout
           layoutId={`recipeCard-${recipe.id}`}
           data-testid="recipeCard"
@@ -151,7 +150,6 @@ const Card = styled(motion.div)`
   height: 30rem;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
-  z-index: 0;
   cursor: pointer;
   will-change: transform;
 `;

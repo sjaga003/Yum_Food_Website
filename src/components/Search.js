@@ -40,7 +40,10 @@ const Search = ({
   const recipeCards = useSelector((state) => state.recipeCards);
   useEffect(() => {
     if (searchQuery) {
-      dispatch(loadSearchedRecipes(5, searchQuery));
+      // dispatch(loadSearchedRecipes(5, searchQuery, sortSelected));
+      dispatch(loadPreviewRecipes(recipePreviewPopular()));
+      setLastSearch(searchQuery);
+      setSearchQuery('');
     }
   }, []);
   useEffect(() => {

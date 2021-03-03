@@ -7,6 +7,7 @@ import {
   useDragControls,
 } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const items = [
@@ -407,7 +408,7 @@ const quickSearchCards = [
 
 const Carousel = () => {
   const [position, setPosition] = useState({
-    index: 0,
+    index: 2,
     direction: 0,
     fromDrag: false,
   });
@@ -570,10 +571,23 @@ const Carousel = () => {
                 opacity: index === position.index ? 1 : 0.4,
               }}
             >
-              <CardBackground key={`quickCard-${item.name}`}>
-                {item.icon}
-                <CardText>{item.name}</CardText>
-              </CardBackground>
+              {index === position.index ? (
+                <Link
+                  draggable={false}
+                  style={{ textDecoration: 'none' }}
+                  to={`/search?query=${item.name}`}
+                >
+                  <CardBackground key={`quickCard-${item.name}`}>
+                    {item.icon}
+                    <CardText>{item.name}</CardText>
+                  </CardBackground>
+                </Link>
+              ) : (
+                <CardBackground key={`quickCard-${item.name}`}>
+                  {item.icon}
+                  <CardText>{item.name}</CardText>
+                </CardBackground>
+              )}
             </CarouselDiv>
           ))}
         </Container>
@@ -646,6 +660,7 @@ const CardText = styled.span`
   justify-self: flex-end;
   font-size: 2.4rem;
   font-family: var(--text-font);
+  color: black;
 `;
 
 export default Carousel;
