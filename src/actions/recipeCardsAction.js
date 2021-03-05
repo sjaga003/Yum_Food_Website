@@ -1,5 +1,10 @@
 import axios from 'axios';
 import { randomCardURL, searchSortedURL, searchURL } from '../api';
+import {
+  recipePreviewDessert,
+  recipePreviewPopular,
+  recipePreviewVegetarian,
+} from '../recipePreviewData';
 
 export const loadRandomRecipes = (numberToLoad) => async (dispatch) => {
   const randomRecipeData = await axios.get(randomCardURL(numberToLoad));
@@ -12,9 +17,11 @@ export const loadRandomRecipes = (numberToLoad) => async (dispatch) => {
   });
 };
 
-export const loadSearchedRecipes = (offset, query, sortType = '') => async (
-  dispatch
-) => {
+export const loadSearchedRecipes = (
+  offset,
+  query,
+  sortType = 'meta-score'
+) => async (dispatch) => {
   const searchedRecipeData = await axios.get(
     searchURL(offset, query, sortType)
   );
@@ -30,7 +37,7 @@ export const loadSearchedRecipes = (offset, query, sortType = '') => async (
 export const loadAdditionalSearchedRecipes = (
   offset,
   query,
-  sortType = ''
+  sortType = 'meta-score'
 ) => async (dispatch) => {
   const searchedRecipeData = await axios.get(
     searchURL(offset, query, sortType)
@@ -40,6 +47,7 @@ export const loadAdditionalSearchedRecipes = (
     type: 'recipeCards/loadAdditionalSearchedRecipes',
     payload: {
       recipes: searchedRecipeData.data,
+      // recipes: recipes,
     },
   });
 };
@@ -54,5 +62,11 @@ export const loadPreviewRecipes = (recipes) => {
 export const sortRecipesByTime = () => {
   return {
     type: 'recipeCards/sortRecipesByTime',
+  };
+};
+
+export const clearRecipeCards = () => {
+  return {
+    type: 'recipeCards/clearRecipeCards',
   };
 };

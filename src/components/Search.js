@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Recipes from './Recipes';
 import {
+  clearRecipeCards,
   loadAdditionalSearchedRecipes,
   loadPreviewRecipes,
   loadRandomRecipes,
@@ -14,10 +15,14 @@ import Nav from './Nav';
 import CookBookSidebar from './CookBookSidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { mockRecipeCards } from '../api';
-import { recipePreviewPopular } from '../recipePreviewData';
+import {
+  recipePreviewAppetizer,
+  recipePreviewDessert,
+  recipePreviewPopular,
+} from '../recipePreviewData';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -34,18 +39,23 @@ const Search = ({
   const [searchQuery, setSearchQuery] = useState(query.get('query'));
   const [lastSearch, setLastSearch] = useState('');
   const [sortSelected, setSortSelected] = useState('meta-score');
+  const [fetchCount, setFetchCount] = useState(0);
   const dispatch = useDispatch();
   const [items, setItems] = useState(Array.from({ length: 20 }));
+
+  const history = useHistory();
+
   // const recipeCards = { recipes: [], isLoading: true, isDone: false };
   const recipeCards = useSelector((state) => state.recipeCards);
   useEffect(() => {
     if (searchQuery) {
-      // dispatch(loadSearchedRecipes(5, searchQuery, sortSelected));
-      dispatch(loadPreviewRecipes(recipePreviewPopular()));
+      dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
+      // dispatch(loadPreviewRecipes(recipePreviewPopular()));
       setLastSearch(searchQuery);
       setSearchQuery('');
     }
   }, []);
+
   useEffect(() => {
     console.log(sortSelected);
   }, [sortSelected]);
@@ -62,7 +72,19 @@ const Search = ({
         sortSelected
       )
     ); //fix this loading issue
+    // if (fetchCount === 0) {
+    //   dispatch(loadAdditionalSearchedRecipes(recipePreviewDessert()));
+    // } else if (fetchCount === 1) {
+    //   dispatch(loadAdditionalSearchedRecipes(recipePreviewAppetizer()));
+    // }
+
+    // setFetchCount(fetchCount + 1);
   };
+
+  let bool = false;
+  setTimeout(() => {
+    bool = true;
+  }, 1000);
 
   return (
     <PageContainer>
@@ -81,11 +103,19 @@ const Search = ({
           onSubmit={(e) => {
             e.preventDefault();
             console.log(searchQuery);
-            // dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
+            dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
 
-            dispatch(loadPreviewRecipes(recipePreviewPopular()));
+            // dispatch(loadPreviewRecipes(recipePreviewPopular()));
             setLastSearch(searchQuery);
+            history.push({
+              pathname: '/search',
+              search: `?query=${searchQuery}`,
+              state: {
+                update: true,
+              },
+            });
             setSearchQuery('');
+
             console.log('HERE');
             console.log(!recipeCards.isDone);
           }}
@@ -107,21 +137,24 @@ const Search = ({
         <PillContainer>
           <PillBody
             onClick={() => {
-              dispatch(loadSearchedRecipes(0, 'Casserole'));
+              dispatch(loadSearchedRecipes(0, 'Casserole', sortSelected));
+              setLastSearch('Casserole');
             }}
           >
             <PillTitle>Casserole</PillTitle>
           </PillBody>
           <PillBody
             onClick={() => {
-              dispatch(loadSearchedRecipes(0, 'Cookies'));
+              dispatch(loadSearchedRecipes(0, 'Cookies', sortSelected));
+              setLastSearch('Cookies');
             }}
           >
             <PillTitle>Cookies</PillTitle>
           </PillBody>
           <PillBody
             onClick={() => {
-              dispatch(loadSearchedRecipes(0, 'Cake'));
+              dispatch(loadSearchedRecipes(0, 'Cake', sortSelected));
+              setLastSearch('Cake');
             }}
           >
             <PillTitle>Cake</PillTitle>
@@ -129,8 +162,20 @@ const Search = ({
         </PillContainer>
       </SearchBackground>
 
-      <button onClick={() => dispatch(sortRecipesByTime())}>Test</button>
-      <SortSelect onChange={(e) => setSortSelected(e.target.value)}>
+      {/* <button onClick={() => dispatch(sortRecipesByTime())}>Test</button> */}
+      <SortSelect
+        onChange={(e) => {
+          setSortSelected(e.target.value);
+          if (
+            recipeCards.recipes.results &&
+            recipeCards.recipes.results.length
+          ) {
+            console.log('reset');
+            dispatch(clearRecipeCards());
+            dispatch(loadSearchedRecipes(0, lastSearch, e.target.value));
+          }
+        }}
+      >
         <label>Sort By:</label>
         <option value="meta-score">Best</option>
         <option value="time">Time to Cook</option>
@@ -144,18 +189,21 @@ const Search = ({
           dataLength={parseInt(recipeCards.recipes.results.length)}
           next={fetchMore}
           hasMore={
+            // fetchCount <= 1
             !recipeCards.isDone &&
             recipeCards.recipes.results.length <=
               recipeCards.recipes.totalResults
           }
-          loader={<FontAwesomeIcon icon={faSync} spin />}
+          loader={
+            <Loader>
+              <FontAwesomeIcon icon={faSync} spin />
+            </Loader>
+          }
           endMessage={
-            recipeCards.recipes.results.length === 0 && (
-              <EndMessage>
-                <FontAwesomeIcon icon={faStop} />
-                <span>No more search results found...</span>
-              </EndMessage>
-            )
+            <EndMessage>
+              <FontAwesomeIcon icon={faStop} />
+              <motion.span>No more search results found...</motion.span>
+            </EndMessage>
           }
         >
           <Recipes
@@ -165,15 +213,29 @@ const Search = ({
             setIsCookBookOpen={setIsCookBookOpen}
             cookBookRef={cookBookRef}
             fromPreview={false}
+            fetchCount={fetchCount}
           />
         </InfiniteScroll>
       ) : (
-        lastSearch !== '' && (
-          <EndMessage>
+        lastSearch !== '' &&
+        (bool ? (
+          <EndMessage
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 2, type: 'tween' },
+            }}
+          >
             <FontAwesomeIcon icon={faStop} />
-            <span>No search results found...</span>
+            <span>No search results found</span>
           </EndMessage>
-        )
+        ) : (
+          <Loader>
+            <FontAwesomeIcon icon={faSync} spin />
+          </Loader>
+        ))
       )}
       {/* {items !== undefined && (
         <InfiniteScroll
@@ -221,6 +283,15 @@ const SearchForm = styled.form`
   align-items: center;
   margin-bottom: 3rem;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+`;
+
+const Loader = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10rem;
+  font-size: 1.8em;
 `;
 
 const SearchButton = styled.button`
@@ -303,7 +374,7 @@ const PillTitle = styled.span`
   font-size: 1.8rem;
 `;
 
-const EndMessage = styled.div`
+const EndMessage = styled(motion.div)`
   font-size: 2.4rem;
   display: flex;
   justify-content: center;

@@ -45,11 +45,7 @@ const Recipes = ({
   return (
     <>
       <RecipeContainer>
-        <CardContainer
-          variants={containerFadeIn}
-          initial="hidden"
-          animate="flat"
-        >
+        <CardContainer>
           {recipeCards.recipes.results &&
             recipeCards.recipes.results.map((recipe, index) => {
               if (!cookBookList.some((el) => el.id === recipe.id)) {

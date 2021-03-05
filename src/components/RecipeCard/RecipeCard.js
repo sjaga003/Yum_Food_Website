@@ -121,7 +121,8 @@ const RecipeCard = ({
           data-testid="recipeCard"
           data-recipe-id={recipe.id}
           variants={variant}
-          custom={index}
+          initial="hidden"
+          animate="flat"
           onClick={onCardClick}
         >
           <FoodImage
