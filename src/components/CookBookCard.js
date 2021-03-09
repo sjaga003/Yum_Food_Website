@@ -1,32 +1,78 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import MissingImage from '../images/card_image_missing.svg';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import RecipeDetail from './RecipeCard/RecipeDetail/RecipeDetail';
+import { useDispatch, useSelector } from 'react-redux';
 const CookBookCard = ({ recipe, cookBookList, setCookBookList }) => {
+  const [recipeCardState, setRecipeCardState] = useState({
+    isDocked: false,
+    isDragging: false,
+    isDetailOpen: false,
+    recipeDetail: {},
+  });
+
+  const cardRef = useRef();
+
+  const recipeDetails = useSelector((state) => state.recipeCards);
+  const dispatch = useDispatch();
+
+  const [recipeDetail, setRecipeDetail] = useState({});
+
+  const onCardClick = () => {
+    if (
+      cardRef.current.style.transform ===
+      'translate3d(0px, 0px, 0px) scale(1, 1)'
+    ) {
+      setRecipeDetail(
+        recipeDetails.recipes.results.find(
+          (element) => element.id === recipe.id
+        )
+      );
+
+      setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
   return (
-    <Card
-      key={`cookBookList-${recipe.id}`}
-      layout
-      layoutId={`recipeCard-${recipe.id}`}
-    >
-      <FoodImage
-        draggable={false}
-        data-testid="recipeCardImage"
-        src={recipe.image ? recipe.image : MissingImage}
-        alt={`${recipe.title}`}
-      />
-      <FoodInfo>
-        <Title>{recipe.title}</Title>
-      </FoodInfo>{' '}
-      <CloseButton
-        onClick={() => {
-          setCookBookList([...cookBookList].filter((e) => e !== recipe));
-        }}
-        icon={faTimes}
-      />
-    </Card>
+    <>
+      {recipeCardState.isDetailOpen && (
+        <RecipeDetail
+          recipeCardState={recipeCardState.isDetailOpen}
+          setRecipeCardState={setRecipeCardState}
+          recipe={recipeDetail}
+          recipeId={recipe.id}
+        />
+      )}
+      <Card
+        key={`cookBookList-${recipe.id}`}
+        layout
+        layoutId={`recipeCard-${recipe.id}`}
+        ref={cardRef}
+        onClick={onCardClick}
+        layout
+        layoutId={`recipeCard-${recipe.id}`}
+      >
+        <FoodImage
+          draggable={false}
+          data-testid="recipeCardImage"
+          src={recipe.image ? recipe.image : MissingImage}
+          alt={`${recipe.title}`}
+        />
+        <FoodInfo>
+          <Title>{recipe.title}</Title>
+        </FoodInfo>{' '}
+        <CloseButton
+          onClick={() => {
+            setCookBookList([...cookBookList].filter((e) => e !== recipe));
+          }}
+          icon={faTimes}
+        />
+      </Card>
+    </>
   );
 };
 
@@ -44,6 +90,7 @@ const Card = styled(motion.div)`
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   z-index: 2;
   margin-bottom: 10px;
+  cursor: pointer;
   &:hover {
     background: #f4f5f7;
   }
