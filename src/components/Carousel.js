@@ -490,16 +490,12 @@ const Carousel = () => {
   }, [position]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={`carousel-animatePresence`}>
       <ButtonContainer>
         <CarouselButton
-          initial={{
-            color: 'var(--highlight-color)',
-            background: 'transparent',
-          }}
           whileHover={{
             color: 'white',
-            background: 'var(--highlight-color)',
+            backgroundColor: 'var(--highlight-color)',
           }}
           onClick={() => {
             if (position.index <= 0) {
@@ -520,13 +516,9 @@ const Carousel = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
         </CarouselButton>
         <CarouselButton
-          initial={{
-            color: 'var(--highlight-color)',
-            background: 'transparent',
-          }}
           whileHover={{
             color: 'white',
-            background: 'var(--highlight-color)',
+            backgroundColor: 'var(--highlight-color)',
           }}
           onClick={(event) => {
             if (position.index > quickSearchCards.length - 2) {
@@ -560,7 +552,7 @@ const Carousel = () => {
           {quickSearchCards.map((item, index) => (
             <CarouselDiv
               ref={(element) => testRef.current.push(element)}
-              key={`val-${index}`}
+              key={`carouselCard-${item}`}
               style={{ background: item }}
               initial={{
                 scale: index === position.index ? 1 : 0.7,

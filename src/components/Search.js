@@ -163,24 +163,26 @@ const Search = ({
       </SearchBackground>
 
       {/* <button onClick={() => dispatch(sortRecipesByTime())}>Test</button> */}
-      <SortSelect
-        onChange={(e) => {
-          setSortSelected(e.target.value);
-          if (
-            recipeCards.recipes.results &&
-            recipeCards.recipes.results.length
-          ) {
-            console.log('reset');
-            dispatch(clearRecipeCards());
-            dispatch(loadSearchedRecipes(0, lastSearch, e.target.value));
-          }
-        }}
-      >
-        <label>Sort By:</label>
-        <option value="meta-score">Best</option>
-        <option value="time">Time to Cook</option>
-        <option value="price">Price</option>
-      </SortSelect>
+      {lastSearch && (
+        <SortSelect
+          onChange={(e) => {
+            setSortSelected(e.target.value);
+            if (
+              recipeCards.recipes.results &&
+              recipeCards.recipes.results.length
+            ) {
+              console.log('reset');
+              dispatch(clearRecipeCards());
+              dispatch(loadSearchedRecipes(0, lastSearch, e.target.value));
+            }
+          }}
+        >
+          <label>Sort By:</label>
+          <option value="meta-score">Best</option>
+          <option value="time">Time to Cook</option>
+          <option value="price">Price</option>
+        </SortSelect>
+      )}
       {recipeCards.recipes.results ? (
         <InfiniteScroll
           scrollableTarget={'body'}

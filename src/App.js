@@ -32,12 +32,12 @@ function App() {
         <Route exact path="/">
           <GlobalStyle home />
           <Content>
+            <Nav />
+            <Home />
+            <Welcome />
+            <Carousel />
             <AnimateSharedLayout type="switch">
               <AnimatePresence>
-                <Nav />
-                <Home />
-                <Welcome />
-                <Carousel />
                 <CookBookSidebar
                   cookBookRef={cookBookRef}
                   isCookBookOpen={isCookBookOpen}
@@ -52,10 +52,10 @@ function App() {
                   isCookBookOpen={isCookBookOpen}
                   setIsCookBookOpen={setIsCookBookOpen}
                 />
-                <Contact />
-                <Footer />
               </AnimatePresence>
             </AnimateSharedLayout>
+            <Contact />
+            <Footer />
           </Content>
           <FooterBackgroundCover> </FooterBackgroundCover>
         </Route>
