@@ -72,6 +72,7 @@ const RecipeCard = ({
   };
 
   const endDrag = (event, info) => {
+    cardRef.current.style.zIndex = 0;
     const newArray = recipeCardState.isDocked
       ? [...cookBookList, recipe]
       : [...cookBookList].filter((e) => e !== recipe.id);
