@@ -1,4 +1,4 @@
-import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faStopwatch, faSync } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
@@ -33,6 +33,8 @@ const RecipeCard = ({
   const recipeDetails = useSelector((state) => state.recipeCards);
   const dispatch = useDispatch();
   const cardRef = useRef();
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
@@ -125,12 +127,17 @@ const RecipeCard = ({
           animate="flat"
           onClick={onCardClick}
         >
-          <FoodImage
-            draggable={false}
-            data-testid="recipeCardImage"
-            src={recipe.image ? recipe.image : MissingImage}
-            alt={`${recipe.title}`}
-          />
+          <ImageContainer>
+            {!imageLoaded && <Spinner size="4x" icon={faSync} spin />}
+            <FoodImage
+              style={!imageLoaded ? { display: 'none' } : { display: 'block' }}
+              draggable={false}
+              data-testid="recipeCardImage"
+              src={recipe.image ? recipe.image : MissingImage}
+              onLoad={() => setImageLoaded(true)}
+              alt={`${recipe.title}`}
+            />
+          </ImageContainer>
           <FoodInfo>
             <Title>{recipe.title}</Title>
           </FoodInfo>
@@ -153,6 +160,17 @@ const Card = styled(motion.div)`
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   cursor: pointer;
   will-change: transform;
+`;
+
+const ImageContainer = styled(motion.div)`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Spinner = styled(FontAwesomeIcon)`
+  color: var(--secondary-color);
 `;
 
 const FoodImage = styled.img`
