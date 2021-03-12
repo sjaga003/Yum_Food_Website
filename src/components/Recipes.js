@@ -23,13 +23,12 @@ const containerFadeIn = {
 const Recipes = ({
   isCookBookOpen,
   setIsCookBookOpen,
-  cookBookList,
-  setCookBookList,
   cookBookRef,
   fromPreview,
 }) => {
   // const recipeCards = mockRecipeCards();
   const recipeCards = useSelector((state) => state.recipeCards);
+  const cookBook = useSelector((state) => state.cookBook);
   // console.log(recipeCards);
   const dispatch = useDispatch();
 
@@ -48,12 +47,10 @@ const Recipes = ({
         <CardContainer>
           {recipeCards.recipes.results &&
             recipeCards.recipes.results.map((recipe, index) => {
-              if (!cookBookList.some((el) => el.id === recipe.id)) {
+              if (!cookBook?.some((el) => el.id === recipe.id)) {
                 return (
                   <RecipeCard
                     cookBookRef={cookBookRef}
-                    setCookBookList={setCookBookList}
-                    cookBookList={cookBookList}
                     isCookBookOpen={isCookBookOpen}
                     setIsCookBookOpen={setIsCookBookOpen}
                     key={`recipe-${recipe.id}`}

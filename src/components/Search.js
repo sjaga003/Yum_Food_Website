@@ -28,13 +28,7 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const Search = ({
-  isCookBookOpen,
-  setIsCookBookOpen,
-  cookBookList,
-  setCookBookList,
-  cookBookRef,
-}) => {
+const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const query = useQuery();
   const [searchQuery, setSearchQuery] = useState(query.get('query'));
   const [lastSearch, setLastSearch] = useState('');
@@ -93,8 +87,6 @@ const Search = ({
         cookBookRef={cookBookRef}
         isCookBookOpen={isCookBookOpen}
         setIsCookBookOpen={setIsCookBookOpen}
-        cookBookList={cookBookList}
-        setCookBookList={setCookBookList}
         cookBookRef={cookBookRef}
       />
       <SearchBackground>
@@ -209,8 +201,6 @@ const Search = ({
           }
         >
           <Recipes
-            cookBookList={cookBookList}
-            setCookBookList={setCookBookList}
             isCookBookOpen={isCookBookOpen}
             setIsCookBookOpen={setIsCookBookOpen}
             cookBookRef={cookBookRef}

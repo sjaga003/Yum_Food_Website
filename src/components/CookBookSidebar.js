@@ -2,6 +2,7 @@ import { faBookOpen, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import CookBookCard from './CookBookCard';
 
@@ -23,10 +24,10 @@ const cookBookButtonVariant = {
 const CookBookSidebar = ({
   isCookBookOpen,
   setIsCookBookOpen,
-  cookBookList,
-  setCookBookList,
   cookBookRef,
 }) => {
+  const cookBook = useSelector((state) => state.cookBook);
+
   return (
     <CookBookContainer
       initial={{ right: -320 }}
@@ -47,15 +48,10 @@ const CookBookSidebar = ({
         {isCookBookOpen && <CookBookTitle>Cookbook</CookBookTitle>}
         <CookBookCards>
           {isCookBookOpen &&
-            cookBookList &&
-            cookBookList.map((entry) => {
+            cookBook &&
+            cookBook.map((entry) => {
               return (
-                <CookBookCard
-                  key={`cookBookCard-${entry.id}`}
-                  recipe={entry}
-                  setCookBookList={setCookBookList}
-                  cookBookList={cookBookList}
-                />
+                <CookBookCard key={`cookBookCard-${entry.id}`} recipe={entry} />
               );
             })}
         </CookBookCards>

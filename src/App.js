@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
+import CookBookPage from './components/CookBookPage';
 import CookBookSidebar from './components/CookBookSidebar';
 import Footer from './components/Footer';
 import { GlobalStyle } from './components/GlobalStyles';
@@ -19,14 +20,13 @@ import FooterBackground from './images/footer_background.svg';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
-  const [cookBookList, setCookBookList] = useState([]);
 
   const cookBookRef = useRef();
   return (
     <div className="App">
       <BrowserRouter>
         <Route exact path="/">
-          <GlobalStyle home />
+          <GlobalStyle background="home" />
           <Content>
             <Nav />
             <Home />
@@ -39,14 +39,10 @@ function App() {
                   cookBookRef={cookBookRef}
                   isCookBookOpen={isCookBookOpen}
                   setIsCookBookOpen={setIsCookBookOpen}
-                  cookBookList={cookBookList}
-                  setCookBookList={setCookBookList}
                 />
                 <RecipePreview
                   key="RecipePreview"
                   cookBookRef={cookBookRef}
-                  cookBookList={cookBookList}
-                  setCookBookList={setCookBookList}
                   isCookBookOpen={isCookBookOpen}
                   setIsCookBookOpen={setIsCookBookOpen}
                 />
@@ -58,18 +54,20 @@ function App() {
           <FooterBackgroundCover> </FooterBackgroundCover>
         </Route>
         <Route path="/search">
-          <GlobalStyle />
+          <GlobalStyle background="search" />
           <AnimateSharedLayout type="switch">
             <AnimatePresence>
               <Search
                 cookBookRef={cookBookRef}
-                cookBookList={cookBookList}
-                setCookBookList={setCookBookList}
                 isCookBookOpen={isCookBookOpen}
                 setIsCookBookOpen={setIsCookBookOpen}
               />
             </AnimatePresence>
           </AnimateSharedLayout>
+        </Route>
+        <Route path="/cookbook">
+          <GlobalStyle />
+          <CookBookPage />
         </Route>
       </BrowserRouter>
     </div>

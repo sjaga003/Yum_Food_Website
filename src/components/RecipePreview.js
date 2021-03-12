@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
+import {
+  addToCookBook,
+  removeFromCookBook,
+  setCookBook,
+} from '../actions/cookBookAction';
 import { loadPreviewRecipes } from '../actions/recipeCardsAction';
 import {
   recipePreviewAppetizer,
@@ -11,13 +16,7 @@ import {
 } from '../recipePreviewData';
 import Recipes from './Recipes';
 
-const RecipePreview = ({
-  isCookBookOpen,
-  setIsCookBookOpen,
-  cookBookList,
-  setCookBookList,
-  cookBookRef,
-}) => {
+const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,8 +83,6 @@ const RecipePreview = ({
       </Navigation>
 
       <Recipes
-        cookBookList={cookBookList}
-        setCookBookList={setCookBookList}
         isCookBookOpen={isCookBookOpen}
         setIsCookBookOpen={setIsCookBookOpen}
         cookBookRef={cookBookRef}

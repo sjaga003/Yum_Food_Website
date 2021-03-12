@@ -9,6 +9,7 @@ import MissingImage from '../../images/card_image_missing.svg';
 import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
 import { mockRecipeDetails } from '../../api';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
+import { addToCookBook } from '../../actions/cookBookAction';
 
 const variant = {
   flat: {
@@ -22,15 +23,12 @@ const variant = {
 const RecipeCard = ({
   recipe,
   cookBookRef,
-  cookBookList,
-  setCookBookList,
   isCookBookOpen,
   setIsCookBookOpen,
-  index,
-  fromPreview,
 }) => {
   // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
+  const cookBook = useSelector((state) => state.cookBook);
   const dispatch = useDispatch();
   const cardRef = useRef();
 
@@ -73,12 +71,10 @@ const RecipeCard = ({
 
   const endDrag = (event, info) => {
     cardRef.current.style.zIndex = 0;
-    const newArray = recipeCardState.isDocked
-      ? [...cookBookList, recipe]
-      : [...cookBookList].filter((e) => e !== recipe.id);
-
-    setCookBookList(newArray);
-    setRecipeCardState({ ...recipeCardState, isDragging: false });
+    if (recipeCardState.isDocked) {
+      dispatch(addToCookBook(recipe));
+      setRecipeCardState({ ...recipeCardState, isDragging: false });
+    }
   };
 
   const onCardClick = () => {
@@ -98,7 +94,7 @@ const RecipeCard = ({
   };
 
   return (
-    !cookBookList.includes(recipe) && (
+    !cookBook.includes(recipe) && ( //? Optional chaining checks if cookBook exists before running includes
       <>
         {recipeCardState.isDetailOpen && (
           <RecipeDetail

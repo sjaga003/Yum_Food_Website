@@ -1,3 +1,4 @@
+import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 import { createGlobalStyle } from 'styled-components';
 import HomeBackground from '../images/home_background.svg';
 import SearchBackground from '../images/search_background.svg';
@@ -15,10 +16,15 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         position: relative;
         overflow-x: hidden;
-        background: ${(props) =>
-          props.home
-            ? `url(${HomeBackground}) no-repeat`
-            : `url(${SearchBackground}) no-repeat`} ;
+        background: ${(props) => {
+          if (props.background === 'home') {
+            return `url(${HomeBackground}) no-repeat`;
+          } else if (props.background === 'search') {
+            return `url(${SearchBackground}) no-repeat`;
+          } else {
+            return `none`;
+          }
+        }};
         background-size: cover;
         line-height: 1.6;
         font-size: 1.6rem;

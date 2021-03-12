@@ -6,7 +6,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RecipeDetail from './RecipeCard/RecipeDetail/RecipeDetail';
 import { useDispatch, useSelector } from 'react-redux';
-const CookBookCard = ({ recipe, cookBookList, setCookBookList }) => {
+import { removeFromCookBook } from '../actions/cookBookAction';
+const CookBookCard = ({ recipe }) => {
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
     isDragging: false,
@@ -67,7 +68,7 @@ const CookBookCard = ({ recipe, cookBookList, setCookBookList }) => {
         </FoodInfo>{' '}
         <CloseButton
           onClick={(e) => {
-            setCookBookList([...cookBookList].filter((e) => e !== recipe));
+            dispatch(removeFromCookBook(recipe));
             e.stopPropagation();
           }}
           icon={faTimes}
