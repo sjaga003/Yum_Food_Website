@@ -66,8 +66,9 @@ const CookBookCard = ({ recipe, cookBookList, setCookBookList }) => {
           <Title>{recipe.title}</Title>
         </FoodInfo>{' '}
         <CloseButton
-          onClick={() => {
+          onClick={(e) => {
             setCookBookList([...cookBookList].filter((e) => e !== recipe));
+            e.stopPropagation();
           }}
           icon={faTimes}
         />

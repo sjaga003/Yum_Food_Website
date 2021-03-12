@@ -1,25 +1,21 @@
-import React, { useRef, useState } from 'react';
-
-import styled from 'styled-components';
+import '@fontsource/montserrat';
 import '@fontsource/prompt';
 import '@fontsource/roboto';
-import '@fontsource/montserrat';
-
-import Nav from './components/Nav';
-import Home from './components/Home';
-import { GlobalStyle } from './components/GlobalStyles';
-import Recipes from './components/Recipes';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import React, { useRef, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import styled from 'styled-components';
+import Carousel from './components/Carousel';
+import Contact from './components/Contact';
+import CookBookSidebar from './components/CookBookSidebar';
+import Footer from './components/Footer';
+import { GlobalStyle } from './components/GlobalStyles';
+import Home from './components/Home';
+import Nav from './components/Nav';
+import RecipePreview from './components/RecipePreview';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import FooterBackground from './images/footer_background.svg';
-import RecipePreview from './components/RecipePreview';
-import Carousel from './components/Carousel';
-import CarouselCard from './components/CarouselCard';
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import CookBookSidebar from './components/CookBookSidebar';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -39,6 +35,7 @@ function App() {
             <AnimateSharedLayout type="switch">
               <AnimatePresence>
                 <CookBookSidebar
+                  key="CookBookSidebar"
                   cookBookRef={cookBookRef}
                   isCookBookOpen={isCookBookOpen}
                   setIsCookBookOpen={setIsCookBookOpen}
@@ -46,6 +43,7 @@ function App() {
                   setCookBookList={setCookBookList}
                 />
                 <RecipePreview
+                  key="RecipePreview"
                   cookBookRef={cookBookRef}
                   cookBookList={cookBookList}
                   setCookBookList={setCookBookList}

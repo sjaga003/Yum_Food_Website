@@ -1,16 +1,14 @@
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { loadPreviewRecipes } from '../actions/recipeCardsAction';
 import {
-  recipePreviewBreakfast,
-  recipePreviewPopular,
   recipePreviewAppetizer,
+  recipePreviewBreakfast,
   recipePreviewDessert,
+  recipePreviewPopular,
   recipePreviewVegetarian,
 } from '../recipePreviewData';
-import CookBookSidebar from './CookBookSidebar';
 import Recipes from './Recipes';
 
 const RecipePreview = ({

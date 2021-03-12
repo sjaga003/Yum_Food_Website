@@ -173,9 +173,9 @@ const RecipeDetail = ({
               <SubtitleHeader>Ingredients</SubtitleHeader>
               <IngredientCards>
                 {recipe.nutrition.ingredients &&
-                  recipe.nutrition.ingredients.map((item) => (
+                  recipe.nutrition.ingredients.map((item, index) => (
                     <RecipeDetailIngredient
-                      key={`RecipeDetailIngredient-${recipe.id}-${item.id}`}
+                      key={`RecipeDetailIngredient-${recipe.id}-${item.id}-${index}`}
                       item={item}
                       ingredientsList={ingredientsList}
                       defaultServing={recipe.servings}

@@ -76,6 +76,7 @@ const RecipeCard = ({
     const newArray = recipeCardState.isDocked
       ? [...cookBookList, recipe]
       : [...cookBookList].filter((e) => e !== recipe.id);
+
     setCookBookList(newArray);
     setRecipeCardState({ ...recipeCardState, isDragging: false });
   };

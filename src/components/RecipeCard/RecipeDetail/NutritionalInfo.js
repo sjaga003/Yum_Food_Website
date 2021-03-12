@@ -189,6 +189,7 @@ const NutritionalInfo = ({ recipe }) => {
         <PieChart width={450} height={400}>
           <Pie
             data={nutrientData.macros}
+            dataKey="value"
             outerRadius={80}
             label={renderCustomizedLabel}
             labelLine={false}
