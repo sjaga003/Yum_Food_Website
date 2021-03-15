@@ -94,54 +94,52 @@ const RecipeCard = ({
   };
 
   return (
-    !cookBook.includes(recipe) && ( //? Optional chaining checks if cookBook exists before running includes
-      <>
-        {recipeCardState.isDetailOpen && (
-          <RecipeDetail
-            recipeCardState={recipeCardState.isDetailOpen}
-            setRecipeCardState={setRecipeCardState}
-            recipe={recipeDetail}
-            recipeId={recipe.id}
+    <>
+      {recipeCardState.isDetailOpen && (
+        <RecipeDetail
+          recipeCardState={recipeCardState.isDetailOpen}
+          setRecipeCardState={setRecipeCardState}
+          recipe={recipeDetail}
+          recipeId={recipe.id}
+        />
+      )}
+      <Card
+        ref={cardRef}
+        drag
+        dragConstraints={cardRef}
+        dragElastic={1}
+        onDragStart={() => {
+          setRecipeCardState({ ...recipeCardState, isDragging: true });
+          cardRef.current.style.zIndex = 2;
+          console.log('hello');
+        }}
+        onDrag={modifyDrag}
+        onDragEnd={endDrag}
+        layout
+        layoutId={`recipeCard-${recipe.id}`}
+        data-testid="recipeCard"
+        data-recipe-id={recipe.id}
+        variants={variant}
+        initial="hidden"
+        animate="flat"
+        onClick={onCardClick}
+      >
+        <ImageContainer>
+          {!imageLoaded && <Spinner size="4x" icon={faSync} spin />}
+          <FoodImage
+            style={!imageLoaded ? { display: 'none' } : { display: 'block' }}
+            draggable={false}
+            data-testid="recipeCardImage"
+            src={recipe.image ? recipe.image : MissingImage}
+            onLoad={() => setImageLoaded(true)}
+            alt={`${recipe.title}`}
           />
-        )}
-        <Card
-          ref={cardRef}
-          drag
-          dragConstraints={cardRef}
-          dragElastic={1}
-          onDragStart={() => {
-            setRecipeCardState({ ...recipeCardState, isDragging: true });
-            cardRef.current.style.zIndex = 2;
-            console.log('hello');
-          }}
-          onDrag={modifyDrag}
-          onDragEnd={endDrag}
-          layout
-          layoutId={`recipeCard-${recipe.id}`}
-          data-testid="recipeCard"
-          data-recipe-id={recipe.id}
-          variants={variant}
-          initial="hidden"
-          animate="flat"
-          onClick={onCardClick}
-        >
-          <ImageContainer>
-            {!imageLoaded && <Spinner size="4x" icon={faSync} spin />}
-            <FoodImage
-              style={!imageLoaded ? { display: 'none' } : { display: 'block' }}
-              draggable={false}
-              data-testid="recipeCardImage"
-              src={recipe.image ? recipe.image : MissingImage}
-              onLoad={() => setImageLoaded(true)}
-              alt={`${recipe.title}`}
-            />
-          </ImageContainer>
-          <FoodInfo>
-            <Title>{recipe.title}</Title>
-          </FoodInfo>
-        </Card>
-      </>
-    )
+        </ImageContainer>
+        <FoodInfo>
+          <Title>{recipe.title}</Title>
+        </FoodInfo>
+      </Card>
+    </>
   );
 };
 

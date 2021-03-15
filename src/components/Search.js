@@ -39,6 +39,12 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
   const history = useHistory();
 
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(clearRecipeCards());
+  }, [location.pathname]);
+
   // const recipeCards = { recipes: [], isLoading: true, isDone: false };
   const recipeCards = useSelector((state) => state.recipeCards);
   useEffect(() => {

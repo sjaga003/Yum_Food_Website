@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import YumLogo from '../images/Yum_Logo.svg';
 
@@ -10,12 +11,12 @@ const Nav = () => {
         <img src={YumLogo} alt="Yum Logo" />
       </Logo>
       <NavLinks>
-        <NavItem href="#">Home</NavItem>
-        <NavItem href="#">Menu</NavItem>
-        <NavItem href="#">Event</NavItem>
-        <NavItem href="#">Team</NavItem>
-        <NavItem href="#">Shop</NavItem>
-        <NavItem href="#">Contact</NavItem>
+        <NavItem to="/">Home</NavItem>
+        <NavItem to="/cookbook">My Recipes</NavItem>
+        <NavItem to="/">Event</NavItem>
+        <NavItem to="/">Team</NavItem>
+        <NavItem to="/search">Search</NavItem>
+        <NavItem to="/">Contact</NavItem>
       </NavLinks>
     </Navigation>
   );
@@ -48,7 +49,7 @@ const NavLinks = styled.div`
   align-items: center;
 `;
 
-const NavItem = styled.a`
+const NavItem = styled(NavLink)`
   margin: 0px 3rem;
 
   text-decoration: none;

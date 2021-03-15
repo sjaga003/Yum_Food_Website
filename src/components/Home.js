@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SushiImage from '../images/sushi.jpg';
 import SushiImage2 from '../images/sushi2.jpeg';
 import HeaderMask from '../images/header_mask.svg';
+import { useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { clearRecipeCards } from '../actions/recipeCardsAction';
 
 const Home = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearRecipeCards());
+  }, [location.pathname]);
+
   return (
     <HomeContainer>
       <HomeContent>

@@ -21,6 +21,8 @@ export const GlobalStyle = createGlobalStyle`
             return `url(${HomeBackground}) no-repeat`;
           } else if (props.background === 'search') {
             return `url(${SearchBackground}) no-repeat`;
+          } else if (props.background === 'cookbook') {
+            return `url(${SearchBackground}) no-repeat 0px -150px`;
           } else {
             return `none`;
           }

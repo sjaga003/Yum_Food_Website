@@ -2,9 +2,16 @@ import '@fontsource/montserrat';
 import '@fontsource/prompt';
 import '@fontsource/roboto';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import React, { useRef, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  BrowserRouter,
+  Route,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 import styled from 'styled-components';
+import { clearRecipeCards } from './actions/recipeCardsAction';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
 import CookBookPage from './components/CookBookPage';
@@ -22,6 +29,7 @@ function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
 
   const cookBookRef = useRef();
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -67,7 +75,11 @@ function App() {
         </Route>
         <Route path="/cookbook">
           <GlobalStyle />
-          <CookBookPage />
+          <CookBookPage
+            cookBookRef={cookBookRef}
+            isCookBookOpen={isCookBookOpen}
+            setIsCookBookOpen={setIsCookBookOpen}
+          />
         </Route>
       </BrowserRouter>
     </div>

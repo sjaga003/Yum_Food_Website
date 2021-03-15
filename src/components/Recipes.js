@@ -24,7 +24,7 @@ const Recipes = ({
   isCookBookOpen,
   setIsCookBookOpen,
   cookBookRef,
-  fromPreview,
+  fromCookBook,
 }) => {
   // const recipeCards = mockRecipeCards();
   const recipeCards = useSelector((state) => state.recipeCards);
@@ -47,6 +47,19 @@ const Recipes = ({
         <CardContainer>
           {recipeCards.recipes.results &&
             recipeCards.recipes.results.map((recipe, index) => {
+              if (fromCookBook) {
+                return (
+                  <RecipeCard
+                    cookBookRef={cookBookRef}
+                    isCookBookOpen={isCookBookOpen}
+                    setIsCookBookOpen={setIsCookBookOpen}
+                    key={`recipe-${recipe.id}`}
+                    index={index}
+                    recipe={recipe}
+                  />
+                );
+              }
+
               if (!cookBook?.some((el) => el.id === recipe.id)) {
                 return (
                   <RecipeCard
@@ -56,7 +69,6 @@ const Recipes = ({
                     key={`recipe-${recipe.id}`}
                     index={index}
                     recipe={recipe}
-                    fromPreview={fromPreview}
                   />
                 );
               }

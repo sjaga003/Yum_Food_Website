@@ -37,7 +37,8 @@ const recipeCardsReducer = (state = initialState, action) => {
         },
         isDone: !action.payload.recipes.results.length,
       };
-    case 'recipeCards/sortRecipesByTime':
+    case 'recipeCards/sortRecipesByTime': {
+      //Creating new scope to use sorted multiple times by using {}
       const sorted = state.recipes.results.sort(
         (a, b) => a.readyInMinutes - b.readyInMinutes
       );
@@ -50,11 +51,49 @@ const recipeCardsReducer = (state = initialState, action) => {
           totalResults: state.totalResults,
         },
       };
+    }
+    case 'recipeCards/sortRecipesByMeta': {
+      const sorted = state.recipes.results.sort(
+        (a, b) => a.healthScore - b.healthScore
+      );
+      return {
+        ...state,
+        recipes: {
+          number: state.recipes.number,
+          offset: state.recipes.offset,
+          results: sorted,
+          totalResults: state.totalResults,
+        },
+      };
+    }
+    case 'recipeCards/sortRecipesByPrice': {
+      const sorted = state.recipes.results.sort(
+        (a, b) => a.pricePerServing - b.pricePerServing
+      );
+      return {
+        ...state,
+        recipes: {
+          number: state.recipes.number,
+          offset: state.recipes.offset,
+          results: sorted,
+          totalResults: state.totalResults,
+        },
+      };
+    }
     case 'recipeCards/clearRecipeCards':
       return {
         ...state,
         recipes: {},
         isLoading: true,
+      };
+    case 'recipeCards/setRecipeCards':
+      console.log(action.payload);
+      return {
+        ...state,
+        recipes: {
+          results: action.payload,
+        },
+        isLoading: false,
       };
     default:
       return { ...state };
