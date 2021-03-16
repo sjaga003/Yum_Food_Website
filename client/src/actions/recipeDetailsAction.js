@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { recipeDetailsUrl } from '../api';
+import { recipeDetailsUrl } from '../api/api';
 
 export const loadRecipeDetails = (recipeId) => async (dispatch) => {
   const recipeDetail = await axios.get(recipeDetailsUrl(recipeId));

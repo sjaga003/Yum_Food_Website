@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadRandomRecipes } from '../actions/recipeCardsAction';
 import RecipeCard from './RecipeCard/RecipeCard';
-import { mockRecipeCards } from '../api';
+import { mockRecipeCards } from '../api/api';
 
 const containerFadeIn = {
   flat: {

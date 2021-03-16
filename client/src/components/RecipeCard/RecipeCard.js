@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import MissingImage from '../../images/card_image_missing.svg';
 
 import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
-import { mockRecipeDetails } from '../../api';
+import { mockRecipeDetails } from '../../api/api';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
 import { addToCookBook } from '../../actions/cookBookAction';
 

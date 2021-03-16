@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { clearRecipeCards } from './actions/recipeCardsAction';
+import { fetchAllRecipes, addRecipeToDatabase } from './api/databaseApi';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
 import CookBookPage from './components/CookBookPage';
@@ -24,11 +25,18 @@ import RecipePreview from './components/RecipePreview';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
 import FooterBackground from './images/footer_background.svg';
+import { recipePreviewPopular } from './recipePreviewData';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
 
   const cookBookRef = useRef();
+
+  useEffect(() => {
+    const test = recipePreviewPopular();
+
+    fetchAllRecipes().then((thing) => console.log(thing));
+  });
 
   return (
     <div className="App">

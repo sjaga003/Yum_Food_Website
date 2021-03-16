@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { randomCardURL, searchSortedURL, searchURL } from '../api';
+import { randomCardURL, searchSortedURL, searchURL } from '../api/api';
 import {
   recipePreviewDessert,
   recipePreviewPopular,

@@ -10,7 +10,7 @@ export const getRecipes = async (req, res) => {
   }
 };
 
-export const createPost = async (req, res) => {
+export const createRecipe = async (req, res) => {
   const body = req.body;
   const newRecipe = new Recipe(body);
   try {

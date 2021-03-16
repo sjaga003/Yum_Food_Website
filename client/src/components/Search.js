@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useHistory, useLocation } from 'react-router';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { mockRecipeCards } from '../api';
+import { mockRecipeCards } from '../api/api';
 import {
   recipePreviewAppetizer,
   recipePreviewDessert,

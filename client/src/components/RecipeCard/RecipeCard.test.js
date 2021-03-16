@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { mockRecipeCards } from '../../api';
+import { mockRecipeCards } from '../../api/api';
 import RecipeCard from './RecipeCard';
 
 test('Recipe Card Renders', () => {
