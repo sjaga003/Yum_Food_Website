@@ -29,8 +29,11 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const test = recipePreviewPopular();
-    dispatch(setRecipeCards(cookBook));
+    const recipeObjects = cookBook.reduce((acc, curr) => {
+      acc.push(curr.recipeObject);
+      return acc;
+    }, []);
+    dispatch(setRecipeCards(recipeObjects));
   }, []);
 
   useEffect(() => {

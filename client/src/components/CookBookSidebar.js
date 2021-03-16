@@ -56,7 +56,10 @@ const CookBookSidebar = ({
             cookBook &&
             cookBook.map((entry) => {
               return (
-                <CookBookCard key={`cookBookCard-${entry.id}`} recipe={entry} />
+                <CookBookCard
+                  key={`cookBookCard-${entry.recipeObject.id}`}
+                  databaseEntry={entry}
+                />
               );
             })}
         </CookBookCards>

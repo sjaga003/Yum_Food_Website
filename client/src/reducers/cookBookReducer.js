@@ -7,7 +7,9 @@ const cookBookReducer = (state = intitalState, action) => {
     case 'cookBook/addToCookBook':
       return [...state, action.payload];
     case 'cookBook/removeFromCookBook':
-      return state.filter((item) => item.id !== action.payload.id);
+      return state.filter((item) => item._id !== action.payload);
+    case 'cookBook/fetchAllRecipes':
+      return action.payload;
     default:
       return state;
   }

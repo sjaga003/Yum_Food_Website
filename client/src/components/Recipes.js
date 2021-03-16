@@ -60,7 +60,7 @@ const Recipes = ({
                 );
               }
 
-              if (!cookBook?.some((el) => el.id === recipe.id)) {
+              if (!cookBook?.some((el) => el.recipeObject.id === recipe.id)) {
                 return (
                   <RecipeCard
                     cookBookRef={cookBookRef}

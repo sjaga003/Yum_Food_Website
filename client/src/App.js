@@ -11,8 +11,13 @@ import {
   useLocation,
 } from 'react-router-dom';
 import styled from 'styled-components';
+import { fetchToCookBook } from './actions/cookBookAction';
 import { clearRecipeCards } from './actions/recipeCardsAction';
-import { fetchAllRecipes, addRecipeToDatabase } from './api/databaseApi';
+import {
+  fetchAllRecipes,
+  addRecipeToDatabase,
+  deleteFromDatabase,
+} from './api/databaseApi';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
 import CookBookPage from './components/CookBookPage';
@@ -31,11 +36,16 @@ function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
 
   const cookBookRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const test = recipePreviewPopular();
-
-    fetchAllRecipes().then((thing) => console.log(thing));
+    // addRecipeToDatabase({
+    //   recipeId: test.results[1].id,
+    //   recipeObject: test.results[1],
+    // });
+    // deleteFromDatabase('60512d613e6e2e232c4ff8c2');
+    dispatch(fetchToCookBook());
   });
 
   return (

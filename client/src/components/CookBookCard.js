@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import MissingImage from '../images/card_image_missing.svg';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RecipeDetail from './RecipeCard/RecipeDetail/RecipeDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCookBook } from '../actions/cookBookAction';
-const CookBookCard = ({ recipe }) => {
+const CookBookCard = ({ databaseEntry }) => {
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
     isDragging: false,
@@ -15,27 +15,25 @@ const CookBookCard = ({ recipe }) => {
     recipeDetail: {},
   });
 
+  const [recipe, setRecipe] = useState({});
+
+  useEffect(() => {
+    setRecipe(databaseEntry.recipeObject);
+  }, []);
+
   const cardRef = useRef();
 
   const recipeDetails = useSelector((state) => state.recipeCards);
+  const cookBook = useSelector((state) => state.cookBook);
   const dispatch = useDispatch();
 
   const [recipeDetail, setRecipeDetail] = useState({});
 
   const onCardClick = () => {
-    if (
-      cardRef.current.style.transform ===
-      'translate3d(0px, 0px, 0px) scale(1, 1)'
-    ) {
-      setRecipeDetail(
-        recipeDetails.recipes.results.find(
-          (element) => element.id === recipe.id
-        )
-      );
+    setRecipeDetail(recipe);
 
-      setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
-      document.body.style.overflow = 'hidden';
-    }
+    setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
+    document.body.style.overflow = 'hidden';
   };
 
   return (
@@ -68,7 +66,7 @@ const CookBookCard = ({ recipe }) => {
         </FoodInfo>{' '}
         <CloseButton
           onClick={(e) => {
-            dispatch(removeFromCookBook(recipe));
+            dispatch(removeFromCookBook(databaseEntry._id));
             e.stopPropagation();
           }}
           icon={faTimes}
