@@ -84,7 +84,7 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   & > * {
-    padding: 1rem 0rem;
+    padding: 0.5rem 0rem;
   }
 `;
 
@@ -98,6 +98,9 @@ const Logo = styled.div`
 
 const Description = styled.div`
   max-width: 40ch;
+  font-family: var(--text-font);
+  color: var(--header-color);
+  font-size: 1.6rem;
 `;
 
 const Icons = styled.ul`
@@ -127,26 +130,27 @@ const FaIcon = styled(FontAwesomeIcon)`
 const Heading = styled.span`
   font-family: var(--header-font);
   font-size: 2.4rem;
-  color: #29315d;
+  color: var(--header-color);
   font-weight: bold;
 `;
 
 const Link = styled.span`
   list-style: none;
   font-family: var(--text-font);
+  color: var(--header-color);
   font-size: 1.8rem;
 `;
 
 const ContactInfo = styled.span`
   font-size: 1.8rem;
-  font-family: var(--text-font);
+  font-family: var(--header-color);
 `;
 
 const Address = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 1.8rem;
-  font-family: var(--text-font);
+  font-family: var(--header-color);
 `;
 
 export default Footer;

@@ -25,7 +25,7 @@ const Nav = () => {
 const Navigation = styled.ul`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 2rem 0;
   width: 100%;
   /* position: fixed; */
@@ -51,18 +51,9 @@ const NavLinks = styled.div`
 
 const NavItem = styled(NavLink)`
   margin: 0px 3rem;
-
   text-decoration: none;
-  color: var(--text-color);
   font-size: 2rem;
-`;
-
-const ContactButton = styled(motion.div)`
-  padding: 1rem 3rem;
-  background: var(--highlight-color);
-  border-radius: 4px;
-  color: var(--bg-color);
-  position: relative;
+  color: var(--text-color);
 `;
 
 export default Nav;

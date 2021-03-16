@@ -158,6 +158,7 @@ const RecipeDetail = ({
                         readOnly={true}
                         type="number"
                         value={servingSize}
+                        style={{ color: 'var(--header-color)' }}
                       />
                       <button onClick={() => setServingSize(servingSize + 1)}>
                         +
@@ -185,19 +186,20 @@ const RecipeDetail = ({
               </IngredientCards>
             </div>
             <div>
-              <SubtitleHeader>Instructions</SubtitleHeader>
-              <>
-                <RecipeInstructions>
-                  {recipe.analyzedInstructions[0] &&
-                    recipe.analyzedInstructions[0].steps.map((instruction) => (
-                      <RecipeDetailInstruction
-                        key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
-                        instruction={instruction}
-                        recipe={recipe}
-                      />
-                    ))}
-                </RecipeInstructions>
-              </>
+              {recipe.analyzedInstructions[0] && (
+                <SubtitleHeader>Instructions</SubtitleHeader>
+              )}
+
+              <RecipeInstructions>
+                {recipe.analyzedInstructions[0] &&
+                  recipe.analyzedInstructions[0].steps.map((instruction) => (
+                    <RecipeDetailInstruction
+                      key={`RecipeInstruction-${recipe.key}-${instruction.number}`}
+                      instruction={instruction}
+                      recipe={recipe}
+                    />
+                  ))}
+              </RecipeInstructions>
             </div>
             <div>
               <SubtitleHeader>Nutritional Information</SubtitleHeader>
@@ -227,7 +229,7 @@ const RecipeDetail = ({
 
 const SpinnerIcon = styled(FontAwesomeIcon)`
   font-size: 10rem;
-  color: #ccc;
+  color: var(--text-color);
   will-change: transform;
   display: inline-block;
 `;
@@ -305,6 +307,9 @@ const AllergyInfo = styled(motion.div)`
 const RecipeName = styled(motion.div)`
   font-size: 3.6rem;
   margin-bottom: 2rem;
+  color: var(--header-color);
+  font-family: var(--header-font);
+  font-weight: 600;
 `;
 
 const DividerLine = styled(motion.svg)`
@@ -368,19 +373,25 @@ const StatBox = styled(motion.div)`
 `;
 
 const StatLabel = styled(motion.span)`
-  color: var(--secondary-color);
+  color: var(--header-color);
+  font-family: var(--header-font);
+  font-weight: 600;
   font-size: 1.8rem;
 `;
 const StatData = styled(motion.span)`
   font-size: 1.8rem;
+  color: var(--text-color);
 `;
 
 const RecipeBody = styled(motion.div)``;
 
 const SubtitleHeader = styled(motion.div)`
-  margin-top: 3rem;
+  margin-top: 6rem;
   font-size: 3.2rem;
   margin-bottom: 3.2rem;
+  font-family: var(--header-font);
+  color: var(--header-color);
+  font-weight: 600;
 `;
 
 const InstructionContainer = styled(motion.div)`
@@ -391,16 +402,17 @@ const InstructionContainer = styled(motion.div)`
 const IngredientCards = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fill, 18rem);
-  grid-column-gap: 3rem;
+  grid-column-gap: 5rem;
   grid-row-gap: 2rem;
   justify-content: center;
   align-items: center;
+  padding: 0rem 5rem;
 `;
 
 const RecipeInstructions = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-self: center;
 `;
 

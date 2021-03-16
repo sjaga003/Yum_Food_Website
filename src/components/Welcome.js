@@ -40,25 +40,28 @@ const WelcomeSection = styled.section`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 400px 0;
+  margin-bottom: 300px;
 `;
 const WelcomeText = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 45vh;
 `;
 
 const HeadingText = styled.span`
-  font-family: 'Prompt', sans-serif;
-  font-size: 2.4rem;
+  font-family: var(--header-font);
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: 2.8rem;
   color: var(--highlight-color);
 `;
 
 const SubtitleText = styled.span`
-  font-family: var(--text-font);
+  font-family: var(--header-font);
   font-size: 3.6rem;
-  color: var(--text-color);
+  color: var(--header-color);
+  font-weight: 600;
 `;
 
 const ContentText = styled.span`
@@ -72,7 +75,7 @@ const Button = styled.a`
   margin: 0;
   text-decoration: none;
   font-size: 2rem;
-  padding: 1rem 3rem;
+  padding: 1.5rem 3rem;
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);

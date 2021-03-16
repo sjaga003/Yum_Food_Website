@@ -7,7 +7,7 @@ const Contact = () => {
       <ContactBox>
         <ContactHeader>Contact Us</ContactHeader>
         <Form>
-          <EmailInput placeholder="Enter your email" />
+          <EmailInput type="email" placeholder="Enter your email" />
           <Button>Submit</Button>
         </Form>
       </ContactBox>
@@ -19,7 +19,7 @@ const ContactSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  margin-bottom: 300px;
 `;
 
 const ContactBox = styled.div`
@@ -31,7 +31,7 @@ const ContactBox = styled.div`
   width: 100rem;
   height: 30rem;
   padding: 2rem;
-  color: white;
+  color: var(--bg-color);
   font-family: var(--header-font);
   font-size: 3.6rem;
   border-radius: 6px;
@@ -48,7 +48,7 @@ const EmailInput = styled.input`
   width: 40rem;
   font-size: 1.8rem;
   border-radius: 8px;
-  color: var(--secondary-color);
+  color: var(--text-color);
   font-family: var(--text-font);
 `;
 

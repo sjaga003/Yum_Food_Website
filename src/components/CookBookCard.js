@@ -135,7 +135,11 @@ const Title = styled(motion.span)`
   font-size: 16px;
   font-weight: 600;
   text-align: left;
-  color: var(--text-color);
+  color: var(--header-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 export default CookBookCard;

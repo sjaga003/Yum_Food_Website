@@ -485,12 +485,18 @@ const Carousel = () => {
   }, [position]);
 
   return (
-    <>
+    <CarouselContainer>
+      <HeadingText>In a rush</HeadingText>
+      <SubtitleText>Quicksearch</SubtitleText>
       <ButtonContainer>
         <CarouselButton
+          initial={{
+            color: 'var(--highlight-color)',
+            background: 'transparent',
+          }}
           whileHover={{
             color: 'white',
-            backgroundColor: 'var(--highlight-color)',
+            background: 'var(--highlight-color)',
           }}
           onClick={() => {
             if (position.index <= 0) {
@@ -511,9 +517,13 @@ const Carousel = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
         </CarouselButton>
         <CarouselButton
+          initial={{
+            color: 'var(--highlight-color)',
+            background: 'transparent',
+          }}
           whileHover={{
             color: 'white',
-            backgroundColor: 'var(--highlight-color)',
+            background: 'var(--highlight-color)',
           }}
           onClick={(event) => {
             if (position.index > quickSearchCards.length - 2) {
@@ -579,7 +589,7 @@ const Carousel = () => {
           ))}
         </Container>
       </Bounds>
-    </>
+    </CarouselContainer>
   );
 };
 
@@ -589,6 +599,12 @@ const Bounds = styled(motion.div)`
   width: 1000px;
   display: flex;
   align-self: center;
+`;
+
+const CarouselContainer = styled.div`
+  margin-bottom: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Container = styled(motion.div)`
@@ -608,7 +624,7 @@ const ButtonContainer = styled(motion.div)`
 `;
 
 const CarouselButton = styled(motion.button)`
-  background: transparent;
+  background: white;
   border: 0;
   color: var(--highlight-color);
   border-radius: 50%;
@@ -626,7 +642,7 @@ const CarouselButton = styled(motion.button)`
 const CardBackground = styled(motion.div)`
   height: 25rem;
   width: 20rem;
-  background: #f4f7fc;
+  background: var(--card-color);
 
   display: flex;
   flex-direction: column;
@@ -646,8 +662,24 @@ const CardBackground = styled(motion.div)`
 const CardText = styled.span`
   justify-self: flex-end;
   font-size: 2.4rem;
-  font-family: var(--text-font);
-  color: black;
+  font-weight: 600;
+  font-family: var(--header-font);
+  color: var(--header-color);
+`;
+
+const HeadingText = styled.span`
+  font-family: var(--header-font);
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: 2.8rem;
+  color: var(--highlight-color);
+`;
+
+const SubtitleText = styled.span`
+  font-family: var(--header-font);
+  font-size: 3.6rem;
+  color: var(--header-color);
+  font-weight: 600;
 `;
 
 export default Carousel;

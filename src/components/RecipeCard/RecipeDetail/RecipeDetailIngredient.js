@@ -53,10 +53,8 @@ const IngredientCard = styled(motion.div)`
   background: white;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   padding: 1.5rem;
-  max-height: 18rem;
-  max-width: 18rem;
-  min-height: 18rem;
-  min-width: 18rem;
+  height: 20rem;
+  width: 20rem;
   font-size: 1.4rem;
 `;
 const IngredientImage = styled(motion.div)`
@@ -75,7 +73,9 @@ const IngredientImage = styled(motion.div)`
 const IngredientName = styled(motion.span)`
   text-align: center;
   text-transform: capitalize;
-
+  font-family: var(--header-font);
+  color: var(--header-color);
+  font-size: 1.6rem;
   margin-top: 1rem;
   font-weight: 600;
 `;
@@ -83,6 +83,9 @@ const IngredientName = styled(motion.span)`
 const IngredientAmount = styled(motion.div)`
   word-wrap: break-word;
   margin-top: 1rem;
+  font-size: 1.6rem;
+  color: var(--header-color);
+  
 `;
 
 export default RecipeDetailIngredient;

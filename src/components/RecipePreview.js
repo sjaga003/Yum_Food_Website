@@ -95,6 +95,7 @@ const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 const RecipePreviewSection = styled.section`
   display: flex;
   flex-direction: column;
+  margin-bottom: 300px;
 `;
 
 const Navigation = styled.div`
@@ -109,14 +110,18 @@ const Header = styled.div`
 `;
 
 const Heading = styled.span`
-  font-family: 'Prompt', sans-serif;
-  font-size: 2.4rem;
+  font-family: var(--header-font);
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: 2.8rem;
   color: var(--highlight-color);
 `;
 
 const SubHeading = styled.span`
-  font-family: var(--text-font);
+  font-family: var(--header-font);
   font-size: 3.6rem;
+  color: var(--header-color);
+  font-weight: 600;
 `;
 
 const ButtonContainer = styled.div`
@@ -136,7 +141,7 @@ const Button = styled.button`
   cursor: pointer;
   outline: none;
   background: transparent;
-  color: #718096;
+  color: var(--text-color);
   ${({ active }) =>
     active &&
     css`

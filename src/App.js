@@ -74,7 +74,7 @@ function App() {
           </AnimateSharedLayout>
         </Route>
         <Route path="/cookbook">
-          <GlobalStyle />
+          <GlobalStyle background="cookbook" />
           <CookBookPage
             cookBookRef={cookBookRef}
             isCookBookOpen={isCookBookOpen}
@@ -97,7 +97,7 @@ const Content = styled.div`
 
 const FooterBackgroundCover = styled.div`
   background-image: url(${FooterBackground});
-  background-position: center 119%;
+  background-position: center 116%;
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;

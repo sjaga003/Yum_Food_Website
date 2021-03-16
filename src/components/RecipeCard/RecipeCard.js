@@ -160,7 +160,7 @@ const Card = styled(motion.div)`
   border-radius: 8px;
   border: 1px solid lightgray;
   overflow: hidden;
-  background: #f4f7fc;
+  background: var(--card-color);
   width: 32rem;
   height: 41rem;
   justify-content: left;
@@ -173,10 +173,13 @@ const ImageContainer = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  height: 27.6rem;
 `;
 
 const Spinner = styled(FontAwesomeIcon)`
   color: var(--secondary-color);
+  display: flex;
+  align-self: center;
 `;
 
 const FoodImage = styled.img`
@@ -188,6 +191,8 @@ const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 0.5rem;
+  color: var(--text-color);
+  font-family: var(--text-font);
 `;
 
 const Heart = styled(FontAwesomeIcon)`
@@ -198,18 +203,18 @@ const FoodInfo = styled.div`
   padding: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
 `;
 
 const SourceName = styled.span`
   text-transform: uppercase;
-  color: #8c8c8c;
+  color: var(--text-color);
 `;
 
 const Title = styled(motion.div)`
-  font-family: 'Prompt', sans-serif;
+  font-family: var(--header-font);
   font-size: 1.8rem;
-  color: var(--text-color);
+  color: var(--header-color);
+  font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

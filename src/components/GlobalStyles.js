@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         width: 100%;
         color: black;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Hind', sans-serif;
         position: relative;
         overflow-x: hidden;
         background: ${(props) => {
@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
           } else if (props.background === 'search') {
             return `url(${SearchBackground}) no-repeat`;
           } else if (props.background === 'cookbook') {
-            return `url(${SearchBackground}) no-repeat 0px -150px`;
+            return `url(${SearchBackground}) no-repeat 0px 16%`;
           } else {
             return `none`;
           }
@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
         background-size: cover;
         line-height: 1.6;
         font-size: 1.6rem;
+        line-height: 1.5;
     }
     * {
         padding: 0;
@@ -37,12 +38,13 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-tap-highlight-color: transparent;
-        --highlight-color: rgba(255, 185, 2, 1);
-        --bg-color: #fff;
-        --text-color: #000;
-        --secondary-color: #7d90a6;
+        --highlight-color: #F3A032;
+        --bg-color: #ffff;
+        --text-color: #5F7597;
+        --header-color: #29315D;
+        --secondary-color: #718096;
         --card-color: #f4f7fc;
         --header-font: 'Montserrat', sans-serif;
-        --text-font: 'Roboto', sans-serif;
+        --text-font: 'Hind', sans-serif;
     }
 `;

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/hind": "^4.2.2",
     "@fontsource/montserrat": "^4.1.0",
     "@fontsource/prompt": "^4.1.0",
     "@fontsource/roboto": "^4.1.0",

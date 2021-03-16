@@ -40,7 +40,9 @@ const HomeContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: 75vh;
-  /* margin: 0 0 600px 0; */
+  max-width: 120rem;
+  align-self: center;
+  margin-bottom: 500px;
 `;
 
 const HomeContent = styled.div`
@@ -51,6 +53,7 @@ const HomeContent = styled.div`
 
 const Hero = styled.h1`
   font-family: var(--header-font);
+  color: var(--header-color);
   font-size: 7.2rem;
   font-weight: 600;
   line-height: 1.3;
@@ -61,7 +64,7 @@ const HeroDescription = styled.p`
   color: var(--secondary-color);
   font-size: 2rem;
   width: 75%;
-  margin: 3rem 0 4rem 0;
+  margin: 3rem 0 5rem 0;
 `;
 
 const ImageContainer = styled.div`
@@ -80,7 +83,7 @@ const LearnMoreButton = styled.a`
   margin: 0;
   text-decoration: none;
   font-size: 2rem;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);

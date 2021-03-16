@@ -47,30 +47,28 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     <PageContainer>
       <Nav />
       <Title>My Recipes</Title>
-      <button
-        onClick={() => {
-          dispatch(setRecipeCards(cookBook));
-          dispatch(sortRecipesByMeta());
-        }}
-      >
-        Click
-      </button>
-      <SortSelect
-        onChange={(e) => {
-          setSortSelected(e.target.value);
-        }}
-      >
-        <label>Sort By:</label>
-        <option value="meta-score">Best</option>
-        <option value="time">Time to Cook</option>
-        <option value="price">Price</option>
-      </SortSelect>
-      <Recipes
-        isCookBookOpen={isCookBookOpen}
-        setIsCookBookOpen={setIsCookBookOpen}
-        cookBookRef={cookBookRef}
-        fromCookBook={true}
-      />
+      {cookBook ? (
+        <>
+          <SortSelect
+            onChange={(e) => {
+              setSortSelected(e.target.value);
+            }}
+          >
+            <label>Sort By:</label>
+            <option value="meta-score">Best</option>
+            <option value="time">Time to Cook</option>
+            <option value="price">Price</option>
+          </SortSelect>
+          <Recipes
+            isCookBookOpen={isCookBookOpen}
+            setIsCookBookOpen={setIsCookBookOpen}
+            cookBookRef={cookBookRef}
+            fromCookBook={true}
+          />
+        </>
+      ) : (
+        <Error>No Recipes Saved...</Error>
+      )}
     </PageContainer>
   );
 };
@@ -79,11 +77,11 @@ const SortSelect = styled.select`
   border: 1px solid lightgray;
   border-radius: 8px;
   background: white;
-  color: var(--secondary-color);
+  color: var(--text-color);
   font-family: var(--text-font);
   align-self: flex-start;
   font-size: 1.8rem;
-  padding-right: 10px;
+  padding: 0.5rem;
   &:focus {
     outline: 0;
   }
@@ -102,8 +100,16 @@ const PageContainer = styled.div`
 
 const Title = styled.span`
   font-size: 6.4rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--header-font);
+  color: var(--header-color);
+  font-weight: 600;
   margin: 8rem 0rem 4rem 0rem;
+`;
+
+const Error = styled.span`
+  font-family: var(--text-font);
+  font-size: 3.6rem;
+  color: var(--text-color);
 `;
 
 export default CookBookPage;

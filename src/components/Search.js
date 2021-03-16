@@ -137,6 +137,13 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             onClick={() => {
               dispatch(loadSearchedRecipes(0, 'Casserole', sortSelected));
               setLastSearch('Casserole');
+              history.push({
+                pathname: '/search',
+                search: `?query=Casserole`,
+                state: {
+                  update: true,
+                },
+              });
             }}
           >
             <PillTitle>Casserole</PillTitle>
@@ -145,6 +152,13 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             onClick={() => {
               dispatch(loadSearchedRecipes(0, 'Cookies', sortSelected));
               setLastSearch('Cookies');
+              history.push({
+                pathname: '/search',
+                search: `?query=Cookies`,
+                state: {
+                  update: true,
+                },
+              });
             }}
           >
             <PillTitle>Cookies</PillTitle>
@@ -153,6 +167,13 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             onClick={() => {
               dispatch(loadSearchedRecipes(0, 'Cake', sortSelected));
               setLastSearch('Cake');
+              history.push({
+                pathname: '/search',
+                search: `?query=Cake`,
+                state: {
+                  update: true,
+                },
+              });
             }}
           >
             <PillTitle>Cake</PillTitle>
@@ -160,7 +181,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
         </PillContainer>
       </SearchBackground>
 
-      {/* <button onClick={() => dispatch(sortRecipesByTime())}>Test</button> */}
       {lastSearch && (
         <SortSelect
           onChange={(e) => {
@@ -175,7 +195,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             }
           }}
         >
-          <label>Sort By:</label>
           <option value="meta-score">Best</option>
           <option value="time">Time to Cook</option>
           <option value="price">Price</option>
@@ -266,11 +285,11 @@ const SortSelect = styled.select`
   border: 1px solid lightgray;
   border-radius: 8px;
   background: white;
-  color: var(--secondary-color);
+  color: var(--text-color);
   font-family: var(--text-font);
   align-self: flex-start;
   font-size: 1.8rem;
-  padding-right: 10px;
+  padding: 0.5rem;
   &:focus {
     outline: 0;
   }
@@ -290,6 +309,7 @@ const Loader = styled(motion.div)`
   width: 100%;
   height: 10rem;
   font-size: 1.8em;
+  color: var(--header-color);
 `;
 
 const SearchButton = styled.button`
@@ -309,7 +329,9 @@ const SearchButton = styled.button`
 
 const SearchTitle = styled.span`
   font-size: 6.4rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--header-font);
+  font-weight: 600;
+  color: var(--header-color);
   margin: 8rem 0rem 4rem 0rem;
 `;
 
@@ -364,6 +386,7 @@ const PillBody = styled.div`
   border-left: var(--highlight-color) 25px solid;
   padding: 0rem 2rem;
   margin-right: 3rem;
+  color: var(--header-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   cursor: pointer;
 `;
@@ -377,7 +400,7 @@ const EndMessage = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--secondary-color);
+  color: var(--header-color);
   span {
     margin-left: 1rem;
   }

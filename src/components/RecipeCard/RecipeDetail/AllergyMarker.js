@@ -30,6 +30,7 @@ const AllergyIconContainer = styled(motion.div)`
   justify-content: center;
   svg {
     width: 1.4rem;
+    color: var(--text-color);
   }
 `;
 const AllergyIcon = styled(FontAwesomeIcon)`
@@ -39,6 +40,7 @@ const AllergyIcon = styled(FontAwesomeIcon)`
 
 const AllergyLabel = styled(motion.span)`
   font-size: 1.8rem;
+  color: var(--text-color);
 `;
 
 export default AllergyMarker;
