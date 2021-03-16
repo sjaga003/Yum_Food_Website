@@ -3,12 +3,16 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
+import postRoutes from './routes/recipes.js';
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/posts', postRoutes);
 
 //connect to mongoose
 const CONNECTION_URL = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.x4w0b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
