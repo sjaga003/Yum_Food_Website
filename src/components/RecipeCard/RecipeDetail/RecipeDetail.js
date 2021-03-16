@@ -287,7 +287,9 @@ const Header = styled(motion.div)`
   justify-content: space-around;
   align-items: center;
 `;
-const ImageContainer = styled(motion.div)``;
+const ImageContainer = styled(motion.div)`
+  width: 50rem;
+`;
 
 const InfoContainer = styled(motion.div)`
   width: 50%;

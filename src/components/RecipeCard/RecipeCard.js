@@ -1,4 +1,9 @@
-import { faStopwatch, faSync } from '@fortawesome/free-solid-svg-icons';
+import {
+  faStopwatch,
+  faSync,
+  faHeart,
+} from '@fortawesome/free-solid-svg-icons';
+import {} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
@@ -136,6 +141,12 @@ const RecipeCard = ({
           />
         </ImageContainer>
         <FoodInfo>
+          <TopRow>
+            <SourceName>{recipe.sourceName}</SourceName>
+            <div>
+              <Heart icon={faHeart} /> {` ${recipe.aggregateLikes}`}
+            </div>
+          </TopRow>
           <Title>{recipe.title}</Title>
         </FoodInfo>
       </Card>
@@ -150,8 +161,8 @@ const Card = styled(motion.div)`
   border: 1px solid lightgray;
   overflow: hidden;
   background: #f4f7fc;
-  width: 26.8rem;
-  height: 30rem;
+  width: 32rem;
+  height: 41rem;
   justify-content: left;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   cursor: pointer;
@@ -160,9 +171,8 @@ const Card = styled(motion.div)`
 
 const ImageContainer = styled(motion.div)`
   display: flex;
-  height: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const Spinner = styled(FontAwesomeIcon)`
@@ -170,25 +180,40 @@ const Spinner = styled(FontAwesomeIcon)`
 `;
 
 const FoodImage = styled.img`
-  height: 23.6rem;
+  height: 27.6rem;
   object-fit: cover;
 `;
 
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+`;
+
+const Heart = styled(FontAwesomeIcon)`
+  color: var(--highlight-color);
+`;
+
 const FoodInfo = styled.div`
-  padding: 1rem;
+  padding: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  height: 100%;
+`;
+
+const SourceName = styled.span`
+  text-transform: uppercase;
+  color: #8c8c8c;
 `;
 
 const Title = styled(motion.div)`
-  font-family: var(--header-font);
-  font-size: 1.6rem;
-
-  text-align: center;
+  font-family: 'Prompt', sans-serif;
+  font-size: 1.8rem;
   color: var(--text-color);
-  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 export default RecipeCard;
