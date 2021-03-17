@@ -15,6 +15,11 @@ import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
 import { mockRecipeDetails } from '../../api/api';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
 import { addToCookBook } from '../../actions/cookBookAction';
+import {
+  hideRecipe,
+  removeRecipeCard,
+  showRecipe,
+} from '../../actions/recipeCardsAction';
 
 const variant = {
   flat: {
@@ -77,8 +82,8 @@ const RecipeCard = ({
   const endDrag = (event, info) => {
     cardRef.current.style.zIndex = 0;
     if (recipeCardState.isDocked) {
-      dispatch(addToCookBook(recipe));
       setRecipeCardState({ ...recipeCardState, isDragging: false });
+      dispatch(addToCookBook(recipe));
     }
   };
 
