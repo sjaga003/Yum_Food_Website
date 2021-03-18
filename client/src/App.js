@@ -18,6 +18,7 @@ import {
   addRecipeToDatabase,
   deleteFromDatabase,
 } from './api/databaseApi';
+import Auth from './components/Auth/Auth';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
 import CookBookPage from './components/CookBookPage';
@@ -98,6 +99,10 @@ function App() {
             isCookBookOpen={isCookBookOpen}
             setIsCookBookOpen={setIsCookBookOpen}
           />
+        </Route>
+        <Route path="/auth">
+          <GlobalStyle background="home" />
+          <Auth />
         </Route>
       </BrowserRouter>
     </div>

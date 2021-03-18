@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import YumLogo from '../images/Yum_Logo.svg';
 
 const Nav = () => {
+  const user = null;
+
   return (
     <Navigation>
       <Logo>
@@ -16,7 +18,7 @@ const Nav = () => {
         <NavItem to="/">Event</NavItem>
         <NavItem to="/">Team</NavItem>
         <NavItem to="/search">Search</NavItem>
-        <NavItem to="/">Contact</NavItem>
+        <NavItem to="/auth">Login</NavItem>
       </NavLinks>
     </Navigation>
   );
