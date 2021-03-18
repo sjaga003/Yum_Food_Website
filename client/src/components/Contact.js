@@ -31,23 +31,27 @@ const ContactSection = styled.section`
 `;
 
 const ContactBox = styled.div`
-  background: var(--highlight-color);
+  background: var(--card-color);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 100rem;
+  width: 60rem;
 
   padding: 2rem;
   color: var(--bg-color);
   font-family: var(--header-font);
   font-size: 3.6rem;
   border-radius: 6px;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
 `;
 
 const ContactHeader = styled.span`
   font-weight: 600;
   margin-bottom: 5rem;
+  color: var(--header-color);
+  font-family: var(--header-font);
+  font-size: 3.6rem;
 `;
 
 const InputContainer = styled.div`
@@ -58,6 +62,7 @@ const InputContainer = styled.div`
   padding: 0.5rem 0.5rem 0.5rem 3rem;
   border-radius: 6px;
   margin-bottom: 1.8rem;
+  border: 1px solid lightgray;
 `;
 
 const EmailInput = styled.input`
@@ -107,17 +112,16 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-  margin-top: 2rem;
-  height: 100%;
-  width: 12rem;
+  border: 0;
+  padding: 1rem 2rem;
+  font-family: var(--text-font);
+  font-size: 1.8rem;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
   background: var(--highlight-color);
   color: white;
-  border: 0;
-  font-family: var(--header-font);
-  font-size: 1.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 6px;
+  border-radius: 4px;
 `;
 
 export default Contact;
