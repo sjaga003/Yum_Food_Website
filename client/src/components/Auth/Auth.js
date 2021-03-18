@@ -4,6 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Nav from '../Nav';
+import { GoogleLogin } from 'react-google-login';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { useDispatch } from 'react-redux';
+import { getAuthData } from '../../actions/authAction';
+import { useHistory } from 'react-router';
 
 const Auth = () => {
   const [isSignedUp, setIsSignedUp] = useState(false);
@@ -17,6 +22,25 @@ const Auth = () => {
   const switchMode = (e) => {
     setIsSignedUp((prev) => !prev);
     setShowPassword(false);
+  };
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      dispatch(getAuthData(result, token));
+      history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const googleFailure = () => {
+    console.error('Google Sign In was unsuccessful');
   };
 
   return (
@@ -71,6 +95,20 @@ const Auth = () => {
             />
           )}
           <Button type="submit">{isSignedUp ? 'Sign In' : 'Sign Up'}</Button>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_ID}
+            render={(renderProps) => (
+              <Button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <FontAwesomeIcon icon={faGoogle} /> Sign In With Google
+              </Button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
         </Form>
         <ModeButton onClick={() => switchMode()}>
           {isSignedUp
@@ -197,11 +235,11 @@ const Button = styled.button`
   font-size: 1.8rem;
   cursor: pointer;
   outline: none;
-  background: transparent;
   background: var(--highlight-color);
   color: white;
   border-radius: 4px;
   margin-top: 2rem;
+  width: 100%;
 `;
 
 const ModeButton = styled(Button)`

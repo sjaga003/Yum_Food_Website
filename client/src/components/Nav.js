@@ -1,11 +1,23 @@
 import { motion } from 'framer-motion';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
+import AccountDropdown from './Auth/AccountDropdown';
 
 const Nav = () => {
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
+  const [displayDropdown, setDisplayDropdown] = useState(false);
+
+  useEffect(() => {
+    const token = user?.token;
+
+    //JWT
+
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, []);
 
   return (
     <Navigation>
@@ -18,7 +30,31 @@ const Nav = () => {
         <NavItem to="/">Event</NavItem>
         <NavItem to="/">Team</NavItem>
         <NavItem to="/search">Search</NavItem>
-        <NavItem to="/auth">Login</NavItem>
+
+        {user ? (
+          <>
+            <LoginContainer>
+              <UserImage
+                onClick={() => {
+                  setDisplayDropdown(!displayDropdown);
+                  // document.body.style.overflow = 'hidden';
+                }}
+              >
+                <img src={user.result.imageUrl} alt={user.result.name} />
+              </UserImage>
+              {displayDropdown && (
+                <AccountDropdown
+                  user={user}
+                  setUser={setUser}
+                  displayDropdown={displayDropdown}
+                  setDisplayDropdown={setDisplayDropdown}
+                />
+              )}
+            </LoginContainer>
+          </>
+        ) : (
+          <NavItem to="/auth">Login</NavItem>
+        )}
       </NavLinks>
     </Navigation>
   );
@@ -34,6 +70,33 @@ const Navigation = styled.ul`
   left: 0;
   top: 0;
   /* background: white; */
+`;
+
+const UserImage = styled.div`
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  font-size: 1.8rem;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: var(--header-font);
+  line-height: 1;
+  user-select: none;
+  border-radius: 50%;
+  justify-content: center;
+  background: var(--highlight-color);
+  color: var(--bg-color);
+  font-weight: 600;
+  cursor: pointer;
+  svg {
+    color: var(--bg-color);
+    height: 2rem;
+  }
+  img {
+    height: 4rem;
+  }
 `;
 
 const Logo = styled.div`
@@ -56,6 +119,17 @@ const NavItem = styled(NavLink)`
   text-decoration: none;
   font-size: 2rem;
   color: var(--text-color);
+`;
+
+const LoginContainer = styled.div`
+  margin: 0px 3rem;
+  text-decoration: none;
+  font-size: 2rem;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
 `;
 
 export default Nav;
