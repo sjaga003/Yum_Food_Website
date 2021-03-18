@@ -40,7 +40,11 @@ const Nav = () => {
                   // document.body.style.overflow = 'hidden';
                 }}
               >
-                <img src={user.result.imageUrl} alt={user.result.name} />
+                {user.result.imgUrl ? (
+                  <img src={user.result.imageUrl} alt={user.result.name} />
+                ) : (
+                  <AccountIcon>{user.result.name.charAt(0)}</AccountIcon>
+                )}
               </UserImage>
               {displayDropdown && (
                 <AccountDropdown
@@ -97,6 +101,10 @@ const UserImage = styled.div`
   img {
     height: 4rem;
   }
+`;
+
+const AccountIcon = styled.span`
+  font-size: 2.4rem;
 `;
 
 const Logo = styled.div`

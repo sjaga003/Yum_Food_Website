@@ -7,17 +7,36 @@ import Nav from '../Nav';
 import { GoogleLogin } from 'react-google-login';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useDispatch } from 'react-redux';
-import { getAuthData } from '../../actions/authAction';
+import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
 import { useHistory } from 'react-router';
+
+const initialFormData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  repeatPassword: '',
+};
 
 const Auth = () => {
   const [isSignedUp, setIsSignedUp] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = () => {};
+  const [formData, setFormData] = useState(initialFormData);
 
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignedUp) {
+      dispatch(authSignIn(formData, history));
+    } else {
+      dispatch(authSignUp(formData, history));
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const switchMode = (e) => {
     setIsSignedUp((prev) => !prev);
@@ -59,13 +78,13 @@ const Auth = () => {
                 <Input
                   name="firstName"
                   placeholder="First Name"
-                  onChange={() => handleChange()}
+                  onChange={handleChange}
                   autoFocus
                 />
                 <Input
                   name="lastName"
                   placeholder="Last Name"
-                  onChange={() => handleChange()}
+                  onChange={handleChange}
                 />
               </InputRow>
             </>
@@ -74,13 +93,14 @@ const Auth = () => {
             name="email"
             type="email"
             placeholder="Email Address"
-            onChange={() => handleChange()}
+            onChange={handleChange}
           />
           <PasswordRow>
             <Input
               name="password"
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}
+              onChange={handleChange}
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
@@ -91,7 +111,7 @@ const Auth = () => {
             <Input
               name="repeatPassword"
               placeholder="Repeat Password"
-              onChange={() => handleChange()}
+              onChange={handleChange}
             />
           )}
           <Button type="submit">{isSignedUp ? 'Sign In' : 'Sign Up'}</Button>
@@ -112,8 +132,8 @@ const Auth = () => {
         </Form>
         <ModeButton onClick={() => switchMode()}>
           {isSignedUp
-            ? 'Already have an account? Sign In'
-            : `Don't have an account? Sign Up`}
+            ? `Don't have an account? Sign Up `
+            : `Already have an account? Sign In`}
         </ModeButton>
       </Card>
     </PageContainer>

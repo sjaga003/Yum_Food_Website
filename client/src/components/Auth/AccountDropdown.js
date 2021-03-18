@@ -32,7 +32,11 @@ const AccountDropdown = ({
       ></Background>
       <Card>
         <UserImage>
-          <img src={user.result.imageUrl} alt={user.result.name} />
+          {user.result.imgUrl ? (
+            <img src={user.result.imageUrl} alt={user.result.name} />
+          ) : (
+            <AccountIcon>{user.result.name.charAt(0)}</AccountIcon>
+          )}
         </UserImage>
         <UserName>{user.result.name}</UserName>
         <Email>{user.result.email}</Email>
@@ -87,6 +91,10 @@ const UserImage = styled.div`
   img {
     height: 8rem;
   }
+`;
+
+const AccountIcon = styled.span`
+  font-size: 3.6rem;
 `;
 
 const UserName = styled.span`

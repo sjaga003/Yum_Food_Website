@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import recipeRoutes from './routes/recipes.js';
+import userRoutes from './routes/users.js';
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/recipes', recipeRoutes);
+app.use('/users', userRoutes);
 
 //connect to mongoose
 const CONNECTION_URL = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.x4w0b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
