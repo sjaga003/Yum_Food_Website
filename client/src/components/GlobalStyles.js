@@ -38,7 +38,8 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-tap-highlight-color: transparent;
-        --highlight-color: #F3A032;
+        --highlight-color: #F5A11C;
+        --button-hover-color: #E38B00;
         --bg-color: #ffff;
         --text-color: #5F7597;
         --header-color: #29315D;

@@ -142,6 +142,7 @@ const Button = styled.button`
   outline: none;
   background: transparent;
   color: var(--text-color);
+
   ${({ active }) =>
     active &&
     css`

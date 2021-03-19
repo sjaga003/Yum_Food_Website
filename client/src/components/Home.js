@@ -88,6 +88,10 @@ const LearnMoreButton = styled.a`
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);
+  transition: background 0.2s;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 export default Home;

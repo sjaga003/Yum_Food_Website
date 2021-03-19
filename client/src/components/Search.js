@@ -325,6 +325,10 @@ const SearchButton = styled.button`
   &:focus {
     outline: 0;
   }
+  transition: background 0.2s;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 const SearchTitle = styled.span`
@@ -389,6 +393,10 @@ const PillBody = styled.div`
   color: var(--header-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   cursor: pointer;
+  transition: border-left 0.2s;
+  &:hover {
+    border-left: var(--button-hover-color) 25px solid;
+  }
 `;
 
 const PillTitle = styled.span`

@@ -246,6 +246,10 @@ const PasswordRow = styled.div`
     margin: 0rem 1rem 0rem 1rem;
     cursor: pointer;
     user-select: none;
+    transition: color 0.2s;
+    &:hover {
+      color: var(--button-hover-color);
+    }
   }
 `;
 
@@ -261,6 +265,10 @@ const Button = styled.button`
   border-radius: 4px;
   margin-top: 2rem;
   width: 100%;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 const ModeButton = styled(Button)`
@@ -268,6 +276,10 @@ const ModeButton = styled(Button)`
   width: fit-content;
   background: none;
   color: var(--text-color);
+  transition: none;
+  &:hover {
+    background: none;
+  }
 `;
 
 export default Auth;

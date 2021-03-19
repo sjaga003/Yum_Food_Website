@@ -122,6 +122,10 @@ const Button = styled.button`
   background: var(--highlight-color);
   color: white;
   border-radius: 4px;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 export default Contact;

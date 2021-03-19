@@ -127,6 +127,10 @@ const Button = styled.button`
   border-radius: 4px;
   margin-top: 2rem;
   width: 100%;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 const Background = styled.div`

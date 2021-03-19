@@ -80,6 +80,10 @@ const Button = styled.a`
   border-radius: 4px;
   color: var(--bg-color);
   align-self: flex-start;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 export default Welcome;
