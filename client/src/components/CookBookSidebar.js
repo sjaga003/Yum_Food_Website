@@ -2,9 +2,10 @@ import { faBookOpen, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { fetchToCookBook } from '../actions/cookBookAction';
 import CookBookCard from './CookBookCard';
 
 const cookBookButtonVariant = {
@@ -28,9 +29,14 @@ const CookBookSidebar = ({
   cookBookRef,
 }) => {
   const cookBook = useSelector((state) => state.cookBook);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setIsCookBookOpen(false);
+    dispatch(fetchToCookBook());
   }, []);
+
   return (
     <CookBookContainer
       initial={{ right: -380 }}

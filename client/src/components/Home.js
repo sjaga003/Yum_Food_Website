@@ -6,6 +6,7 @@ import HeaderMask from '../images/header_mask.svg';
 import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { clearRecipeCards } from '../actions/recipeCardsAction';
+import { fetchToCookBook } from '../actions/cookBookAction';
 
 const Home = () => {
   const location = useLocation();

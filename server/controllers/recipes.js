@@ -3,8 +3,8 @@ import Recipe from '../models/recipeModel.js';
 
 export const getRecipes = async (req, res) => {
   try {
-    const postRecipes = await Recipe.find();
-    console.log(postRecipes);
+    const postRecipes = await Recipe.find({ userList: req.userId });
+    // console.log(postRecipes);
     res.status(200).json(postRecipes);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -13,8 +13,21 @@ export const getRecipes = async (req, res) => {
 
 export const createRecipe = async (req, res) => {
   const body = req.body;
-  const newRecipe = new Recipe(body);
+  console.log(body);
+  const existingRecipe = await Recipe.findOne({
+    recipeObject: body.recipeObject,
+  });
+  let newRecipe = null;
+
+  if (existingRecipe) {
+    newRecipe = existingRecipe;
+    console.log('existing recipe');
+  } else {
+    newRecipe = new Recipe(body);
+  }
+
   try {
+    await newRecipe.userList.push(req.userId);
     await newRecipe.save();
 
     res.status(201).json(newRecipe);

@@ -40,7 +40,7 @@ const Nav = () => {
                   // document.body.style.overflow = 'hidden';
                 }}
               >
-                {user.result.imgUrl ? (
+                {user.result.imageUrl ? (
                   <img src={user.result.imageUrl} alt={user.result.name} />
                 ) : (
                   <AccountIcon>{user.result.name.charAt(0)}</AccountIcon>

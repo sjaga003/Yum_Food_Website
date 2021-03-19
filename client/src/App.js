@@ -46,8 +46,7 @@ function App() {
     //   recipeObject: test.results[1],
     // });
     // deleteFromDatabase('60512d613e6e2e232c4ff8c2');
-    dispatch(fetchToCookBook());
-  });
+  }, []);
 
   return (
     <div className="App">
