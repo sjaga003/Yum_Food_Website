@@ -7,7 +7,7 @@ import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
 import AccountDropdown from './Auth/AccountDropdown';
 
-const Nav = () => {
+const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
   const [displayDropdown, setDisplayDropdown] = useState(false);
 
@@ -52,6 +52,8 @@ const Nav = () => {
                   setUser={setUser}
                   displayDropdown={displayDropdown}
                   setDisplayDropdown={setDisplayDropdown}
+                  isCookBookOpen={isCookBookOpen}
+                  setIsCookBookOpen={setIsCookBookOpen}
                 />
               )}
             </LoginContainer>

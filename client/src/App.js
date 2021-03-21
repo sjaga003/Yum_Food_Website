@@ -11,6 +11,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import styled from 'styled-components';
+import { setAuthData } from './actions/authAction';
 import { fetchToCookBook } from './actions/cookBookAction';
 import { clearRecipeCards } from './actions/recipeCardsAction';
 import {
@@ -19,6 +20,7 @@ import {
   deleteFromDatabase,
 } from './api/databaseApi';
 import Auth from './components/Auth/Auth';
+import NeedAuthModal from './components/Auth/NeedAuthModal';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
 import CookBookPage from './components/CookBookPage';
@@ -46,6 +48,7 @@ function App() {
     //   recipeObject: test.results[1],
     // });
     // deleteFromDatabase('60512d613e6e2e232c4ff8c2');
+    dispatch(setAuthData());
   }, []);
 
   return (
@@ -54,7 +57,10 @@ function App() {
         <Route exact path="/">
           <GlobalStyle background="home" />
           <Content>
-            <Nav />
+            <Nav
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+            />
             <Home />
             <Welcome />
             <Carousel />

@@ -1,11 +1,13 @@
 import { faBookOpen, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { setAuthData } from '../actions/authAction';
 import { fetchToCookBook } from '../actions/cookBookAction';
+import NeedAuthModal from './Auth/NeedAuthModal';
 import CookBookCard from './CookBookCard';
 
 const cookBookButtonVariant = {
@@ -29,8 +31,10 @@ const CookBookSidebar = ({
   cookBookRef,
 }) => {
   const cookBook = useSelector((state) => state.cookBook);
-
+  const user = useSelector((state) => state.auth.authData);
   const dispatch = useDispatch();
+
+  const [needAuthOpen, setNeedAuthOpen] = useState(false);
 
   useEffect(() => {
     setIsCookBookOpen(false);
@@ -38,39 +42,47 @@ const CookBookSidebar = ({
   }, []);
 
   return (
-    <CookBookContainer
-      initial={{ right: -380 }}
-      animate={
-        isCookBookOpen
-          ? { right: -5, transition: { type: 'spring', damping: 16 } }
-          : { right: -380, transition: { type: 'spring', damping: 13 } }
-      }
-    >
-      <CookBook key="cookbook" ref={cookBookRef}>
-        <ButtonContainer
-          onClick={() => {
-            setIsCookBookOpen(!isCookBookOpen);
-          }}
-        >
-          <ButtonIcon icon={faBookOpen} />
-        </ButtonContainer>
-        {isCookBookOpen && (
-          <CookBookTitle to="/cookbook">Cookbook</CookBookTitle>
-        )}
-        <CookBookCards>
-          {isCookBookOpen &&
-            cookBook &&
-            cookBook.map((entry) => {
-              return (
-                <CookBookCard
-                  key={`cookBookCard-${entry.recipeObject.id}`}
-                  databaseEntry={entry}
-                />
-              );
-            })}
-        </CookBookCards>
-      </CookBook>
-    </CookBookContainer>
+    <>
+      {needAuthOpen && <NeedAuthModal setNeedAuthOpen={setNeedAuthOpen} />}
+      <CookBookContainer
+        initial={{ right: -380 }}
+        animate={
+          isCookBookOpen
+            ? { right: -5, transition: { type: 'spring', damping: 16 } }
+            : { right: -380, transition: { type: 'spring', damping: 13 } }
+        }
+      >
+        <CookBook key="cookbook" ref={cookBookRef}>
+          <ButtonContainer
+            onClick={() => {
+              if (user) {
+                setIsCookBookOpen(!isCookBookOpen);
+              } else {
+                setNeedAuthOpen(true);
+                document.body.style.overflow = 'hidden';
+              }
+            }}
+          >
+            <ButtonIcon icon={faBookOpen} />
+          </ButtonContainer>
+          {isCookBookOpen && (
+            <CookBookTitle to="/cookbook">Cookbook</CookBookTitle>
+          )}
+          <CookBookCards>
+            {isCookBookOpen &&
+              cookBook &&
+              cookBook.map((entry) => {
+                return (
+                  <CookBookCard
+                    key={`cookBookCard-${entry.recipeObject.id}`}
+                    databaseEntry={entry}
+                  />
+                );
+              })}
+          </CookBookCards>
+        </CookBook>
+      </CookBookContainer>
+    </>
   );
 };
 

@@ -10,6 +10,8 @@ const AccountDropdown = ({
   setUser,
   displayDropdown,
   setDisplayDropdown,
+  isCookBookOpen,
+  setIsCookBookOpen,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -17,6 +19,7 @@ const AccountDropdown = ({
   const logout = () => {
     dispatch(logoutUser());
     history.push('/');
+    setIsCookBookOpen(false);
     setUser(null);
   };
 

@@ -37,3 +37,9 @@ export const authSignUp = (formData, history) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const setAuthData = () => {
+  return {
+    type: 'auth/setAuthData',
+  };
+};

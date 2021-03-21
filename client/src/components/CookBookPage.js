@@ -13,14 +13,17 @@ import {
   clearRecipeCards,
 } from '../actions/recipeCardsAction';
 import { recipePreviewPopular } from '../recipePreviewData';
+import NeedAuthModal from './Auth/NeedAuthModal';
 import Nav from './Nav';
 import Recipes from './Recipes';
 
 const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
   const recipeCards = useSelector((state) => state.recipeCards);
+  const user = useSelector((state) => state.auth.authData);
   const cookBook = useSelector((state) => state.cookBook);
   const [sortSelected, setSortSelected] = useState('');
+  const [needAuthOpen, setNeedAuthOpen] = useState(true);
 
   const location = useLocation();
 
@@ -48,6 +51,9 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
   return (
     <PageContainer>
+      {needAuthOpen && (
+        <NeedAuthModal cantClose={true} setNeedAuthOpen={setNeedAuthOpen} />
+      )}
       <Nav />
       <Title>My Recipes</Title>
       {cookBook ? (

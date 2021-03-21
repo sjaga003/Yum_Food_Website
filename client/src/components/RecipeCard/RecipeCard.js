@@ -20,6 +20,7 @@ import {
   removeRecipeCard,
   showRecipe,
 } from '../../actions/recipeCardsAction';
+import NeedAuthModal from '../Auth/NeedAuthModal';
 
 const variant = {
   flat: {
@@ -39,10 +40,12 @@ const RecipeCard = ({
   // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
   const cookBook = useSelector((state) => state.cookBook);
+  const user = useSelector((state) => state.auth.authData);
   const dispatch = useDispatch();
   const cardRef = useRef();
 
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [needAuthOpen, setNeedAuthOpen] = useState(false);
 
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
@@ -105,6 +108,7 @@ const RecipeCard = ({
 
   return (
     <>
+      {needAuthOpen && <NeedAuthModal setNeedAuthOpen={setNeedAuthOpen} />}
       {recipeCardState.isDetailOpen && (
         <RecipeDetail
           recipeCardState={recipeCardState.isDetailOpen}
@@ -115,13 +119,17 @@ const RecipeCard = ({
       )}
       <Card
         ref={cardRef}
-        drag
+        drag={needAuthOpen ? false : true}
         dragConstraints={cardRef}
-        dragElastic={1}
+        dragElastic={user ? 1 : 0}
         onDragStart={() => {
-          setRecipeCardState({ ...recipeCardState, isDragging: true });
-          cardRef.current.style.zIndex = 2;
-          console.log('hello');
+          if (user) {
+            setRecipeCardState({ ...recipeCardState, isDragging: true });
+            cardRef.current.style.zIndex = 2;
+          } else {
+            setNeedAuthOpen(true);
+            document.body.style.overflow = 'hidden';
+          }
         }}
         onDrag={modifyDrag}
         onDragEnd={endDrag}
