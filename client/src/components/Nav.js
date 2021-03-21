@@ -6,15 +6,28 @@ import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
 import AccountDropdown from './Auth/AccountDropdown';
+import decode from 'jwt-decode';
 
 const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
   const [displayDropdown, setDisplayDropdown] = useState(false);
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   useEffect(() => {
     const token = user?.token;
 
     //JWT
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        dispatch(logoutUser());
+        history.push('/');
+        setIsCookBookOpen(false);
+        setUser(null);
+      }
+    }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, []);
