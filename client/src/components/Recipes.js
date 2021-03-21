@@ -70,6 +70,7 @@ const Recipes = ({
                     key={`recipe-${recipe.id}`}
                     index={index}
                     recipe={recipe}
+                    fromCookBook={false}
                   />
                 );
               }

@@ -128,7 +128,7 @@ const RecipeCard = ({
       )}
       <Card
         ref={cardRef}
-        drag={handleDrag}
+        drag={handleDrag()}
         dragConstraints={cardRef}
         dragElastic={user ? 1 : 0}
         onDragStart={() => {
