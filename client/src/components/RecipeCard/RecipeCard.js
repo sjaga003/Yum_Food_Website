@@ -2,6 +2,7 @@ import {
   faStopwatch,
   faSync,
   faHeart,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import {} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +15,10 @@ import MissingImage from '../../images/card_image_missing.svg';
 import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
 import { mockRecipeDetails } from '../../api/api';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
-import { addToCookBook } from '../../actions/cookBookAction';
+import {
+  addToCookBook,
+  removeFromCookBook,
+} from '../../actions/cookBookAction';
 import {
   hideRecipe,
   removeRecipeCard,
@@ -37,6 +41,7 @@ const RecipeCard = ({
   isCookBookOpen,
   setIsCookBookOpen,
   fromCookBook,
+  databaseId,
 }) => {
   // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
@@ -153,6 +158,17 @@ const RecipeCard = ({
       >
         <ImageContainer>
           {!imageLoaded && <Spinner size="4x" icon={faSync} spin />}
+          {fromCookBook && (
+            <DeleteContainer
+              className="deleteContainer"
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(removeFromCookBook(databaseId));
+              }}
+            >
+              <FontAwesomeIcon size="lg" icon={faTimes} />
+            </DeleteContainer>
+          )}
           <FoodImage
             style={!imageLoaded ? { display: 'none' } : { display: 'block' }}
             draggable={false}
@@ -189,6 +205,10 @@ const Card = styled(motion.div)`
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   cursor: pointer;
   will-change: transform;
+
+  &:hover div > .deleteContainer {
+    visibility: visible;
+  }
 `;
 
 const ImageContainer = styled(motion.div)`
@@ -219,6 +239,25 @@ const TopRow = styled.div`
 
 const Heart = styled(FontAwesomeIcon)`
   color: var(--highlight-color);
+`;
+
+const DeleteContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 1.5rem;
+  width: 4rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--bg-color);
+  background: var(--highlight-color);
+  visibility: hidden;
+  border-radius: 4px 0px 0px 4px;
+  cursor: pointer;
+  &:hover {
+    background: var(--button-hover-color);
+  }
 `;
 
 const FoodInfo = styled.div`

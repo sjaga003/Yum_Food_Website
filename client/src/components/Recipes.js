@@ -45,22 +45,24 @@ const Recipes = ({
     <>
       <RecipeContainer>
         <CardContainer>
-          {recipeCards.recipes.results &&
+          {fromCookBook &&
+            cookBook.map((recipe, index) => {
+              return (
+                <RecipeCard
+                  cookBookRef={cookBookRef}
+                  isCookBookOpen={isCookBookOpen}
+                  setIsCookBookOpen={setIsCookBookOpen}
+                  key={`recipe-${recipe.recipeObject.id}`}
+                  index={index}
+                  databaseId={recipe._id}
+                  recipe={recipe.recipeObject}
+                  fromCookBook={fromCookBook}
+                />
+              );
+            })}
+          {!fromCookBook &&
+            recipeCards.recipes.results &&
             recipeCards.recipes.results.map((recipe, index) => {
-              if (fromCookBook) {
-                return (
-                  <RecipeCard
-                    cookBookRef={cookBookRef}
-                    isCookBookOpen={isCookBookOpen}
-                    setIsCookBookOpen={setIsCookBookOpen}
-                    key={`recipe-${recipe.id}`}
-                    index={index}
-                    recipe={recipe}
-                    fromCookBook={fromCookBook}
-                  />
-                );
-              }
-
               if (!cookBook?.some((el) => el.recipeObject.id === recipe.id)) {
                 return (
                   <RecipeCard
