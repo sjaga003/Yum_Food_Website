@@ -19,8 +19,10 @@ const AccountDropdown = ({
   const logout = () => {
     dispatch(logoutUser());
     history.push('/');
-    setIsCookBookOpen(false);
     setUser(null);
+    try {
+      setIsCookBookOpen(false);
+    } catch (error) {}
   };
 
   return (

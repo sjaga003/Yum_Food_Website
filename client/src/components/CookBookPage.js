@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import { setCookBook } from '../actions/cookBookAction';
+import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
 import {
   loadPreviewRecipes,
   setRecipeCards,
@@ -22,10 +22,12 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const recipeCards = useSelector((state) => state.recipeCards);
   const user = useSelector((state) => state.auth.authData);
   const cookBook = useSelector((state) => state.cookBook);
-  const [sortSelected, setSortSelected] = useState('');
-  const [needAuthOpen, setNeedAuthOpen] = useState(true);
+  const [sortSelected, setSortSelected] = useState('meta-score');
+  const [needAuthOpen, setNeedAuthOpen] = useState(false);
 
   const location = useLocation();
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     dispatch(clearRecipeCards());
@@ -36,8 +38,21 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
       acc.push(curr.recipeObject);
       return acc;
     }, []);
+
+    console.log(recipeObjects);
     dispatch(setRecipeCards(recipeObjects));
-  }, []);
+  }, [cookBook]);
+
+  useEffect(() => {
+    if (user) {
+      setNeedAuthOpen(false);
+      if (!cookBook.length) {
+        dispatch(fetchToCookBook());
+      }
+    } else {
+      setNeedAuthOpen(true);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (sortSelected === 'time') {

@@ -36,6 +36,7 @@ const RecipeCard = ({
   cookBookRef,
   isCookBookOpen,
   setIsCookBookOpen,
+  fromCookBook,
 }) => {
   // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
@@ -106,6 +107,14 @@ const RecipeCard = ({
     }
   };
 
+  const handleDrag = () => {
+    if (!fromCookBook) {
+      return needAuthOpen ? false : true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       {needAuthOpen && <NeedAuthModal setNeedAuthOpen={setNeedAuthOpen} />}
@@ -119,7 +128,7 @@ const RecipeCard = ({
       )}
       <Card
         ref={cardRef}
-        drag={needAuthOpen ? false : true}
+        drag={handleDrag}
         dragConstraints={cardRef}
         dragElastic={user ? 1 : 0}
         onDragStart={() => {

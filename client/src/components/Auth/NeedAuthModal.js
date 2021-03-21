@@ -31,9 +31,10 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
             Create an account or sign in to Yum. Search and organize recipes,
             then save them to your personal recipe list!
           </ContentText>
-          <Button>
-            <Link to="/auth">Sign Up or Sign In </Link>
-          </Button>
+
+          <Link to="/auth">
+            <Button>Sign Up or Sign In </Button>
+          </Link>
         </CardSection>
         <CardSection>
           <img src={CardSave} alt="Card Save" />
