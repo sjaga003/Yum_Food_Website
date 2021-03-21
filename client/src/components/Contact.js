@@ -1,20 +1,65 @@
-import React from 'react';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Contact = () => {
+  const [contactFormData, setContactFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleOnChange = (e) => {
+    setContactFormData({ ...contactFormData, [e.target.name]: e.target.value });
+  };
+
   return (
     <ContactSection>
       <ContactBox>
-        <ContactHeader>Contact Us</ContactHeader>
-        <Form>
+        <HeadingText>Have Questions?</HeadingText>
+        <SubtitleText>Contact Us</SubtitleText>
+        <Form autoComplete="off">
           <InputContainer>
-            <NameInput placeholder="Name" />
+            <ValueInput required onChange={handleOnChange} name="name" />
+            <InputLabel
+              animate={
+                contactFormData.name != ''
+                  ? { top: '-24px', left: '0px' }
+                  : { top: 'initial' }
+              }
+            >
+              Name
+            </InputLabel>
           </InputContainer>
           <InputContainer>
-            <EmailInput type="email" placeholder="Email" />
+            <ValueInput
+              required
+              name="email"
+              type="email"
+              onChange={handleOnChange}
+            />
+            <InputLabel
+              animate={
+                contactFormData.email != ''
+                  ? { top: '-24px', left: '0px' }
+                  : { top: 'initial' }
+              }
+            >
+              Email
+            </InputLabel>
           </InputContainer>
           <InputContainer>
-            <MessageInput placeholder="Message" />
+            <MessageInput required name="message" onChange={handleOnChange} />
+            <InputLabel
+              className="textarea-label"
+              animate={
+                contactFormData.message != ''
+                  ? { top: '-32px', left: '0px' }
+                  : { top: 'initial' }
+              }
+            >
+              Message
+            </InputLabel>
           </InputContainer>
           <Button>Submit {'➞'}</Button>
         </Form>
@@ -46,12 +91,31 @@ const ContactBox = styled.div`
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
 `;
 
-const ContactHeader = styled.span`
+const HeadingText = styled.span`
+  font-family: var(--header-font);
+  font-variant: small-caps;
   font-weight: 600;
-  margin-bottom: 5rem;
-  color: var(--header-color);
+  font-size: 2.8rem;
+  color: var(--highlight-color);
+`;
+
+const SubtitleText = styled.span`
   font-family: var(--header-font);
   font-size: 3.6rem;
+  color: var(--header-color);
+  font-weight: 600;
+  margin-bottom: 1.8rem;
+`;
+
+const InputLabel = styled(motion.label)`
+  position: absolute;
+  left: 1rem;
+  pointer-events: none;
+
+  z-index: 1;
+  color: var(--text-color);
+  font-family: var(--text-font);
+  font-size: 1.8rem;
 `;
 
 const InputContainer = styled.div`
@@ -59,13 +123,18 @@ const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0.5rem 0.5rem 3rem;
   border-radius: 6px;
-  margin-bottom: 1.8rem;
+  margin-bottom: 3rem;
+  position: relative;
   border: 1px solid lightgray;
+  .textarea-label {
+    display: flex;
+    align-self: flex-start;
+    padding-top: 0.8rem;
+  }
 `;
 
-const EmailInput = styled.input`
+const ValueInput = styled.input`
   outline: none;
   border: 0;
   height: 6rem;
@@ -74,17 +143,7 @@ const EmailInput = styled.input`
   border-radius: 8px;
   color: var(--text-color);
   font-family: var(--text-font);
-`;
-
-const NameInput = styled.input`
-  outline: none;
-  border: 0;
-  height: 6rem;
-  width: 40rem;
-  font-size: 1.8rem;
-  border-radius: 8px;
-  color: var(--text-color);
-  font-family: var(--text-font);
+  padding-left: 1rem;
 `;
 
 const MessageInput = styled.textarea`
@@ -100,6 +159,7 @@ const MessageInput = styled.textarea`
   border-radius: 8px;
   color: var(--text-color);
   padding-top: 1rem;
+  padding-left: 1rem;
   font-family: var(--text-font);
 `;
 
