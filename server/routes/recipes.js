@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.get('/', auth, getRecipes);
 router.post('/', auth, createRecipe);
-router.delete('/:id', deleteRecipe);
+router.delete('/:id', auth, deleteRecipe);
 
 export default router;

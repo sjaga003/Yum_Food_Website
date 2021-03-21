@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { setAuthData } from '../actions/authAction';
-import { fetchToCookBook } from '../actions/cookBookAction';
+import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
 import NeedAuthModal from './Auth/NeedAuthModal';
 import CookBookCard from './CookBookCard';
 
@@ -38,7 +38,11 @@ const CookBookSidebar = ({
 
   useEffect(() => {
     setIsCookBookOpen(false);
-    dispatch(fetchToCookBook());
+    if (user) {
+      dispatch(fetchToCookBook());
+    } else {
+      dispatch(setCookBook([]));
+    }
   }, []);
 
   return (
