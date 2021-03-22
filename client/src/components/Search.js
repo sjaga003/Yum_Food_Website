@@ -1,28 +1,19 @@
+import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
-import Recipes from './Recipes';
+import { useHistory, useLocation } from 'react-router';
+import styled from 'styled-components';
 import {
   clearRecipeCards,
   loadAdditionalSearchedRecipes,
-  loadPreviewRecipes,
-  loadRandomRecipes,
   loadSearchedRecipes,
-  sortRecipesByTime,
 } from '../actions/recipeCardsAction';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import Nav from './Nav';
 import CookBookSidebar from './CookBookSidebar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useHistory, useLocation } from 'react-router';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { mockRecipeCards } from '../api/api';
-import {
-  recipePreviewAppetizer,
-  recipePreviewDessert,
-  recipePreviewPopular,
-} from '../recipePreviewData';
+import Nav from './Nav';
+import Recipes from './Recipes';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -30,12 +21,10 @@ const useQuery = () => {
 
 const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const query = useQuery();
-  const [searchQuery, setSearchQuery] = useState(query.get('query'));
+  const [searchQuery, setSearchQuery] = useState(query.get('query') || '');
   const [lastSearch, setLastSearch] = useState('');
   const [sortSelected, setSortSelected] = useState('meta-score');
-  const [fetchCount, setFetchCount] = useState(0);
   const dispatch = useDispatch();
-  const [items, setItems] = useState(Array.from({ length: 20 }));
 
   const history = useHistory();
 
@@ -45,7 +34,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     dispatch(clearRecipeCards());
   }, [location.pathname]);
 
-  // const recipeCards = { recipes: [], isLoading: true, isDone: false };
   const recipeCards = useSelector((state) => state.recipeCards);
   useEffect(() => {
     if (searchQuery) {
@@ -54,31 +42,16 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
       setLastSearch(searchQuery);
       setSearchQuery('');
     }
-  }, []);
-
-  useEffect(() => {
-    console.log(sortSelected);
-  }, [sortSelected]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchMore = () => {
-    console.log('FETCH');
-    // setTimeout(() => {
-    //   setItems(items.concat(Array.from({ length: 20 })));
-    // }, 1000);
     dispatch(
       loadAdditionalSearchedRecipes(
         recipeCards.recipes.results.length,
         lastSearch,
         sortSelected
       )
-    ); //fix this loading issue
-    // if (fetchCount === 0) {
-    //   dispatch(loadAdditionalSearchedRecipes(recipePreviewDessert()));
-    // } else if (fetchCount === 1) {
-    //   dispatch(loadAdditionalSearchedRecipes(recipePreviewAppetizer()));
-    // }
-
-    // setFetchCount(fetchCount + 1);
+    );
   };
 
   let bool = false;
@@ -93,7 +66,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
         cookBookRef={cookBookRef}
         isCookBookOpen={isCookBookOpen}
         setIsCookBookOpen={setIsCookBookOpen}
-        cookBookRef={cookBookRef}
       />
       <SearchBackground>
         <SearchTitle>Browse Hundreds of Recipes</SearchTitle>
@@ -121,7 +93,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <SearchContainer>
             <SearchInput
               onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
+              value={'' || searchQuery}
             />
             {searchQuery && (
               <RemoveSearchIcon
@@ -208,7 +180,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           dataLength={parseInt(recipeCards.recipes.results.length)}
           next={fetchMore}
           hasMore={
-            // fetchCount <= 1
             !recipeCards.isDone &&
             recipeCards.recipes.results.length <=
               recipeCards.recipes.totalResults
@@ -230,7 +201,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             setIsCookBookOpen={setIsCookBookOpen}
             cookBookRef={cookBookRef}
             fromPreview={false}
-            fetchCount={fetchCount}
           />
         </InfiniteScroll>
       ) : (

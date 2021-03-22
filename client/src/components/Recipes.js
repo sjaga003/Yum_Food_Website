@@ -1,24 +1,8 @@
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadRandomRecipes } from '../actions/recipeCardsAction';
 import RecipeCard from './RecipeCard/RecipeCard';
-import { mockRecipeCards } from '../api/api';
-
-const containerFadeIn = {
-  flat: {
-    opacity: 1,
-    y: 0,
-  },
-  hidden: {
-    opacity: 0,
-    y: 100,
-    transition: {
-      type: 'tween',
-    },
-  },
-};
 
 const Recipes = ({
   isCookBookOpen,
@@ -26,20 +10,8 @@ const Recipes = ({
   cookBookRef,
   fromCookBook,
 }) => {
-  // const recipeCards = mockRecipeCards();
   const recipeCards = useSelector((state) => state.recipeCards);
   const cookBook = useSelector((state) => state.cookBook);
-  // console.log(recipeCards);
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(loadRandomRecipes(5));
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log('HI');
-  //   console.log(recipeCards);
-  // }, [recipeCards]);
 
   return (
     <>
@@ -76,6 +48,7 @@ const Recipes = ({
                   />
                 );
               }
+              return null;
             })}
         </CardContainer>
       </RecipeContainer>
