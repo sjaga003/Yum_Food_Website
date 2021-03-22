@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
@@ -26,10 +26,15 @@ const Auth = () => {
 
   const [formData, setFormData] = useState(initialFormData);
 
+  const [passwordMatch, setPasswordMatch] = useState(false);
+
+  const [incorrectCredentials, setIncorrectCredentials] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignedUp) {
-      dispatch(authSignIn(formData, history));
+      dispatch(authSignIn(formData, history, setIncorrectCredentials));
+      setFormData(initialFormData);
     } else {
       dispatch(authSignUp(formData, history));
     }
@@ -42,6 +47,7 @@ const Auth = () => {
   const switchMode = (e) => {
     setIsSignedUp((prev) => !prev);
     setShowPassword(false);
+    setIncorrectCredentials(false);
   };
 
   const dispatch = useDispatch();
@@ -63,6 +69,14 @@ const Auth = () => {
     console.error('Google Sign In was unsuccessful');
   };
 
+  useEffect(() => {
+    if (formData.password === formData.repeatPassword) {
+      setPasswordMatch(true);
+    } else {
+      setPasswordMatch(false);
+    }
+  }, [formData.password, formData.repeatPassword]);
+
   return (
     <PageContainer>
       <Nav />
@@ -77,31 +91,39 @@ const Auth = () => {
             <>
               <InputRow>
                 <Input
+                  required
                   name="firstName"
                   placeholder="First Name"
                   onChange={handleChange}
                   autoFocus
+                  value={'' || formData.firstName}
                 />
                 <Input
+                  required
                   name="lastName"
                   placeholder="Last Name"
                   onChange={handleChange}
+                  value={'' || formData.lastName}
                 />
               </InputRow>
             </>
           )}
           <Input
+            required
             name="email"
             type="email"
             placeholder="Email Address"
             onChange={handleChange}
+            value={'' || formData.email}
           />
           <PasswordRow>
             <Input
+              required
               name="password"
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}
               onChange={handleChange}
+              value={'' || formData.password}
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
@@ -110,12 +132,22 @@ const Auth = () => {
           </PasswordRow>
           {!isSignedUp && (
             <Input
+              required
+              type="password"
               name="repeatPassword"
               placeholder="Repeat Password"
               onChange={handleChange}
+              value={'' || formData.repeatPassword}
             />
           )}
-          <Button type="submit">{isSignedUp ? 'Sign In' : 'Sign Up'}</Button>
+          {isSignedUp && incorrectCredentials && (
+            <IncorrectError>
+              Error: Incorrect Username or Password
+            </IncorrectError>
+          )}
+          <Button type="submit" disabled={!isSignedUp ? !passwordMatch : false}>
+            {isSignedUp ? 'Sign In' : 'Sign Up'}
+          </Button>
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_ID}
             render={(renderProps) => (
@@ -269,6 +301,12 @@ const Button = styled.button`
   &:hover {
     background: var(--button-hover-color);
   }
+  &:disabled {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
 `;
 
 const ModeButton = styled(Button)`
@@ -280,6 +318,15 @@ const ModeButton = styled(Button)`
   &:hover {
     background: none;
   }
+`;
+
+const IncorrectError = styled.span`
+  color: #b03130;
+  font-size: 1.8rem;
+  font-family: var(--text-font);
+  display: flex;
+  align-self: flex-start;
+  margin-top: 2rem;
 `;
 
 export default Auth;

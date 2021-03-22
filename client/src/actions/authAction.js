@@ -14,15 +14,20 @@ export const logoutUser = () => {
   };
 };
 
-export const authSignIn = (formData, history) => async (dispatch) => {
+export const authSignIn = (
+  formData,
+  history,
+  setIncorrectCredentials
+) => async (dispatch) => {
   try {
     //log in the user
     const { data } = await signIn(formData);
-
+    // await console.log(signIn(formData));
+    setIncorrectCredentials(false);
     dispatch({ type: 'auth/getAuthData', payload: data });
-
     history.push('/');
   } catch (error) {
+    setIncorrectCredentials(true);
     console.error(error);
   }
 };
