@@ -19,7 +19,7 @@ const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     setActiveButton('A');
   }, []);
 
-  const [activeButton, setActiveButton] = useState('');
+  const [activeButton, setActiveButton] = useState('Popular');
 
   return (
     <RecipePreviewSection>
@@ -29,47 +29,51 @@ const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
         </Header>
         <ButtonContainer>
           <Button
-            active={activeButton === 'A'}
+            name="Popular"
+            active={activeButton === 'Popular'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewPopular()));
-              setActiveButton('A');
+              setActiveButton('Popular');
             }}
           >
             Popular
           </Button>
           <Button
-            active={activeButton === 'B'}
+            name="Breakfast"
+            active={activeButton === 'Breakfast'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewBreakfast()));
-              setActiveButton('B');
+              setActiveButton('Breakfast');
             }}
           >
             Breakfast
           </Button>
           <Button
-            active={activeButton === 'C'}
+            name="Appetizer"
+            active={activeButton === 'Appetizer'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewAppetizer()));
-
-              setActiveButton('C');
+              setActiveButton('Appetizer');
             }}
           >
             Appetizer
           </Button>
           <Button
-            active={activeButton === 'D'}
+            name="Dessert"
+            active={activeButton === 'Dessert'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewDessert()));
-              setActiveButton('D');
+              setActiveButton('Dessert');
             }}
           >
             Dessert
           </Button>
           <Button
-            active={activeButton === 'E'}
+            name="Vegetarian"
+            active={activeButton === 'Vegetarian'}
             onClick={() => {
               dispatch(loadPreviewRecipes(recipePreviewVegetarian()));
-              setActiveButton('E');
+              setActiveButton('Vegetarian');
             }}
           >
             Vegetarian
