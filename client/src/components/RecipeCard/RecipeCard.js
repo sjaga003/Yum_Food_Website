@@ -1,30 +1,17 @@
-import {
-  faStopwatch,
-  faSync,
-  faHeart,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
 import {} from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import MissingImage from '../../images/card_image_missing.svg';
-
-import { loadRecipeDetails } from '../../actions/recipeDetailsAction';
-import { mockRecipeDetails } from '../../api/api';
-import RecipeDetail from './RecipeDetail/RecipeDetail';
 import {
   addToCookBook,
   removeFromCookBook,
 } from '../../actions/cookBookAction';
-import {
-  hideRecipe,
-  removeRecipeCard,
-  showRecipe,
-} from '../../actions/recipeCardsAction';
+import MissingImage from '../../images/card_image_missing.svg';
 import NeedAuthModal from '../Auth/NeedAuthModal';
+import RecipeDetail from './RecipeDetail/RecipeDetail';
 
 const variant = {
   flat: {
@@ -43,9 +30,7 @@ const RecipeCard = ({
   fromCookBook,
   databaseId,
 }) => {
-  // const recipeDetails = mockRecipeDetails();
   const recipeDetails = useSelector((state) => state.recipeCards);
-  const cookBook = useSelector((state) => state.cookBook);
   const user = useSelector((state) => state.auth.authData);
   const dispatch = useDispatch();
   const cardRef = useRef();

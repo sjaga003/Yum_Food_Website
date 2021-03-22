@@ -1,6 +1,3 @@
-import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import {
   faBreadSlice,
   faLeaf,
@@ -8,12 +5,13 @@ import {
   faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import DairyIcon from '../../../images/Dairy.svg';
+import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import AllergyMarker from './AllergyMarker';
+import NutritionalInfo from './NutritionalInfo';
 import RecipeDetailIngredient from './RecipeDetailIngredient';
 import RecipeDetailInstruction from './RecipeDetailInstruction';
-
-import NutritionalInfo from './NutritionalInfo';
 
 const RecipeDetail = ({
   recipeCardState,
@@ -24,31 +22,33 @@ const RecipeDetail = ({
   const [servingSize, setServingSize] = useState(0);
   const [ingredientsList, setIngredientsList] = useState([]);
 
-  const createIngredientsList = () => {
-    let ingredients = [];
-    if (!recipe.analyzedInstructions[0]) {
-      return ingredients;
-    }
-    recipe.analyzedInstructions[0].steps.map((step) => {
-      step.ingredients.map((ingredient) => {
-        if (
-          ingredient.image &&
-          !ingredients.some((el) => el.id === ingredient.id)
-        ) {
-          ingredients.push({
-            id: ingredient.id,
-            image: ingredient.image,
-            name: ingredient.name,
-          });
-        }
-      });
-    });
-    return ingredients;
-  };
-
   useEffect(() => {
+    //Moved function into useEffect to remove ESLint dependency warning
+    //Only supposed to run once on first render []
+    const createIngredientsList = () => {
+      let ingredients = [];
+      if (!recipe.analyzedInstructions[0]) {
+        return ingredients;
+      }
+      recipe.analyzedInstructions[0].steps.forEach((step) => {
+        step.ingredients.forEach((ingredient) => {
+          if (
+            ingredient.image &&
+            !ingredients.some((el) => el.id === ingredient.id)
+          ) {
+            ingredients.push({
+              id: ingredient.id,
+              image: ingredient.image,
+              name: ingredient.name,
+            });
+          }
+        });
+      });
+      return ingredients;
+    };
+
     setIngredientsList(createIngredientsList());
-  }, []);
+  }, [recipe.analyzedInstructions]);
 
   useEffect(() => {
     recipe && setServingSize(recipe.servings);
@@ -392,11 +392,6 @@ const SubtitleHeader = styled(motion.div)`
   font-family: var(--header-font);
   color: var(--header-color);
   font-weight: 600;
-`;
-
-const InstructionContainer = styled(motion.div)`
-  display: flex;
-  justify-content: center;
 `;
 
 const IngredientCards = styled(motion.div)`

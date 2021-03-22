@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
 import AccountDropdown from './Auth/AccountDropdown';
-import decode from 'jwt-decode';
 
 const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
@@ -16,9 +15,10 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const history = useHistory();
 
   useEffect(() => {
+    //Added deps to remove ESLint Warning
+    //Only supposed to run once on first render []
     const token = user?.token;
 
-    //JWT
     if (token) {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) {
@@ -30,7 +30,7 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
-  }, []);
+  }, [dispatch, history, setIsCookBookOpen, user?.token]);
 
   return (
     <Navigation>
@@ -50,7 +50,6 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
               <UserImage
                 onClick={() => {
                   setDisplayDropdown(!displayDropdown);
-                  // document.body.style.overflow = 'hidden';
                 }}
               >
                 {user.result.imageUrl ? (

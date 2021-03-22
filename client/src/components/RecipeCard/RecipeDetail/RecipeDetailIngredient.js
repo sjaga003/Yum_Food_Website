@@ -1,5 +1,5 @@
-import { motion, useExternalRef } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import React from 'react';
 import styled from 'styled-components';
 import NoImageFound from '../../../images/no_ingredient_image.jpg';
 
@@ -85,7 +85,6 @@ const IngredientAmount = styled(motion.div)`
   margin-top: 1rem;
   font-size: 1.6rem;
   color: var(--header-color);
-  
 `;
 
 export default RecipeDetailIngredient;

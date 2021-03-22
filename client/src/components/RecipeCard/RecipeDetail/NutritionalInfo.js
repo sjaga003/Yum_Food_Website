@@ -1,7 +1,4 @@
-import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import {} from 'module';
 import {
   Bar,
   BarChart,
@@ -24,82 +21,87 @@ import {
 const NutritionalInfo = ({ recipe }) => {
   const [nutrientData, setNutrientData] = useState({});
 
-  const getNutrientData = () => {
-    const totalMacro = recipe.nutrition.nutrients.reduce(
-      (accumulator, current) => {
-        if (
-          current.name === 'Carbohydrates' ||
-          current.name === 'Fat' ||
-          current.name === 'Protein'
-        ) {
-          accumulator += current.amount;
-        }
-        return accumulator;
-      },
-      0
-    );
-    const macros = recipe.nutrition.nutrients.reduce((accumulator, current) => {
-      if (
-        current.name === 'Carbohydrates' ||
-        current.name === 'Fat' ||
-        current.name === 'Protein'
-      )
-        accumulator.push({
-          name: current.name,
-          value: Math.floor((current.amount / totalMacro) * 100),
-        });
-      return accumulator;
-    }, []);
-
-    const vitamins = recipe.nutrition.nutrients
-      .reduce((accumulator, current) => {
-        if (current.name.includes('Vitamin')) {
-          accumulator.push({
-            name: current.title,
-            value: current.percentOfDailyNeeds,
-          });
-        }
-        return accumulator;
-      }, [])
-      .filter(
-        (el) =>
-          !(
-            el.name === 'Vitamin B3' ||
-            el.name === 'Vitamin B2' ||
-            el.name === 'Vitamin B1' ||
-            el.name === 'Vitamin B5'
+  useEffect(() => {
+    //Moved function into useEffect to remove ESLint dependency warning
+    //Only supposed to run once on first render []
+    const getNutrientData = () => {
+      const totalMacro = recipe.nutrition.nutrients.reduce(
+        (accumulator, current) => {
+          if (
+            current.name === 'Carbohydrates' ||
+            current.name === 'Fat' ||
+            current.name === 'Protein'
+          ) {
+            accumulator += current.amount;
+          }
+          return accumulator;
+        },
+        0
+      );
+      const macros = recipe.nutrition.nutrients.reduce(
+        (accumulator, current) => {
+          if (
+            current.name === 'Carbohydrates' ||
+            current.name === 'Fat' ||
+            current.name === 'Protein'
           )
+            accumulator.push({
+              name: current.name,
+              value: Math.floor((current.amount / totalMacro) * 100),
+            });
+          return accumulator;
+        },
+        []
       );
 
-    const minerals = recipe.nutrition.nutrients.reduce(
-      (accumulator, current) => {
-        if (
-          current.name === 'Phosphorus' ||
-          current.name === 'Calcium' ||
-          current.name === 'Iron' ||
-          current.name === 'Selenium' ||
-          current.name === 'Manganese' ||
-          current.name === 'Copper' ||
-          current.name === 'Zinc' ||
-          current.name === 'Magnesium' ||
-          current.name === 'Potassium'
-        ) {
-          accumulator.push({
-            name: current.title,
-            value: current.percentOfDailyNeeds,
-          });
-        }
-        return accumulator;
-      },
-      []
-    );
+      const vitamins = recipe.nutrition.nutrients
+        .reduce((accumulator, current) => {
+          if (current.name.includes('Vitamin')) {
+            accumulator.push({
+              name: current.title,
+              value: current.percentOfDailyNeeds,
+            });
+          }
+          return accumulator;
+        }, [])
+        .filter(
+          (el) =>
+            !(
+              el.name === 'Vitamin B3' ||
+              el.name === 'Vitamin B2' ||
+              el.name === 'Vitamin B1' ||
+              el.name === 'Vitamin B5'
+            )
+        );
 
-    return { macros, vitamins, minerals };
-  };
+      const minerals = recipe.nutrition.nutrients.reduce(
+        (accumulator, current) => {
+          if (
+            current.name === 'Phosphorus' ||
+            current.name === 'Calcium' ||
+            current.name === 'Iron' ||
+            current.name === 'Selenium' ||
+            current.name === 'Manganese' ||
+            current.name === 'Copper' ||
+            current.name === 'Zinc' ||
+            current.name === 'Magnesium' ||
+            current.name === 'Potassium'
+          ) {
+            accumulator.push({
+              name: current.title,
+              value: current.percentOfDailyNeeds,
+            });
+          }
+          return accumulator;
+        },
+        []
+      );
 
-  useEffect(() => {
+      return { macros, vitamins, minerals };
+    };
+
     setNutrientData(getNutrientData());
-  }, []);
+  }, [recipe.nutrition.nutrients]);
 
   useEffect(() => {
     console.log(nutrientData);
@@ -173,7 +175,6 @@ const NutritionalInfo = ({ recipe }) => {
               <Bar
                 dataKey="value"
                 name="Percent of Daily Needs"
-                dataKey="value"
                 unit="%"
                 stroke="#8884d8"
                 fill="#8884d8"
@@ -246,7 +247,6 @@ const NutritionalInfo = ({ recipe }) => {
               <Bar
                 dataKey="value"
                 name="Percent of Daily Needs"
-                dataKey="value"
                 unit="%"
                 stroke="#e98a4b"
                 fill="#e98a4b"
