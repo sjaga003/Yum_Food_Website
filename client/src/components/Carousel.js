@@ -5,18 +5,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const items = [
-  'red',
-  'blue',
-  'green',
-  'yellow',
-  'black',
-  'brown',
-  'purple',
-  'pink',
-  'orange',
-];
-
 const quickSearchCards = [
   {
     icon: (
@@ -409,7 +397,6 @@ const Carousel = () => {
   });
   const cardRef = useRef();
   const boundsRef = useRef();
-  const testRef = useRef(new Array());
   const controls = useAnimation();
   const elementWidth = 250;
 
@@ -458,7 +445,7 @@ const Carousel = () => {
         return acc;
       }
     }, itemCoords[0]);
-    if (position.index != closestValue.index) {
+    if (position.index !== closestValue.index) {
       setPosition({
         index: closestValue.index,
         direction: closestValue.index > position.index ? 1 : -1,
@@ -482,7 +469,7 @@ const Carousel = () => {
         });
       }
     }
-  }, [position]);
+  }, [position, controls]);
 
   return (
     <CarouselContainer>
@@ -556,7 +543,6 @@ const Carousel = () => {
         >
           {quickSearchCards.map((item, index) => (
             <CarouselDiv
-              ref={(element) => testRef.current.push(element)}
               key={`carouselCard-${item.name}`}
               style={{ background: item }}
               initial={{

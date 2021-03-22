@@ -1,5 +1,4 @@
 import { signIn, signUp } from '../api/databaseApi';
-import { fetchToCookBook } from './cookBookAction';
 
 export const getAuthData = (result, token) => {
   return {
@@ -22,7 +21,6 @@ export const authSignIn = (
   try {
     //log in the user
     const { data } = await signIn(formData);
-    // await console.log(signIn(formData));
     setIncorrectCredentials(false);
     dispatch({ type: 'auth/getAuthData', payload: data });
     history.push('/');

@@ -4,23 +4,10 @@ import '@fontsource/roboto';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  BrowserRouter,
-  Route,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { setAuthData } from './actions/authAction';
-import { fetchToCookBook } from './actions/cookBookAction';
-import { clearRecipeCards } from './actions/recipeCardsAction';
-import {
-  fetchAllRecipes,
-  addRecipeToDatabase,
-  deleteFromDatabase,
-} from './api/databaseApi';
 import Auth from './components/Auth/Auth';
-import NeedAuthModal from './components/Auth/NeedAuthModal';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
 import CookBookPage from './components/CookBookPage';
@@ -33,7 +20,6 @@ import RecipePreview from './components/RecipePreview';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
 import FooterBackground from './images/footer_background.svg';
-import { recipePreviewPopular } from './recipePreviewData';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -42,14 +28,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const test = recipePreviewPopular();
-    // addRecipeToDatabase({
-    //   recipeId: test.results[1].id,
-    //   recipeObject: test.results[1],
-    // });
-    // deleteFromDatabase('60512d613e6e2e232c4ff8c2');
+    //Added deps to remove ESLint Warning
+    //Only supposed to run once on first render []
     dispatch(setAuthData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">

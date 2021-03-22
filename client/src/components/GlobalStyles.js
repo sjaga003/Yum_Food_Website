@@ -1,4 +1,3 @@
-import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 import { createGlobalStyle } from 'styled-components';
 import HomeBackground from '../images/home_background.svg';
 import SearchBackground from '../images/search_background.svg';

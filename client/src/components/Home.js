@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import SushiImage from '../images/sushi.jpg';
-import SushiImage2 from '../images/sushi2.jpeg';
-import HeaderMask from '../images/header_mask.svg';
-import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
+import styled from 'styled-components';
 import { clearRecipeCards } from '../actions/recipeCardsAction';
-import { fetchToCookBook } from '../actions/cookBookAction';
+import HeaderMask from '../images/header_mask.svg';
+import SushiImage from '../images/sushi.jpg';
 
 const Home = () => {
   const location = useLocation();
@@ -14,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(clearRecipeCards());
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   return (
     <HomeContainer>

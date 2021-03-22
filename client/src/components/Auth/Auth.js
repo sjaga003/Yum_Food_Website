@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
-import Nav from '../Nav';
+import React, { useEffect, useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useDispatch } from 'react-redux';
-import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
 import { useHistory } from 'react-router';
-import { fetchToCookBook } from '../../actions/cookBookAction';
+import styled from 'styled-components';
+import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
+import Nav from '../Nav';
 
 const initialFormData = {
   firstName: '',

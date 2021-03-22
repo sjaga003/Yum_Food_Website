@@ -1,8 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
 import { logoutUser } from '../../actions/authAction';
 
 const AccountDropdown = ({

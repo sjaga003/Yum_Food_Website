@@ -1,15 +1,9 @@
+import { faGithubAlt, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import YumLogo from '../images/Yum_Logo.svg';
-import {
-  faGithub,
-  faGithubAlt,
-  faLinkedin,
-  faLinkedinIn,
-} from '@fortawesome/free-brands-svg-icons';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (

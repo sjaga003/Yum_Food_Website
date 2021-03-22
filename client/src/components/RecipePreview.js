@@ -15,9 +15,10 @@ const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //Added deps to remove ESLint Warning
+    //Only supposed to run once on first render []
     dispatch(loadPreviewRecipes(recipePreviewPopular()));
-    setActiveButton('A');
-  }, []);
+  }, [dispatch]);
 
   const [activeButton, setActiveButton] = useState('Popular');
 

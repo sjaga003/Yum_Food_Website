@@ -23,7 +23,7 @@ const Contact = () => {
             <ValueInput required onChange={handleOnChange} name="name" />
             <InputLabel
               animate={
-                contactFormData.name != ''
+                contactFormData.name !== ''
                   ? { top: '-24px', left: '0px' }
                   : { top: 'initial' }
               }
@@ -40,7 +40,7 @@ const Contact = () => {
             />
             <InputLabel
               animate={
-                contactFormData.email != ''
+                contactFormData.email !== ''
                   ? { top: '-24px', left: '0px' }
                   : { top: 'initial' }
               }
@@ -53,7 +53,7 @@ const Contact = () => {
             <InputLabel
               className="textarea-label"
               animate={
-                contactFormData.message != ''
+                contactFormData.message !== ''
                   ? { top: '-32px', left: '0px' }
                   : { top: 'initial' }
               }

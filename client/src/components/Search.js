@@ -32,13 +32,13 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
   useEffect(() => {
     dispatch(clearRecipeCards());
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   const recipeCards = useSelector((state) => state.recipeCards);
+
   useEffect(() => {
     if (searchQuery) {
       dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
-      // dispatch(loadPreviewRecipes(recipePreviewPopular()));
       setLastSearch(searchQuery);
       setSearchQuery('');
     }

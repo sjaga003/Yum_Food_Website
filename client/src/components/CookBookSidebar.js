@@ -1,29 +1,13 @@
-import { faBookOpen, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { setAuthData } from '../actions/authAction';
 import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
 import NeedAuthModal from './Auth/NeedAuthModal';
 import CookBookCard from './CookBookCard';
-
-const cookBookButtonVariant = {
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 0.1,
-    },
-  },
-  hide: {
-    opacity: 0,
-    transition: {
-      duration: 0.1,
-    },
-  },
-};
 
 const CookBookSidebar = ({
   isCookBookOpen,
@@ -37,13 +21,15 @@ const CookBookSidebar = ({
   const [needAuthOpen, setNeedAuthOpen] = useState(false);
 
   useEffect(() => {
+    //Added deps to remove ESLint Warning
+    //Only supposed to run once on first render []
     setIsCookBookOpen(false);
     if (user) {
       dispatch(fetchToCookBook());
     } else {
       dispatch(setCookBook([]));
     }
-  }, []);
+  }, [dispatch, setIsCookBookOpen, user]);
 
   return (
     <>

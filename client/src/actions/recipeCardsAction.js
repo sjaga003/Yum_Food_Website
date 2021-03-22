@@ -1,10 +1,5 @@
 import axios from 'axios';
-import { randomCardURL, searchSortedURL, searchURL } from '../api/api';
-import {
-  recipePreviewDessert,
-  recipePreviewPopular,
-  recipePreviewVegetarian,
-} from '../recipePreviewData';
+import { randomCardURL, searchURL } from '../api/api';
 
 export const loadRandomRecipes = (numberToLoad) => async (dispatch) => {
   const randomRecipeData = await axios.get(randomCardURL(numberToLoad));
@@ -47,7 +42,6 @@ export const loadAdditionalSearchedRecipes = (
     type: 'recipeCards/loadAdditionalSearchedRecipes',
     payload: {
       recipes: searchedRecipeData.data,
-      // recipes: recipes,
     },
   });
 };

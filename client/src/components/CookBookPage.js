@@ -1,25 +1,21 @@
-import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
+import { fetchToCookBook } from '../actions/cookBookAction';
 import {
-  loadPreviewRecipes,
+  clearRecipeCards,
   setRecipeCards,
   sortRecipesByMeta,
-  sortRecipesByTime,
   sortRecipesByPrice,
-  clearRecipeCards,
+  sortRecipesByTime,
 } from '../actions/recipeCardsAction';
-import { recipePreviewPopular } from '../recipePreviewData';
 import NeedAuthModal from './Auth/NeedAuthModal';
 import Nav from './Nav';
 import Recipes from './Recipes';
 
 const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
-  const recipeCards = useSelector((state) => state.recipeCards);
   const user = useSelector((state) => state.auth.authData);
   const cookBook = useSelector((state) => state.cookBook);
   const [sortSelected, setSortSelected] = useState('meta-score');
@@ -31,7 +27,7 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
   useEffect(() => {
     dispatch(clearRecipeCards());
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   useEffect(() => {
     const recipeObjects = cookBook.reduce((acc, curr) => {
@@ -41,7 +37,7 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
     console.log(recipeObjects);
     dispatch(setRecipeCards(recipeObjects));
-  }, [cookBook]);
+  }, [cookBook, dispatch]);
 
   useEffect(() => {
     if (user) {
@@ -52,7 +48,7 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     } else {
       setNeedAuthOpen(true);
     }
-  }, [user]);
+  }, [user, dispatch, cookBook.length]);
 
   useEffect(() => {
     if (sortSelected === 'time') {
@@ -62,7 +58,7 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     } else if (sortSelected === 'price') {
       dispatch(sortRecipesByPrice());
     }
-  }, [sortSelected]);
+  }, [sortSelected, dispatch]);
 
   return (
     <PageContainer>

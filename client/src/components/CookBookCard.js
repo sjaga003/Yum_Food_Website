@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import MissingImage from '../images/card_image_missing.svg';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import RecipeDetail from './RecipeCard/RecipeDetail/RecipeDetail';
-import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { removeFromCookBook } from '../actions/cookBookAction';
+import MissingImage from '../images/card_image_missing.svg';
+import RecipeDetail from './RecipeCard/RecipeDetail/RecipeDetail';
 const CookBookCard = ({ databaseEntry }) => {
   const [recipeCardState, setRecipeCardState] = useState({
     isDocked: false,
@@ -18,13 +18,13 @@ const CookBookCard = ({ databaseEntry }) => {
   const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
+    //Added deps to remove ESLint Warning
+    //Only supposed to run once on first render []
     setRecipe(databaseEntry.recipeObject);
-  }, []);
+  }, [databaseEntry.recipeObject]);
 
   const cardRef = useRef();
 
-  const recipeDetails = useSelector((state) => state.recipeCards);
-  const cookBook = useSelector((state) => state.cookBook);
   const dispatch = useDispatch();
 
   const [recipeDetail, setRecipeDetail] = useState({});
@@ -52,8 +52,6 @@ const CookBookCard = ({ databaseEntry }) => {
         layoutId={`recipeCard-${recipe.id}`}
         ref={cardRef}
         onClick={onCardClick}
-        layout
-        layoutId={`recipeCard-${recipe.id}`}
       >
         <FoodImage
           draggable={false}
