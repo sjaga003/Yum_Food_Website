@@ -28,11 +28,8 @@ const AccountDropdown = ({
   return (
     <>
       <Background
-        className="background"
         onClick={(e) => {
-          if (e.target.classList.contains('background')) {
-            setDisplayDropdown(!displayDropdown);
-          }
+          setDisplayDropdown(!displayDropdown);
         }}
       ></Background>
       <Card>
