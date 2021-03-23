@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import YumLogo from '../images/Yum_Logo.svg';
+import size from '../responsiveStyles';
 
 const Footer = () => {
   return (
@@ -72,6 +73,20 @@ const FooterSection = styled.section`
   flex-direction: row;
   justify-content: space-between;
   padding: 5rem 3rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Column = styled.div`
@@ -79,6 +94,22 @@ const Column = styled.div`
   flex-direction: column;
   & > * {
     padding: 0.5rem 0rem;
+  }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    align-items: center;
+    width: 100%;
+    padding: 3rem 0rem;
+    &:not(:last-child) {
+      border-bottom: 2px solid rgba(227, 139, 0, 0.29735644257703087);
+    }
+  }
+  @media (${size.xs}) {
   }
 `;
 
@@ -95,6 +126,17 @@ const Description = styled.div`
   font-family: var(--text-font);
   color: var(--header-color);
   font-size: 1.6rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    display: none;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Icons = styled.ul`
@@ -103,6 +145,17 @@ const Icons = styled.ul`
   max-width: 10.5rem;
   color: var(--highlight-color);
   cursor: pointer;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Icon = styled(motion.li)`
@@ -145,6 +198,17 @@ const Address = styled.div`
   flex-direction: column;
   font-size: 1.8rem;
   font-family: var(--header-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    display: none;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 export default Footer;

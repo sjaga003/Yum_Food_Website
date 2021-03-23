@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import size from '../responsiveStyles';
 
 const Contact = () => {
   const [contactFormData, setContactFormData] = useState({
@@ -73,6 +74,17 @@ const ContactSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-bottom: 300px;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0 5vw;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const ContactBox = styled.div`
@@ -89,6 +101,18 @@ const ContactBox = styled.div`
   font-size: 3.6rem;
   border-radius: 6px;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const HeadingText = styled.span`
@@ -97,6 +121,17 @@ const HeadingText = styled.span`
   font-weight: 600;
   font-size: 2.8rem;
   color: var(--highlight-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const SubtitleText = styled.span`
@@ -105,6 +140,17 @@ const SubtitleText = styled.span`
   color: var(--header-color);
   font-weight: 600;
   margin-bottom: 1.8rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.8rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const InputLabel = styled(motion.label)`
@@ -132,6 +178,17 @@ const InputContainer = styled.div`
     align-self: flex-start;
     padding-top: 0.8rem;
   }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const ValueInput = styled.input`
@@ -144,6 +201,17 @@ const ValueInput = styled.input`
   color: var(--text-color);
   font-family: var(--text-font);
   padding-left: 1rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const MessageInput = styled.textarea`
@@ -161,6 +229,19 @@ const MessageInput = styled.textarea`
   padding-top: 1rem;
   padding-left: 1rem;
   font-family: var(--text-font);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Form = styled.form`
@@ -168,7 +249,17 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0.5rem 0.5rem 3rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Button = styled.button`

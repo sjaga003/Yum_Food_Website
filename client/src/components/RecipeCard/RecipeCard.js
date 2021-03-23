@@ -207,6 +207,8 @@ const Card = styled(motion.div)`
   @media (${size.sm}) {
   }
   @media (${size.xs}) {
+    width: 80%;
+    height: unset;
   }
 `;
 
@@ -215,6 +217,19 @@ const ImageContainer = styled(motion.div)`
   justify-content: center;
   align-items: flex-start;
   height: 27.6rem;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    height: 20.6rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    height: 70%;
+  }
 `;
 
 const Spinner = styled(FontAwesomeIcon)`
@@ -226,6 +241,19 @@ const Spinner = styled(FontAwesomeIcon)`
 const FoodImage = styled.img`
   height: 27.6rem;
   object-fit: cover;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    height: 20.6rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 const TopRow = styled.div`
@@ -234,10 +262,34 @@ const TopRow = styled.div`
   padding-bottom: 0.5rem;
   color: var(--text-color);
   font-family: var(--text-font);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    font-size: initial;
+  }
 `;
 
 const Heart = styled(FontAwesomeIcon)`
   color: var(--highlight-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    font-size: initial;
+  }
 `;
 
 const DeleteContainer = styled.div`
@@ -263,11 +315,35 @@ const FoodInfo = styled.div`
   padding: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    padding: 1rem;
+  }
 `;
 
 const SourceName = styled.span`
   text-transform: uppercase;
   color: var(--text-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    font-size: initial;
+  }
 `;
 
 const Title = styled(motion.div)`
@@ -279,6 +355,18 @@ const Title = styled(motion.div)`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.6rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 export default RecipeCard;

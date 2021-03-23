@@ -66,7 +66,7 @@ function App() {
             <Contact />
             <Footer />
           </Content>
-          <FooterBackgroundCover> </FooterBackgroundCover>
+          <FooterBackgroundCover />
         </Route>
         <Route path="/search">
           <GlobalStyle background="search" />
@@ -118,15 +118,35 @@ const Content = styled.div`
 `;
 
 const FooterBackgroundCover = styled.div`
-  background-image: url(${FooterBackground});
-  background-position: center 116%;
+  background: rgb(227, 139, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(227, 139, 0, 0.29735644257703087) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  transform: skewY(3deg);
+  background-size: cover;
+  background-position: bottom;
+  width: 100vw;
+  height: 35rem;
+  overflow-x: hidden;
   background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
   z-index: -3;
   position: absolute;
   bottom: 0;
   left: 0;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    height: 60rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 export default App;

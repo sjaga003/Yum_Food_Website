@@ -47,13 +47,22 @@ const HomeContainer = styled.div`
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
-    height: 80vh;
-    margin-bottom: 200px;
+    height: 100vh;
+    margin-bottom: 10rem;
     padding: 0vh 5vw;
     justify-content: center;
+    height: 50vh;
   }
   @media (${size.md}) {
+    background: rgb(227, 139, 0);
+    background: linear-gradient(
+      365deg,
+      rgba(227, 139, 0, 0.29735644257703087) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
     padding: 10vh 15vw;
+    margin-bottom: 0;
+    height: 100vh;
   }
   @media (${size.sm}) {
     padding: 15vh 5vw;
@@ -67,6 +76,17 @@ const HomeContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    justify-content: flex-start;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Hero = styled.h1`

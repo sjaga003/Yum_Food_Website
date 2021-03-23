@@ -34,10 +34,10 @@ export const GlobalStyle = createGlobalStyle`
         
         }
         @media (${size.lg}) {
-          background: none;
         }
         @media (${size.md}) {
         
+          background:none;
         }
         @media (${size.sm}) {
         

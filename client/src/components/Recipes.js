@@ -72,8 +72,10 @@ const CardContainer = styled(motion.div)`
     grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
   }
   @media (${size.sm}) {
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   }
   @media (${size.xs}) {
+    grid-template-columns: repeat(auto-fit, minmax(80%, 1fr));
   }
 `;
 
