@@ -32,16 +32,46 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [dispatch, history, setIsCookBookOpen, user?.token]);
 
+  if (typeof document !== `undefined`) {
+    var prevScrollpos = window.pageYOffset;
+
+    window.onscroll = function () {
+      var currentScrollPos = window.pageYOffset;
+      var threshold = 0;
+
+      if (currentScrollPos < threshold) {
+        document.getElementById('navbar').style.boxShadow =
+          '0px 10px 30px -15px rgba(0, 0, 0, 0)';
+      } else {
+        document.getElementById('navbar').style.background = 'white';
+        document.getElementById('navbar').style.boxShadow =
+          'rgb(0 0 0 / 70%) 0px 5px 10px -10px';
+      }
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById('navbar').style.top = '0';
+      } else {
+        document.getElementById('navbar').style.top = '-500px';
+      }
+      if (currentScrollPos === 0) {
+        document.getElementById('navbar').style.top = '0';
+        document.getElementById('navbar').style.background = 'transparent';
+        document.getElementById('navbar').style.boxShadow =
+          '0px 10px 30px -15px rgba(0, 0, 0, 0)';
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }
+
   return (
-    <Navigation>
+    <Navigation id="navbar">
       <Logo>
         <img src={YumLogo} alt="Yum Logo" />
       </Logo>
       <NavLinks>
         <NavItem to="/">Home</NavItem>
         <NavItem to="/cookbook">My Recipes</NavItem>
-        <NavItem to="/">Event</NavItem>
-        <NavItem to="/">Team</NavItem>
+        <NavItem to="/">Quicksearch</NavItem>
+        <NavItem to="/">Contact Us</NavItem>
         <NavItem to="/search">Search</NavItem>
 
         {user ? (
@@ -81,13 +111,16 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
 const Navigation = styled.ul`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 2rem 0;
+  justify-content: space-around;
+  padding: 1rem 0;
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
   left: 0;
   top: 0;
-  /* background: white; */
+  background: var(--bg-color);
+  z-index: 1;
+  box-shadow: rgb(0 0 0 / 70%) 0px 5px 10px -10px;
+  transition: all 0.5s, background 0s;
 `;
 
 const UserImage = styled.div`
