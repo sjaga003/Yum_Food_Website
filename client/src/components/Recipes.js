@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import size from '../responsiveStyles';
 import RecipeCard from './RecipeCard/RecipeCard';
 
 const Recipes = ({
@@ -58,10 +59,22 @@ const Recipes = ({
 
 const CardContainer = styled(motion.div)`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   grid-column-gap: 3.2rem;
   grid-row-gap: 3.2rem;
-  justify-content: center;
+  justify-items: center;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const RecipeContainer = styled.div`

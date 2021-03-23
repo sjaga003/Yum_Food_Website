@@ -20,6 +20,7 @@ import RecipePreview from './components/RecipePreview';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
 import FooterBackground from './images/footer_background.svg';
+import size from './responsiveStyles';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -103,6 +104,17 @@ const Content = styled.div`
   min-height: 100%;
   padding: 0 15vw;
   overflow-x: hidden;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const FooterBackgroundCover = styled.div`

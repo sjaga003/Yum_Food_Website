@@ -9,6 +9,7 @@ import {
   recipePreviewPopular,
   recipePreviewVegetarian,
 } from '../recipePreviewData';
+import size from '../responsiveStyles';
 import Recipes from './Recipes';
 
 const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
@@ -96,12 +97,36 @@ const RecipePreviewSection = styled.section`
   display: flex;
   flex-direction: column;
   margin-bottom: 300px;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0 5vw;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Navigation = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Header = styled.div`
@@ -115,6 +140,17 @@ const Heading = styled.span`
   font-weight: 600;
   font-size: 2.8rem;
   color: var(--highlight-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const SubHeading = styled.span`
@@ -122,6 +158,18 @@ const SubHeading = styled.span`
   font-size: 3.6rem;
   color: var(--header-color);
   font-weight: 600;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    margin-bottom: 2rem;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.8rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -131,6 +179,19 @@ const ButtonContainer = styled.div`
   height: 100%;
   width: 60rem;
   padding: 1rem;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    flex-wrap: wrap;
+  }
+  @media (${size.md}) {
+    width: 100%;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Button = styled.button`
@@ -149,6 +210,18 @@ const Button = styled.button`
       background: var(--highlight-color);
       color: white;
     `}
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    flex-grow: 2;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 export default RecipePreview;

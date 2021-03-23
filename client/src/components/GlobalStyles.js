@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import HomeBackground from '../images/home_background.svg';
 import SearchBackground from '../images/search_background.svg';
+import size from '../responsiveStyles';
 export const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
@@ -29,7 +30,21 @@ export const GlobalStyle = createGlobalStyle`
         background-size: cover;
         line-height: 1.6;
         font-size: 1.6rem;
-        line-height: 1.5;
+        @media (${size.xl}) {
+        
+        }
+        @media (${size.lg}) {
+          background: none;
+        }
+        @media (${size.md}) {
+        
+        }
+        @media (${size.sm}) {
+        
+        }
+        @media (${size.xs}) {
+        
+        }
     }
     * {
         padding: 0;

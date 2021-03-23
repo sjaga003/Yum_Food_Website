@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
+import size from '../responsiveStyles';
 import NeedAuthModal from './Auth/NeedAuthModal';
 import CookBookCard from './CookBookCard';
 
@@ -82,6 +83,18 @@ const CookBookContainer = styled(motion.div)`
   top: 0;
   right: 0;
   z-index: 1;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    display: none;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const CookBook = styled(motion.div)`

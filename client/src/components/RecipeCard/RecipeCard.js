@@ -10,6 +10,7 @@ import {
   removeFromCookBook,
 } from '../../actions/cookBookAction';
 import MissingImage from '../../images/card_image_missing.svg';
+import size from '../../responsiveStyles';
 import NeedAuthModal from '../Auth/NeedAuthModal';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
 
@@ -193,6 +194,19 @@ const Card = styled(motion.div)`
 
   &:hover div > .deleteContainer {
     visibility: visible;
+  }
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    width: 26rem;
+    height: 33rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
   }
 `;
 

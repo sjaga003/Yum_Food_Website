@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { clearRecipeCards } from '../actions/recipeCardsAction';
 import HeaderMask from '../images/header_mask.svg';
 import SushiImage from '../images/sushi.jpg';
+import size from '../responsiveStyles';
 
 const Home = () => {
   const location = useLocation();
@@ -42,6 +43,24 @@ const HomeContainer = styled.div`
   max-width: 120rem;
   align-self: center;
   margin-bottom: 500px;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    height: 80vh;
+    margin-bottom: 200px;
+    padding: 0vh 5vw;
+    justify-content: center;
+  }
+  @media (${size.md}) {
+    padding: 10vh 15vw;
+  }
+  @media (${size.sm}) {
+    padding: 15vh 5vw;
+    align-items: flex-start;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const HomeContent = styled.div`
@@ -56,6 +75,20 @@ const Hero = styled.h1`
   font-size: 7.2rem;
   font-weight: 600;
   line-height: 1.3;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    font-size: 4.8rem;
+    margin-bottom: 2rem;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 3.6rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const HeroDescription = styled.p`
@@ -64,11 +97,38 @@ const HeroDescription = styled.p`
   font-size: 2rem;
   width: 75%;
   margin: 3rem 0 5rem 0;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    margin: 0;
+    margin-bottom: 3rem;
+  }
+  @media (${size.sm}) {
+    width: 100%;
+    font-size: 1.8rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const ImageContainer = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    display: none;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const HeaderImg = styled.img`
@@ -76,6 +136,18 @@ const HeaderImg = styled.img`
   mask-repeat: no-repeat;
   mask-size: contain;
   width: 50rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    width: 40rem;
+  }
+  @media (${size.md}) {
+    display: none;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const LearnMoreButton = styled.a`
@@ -89,6 +161,20 @@ const LearnMoreButton = styled.a`
   transition: background 0.2s;
   &:hover {
     background: var(--button-hover-color);
+  }
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.8rem;
+    padding: 1.5rem 2.5rem;
+  }
+  @media (${size.sm}) {
+    padding: 1rem 2rem;
+  }
+  @media (${size.xs}) {
   }
 `;
 

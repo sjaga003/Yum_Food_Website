@@ -4,6 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import size from '../responsiveStyles';
 
 const quickSearchCards = [
   {
@@ -591,6 +592,17 @@ const CarouselContainer = styled.div`
   margin-bottom: 300px;
   display: flex;
   flex-direction: column;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0vh 5vw;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Container = styled(motion.div)`
@@ -650,7 +662,7 @@ const CardText = styled.span`
   font-size: 2.4rem;
   font-weight: 600;
   font-family: var(--header-font);
-  color: var(--header-color);
+  color: var(--text-color);
 `;
 
 const HeadingText = styled.span`
@@ -659,6 +671,17 @@ const HeadingText = styled.span`
   font-weight: 600;
   font-size: 2.8rem;
   color: var(--highlight-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const SubtitleText = styled.span`
@@ -666,6 +689,17 @@ const SubtitleText = styled.span`
   font-size: 3.6rem;
   color: var(--header-color);
   font-weight: 600;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.8rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 export default Carousel;
