@@ -12,7 +12,7 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
       className="shadow"
       onClick={(e) => {
         if (e.target.classList.contains('shadow')) {
-          document.body.style.overflow = 'auto';
+          document.body.style.overflowY = 'auto';
           if (cantClose) {
             history.push('/');
           } else {

@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
@@ -15,10 +15,11 @@ import size from '../responsiveStyles';
 import AccountDropdown from './Auth/AccountDropdown';
 import MobileNav from './MobileNav';
 
-const Nav = ({ isCookBookOpen, setIsCookBookOpen, isMobile }) => {
+const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useSelector((state) => state.isMobile);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -222,6 +223,17 @@ const LoginContainer = styled.div`
   flex-direction: row;
   align-items: center;
   position: relative;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    margin: 0;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const UserIcon = styled(FontAwesomeIcon)`

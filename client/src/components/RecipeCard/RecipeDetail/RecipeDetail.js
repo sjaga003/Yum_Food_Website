@@ -60,7 +60,7 @@ const RecipeDetail = ({
       onClick={(e) => {
         if (e.target.classList.contains('shadow')) {
           setRecipeCardState({ ...recipeCardState, isDetailOpen: false });
-          document.body.style.overflow = 'auto';
+          document.body.style.overflowY = 'auto';
         }
       }}
     >

@@ -1,5 +1,10 @@
 import {} from '@fortawesome/free-regular-svg-icons';
-import { faHeart, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart,
+  faPlus,
+  faSync,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useRef, useState } from 'react';
@@ -36,6 +41,7 @@ const RecipeCard = ({
   const dispatch = useDispatch();
   const cardRef = useRef();
 
+  const isMobile = useSelector((state) => state.isMobile);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [needAuthOpen, setNeedAuthOpen] = useState(false);
 
@@ -94,11 +100,15 @@ const RecipeCard = ({
       );
 
       setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflowY = 'hidden';
     }
   };
 
   const handleDrag = () => {
+    if (isMobile) {
+      return false;
+    }
+
     if (!fromCookBook) {
       return needAuthOpen ? false : true;
     } else {
@@ -155,6 +165,20 @@ const RecipeCard = ({
               <FontAwesomeIcon size="lg" icon={faTimes} />
             </DeleteContainer>
           )}
+          {isMobile && !fromCookBook && (
+            <MobileButtonContainer
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!user) {
+                  setNeedAuthOpen(true);
+                } else {
+                  dispatch(addToCookBook(recipe));
+                }
+              }}
+            >
+              <FontAwesomeIcon size="lg" icon={faPlus} />
+            </MobileButtonContainer>
+          )}
           <FoodImage
             style={!imageLoaded ? { display: 'none' } : { display: 'block' }}
             draggable={false}
@@ -201,6 +225,9 @@ const Card = styled(motion.div)`
   @media (${size.lg}) {
   }
   @media (${size.md}) {
+    div > .deleteContainer {
+      visibility: visible;
+    }
     width: 26rem;
     height: 33rem;
   }
@@ -304,6 +331,24 @@ const DeleteContainer = styled.div`
   color: var(--bg-color);
   background: var(--highlight-color);
   visibility: hidden;
+  border-radius: 4px 0px 0px 4px;
+  cursor: pointer;
+  &:hover {
+    background: var(--button-hover-color);
+  }
+`;
+
+const MobileButtonContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 1.5rem;
+  width: 4rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--bg-color);
+  background: var(--highlight-color);
   border-radius: 4px 0px 0px 4px;
   cursor: pointer;
   &:hover {

@@ -23,6 +23,7 @@ import FooterBackground from './images/footer_background.svg';
 import size from './responsiveStyles';
 import { useMediaQuery } from 'react-responsive';
 import MobileNav from './components/MobileNav';
+import { setIsMobile } from './actions/isMobileAction';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -38,6 +39,10 @@ function App() {
 
   const isMobile = useMediaQuery({ query: '(max-width: 1199.98px)' });
 
+  useEffect(() => {
+    dispatch(setIsMobile(isMobile));
+  }, [isMobile]);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -45,7 +50,6 @@ function App() {
           <GlobalStyle background="home" />
           <Content>
             <Nav
-              isMobile={isMobile}
               isCookBookOpen={isCookBookOpen}
               setIsCookBookOpen={setIsCookBookOpen}
             />
