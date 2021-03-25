@@ -105,9 +105,6 @@ const Column = styled.div`
     align-items: center;
     width: 100%;
     padding: 3rem 0rem;
-    &:not(:last-child) {
-      border-bottom: 2px solid rgba(227, 139, 0, 0.29735644257703087);
-    }
   }
   @media (${size.xs}) {
   }

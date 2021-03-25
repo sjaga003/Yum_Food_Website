@@ -1,3 +1,9 @@
+import {
+  faBars,
+  faUser,
+  faUserCircle,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -5,11 +11,14 @@ import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
+import size from '../responsiveStyles';
 import AccountDropdown from './Auth/AccountDropdown';
+import MobileNav from './MobileNav';
 
-const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
+const Nav = ({ isCookBookOpen, setIsCookBookOpen, isMobile }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
   const [displayDropdown, setDisplayDropdown] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -64,16 +73,28 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
 
   return (
     <Navigation id="navbar">
-      <Logo>
-        <img src={YumLogo} alt="Yum Logo" />
-      </Logo>
+      {isMobile && (
+        <>
+          {' '}
+          <BurgerIcon onClick={() => setIsOpen(!isOpen)} icon={faBars} />
+          <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
+        </>
+      )}
+      <NavLink to="/">
+        <Logo>
+          <img src={YumLogo} alt="Yum Logo" />
+        </Logo>
+      </NavLink>
       <NavLinks>
-        <NavItem to="/">Home</NavItem>
-        <NavItem to="/cookbook">My Recipes</NavItem>
-        <NavItem to="/">Quicksearch</NavItem>
-        <NavItem to="/">Contact Us</NavItem>
-        <NavItem to="/search">Search</NavItem>
-
+        {!isMobile && (
+          <>
+            <NavItem to="/">Home</NavItem>
+            <NavItem to="/cookbook">My Recipes</NavItem>
+            <NavItem to="/">Quicksearch</NavItem>
+            <NavItem to="/">Contact Us</NavItem>
+            <NavItem to="/search">Search</NavItem>
+          </>
+        )}
         {user ? (
           <>
             <LoginContainer>
@@ -101,14 +122,16 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
             </LoginContainer>
           </>
         ) : (
-          <NavItem to="/auth">Login</NavItem>
+          <NavItem to="/auth">
+            <UserIcon icon={faUserCircle} />
+          </NavItem>
         )}
       </NavLinks>
     </Navigation>
   );
 };
 
-const Navigation = styled.ul`
+const Navigation = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -117,9 +140,9 @@ const Navigation = styled.ul`
   position: fixed;
   left: 0;
   top: 0;
-  background: var(--bg-color);
+  background: rgba(0, 0, 0, 0);
   z-index: 1;
-  box-shadow: rgb(0 0 0 / 70%) 0px 5px 10px -10px;
+  /* box-shadow: rgb(0 0 0 / 70%) 0px 5px 10px -10px; */
   transition: all 0.5s, background 0s;
 `;
 
@@ -174,6 +197,20 @@ const NavItem = styled(NavLink)`
   text-decoration: none;
   font-size: 2rem;
   color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    margin: 0;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const LoginContainer = styled.div`
@@ -185,6 +222,22 @@ const LoginContainer = styled.div`
   flex-direction: row;
   align-items: center;
   position: relative;
+`;
+
+const UserIcon = styled(FontAwesomeIcon)`
+  font-size: 2.5rem;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+`;
+
+const BurgerIcon = styled(FontAwesomeIcon)`
+  font-size: 2.5rem;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  color: var(--text-color);
+  cursor: pointer;
 `;
 
 export default Nav;

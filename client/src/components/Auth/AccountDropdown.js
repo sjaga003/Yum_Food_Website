@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { logoutUser } from '../../actions/authAction';
+import size from '../../responsiveStyles';
 
 const AccountDropdown = ({
   user,
@@ -66,6 +67,19 @@ const Card = styled.div`
   top: 50px;
   left: -132px;
   z-index: 10;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    right: 0;
+    left: unset;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    right: -45px;
+  }
 `;
 
 const UserImage = styled.div`

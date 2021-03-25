@@ -43,7 +43,7 @@ const HomeContainer = styled.div`
   max-width: 120rem;
   align-self: center;
   margin-bottom: 500px;
-
+  margin-top: 8rem;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {

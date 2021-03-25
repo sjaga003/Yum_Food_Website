@@ -83,18 +83,6 @@ const CookBookContainer = styled(motion.div)`
   top: 0;
   right: 0;
   z-index: 1;
-
-  @media (${size.xl}) {
-  }
-  @media (${size.lg}) {
-    display: none;
-  }
-  @media (${size.md}) {
-  }
-  @media (${size.sm}) {
-  }
-  @media (${size.xs}) {
-  }
 `;
 
 const CookBook = styled(motion.div)`
@@ -144,7 +132,7 @@ const ButtonContainer = styled(motion.div)`
   position: absolute;
   align-self: flex-start;
   left: -80px;
-  top: 16px;
+  top: 7px;
   height: 60px;
   width: 80px;
   display: flex;

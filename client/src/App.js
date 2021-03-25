@@ -21,6 +21,8 @@ import Search from './components/Search';
 import Welcome from './components/Welcome';
 import FooterBackground from './images/footer_background.svg';
 import size from './responsiveStyles';
+import { useMediaQuery } from 'react-responsive';
+import MobileNav from './components/MobileNav';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -34,6 +36,8 @@ function App() {
     dispatch(setAuthData());
   }, [dispatch]);
 
+  const isMobile = useMediaQuery({ query: '(max-width: 1199.98px)' });
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -41,6 +45,7 @@ function App() {
           <GlobalStyle background="home" />
           <Content>
             <Nav
+              isMobile={isMobile}
               isCookBookOpen={isCookBookOpen}
               setIsCookBookOpen={setIsCookBookOpen}
             />
@@ -48,20 +53,21 @@ function App() {
             <Welcome />
             <Carousel />
             <AnimateSharedLayout type="switch">
-              <AnimatePresence>
+              {!isMobile && (
                 <CookBookSidebar
                   key="CookBookSidebar"
                   cookBookRef={cookBookRef}
                   isCookBookOpen={isCookBookOpen}
                   setIsCookBookOpen={setIsCookBookOpen}
                 />
-                <RecipePreview
-                  key="RecipePreview"
-                  cookBookRef={cookBookRef}
-                  isCookBookOpen={isCookBookOpen}
-                  setIsCookBookOpen={setIsCookBookOpen}
-                />
-              </AnimatePresence>
+              )}
+
+              <RecipePreview
+                key="RecipePreview"
+                cookBookRef={cookBookRef}
+                isCookBookOpen={isCookBookOpen}
+                setIsCookBookOpen={setIsCookBookOpen}
+              />
             </AnimateSharedLayout>
             <Contact />
             <Footer />
