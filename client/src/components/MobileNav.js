@@ -20,6 +20,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
+      {isOpen && <Background />}
       <CardContainer
         initial={{ left: -500 }}
         animate={
@@ -60,7 +61,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
 const Background = styled.div`
   width: 100%;
   min-height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 5;
   top: 0;
