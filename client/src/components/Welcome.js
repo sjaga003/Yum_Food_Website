@@ -7,7 +7,9 @@ import size from '../responsiveStyles';
 const Welcome = () => {
   return (
     <WelcomeSection>
-      <ImageMask src={WelcomeImage} />
+      <ImageContainer>
+        <ImageMask src={WelcomeImage} />
+      </ImageContainer>
       <WelcomeText>
         <HeadingText>Welcome</HeadingText>
         <SubtitleText>About Yum</SubtitleText>
@@ -31,14 +33,12 @@ const Welcome = () => {
 const ImageMask = styled.img`
   mask-image: url(${WelcomeMask});
   mask-repeat: no-repeat;
-  mask-size: cover;
-  height: 50rem;
-  mask-position: 0px -55px;
+  mask-size: contain;
+  width: 80%;
+  mask-position: center;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
-    height: 30rem;
-    mask-position: 0px -30px;
   }
   @media (${size.md}) {
     width: 100%;
@@ -51,19 +51,42 @@ const ImageMask = styled.img`
   }
 `;
 
-const WelcomeSection = styled.section`
+const ImageContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 300px;
+  width: 50%;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
   }
   @media (${size.md}) {
-    margin-bottom: 200px;
+    width: 75%;
+    padding: 5rem;
+  }
+  @media (${size.sm}) {
+    width: 100%;
+    padding: 0;
+  }
+  @media (${size.xs}) {
+  }
+`;
 
+const WelcomeSection = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 300px;
+  width: 100%;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0 5vw;
+  }
+  @media (${size.md}) {
+    margin-bottom: 200px;
+    padding: 0;
     flex-direction: column;
   }
   @media (${size.sm}) {
@@ -76,7 +99,7 @@ const WelcomeText = styled.div`
   flex-direction: column;
   justify-content: space-around;
   height: 45vh;
-
+  width: 50%;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -136,7 +159,7 @@ const ContentText = styled.span`
   font-family: var(--text-font);
   font-size: 1.8rem;
   color: var(--text-color);
-  width: 55ch;
+  max-width: 55ch;
 
   @media (${size.xl}) {
   }
@@ -146,7 +169,7 @@ const ContentText = styled.span`
     margin: 0;
     margin-bottom: 3rem;
     font-size: 1.8rem;
-    width: 100%;
+    max-width: 100%;
   }
   @media (${size.sm}) {
   }

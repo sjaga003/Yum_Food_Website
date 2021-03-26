@@ -99,10 +99,12 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
               value={'' || searchQuery}
             />
             {searchQuery && (
-              <RemoveSearchIcon
-                onClick={() => setSearchQuery('')}
-                icon={faTimes}
-              />
+              <RemoveIconContainer>
+                <RemoveSearchIcon
+                  onClick={() => setSearchQuery('')}
+                  icon={faTimes}
+                />
+              </RemoveIconContainer>
             )}
           </SearchContainer>
           <SearchButton>Search</SearchButton>
@@ -255,15 +257,16 @@ const PageContainer = styled.div`
   align-items: center;
   height: 100%;
   /* min-height: 100vh; */
-  margin: 0 auto;
-  padding: 0 15vw;
+  /* margin: 0 auto; */
+
   overflow-x: hidden;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
-    padding: 0 15vw;
+    padding: 0 5vw;
   }
   @media (${size.md}) {
+    width: 100%;
   }
   @media (${size.sm}) {
   }
@@ -280,8 +283,17 @@ const SortSelect = styled.select`
   align-self: flex-start;
   font-size: 1.8rem;
   padding: 0.5rem;
-  &:focus {
-    outline: 0;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    font-size: 1.4rem;
   }
 `;
 
@@ -290,6 +302,20 @@ const SearchForm = styled.form`
   align-items: center;
   margin-bottom: 3rem;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+  width: 100%;
+  height: 6rem;
+  max-width: 100rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    height: 4rem;
+  }
 `;
 
 const Loader = styled(motion.div)`
@@ -319,10 +345,22 @@ const SearchButton = styled.button`
   &:hover {
     background: var(--button-hover-color);
   }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    padding: 0.5rem 1rem;
+  }
+  @media (${size.xs}) {
+    font-size: 1.6rem;
+  }
 `;
 
 const SearchTitle = styled.span`
-  font-size: 6.4rem;
+  font-size: 5.6rem;
   font-family: var(--header-font);
   font-weight: 600;
   color: var(--header-color);
@@ -336,24 +374,36 @@ const SearchTitle = styled.span`
   }
   @media (${size.md}) {
     font-size: 4rem;
-    width: 100%;
   }
   @media (${size.sm}) {
     font-size: 3.2rem;
   }
   @media (${size.xs}) {
+    margin-top: 0;
     font-size: 2.8rem;
+    text-align: center;
   }
 `;
 
 const SearchBackground = styled(motion.div)`
-  width: 95%;
+  width: 100%;
   border-radius: 17px;
-  height: 54rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 16rem;
+  margin: 16rem 0;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    margin: 10rem 0;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    margin: 10rem 0 0 0;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -363,19 +413,33 @@ const SearchContainer = styled.div`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   background: white;
-  width: 75rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
 `;
 
 const SearchInput = styled.input`
   outline: none;
   border: 0;
   border-radius: 8px;
-  height: 8rem;
+  height: 100%;
   width: 95%;
   font-size: 2.4rem;
   color: var(--secondary-color);
   font-family: var(--text-font);
-  padding: 0.5rem 2rem;
+  padding: 0 0 0 2rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.8rem;
+    padding-left: 1rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const RemoveSearchIcon = styled(FontAwesomeIcon)`
@@ -383,10 +447,39 @@ const RemoveSearchIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 
+const RemoveIconContainer = styled.div`
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    display: none;
+  }
+`;
+
 const PillContainer = styled.div`
   display: flex;
-  width: 80rem;
-  margin-right: 45px;
+  width: 100%;
+  max-width: 100rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    flex-wrap: wrap;
+  }
 `;
 
 const PillBody = styled.div`
@@ -404,6 +497,18 @@ const PillBody = styled.div`
   transition: border-left 0.2s;
   &:hover {
     border-left: var(--button-hover-color) 25px solid;
+  }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    padding: 0rem 1.5rem;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    display: none;
   }
 `;
 

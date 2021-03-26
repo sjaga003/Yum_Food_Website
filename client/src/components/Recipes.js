@@ -16,7 +16,9 @@ const Recipes = ({
 
   return (
     <>
-      <RecipeContainer>
+      <RecipeContainer
+        style={fromCookBook ? { overflow: 'hidden' } : { overflow: 'unset' }}
+      >
         <CardContainer>
           {fromCookBook &&
             cookBook.map((recipe, index) => {
@@ -67,9 +69,10 @@ const CardContainer = styled(motion.div)`
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
+    grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
   }
   @media (${size.md}) {
-    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
   }
   @media (${size.sm}) {
     grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
@@ -80,7 +83,8 @@ const CardContainer = styled(motion.div)`
 `;
 
 const RecipeContainer = styled.div`
-  padding: 10rem 0;
+  padding: 3rem 1rem;
+
   /* height: 100vh; //Keeps div from disappearing without cards */
   display: flex;
   flex-direction: column;

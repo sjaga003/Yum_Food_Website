@@ -80,6 +80,7 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             <option value="time">Time to Cook</option>
             <option value="price">Price</option>
           </SortSelect>
+
           <Recipes
             isCookBookOpen={isCookBookOpen}
             setIsCookBookOpen={setIsCookBookOpen}
@@ -114,10 +115,11 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
   min-height: 100vh;
-  margin: 0 auto;
-  padding: 0 15vw;
+  margin: 16rem auto;
   overflow-x: hidden;
+
   /* background: linear-gradient(
     365deg,
     rgba(227, 139, 0, 0.29735644257703087) 0%,
@@ -133,15 +135,31 @@ const PageContainer = styled.div`
   @media (${size.sm}) {
   }
   @media (${size.xs}) {
+    margin-top: 0;
   }
 `;
 
 const Title = styled.span`
-  font-size: 6.4rem;
+  font-size: 5.6rem;
   font-family: var(--header-font);
   color: var(--header-color);
   font-weight: 600;
   margin: 8rem 0rem 4rem 0rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    font-size: 4.8rem;
+  }
+  @media (${size.md}) {
+    font-size: 4rem;
+  }
+  @media (${size.sm}) {
+    font-size: 3.2rem;
+  }
+  @media (${size.xs}) {
+    font-size: 2.8rem;
+    text-align: center;
+  }
 `;
 
 const Error = styled.span`

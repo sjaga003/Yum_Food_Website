@@ -147,7 +147,7 @@ const Navigation = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 15rem;
+  padding: 1rem 14vw;
   width: 100%;
   position: fixed;
   left: 0;
@@ -159,12 +159,11 @@ const Navigation = styled.nav`
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
-    padding: 1rem 5rem;
+    padding: 1rem 5vw;
   }
   @media (${size.md}) {
   }
   @media (${size.sm}) {
-    padding: 1rem 1rem;
   }
   @media (${size.xs}) {
   }
@@ -240,6 +239,10 @@ const NavItem = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:last-child {
+    margin: 0;
+    margin-left: 3rem;
+  }
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -255,7 +258,7 @@ const NavItem = styled(NavLink)`
 `;
 
 const LoginContainer = styled.div`
-  margin: 0px 3rem;
+  margin-left: 3rem;
   text-decoration: none;
   font-size: 2rem;
   color: var(--text-color);

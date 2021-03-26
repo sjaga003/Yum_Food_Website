@@ -588,7 +588,7 @@ const Bounds = styled(motion.div)`
   align-self: center;
 `;
 
-const CarouselContainer = styled.div`
+const CarouselContainer = styled.section`
   margin-bottom: 300px;
   display: flex;
   flex-direction: column;
@@ -598,6 +598,7 @@ const CarouselContainer = styled.div`
     padding: 0vh 5vw;
   }
   @media (${size.md}) {
+    margin-bottom: 200px;
   }
   @media (${size.sm}) {
   }

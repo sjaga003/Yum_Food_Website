@@ -78,7 +78,6 @@ const Card = styled.div`
   @media (${size.sm}) {
   }
   @media (${size.xs}) {
-    right: -45px;
   }
 `;
 

@@ -235,7 +235,7 @@ const Card = styled(motion.div)`
   @media (${size.sm}) {
   }
   @media (${size.xs}) {
-    width: 80%;
+    width: 100%;
     height: unset;
   }
 `;

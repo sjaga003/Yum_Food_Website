@@ -76,6 +76,7 @@ const FooterSection = styled.section`
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
+    padding: 0 5vw;
   }
   @media (${size.md}) {
   }

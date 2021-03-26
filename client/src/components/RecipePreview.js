@@ -114,19 +114,7 @@ const Navigation = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media (${size.xl}) {
-  }
-  @media (${size.lg}) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  @media (${size.md}) {
-  }
-  @media (${size.sm}) {
-  }
-  @media (${size.xs}) {
-  }
+  flex-wrap: wrap;
 `;
 
 const Header = styled.div`

@@ -80,23 +80,27 @@ function App() {
         </Route>
         <Route path="/search">
           <GlobalStyle background="search" />
-          <AnimateSharedLayout type="switch">
-            <AnimatePresence>
-              <Search
-                cookBookRef={cookBookRef}
-                isCookBookOpen={isCookBookOpen}
-                setIsCookBookOpen={setIsCookBookOpen}
-              />
-            </AnimatePresence>
-          </AnimateSharedLayout>
+          <Content>
+            <AnimateSharedLayout type="switch">
+              <AnimatePresence>
+                <Search
+                  cookBookRef={cookBookRef}
+                  isCookBookOpen={isCookBookOpen}
+                  setIsCookBookOpen={setIsCookBookOpen}
+                />
+              </AnimatePresence>
+            </AnimateSharedLayout>
+          </Content>
         </Route>
         <Route path="/cookbook">
           <GlobalStyle background="cookbook" />
-          <CookBookPage
-            cookBookRef={cookBookRef}
-            isCookBookOpen={isCookBookOpen}
-            setIsCookBookOpen={setIsCookBookOpen}
-          />
+          <Content>
+            <CookBookPage
+              cookBookRef={cookBookRef}
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+            />
+          </Content>
         </Route>
         <Route path="/auth">
           <GlobalStyle background="auth" />
@@ -112,7 +116,7 @@ const Content = styled.div`
   flex-direction: column;
   margin: 0 auto;
   min-height: 100%;
-  padding: 0 15vw;
+  padding: 0 14vw;
   overflow-x: hidden;
   @media (${size.xl}) {
   }

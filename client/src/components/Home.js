@@ -40,7 +40,7 @@ const HomeContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: 75vh;
-  max-width: 120rem;
+
   align-self: center;
   margin-bottom: 500px;
   margin-top: 8rem;
@@ -60,7 +60,7 @@ const HomeContainer = styled.div`
       rgba(227, 139, 0, 0.29735644257703087) 0%,
       rgba(255, 255, 255, 1) 100%
     );
-    padding: 10vh 15vw;
+    padding: 10vh 5vw;
     margin-bottom: 0;
     height: 100vh;
   }
@@ -76,11 +76,13 @@ const HomeContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 50%;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
   }
   @media (${size.md}) {
+    width: 100%;
     justify-content: flex-start;
   }
   @media (${size.sm}) {
@@ -137,7 +139,7 @@ const HeroDescription = styled.p`
 const ImageContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 50%;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -155,11 +157,12 @@ const HeaderImg = styled.img`
   mask-image: url(${HeaderMask});
   mask-repeat: no-repeat;
   mask-size: contain;
-  width: 50rem;
+  mask-position: center;
+  width: 100%;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
-    width: 40rem;
+    /* width: 40rem; */
   }
   @media (${size.md}) {
     display: none;
