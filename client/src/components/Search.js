@@ -42,7 +42,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     if (searchQuery) {
       dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
       setLastSearch(searchQuery);
-      setSearchQuery('');
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -112,6 +111,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <PillBody
             onClick={() => {
               dispatch(loadSearchedRecipes(0, 'Casserole', sortSelected));
+              setSearchQuery('Casserole');
               setLastSearch('Casserole');
               history.push({
                 pathname: '/search',
@@ -127,6 +127,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <PillBody
             onClick={() => {
               dispatch(loadSearchedRecipes(0, 'Cookies', sortSelected));
+              setSearchQuery('Cookies');
               setLastSearch('Cookies');
               history.push({
                 pathname: '/search',
@@ -142,6 +143,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <PillBody
             onClick={() => {
               dispatch(loadSearchedRecipes(0, 'Cake', sortSelected));
+              setSearchQuery('Cake');
               setLastSearch('Cake');
               history.push({
                 pathname: '/search',

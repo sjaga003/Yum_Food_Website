@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
+import size from '../../responsiveStyles';
 import Nav from '../Nav';
 
 const initialFormData = {
@@ -185,7 +186,18 @@ const Card = styled.div`
   font-size: 3.6rem;
   border-radius: 6px;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-  margin-top: 10rem;
+  margin: 15rem 0;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 100%;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const PageContainer = styled.div`
@@ -197,6 +209,17 @@ const PageContainer = styled.div`
   margin: 0 auto;
   padding: 0vh 15vw 1vh 15vw;
   overflow-x: hidden;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0 5vw;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const UserImage = styled.div`
@@ -225,6 +248,17 @@ const Title = styled.span`
   font-weight: 600;
   font-family: var(--header-font);
   color: var(--header-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Form = styled.form`
@@ -247,6 +281,17 @@ const Input = styled.input`
   margin-top: 2rem;
   border: 1px solid lightgray;
   padding-left: 1rem;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const InputRow = styled.div`
@@ -304,6 +349,17 @@ const Button = styled.button`
     box-shadow: none;
     background-color: rgba(0, 0, 0, 0.12);
     cursor: default;
+  }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.xs}) {
   }
 `;
 
