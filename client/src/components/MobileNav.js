@@ -1,6 +1,9 @@
 import {
   faBars,
+  faBookOpen,
   faHamburger,
+  faHome,
+  faSearch,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -46,11 +49,15 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
           </TopRow>
 
           <NavLinks>
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/cookbook">My Recipes</NavItem>
-            <NavItem to="/">Quicksearch</NavItem>
-            <NavItem to="/">Contact Us</NavItem>
-            <NavItem to="/search">Search</NavItem>
+            <NavItem to="/">
+              <NavIcon icon={faHome} /> Home
+            </NavItem>
+            <NavItem to="/cookbook">
+              <NavIcon icon={faBookOpen} /> My Recipes
+            </NavItem>
+            <NavItem to="/search">
+              <NavIcon icon={faSearch} /> Search
+            </NavItem>
           </NavLinks>
         </Card>
       </CardContainer>
@@ -104,14 +111,25 @@ const NavItem = styled(NavLink)`
   text-decoration: none;
   font-size: 2rem;
   color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 3rem;
   font-weight: 600;
+`;
+
+const NavIcon = styled(FontAwesomeIcon)`
+  font-size: 2rem;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  margin-right: 1rem;
 `;
 
 const NavLinks = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
   justify-content: center;
 `;

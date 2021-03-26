@@ -79,18 +79,19 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
 
   return (
     <Navigation id="navbar">
-      {isMobile && (
-        <>
-          {' '}
-          <BurgerIcon onClick={() => setIsOpen(!isOpen)} icon={faBars} />
-          <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
-        </>
-      )}
+      <LeftContainer>
+        {isMobile && (
+          <>
+            {' '}
+            <BurgerIcon onClick={() => setIsOpen(!isOpen)} icon={faBars} />
+            <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
+          </>
+        )}
 
-      <Logo onClick={() => animateScroll.scrollToTop()}>
-        <img src={YumLogo} alt="Yum Logo" />
-      </Logo>
-
+        <Logo onClick={() => animateScroll.scrollToTop()}>
+          <img src={YumLogo} alt="Yum Logo" />
+        </Logo>
+      </LeftContainer>
       <NavLinks>
         {!isMobile && (
           <>
@@ -145,8 +146,8 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
 const Navigation = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  padding: 1rem 0;
+  justify-content: space-between;
+  padding: 1rem 15rem;
   width: 100%;
   position: fixed;
   left: 0;
@@ -154,7 +155,23 @@ const Navigation = styled.nav`
   background: rgba(0, 0, 0, 0);
   z-index: 1;
   /* box-shadow: rgb(0 0 0 / 70%) 0px 5px 10px -10px; */
-  transition: all 0.5s, background 0s;
+  transition: top 0.5s, box-shadow 0.5s, background 0s;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 1rem 5rem;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    padding: 1rem 1rem;
+  }
+  @media (${size.xs}) {
+  }
+`;
+
+const LeftContainer = styled.div`
+  display: flex;
 `;
 
 const UserImage = styled.div`
@@ -196,6 +213,17 @@ const Logo = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    margin-left: 2rem;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const NavLinks = styled.div`
@@ -218,6 +246,7 @@ const NavItem = styled(NavLink)`
   }
   @media (${size.md}) {
     margin: 0;
+    font-size: 1.8rem;
   }
   @media (${size.sm}) {
   }
