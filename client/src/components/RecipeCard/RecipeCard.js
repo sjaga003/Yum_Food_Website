@@ -171,6 +171,7 @@ const RecipeCard = ({
                 e.stopPropagation();
                 if (!user) {
                   setNeedAuthOpen(true);
+                  document.body.style.overflowY = 'hidden';
                 } else {
                   dispatch(addToCookBook(recipe));
                 }

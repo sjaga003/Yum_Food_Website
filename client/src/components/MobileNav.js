@@ -20,7 +20,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
-      {isOpen && <Background />}
+      {isOpen && <Background onClick={() => setIsOpen(false)} />}
       <CardContainer
         initial={{ left: -500 }}
         animate={
@@ -96,7 +96,7 @@ const TopRow = styled.div`
   font-size: 2.4rem;
   cursor: pointer;
   svg {
-    color: var(--header-color);
+    color: var(--text-color);
   }
 `;
 
@@ -105,6 +105,7 @@ const NavItem = styled(NavLink)`
   font-size: 2rem;
   color: var(--text-color);
   margin-bottom: 3rem;
+  font-weight: 600;
 `;
 
 const NavLinks = styled.div`

@@ -10,6 +10,7 @@ import {
   sortRecipesByPrice,
   sortRecipesByTime,
 } from '../actions/recipeCardsAction';
+import size from '../responsiveStyles';
 import NeedAuthModal from './Auth/NeedAuthModal';
 import Nav from './Nav';
 import Recipes from './Recipes';
@@ -113,9 +114,26 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0 15vw;
   overflow-x: hidden;
+  /* background: linear-gradient(
+    365deg,
+    rgba(227, 139, 0, 0.29735644257703087) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  ); */
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0 5vw;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Title = styled.span`

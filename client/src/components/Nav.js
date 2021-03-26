@@ -1,5 +1,9 @@
 import {
   faBars,
+  faBook,
+  faBookOpen,
+  faHome,
+  faSearch,
   faUser,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +18,7 @@ import YumLogo from '../images/Yum_Logo.svg';
 import size from '../responsiveStyles';
 import AccountDropdown from './Auth/AccountDropdown';
 import MobileNav from './MobileNav';
+import { animateScroll } from 'react-scroll';
 
 const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
@@ -81,19 +86,23 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
           <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
         </>
       )}
-      <NavLink to="/">
-        <Logo>
-          <img src={YumLogo} alt="Yum Logo" />
-        </Logo>
-      </NavLink>
+
+      <Logo onClick={() => animateScroll.scrollToTop()}>
+        <img src={YumLogo} alt="Yum Logo" />
+      </Logo>
+
       <NavLinks>
         {!isMobile && (
           <>
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/cookbook">My Recipes</NavItem>
-            <NavItem to="/">Quicksearch</NavItem>
-            <NavItem to="/">Contact Us</NavItem>
-            <NavItem to="/search">Search</NavItem>
+            <NavItem to="/">
+              <NavIcon icon={faHome} /> Home
+            </NavItem>
+            <NavItem to="/cookbook">
+              <NavIcon icon={faBookOpen} /> My Recipes
+            </NavItem>
+            <NavItem to="/search">
+              <NavIcon icon={faSearch} /> Search
+            </NavItem>
           </>
         )}
         {user ? (
@@ -124,7 +133,8 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
           </>
         ) : (
           <NavItem to="/auth">
-            <UserIcon icon={faUserCircle} />
+            <NavIcon icon={faUserCircle} />
+            Login
           </NavItem>
         )}
       </NavLinks>
@@ -180,6 +190,7 @@ const AccountIcon = styled.span`
 
 const Logo = styled.div`
   width: 8rem;
+  cursor: pointer;
 
   img {
     width: 100%;
@@ -236,11 +247,12 @@ const LoginContainer = styled.div`
   }
 `;
 
-const UserIcon = styled(FontAwesomeIcon)`
-  font-size: 2.5rem;
+const NavIcon = styled(FontAwesomeIcon)`
+  font-size: 2rem;
   display: flex;
   justify-self: center;
   align-self: center;
+  margin-right: 0.5rem;
 `;
 
 const BurgerIcon = styled(FontAwesomeIcon)`

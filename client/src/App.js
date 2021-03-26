@@ -99,7 +99,7 @@ function App() {
           />
         </Route>
         <Route path="/auth">
-          <GlobalStyle background="home" />
+          <GlobalStyle background="auth" />
           <Auth />
         </Route>
       </BrowserRouter>

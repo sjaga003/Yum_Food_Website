@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import CardSave from '../../images/card_save.svg';
+import size from '../../responsiveStyles';
 
 const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
   const history = useHistory();
@@ -47,10 +48,9 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
 const Card = styled.div`
   background: var(--card-color);
   display: flex;
-
   justify-content: space-evenly;
-
   width: 100rem;
+  min-height: 50rem;
   align-items: center;
   padding: 2rem;
   color: var(--header-color);
@@ -61,6 +61,20 @@ const Card = styled.div`
   user-select: none;
   & > div:first-child {
     border-right: 2px solid #c2c5c9;
+  }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    width: 90vw;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    & > div:first-child {
+      border-right: 0;
+    }
   }
 `;
 
@@ -86,6 +100,20 @@ const CardSection = styled.div`
   img {
     width: 100%;
   }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+    width: 100%;
+    &:last-child {
+      display: none;
+    }
+  }
 `;
 
 const HeadingText = styled.div`
@@ -94,6 +122,18 @@ const HeadingText = styled.div`
   font-weight: 600;
   font-size: 2.8rem;
   color: var(--highlight-color);
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const SubtitleText = styled.span`
@@ -101,12 +141,36 @@ const SubtitleText = styled.span`
   font-size: 3.6rem;
   color: var(--header-color);
   font-weight: 600;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 2.8rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const ContentText = styled.span`
   font-family: var(--text-font);
   font-size: 1.8rem;
   color: var(--text-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    margin: 0;
+    font-size: 1.6rem;
+    width: 100%;
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Button = styled.button`
@@ -128,6 +192,19 @@ const Button = styled.button`
   a {
     text-decoration: none;
     color: var(--bg-color);
+  }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    font-size: 1.6rem;
+    padding: 1.5rem 2.5rem;
+  }
+  @media (${size.sm}) {
+    padding: 1rem 2rem;
+  }
+  @media (${size.xs}) {
   }
 `;
 

@@ -11,6 +11,7 @@ import {
   loadAdditionalSearchedRecipes,
   loadSearchedRecipes,
 } from '../actions/recipeCardsAction';
+import size from '../responsiveStyles';
 import CookBookSidebar from './CookBookSidebar';
 import Nav from './Nav';
 import Recipes from './Recipes';
@@ -25,6 +26,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const [lastSearch, setLastSearch] = useState('');
   const [sortSelected, setSortSelected] = useState('meta-score');
   const dispatch = useDispatch();
+  const isMobile = useSelector((state) => state.isMobile);
 
   const history = useHistory();
 
@@ -62,11 +64,13 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   return (
     <PageContainer>
       <Nav />
-      <CookBookSidebar
-        cookBookRef={cookBookRef}
-        isCookBookOpen={isCookBookOpen}
-        setIsCookBookOpen={setIsCookBookOpen}
-      />
+      {!isMobile && (
+        <CookBookSidebar
+          cookBookRef={cookBookRef}
+          isCookBookOpen={isCookBookOpen}
+          setIsCookBookOpen={setIsCookBookOpen}
+        />
+      )}
       <SearchBackground>
         <SearchTitle>Browse Hundreds of Recipes</SearchTitle>
         <SearchForm
@@ -172,58 +176,60 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <option value="price">Price</option>
         </SortSelect>
       )}
-      {recipeCards.recipes.results ? (
-        <InfiniteScroll
-          scrollableTarget={'body'}
-          pullDownToRefresh={false}
-          style={{ overflow: 'unset' }}
-          dataLength={parseInt(recipeCards.recipes.results.length)}
-          next={fetchMore}
-          hasMore={
-            !recipeCards.isDone &&
-            recipeCards.recipes.results.length <=
-              recipeCards.recipes.totalResults
-          }
-          loader={
+      <RecipeContainer>
+        {recipeCards.recipes.results ? (
+          <InfiniteScroll
+            scrollableTarget={'body'}
+            pullDownToRefresh={false}
+            style={{ overflow: 'unset', width: '100%' }}
+            dataLength={parseInt(recipeCards.recipes.results.length)}
+            next={fetchMore}
+            hasMore={
+              !recipeCards.isDone &&
+              recipeCards.recipes.results.length <=
+                recipeCards.recipes.totalResults
+            }
+            loader={
+              <Loader>
+                <FontAwesomeIcon icon={faSync} spin />
+              </Loader>
+            }
+            endMessage={
+              <EndMessage>
+                <FontAwesomeIcon icon={faStop} />
+                <motion.span>No more search results found...</motion.span>
+              </EndMessage>
+            }
+          >
+            <Recipes
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+              cookBookRef={cookBookRef}
+              fromPreview={false}
+            />
+          </InfiniteScroll>
+        ) : (
+          lastSearch !== '' &&
+          (bool ? (
+            <EndMessage
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 2, type: 'tween' },
+              }}
+            >
+              <FontAwesomeIcon icon={faStop} />
+              <span>No search results found</span>
+            </EndMessage>
+          ) : (
             <Loader>
               <FontAwesomeIcon icon={faSync} spin />
             </Loader>
-          }
-          endMessage={
-            <EndMessage>
-              <FontAwesomeIcon icon={faStop} />
-              <motion.span>No more search results found...</motion.span>
-            </EndMessage>
-          }
-        >
-          <Recipes
-            isCookBookOpen={isCookBookOpen}
-            setIsCookBookOpen={setIsCookBookOpen}
-            cookBookRef={cookBookRef}
-            fromPreview={false}
-          />
-        </InfiniteScroll>
-      ) : (
-        lastSearch !== '' &&
-        (bool ? (
-          <EndMessage
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 2, type: 'tween' },
-            }}
-          >
-            <FontAwesomeIcon icon={faStop} />
-            <span>No search results found</span>
-          </EndMessage>
-        ) : (
-          <Loader>
-            <FontAwesomeIcon icon={faSync} spin />
-          </Loader>
-        ))
-      )}
+          ))
+        )}
+      </RecipeContainer>
       {/* {items !== undefined && (
         <InfiniteScroll
           dataLength={items.length}
@@ -246,9 +252,21 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  /* min-height: 100vh; */
   margin: 0 auto;
   padding: 0 15vw;
   overflow-x: hidden;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    padding: 0 15vw;
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const SortSelect = styled.select`
@@ -307,6 +325,23 @@ const SearchTitle = styled.span`
   font-weight: 600;
   color: var(--header-color);
   margin: 8rem 0rem 4rem 0rem;
+  display: flex;
+
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+    font-size: 4.8rem;
+  }
+  @media (${size.md}) {
+    font-size: 4rem;
+    width: 100%;
+  }
+  @media (${size.sm}) {
+    font-size: 3.2rem;
+  }
+  @media (${size.xs}) {
+    font-size: 2.8rem;
+  }
 `;
 
 const SearchBackground = styled(motion.div)`
@@ -316,6 +351,7 @@ const SearchBackground = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 16rem;
 `;
 
 const SearchContainer = styled.div`
@@ -381,6 +417,13 @@ const EndMessage = styled(motion.div)`
   color: var(--header-color);
   span {
     margin-left: 1rem;
+  }
+`;
+
+const RecipeContainer = styled.div`
+  width: 100%;
+  .infinite-scroll-component__outerdiv {
+    width: 100%;
   }
 `;
 

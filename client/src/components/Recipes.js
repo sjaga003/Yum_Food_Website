@@ -84,6 +84,7 @@ const RecipeContainer = styled.div`
   /* height: 100vh; //Keeps div from disappearing without cards */
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export default Recipes;

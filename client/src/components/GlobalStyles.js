@@ -22,7 +22,9 @@ export const GlobalStyle = createGlobalStyle`
           } else if (props.background === 'search') {
             return `url(${SearchBackground}) no-repeat`;
           } else if (props.background === 'cookbook') {
-            return `url(${SearchBackground}) no-repeat 0px 16%`;
+            return `url(${SearchBackground}) no-repeat`;
+          } else if (props.background === 'auth') {
+            return `url(${SearchBackground}) no-repeat`;
           } else {
             return `none`;
           }
@@ -37,7 +39,15 @@ export const GlobalStyle = createGlobalStyle`
         }
         @media (${size.md}) {
         
-          background:none;
+          background: ${(props) => {
+            if (props.background === 'home') {
+              return `none`;
+            } else if (props.background === 'search') {
+              return `url(${SearchBackground}) no-repeat cover`;
+            } else if (props.background === 'cookbook') {
+              return `url(${SearchBackground}) no-repeat cover`;
+            }
+          }}
         }
         @media (${size.sm}) {
         
