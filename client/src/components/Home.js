@@ -48,7 +48,7 @@ const HomeContainer = styled.div`
   }
   @media (${size.lg}) {
     height: 100vh;
-    margin-bottom: 10rem;
+    margin-bottom: 20rem;
     padding: 0vh 5vw;
     justify-content: center;
     height: 50vh;
@@ -61,7 +61,7 @@ const HomeContainer = styled.div`
       rgba(255, 255, 255, 1) 100%
     );
     padding: 10vh 5vw;
-    margin-bottom: 0;
+    margin-bottom: 10rem;
     height: 100vh;
   }
   @media (${size.sm}) {

@@ -44,8 +44,10 @@ const ImageMask = styled.img`
     width: 100%;
     height: unset;
     mask: 0;
+    border-radius: 8px;
   }
   @media (${size.sm}) {
+    border-radius: 0;
   }
   @media (${size.xs}) {
   }
