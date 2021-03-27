@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import {
   Bar,
   BarChart,
@@ -20,6 +22,9 @@ import {
 
 const NutritionalInfo = ({ recipe }) => {
   const [nutrientData, setNutrientData] = useState({});
+
+  const changeSize = useMediaQuery({ query: '(max-width: 575.98px)' });
+  const isMobile = useSelector((state) => state.isMobile);
 
   useEffect(() => {
     //Moved function into useEffect to remove ESLint dependency warning
@@ -138,13 +143,18 @@ const NutritionalInfo = ({ recipe }) => {
 
   return (
     <>
-      <ResponsiveContainer width="33%">
+      <div
+        style={{
+          transform: changeSize ? 'scale(0.8)' : 'unset',
+          order: isMobile ? -1 : 3,
+        }}
+      >
         {Array.isArray(nutrientData.vitamins) || nutrientData.length ? (
           nutrientData.vitamins.length > 2 ? (
             <RadarChart
               outerRadius={90}
-              width={450}
-              height={400}
+              width={400}
+              height={250}
               data={nutrientData.vitamins}
               innerRadius={'10%'}
             >
@@ -167,7 +177,7 @@ const NutritionalInfo = ({ recipe }) => {
               <Tooltip />
             </RadarChart>
           ) : (
-            <BarChart width={450} height={400} data={nutrientData.vitamins}>
+            <BarChart width={400} height={250} data={nutrientData.vitamins}>
               <CartesianGrid />
               <XAxis dataKey="name" />
               <YAxis domain={[0, 100]} />
@@ -185,38 +195,14 @@ const NutritionalInfo = ({ recipe }) => {
         ) : (
           ''
         )}
-      </ResponsiveContainer>
-      <ResponsiveContainer width="33%">
-        <PieChart width={450} height={400}>
-          <Pie
-            data={nutrientData.macros}
-            dataKey="value"
-            outerRadius={80}
-            label={renderCustomizedLabel}
-            labelLine={false}
-            unit="%"
-          >
-            {nutrientData.macros &&
-              nutrientData.macros.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                  stroke={COLORS[index % COLORS.length]}
-                  fillOpacity={0.6}
-                />
-              ))}
-          </Pie>
-          <Tooltip formatter={(value, name) => [`${name}: ${value}%`]} />
-          <Legend verticalAlign="bottom" />
-        </PieChart>
-      </ResponsiveContainer>
-      <ResponsiveContainer width="33%">
+      </div>
+      <div style={{ transform: changeSize ? 'scale(0.8)' : 'unset' }}>
         {nutrientData.minerals ? (
           nutrientData.minerals.length > 2 ? (
             <RadarChart
               outerRadius={90}
-              width={450}
-              height={400}
+              width={400}
+              height={250}
               data={nutrientData.minerals}
               innerRadius={'10%'}
             >
@@ -239,7 +225,7 @@ const NutritionalInfo = ({ recipe }) => {
               <Tooltip />
             </RadarChart>
           ) : (
-            <BarChart width={450} height={400} data={nutrientData.minerals}>
+            <BarChart width={400} height={400} data={nutrientData.minerals}>
               <CartesianGrid />
               <XAxis dataKey="name" />
               <YAxis domain={[0, 100]} />
@@ -257,7 +243,31 @@ const NutritionalInfo = ({ recipe }) => {
         ) : (
           ''
         )}
-      </ResponsiveContainer>
+      </div>
+      <div style={{ transform: changeSize ? 'scale(0.8)' : 'unset' }}>
+        <PieChart width={400} height={250}>
+          <Pie
+            data={nutrientData.macros}
+            dataKey="value"
+            outerRadius={80}
+            label={renderCustomizedLabel}
+            labelLine={false}
+            unit="%"
+          >
+            {nutrientData.macros &&
+              nutrientData.macros.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                  stroke={COLORS[index % COLORS.length]}
+                  fillOpacity={0.6}
+                />
+              ))}
+          </Pie>
+          <Tooltip formatter={(value, name) => [`${name}: ${value}%`]} />
+          <Legend verticalAlign="bottom" />
+        </PieChart>
+      </div>
     </>
   );
 };

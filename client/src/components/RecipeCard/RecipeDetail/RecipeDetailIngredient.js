@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import NoImageFound from '../../../images/no_ingredient_image.jpg';
+import size from '../../../responsiveStyles';
 
 const RecipeDetailIngredient = ({
   item,
@@ -56,6 +57,21 @@ const IngredientCard = styled(motion.div)`
   height: 20rem;
   width: 20rem;
   font-size: 1.4rem;
+  overflow: hidden;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    height: 15rem;
+    width: 15rem;
+  }
+  @media (${size.xs}) {
+    height: 13rem;
+    width: 13rem;
+  }
 `;
 const IngredientImage = styled(motion.div)`
   width: 8rem;
@@ -68,6 +84,20 @@ const IngredientImage = styled(motion.div)`
     max-height: 100%;
     object-fit: cover;
   }
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    width: 6rem;
+    height: 6rem;
+  }
+  @media (${size.xs}) {
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
 const IngredientName = styled(motion.span)`
@@ -78,6 +108,17 @@ const IngredientName = styled(motion.span)`
   font-size: 1.6rem;
   margin-top: 1rem;
   font-weight: 600;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const IngredientAmount = styled(motion.div)`
@@ -85,6 +126,17 @@ const IngredientAmount = styled(motion.div)`
   margin-top: 1rem;
   font-size: 1.6rem;
   color: var(--header-color);
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+  }
+  @media (${size.sm}) {
+    font-size: 1.4rem;
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 export default RecipeDetailIngredient;
