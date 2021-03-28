@@ -24,6 +24,9 @@ import size from './responsiveStyles';
 import { useMediaQuery } from 'react-responsive';
 import MobileNav from './components/MobileNav';
 import { setIsMobile } from './actions/isMobileAction';
+import DragAndDropAnimation from './DragAndDropAnimation';
+import HowToSection from './HowToSection';
+import OpenCardAnimation from './components/OpenCardAnimation';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -55,6 +58,8 @@ function App() {
             />
             <Home />
             <Welcome />
+            <HowToSection />
+
             <Carousel />
             <AnimateSharedLayout type="switch">
               {!isMobile && (
