@@ -259,7 +259,7 @@ const PageContainer = styled.div`
   /* min-height: 100vh; */
   /* margin: 0 auto; */
 
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   @media (${size.xl}) {
   }
   @media (${size.lg}) {

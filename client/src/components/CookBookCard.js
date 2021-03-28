@@ -62,13 +62,14 @@ const CookBookCard = ({ databaseEntry }) => {
         <FoodInfo>
           <Title>{recipe.title}</Title>
         </FoodInfo>{' '}
-        <CloseButton
+        <CloseContainer
           onClick={(e) => {
             dispatch(removeFromCookBook(databaseEntry._id));
             e.stopPropagation();
           }}
-          icon={faTimes}
-        />
+        >
+          <CloseButton icon={faTimes} />
+        </CloseContainer>
       </Card>
     </>
   );
@@ -97,12 +98,21 @@ const Card = styled(motion.div)`
   }
 `;
 
+const CloseContainer = styled.div`
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const CloseButton = styled(FontAwesomeIcon)`
   color: #aaa;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
+
   transition: fill 0.5s ease;
   opacity: 0;
 `;

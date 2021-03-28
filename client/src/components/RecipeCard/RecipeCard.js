@@ -81,10 +81,13 @@ const RecipeCard = ({
   };
 
   const endDrag = (event, info) => {
-    cardRef.current.style.zIndex = 0;
+    setRecipeCardState({ ...recipeCardState, isDragging: false });
     if (recipeCardState.isDocked) {
-      setRecipeCardState({ ...recipeCardState, isDragging: false });
       dispatch(addToCookBook(recipe));
+    } else {
+      setTimeout(() => {
+        cardRef.current.style.zIndex = 0;
+      }, 500);
     }
   };
 

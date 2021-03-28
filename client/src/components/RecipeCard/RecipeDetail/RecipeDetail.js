@@ -295,6 +295,7 @@ const Card = styled(motion.div)`
   background: var(--card-color);
   overflow: hidden;
   @media (${size.xl}) {
+    height: 100%;
   }
   @media (${size.lg}) {
     width: 90%;
