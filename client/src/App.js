@@ -124,6 +124,7 @@ const Content = styled.div`
   padding: 0 14vw;
   overflow-x: hidden;
   @media (${size.xl}) {
+    padding: 0 25vw;
   }
   @media (${size.lg}) {
     padding: 0;
