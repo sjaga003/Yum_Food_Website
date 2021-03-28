@@ -57,7 +57,7 @@ const CookBookSidebar = ({
             <ButtonIcon icon={faBookOpen} />
           </ButtonContainer>
           {isCookBookOpen && (
-            <CookBookTitle to="/cookbook">Cookbook</CookBookTitle>
+            <CookBookTitle to="/cookbook">My Recipes</CookBookTitle>
           )}
           <CookBookCards>
             {isCookBookOpen &&
@@ -131,7 +131,7 @@ const ButtonIcon = styled(FontAwesomeIcon)`
 const ButtonContainer = styled(motion.div)`
   position: absolute;
   align-self: flex-start;
-  left: -80px;
+  left: -75px;
   top: 7px;
   height: 60px;
   width: 80px;
