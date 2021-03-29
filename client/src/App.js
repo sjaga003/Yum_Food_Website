@@ -4,9 +4,11 @@ import '@fontsource/roboto';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { BrowserRouter, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { setAuthData } from './actions/authAction';
+import { setIsMobile } from './actions/isMobileAction';
 import Auth from './components/Auth/Auth';
 import Carousel from './components/Carousel';
 import Contact from './components/Contact';
@@ -19,14 +21,8 @@ import Nav from './components/Nav';
 import RecipePreview from './components/RecipePreview';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
-import FooterBackground from './images/footer_background.svg';
-import size from './responsiveStyles';
-import { useMediaQuery } from 'react-responsive';
-import MobileNav from './components/MobileNav';
-import { setIsMobile } from './actions/isMobileAction';
-import DragAndDropAnimation from './DragAndDropAnimation';
 import HowToSection from './HowToSection';
-import OpenCardAnimation from './components/OpenCardAnimation';
+import size from './responsiveStyles';
 
 function App() {
   const [isCookBookOpen, setIsCookBookOpen] = useState(false);
@@ -44,7 +40,7 @@ function App() {
 
   useEffect(() => {
     dispatch(setIsMobile(isMobile));
-  }, [isMobile]);
+  }, [isMobile, dispatch]);
 
   return (
     <div className="App">

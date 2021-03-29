@@ -75,7 +75,6 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
               setSortSelected(e.target.value);
             }}
           >
-            <label>Sort By:</label>
             <option value="meta-score">Best</option>
             <option value="time">Time to Cook</option>
             <option value="price">Price</option>

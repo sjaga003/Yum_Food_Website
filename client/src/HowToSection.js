@@ -132,34 +132,4 @@ const ContentText = styled.span`
   }
 `;
 
-const Button = styled.button`
-  border: 0;
-  margin: 0;
-  text-decoration: none;
-  font-size: 2rem;
-  padding: 1.5rem 3rem;
-  background: var(--highlight-color);
-  border-radius: 4px;
-  color: var(--bg-color);
-  align-self: flex-start;
-  transition: background 0.2s;
-  &:hover {
-    background: var(--button-hover-color);
-  }
-
-  @media (${size.xl}) {
-  }
-  @media (${size.lg}) {
-  }
-  @media (${size.md}) {
-    font-size: 1.8rem;
-    padding: 1.5rem 2.5rem;
-  }
-  @media (${size.sm}) {
-    padding: 1rem 2rem;
-  }
-  @media (${size.xs}) {
-  }
-`;
-
 export default HowToSection;

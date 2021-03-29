@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import OpenCard from '../images/open_card.svg';
 import size from '../responsiveStyles';
 const OpenCardAnimation = () => {
-  const test = () => {
-    return OpenCard;
-  };
-
   return (
     <SVGContainer>
       <svg

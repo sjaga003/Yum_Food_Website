@@ -1,10 +1,8 @@
 import {
   faBars,
-  faBook,
   faBookOpen,
   faHome,
   faSearch,
-  faUser,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,13 +10,13 @@ import decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
 import size from '../responsiveStyles';
 import AccountDropdown from './Auth/AccountDropdown';
 import MobileNav from './MobileNav';
-import { animateScroll } from 'react-scroll';
 
 const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); //maybe switch this to just use auth redux state
