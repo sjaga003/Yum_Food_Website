@@ -2,7 +2,7 @@ import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from 'react-infinite-scroller';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
@@ -183,26 +183,19 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
       <RecipeContainer>
         {recipeCards.recipes.results ? (
           <InfiniteScroll
-            scrollableTarget={'body'}
-            pullDownToRefresh={false}
+            pageStart={0}
             style={{ overflow: 'unset', width: '100%' }}
-            dataLength={parseInt(recipeCards.recipes.results.length)}
-            next={fetchMore}
+            useWindow={true}
+            loadMore={fetchMore}
             hasMore={
               !recipeCards.isDone &&
               recipeCards.recipes.results.length <=
                 recipeCards.recipes.totalResults
             }
             loader={
-              <Loader>
+              <Loader key={'Loader'}>
                 <FontAwesomeIcon icon={faSync} spin />
               </Loader>
-            }
-            endMessage={
-              <EndMessage>
-                <FontAwesomeIcon icon={faStop} />
-                <motion.span>No more search results found...</motion.span>
-              </EndMessage>
             }
           >
             <Recipes
