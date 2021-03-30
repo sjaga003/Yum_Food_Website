@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import size from './responsiveStyles';
+import size from '../responsiveStyles';
 
 const DragAndDropAnimation = () => {
   return (

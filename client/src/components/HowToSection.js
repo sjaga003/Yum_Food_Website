@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import OpenCardAnimation from './components/OpenCardAnimation';
+import OpenCardAnimation from './OpenCardAnimation';
 import DragAndDropAnimation from './DragAndDropAnimation';
-import size from './responsiveStyles';
+import size from '../responsiveStyles';
 
 const HowToSection = () => {
   const isMobile = useSelector((state) => state.isMobile);

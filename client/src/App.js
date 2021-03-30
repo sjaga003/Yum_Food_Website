@@ -21,7 +21,7 @@ import Nav from './components/Nav';
 import RecipePreview from './components/RecipePreview';
 import Search from './components/Search';
 import Welcome from './components/Welcome';
-import HowToSection from './HowToSection';
+import HowToSection from './components/HowToSection';
 import size from './responsiveStyles';
 
 function App() {

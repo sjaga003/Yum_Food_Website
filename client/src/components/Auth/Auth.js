@@ -440,18 +440,6 @@ const InputContainer = styled.div`
   }
 `;
 
-const PasswordRow = styled.div`
-  width: 100%;
-  background: var(--bg-color);
-  border-radius: 8px;
-  border: 1px solid lightgray;
-  position: relative;
-  input {
-    margin-top: 0;
-    border: 0;
-  }
-`;
-
 const Button = styled.button`
   border: 0;
   padding: 1rem 2rem;
