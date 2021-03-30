@@ -1,21 +1,27 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
 import size from '../../responsiveStyles';
 import Nav from '../Nav';
 
 const initialFormData = {
   firstName: '',
+  firstNameIsFocused: false,
   lastName: '',
+  lastNameIsFocused: false,
   email: '',
+  emailIsFocused: false,
   password: '',
+  passwordNameIsFocused: false,
   repeatPassword: '',
+  repeatPasswordIsFocused: false,
 };
 
 const Auth = () => {
@@ -33,7 +39,10 @@ const Auth = () => {
     e.preventDefault();
     if (isSignedUp) {
       dispatch(authSignIn(formData, history, setIncorrectCredentials));
-      setFormData(initialFormData);
+      console.log(incorrectCredentials);
+      if (!incorrectCredentials) {
+        setFormData(initialFormData);
+      }
     } else {
       dispatch(authSignUp(formData, history));
     }
@@ -41,6 +50,14 @@ const Auth = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleOnFocus = (e) => {
+    const focusName = `${e.target.name}IsFocused`;
+    setFormData({ ...formData, [focusName]: true });
+  };
+  const handleOnBlur = (e) => {
+    const focusName = `${e.target.name}IsFocused`;
+    setFormData({ ...formData, [focusName]: false });
   };
 
   const switchMode = (e) => {
@@ -76,6 +93,21 @@ const Auth = () => {
     }
   }, [formData.password, formData.repeatPassword]);
 
+  const variant = {
+    active: {
+      top: '-10px',
+      left: '0px',
+      fontSize: '1.4rem',
+      transition: { type: 'tween', duration: 0.2 },
+    },
+    initial: {
+      top: '21px',
+      left: '1rem',
+      fontSize: '1.8rem',
+      transition: { type: 'tween', duration: 0.2 },
+    },
+  };
+
   return (
     <PageContainer>
       <Nav />
@@ -89,60 +121,130 @@ const Auth = () => {
           {!isSignedUp && (
             <>
               <InputRow>
-                <Input
-                  required
-                  name="firstName"
-                  placeholder="First Name"
-                  onChange={handleChange}
-                  autoFocus
-                  value={'' || formData.firstName}
-                />
-                <Input
-                  required
-                  name="lastName"
-                  placeholder="Last Name"
-                  onChange={handleChange}
-                  value={'' || formData.lastName}
-                />
+                <InputContainer>
+                  <Input
+                    required
+                    name="firstName"
+                    onChange={handleChange}
+                    onFocus={handleOnFocus}
+                    onBlur={handleOnBlur}
+                    value={'' || formData.firstName}
+                  />
+                  <InputLabel
+                    variants={variant}
+                    initial={'initial'}
+                    animate={
+                      formData.firstName !== '' || formData.firstNameIsFocused
+                        ? 'active'
+                        : 'initial'
+                    }
+                  >
+                    First Name
+                  </InputLabel>
+                </InputContainer>
+                <InputContainer>
+                  <Input
+                    required
+                    name="lastName"
+                    onChange={handleChange}
+                    onFocus={handleOnFocus}
+                    onBlur={handleOnBlur}
+                    value={'' || formData.lastName}
+                  />
+                  <InputLabel
+                    variants={variant}
+                    initial={'initial'}
+                    animate={
+                      formData.lastName !== '' || formData.lastNameIsFocused
+                        ? 'active'
+                        : 'initial'
+                    }
+                  >
+                    Last Name
+                  </InputLabel>
+                </InputContainer>
               </InputRow>
             </>
           )}
-          <Input
-            required
-            name="email"
-            type="email"
-            placeholder="Email Address"
-            onChange={handleChange}
-            value={'' || formData.email}
-          />
-          <PasswordRow>
+          <InputContainer incorrectCredentials={incorrectCredentials}>
             <Input
+              incorrectCredentials={incorrectCredentials}
+              required
+              name="email"
+              type="email"
+              onChange={handleChange}
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
+              value={'' || formData.email}
+            />
+            <InputLabel
+              incorrectCredentials={incorrectCredentials}
+              variants={variant}
+              initial={'initial'}
+              animate={
+                formData.email !== '' || formData.emailIsFocused
+                  ? 'active'
+                  : 'initial'
+              }
+            >
+              Email
+            </InputLabel>
+          </InputContainer>
+          <InputContainer incorrectCredentials={incorrectCredentials}>
+            <InputLabel
+              incorrectCredentials={incorrectCredentials}
+              variants={variant}
+              initial={'initial'}
+              animate={
+                formData.password !== '' || formData.passwordIsFocused
+                  ? 'active'
+                  : 'initial'
+              }
+            >
+              Password
+            </InputLabel>
+            <Input
+              incorrectCredentials={incorrectCredentials}
               required
               name="password"
-              placeholder="Password"
               type={showPassword ? 'text' : 'password'}
               onChange={handleChange}
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
               value={'' || formData.password}
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
               onClick={() => setShowPassword(!showPassword)}
             />
-          </PasswordRow>
+          </InputContainer>
           {!isSignedUp && (
-            <Input
-              required
-              type="password"
-              name="repeatPassword"
-              placeholder="Repeat Password"
-              onChange={handleChange}
-              value={'' || formData.repeatPassword}
-            />
+            <InputContainer>
+              <Input
+                required
+                type="password"
+                name="repeatPassword"
+                onChange={handleChange}
+                onFocus={handleOnFocus}
+                onBlur={handleOnBlur}
+                value={'' || formData.repeatPassword}
+              />
+              <InputLabel
+                variants={variant}
+                initial={'initial'}
+                animate={
+                  formData.repeatPassword !== '' ||
+                  formData.repeatPasswordIsFocused
+                    ? 'active'
+                    : 'initial'
+                }
+              >
+                Repeat Password
+              </InputLabel>
+            </InputContainer>
           )}
           {isSignedUp && incorrectCredentials && (
-            <IncorrectError>
-              Error: Incorrect Username or Password
-            </IncorrectError>
+            <IncorrectError>Incorrect Username or Password</IncorrectError>
           )}
           <Button type="submit" disabled={!isSignedUp ? !passwordMatch : false}>
             {isSignedUp ? 'Sign In' : 'Sign Up'}
@@ -270,6 +372,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
+  flex: 1;
   outline: none;
   border: 0;
   height: 5rem;
@@ -278,9 +381,21 @@ const Input = styled.input`
   border-radius: 8px;
   color: var(--text-color);
   font-family: var(--text-font);
-  margin-top: 2rem;
   border: 1px solid lightgray;
   padding-left: 1rem;
+
+  ${({ incorrectCredentials }) =>
+    incorrectCredentials &&
+    css`
+      border: 1px #cc0000 solid;
+      color: #cc0000;
+    `}
+`;
+
+const InputRow = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 2rem;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -288,43 +403,52 @@ const Input = styled.input`
   @media (${size.md}) {
   }
   @media (${size.sm}) {
-    font-size: 1.4rem;
+    gap: 0rem;
+    flex-wrap: wrap;
   }
   @media (${size.xs}) {
   }
 `;
 
-const InputRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 2rem;
+const InputContainer = styled.div`
+  position: relative;
+  /* margin-top: 2rem; */
+  align-items: stretch;
   width: 100%;
-`;
-
-const PasswordRow = styled.div`
-  display: flex;
-  align-items: center;
-
-  margin-top: 2rem;
-  width: 100%;
-  background: var(--bg-color);
-  border-radius: 8px;
-  border: 1px solid lightgray;
-  input {
-    margin-top: 0;
-
-    border: 0;
-  }
-  svg {
+  margin-top: 1.5rem;
+  & svg {
+    position: absolute;
     color: var(--highlight-color);
     height: 2rem;
     margin: 0rem 1rem 0rem 1rem;
+    top: 25px;
+    right: 0;
     cursor: pointer;
     user-select: none;
     transition: color 0.2s;
     &:hover {
       color: var(--button-hover-color);
     }
+    ${({ incorrectCredentials }) =>
+      incorrectCredentials &&
+      css`
+        color: #cc0000;
+        &:hover {
+          color: #a3141e;
+        }
+      `}
+  }
+`;
+
+const PasswordRow = styled.div`
+  width: 100%;
+  background: var(--bg-color);
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  position: relative;
+  input {
+    margin-top: 0;
+    border: 0;
   }
 `;
 
@@ -363,6 +487,23 @@ const Button = styled.button`
   }
 `;
 
+const InputLabel = styled(motion.label)`
+  position: absolute;
+  left: 1rem;
+  pointer-events: none;
+  z-index: 1;
+  top: 21px;
+  left: 1rem;
+  color: var(--text-color);
+  font-family: var(--text-font);
+  font-size: 1.8rem;
+  ${({ incorrectCredentials }) =>
+    incorrectCredentials &&
+    css`
+      color: #cc0000;
+    `}
+`;
+
 const ModeButton = styled(Button)`
   align-self: flex-end;
   width: fit-content;
@@ -375,7 +516,7 @@ const ModeButton = styled(Button)`
 `;
 
 const IncorrectError = styled.span`
-  color: #b03130;
+  color: #cc0000;
   font-size: 1.8rem;
   font-family: var(--text-font);
   display: flex;

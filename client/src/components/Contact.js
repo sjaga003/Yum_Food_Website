@@ -6,12 +6,38 @@ import size from '../responsiveStyles';
 const Contact = () => {
   const [contactFormData, setContactFormData] = useState({
     name: '',
+    nameIsFocused: false,
     email: '',
+    emailIsFocused: false,
     message: '',
+    messageIsFocused: false,
   });
 
   const handleOnChange = (e) => {
     setContactFormData({ ...contactFormData, [e.target.name]: e.target.value });
+  };
+  const handleOnFocus = (e) => {
+    const focusName = `${e.target.name}IsFocused`;
+    setContactFormData({ ...contactFormData, [focusName]: true });
+  };
+  const handleOnBlur = (e) => {
+    const focusName = `${e.target.name}IsFocused`;
+    setContactFormData({ ...contactFormData, [focusName]: false });
+  };
+
+  const variant = {
+    active: {
+      top: '-20px',
+      left: '0px',
+      fontSize: '1.4rem',
+      transition: { type: 'tween', duration: 0.2 },
+    },
+    initial: {
+      top: '1.6rem',
+      left: '1rem',
+      fontSize: '1.8rem',
+      transition: { type: 'tween', duration: 0.2 },
+    },
   };
 
   return (
@@ -21,12 +47,20 @@ const Contact = () => {
         <SubtitleText>Contact Us</SubtitleText>
         <Form autoComplete="off">
           <InputContainer>
-            <ValueInput required onChange={handleOnChange} name="name" />
+            <ValueInput
+              required
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
+              onChange={handleOnChange}
+              name="name"
+            />
             <InputLabel
+              variants={variant}
+              initial={'initial'}
               animate={
-                contactFormData.name !== ''
-                  ? { top: '-24px', left: '0px' }
-                  : { top: 'initial' }
+                contactFormData.name !== '' || contactFormData.nameIsFocused
+                  ? 'active'
+                  : 'initial'
               }
             >
               Name
@@ -37,26 +71,49 @@ const Contact = () => {
               required
               name="email"
               type="email"
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
               onChange={handleOnChange}
             />
             <InputLabel
+              variants={variant}
+              initial={'initial'}
               animate={
-                contactFormData.email !== ''
-                  ? { top: '-24px', left: '0px' }
-                  : { top: 'initial' }
+                contactFormData.email !== '' || contactFormData.emailIsFocused
+                  ? 'active'
+                  : 'initial'
               }
             >
               Email
             </InputLabel>
           </InputContainer>
           <InputContainer>
-            <MessageInput required name="message" onChange={handleOnChange} />
+            <MessageInput
+              required
+              name="message"
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
+              onChange={handleOnChange}
+            />
             <InputLabel
+              variants={variant}
+              initial={'initial'}
               className="textarea-label"
               animate={
-                contactFormData.message !== ''
-                  ? { top: '-32px', left: '0px' }
-                  : { top: 'initial' }
+                contactFormData.message !== '' ||
+                contactFormData.messageIsFocused
+                  ? {
+                      top: '-3rem',
+                      left: '0px',
+                      fontSize: '1.4rem',
+                      transition: { type: 'tween', duration: 0.2 },
+                    }
+                  : {
+                      top: '0.5rem',
+                      left: '1rem',
+                      fontSize: '1.8rem',
+                      transition: { type: 'tween', duration: 0.2 },
+                    }
               }
             >
               Message
@@ -156,8 +213,8 @@ const SubtitleText = styled.span`
 const InputLabel = styled(motion.label)`
   position: absolute;
   left: 1rem;
+  top: 1.6rem;
   pointer-events: none;
-
   z-index: 1;
   color: var(--text-color);
   font-family: var(--text-font);
