@@ -1,3 +1,4 @@
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
@@ -63,33 +64,37 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
   return (
     <PageContainer>
-      {needAuthOpen && (
-        <NeedAuthModal cantClose={true} setNeedAuthOpen={setNeedAuthOpen} />
-      )}
-      <Nav />
-      <Title>My Recipes</Title>
-      {cookBook ? (
-        <>
-          <SortSelect
-            onChange={(e) => {
-              setSortSelected(e.target.value);
-            }}
-          >
-            <option value="meta-score">Best</option>
-            <option value="time">Time to Cook</option>
-            <option value="price">Price</option>
-          </SortSelect>
+      <AnimateSharedLayout type="switch">
+        <AnimatePresence>
+          {needAuthOpen && (
+            <NeedAuthModal cantClose={true} setNeedAuthOpen={setNeedAuthOpen} />
+          )}
+          <Nav />
+          <Title>My Recipes</Title>
+          {cookBook ? (
+            <>
+              <SortSelect
+                onChange={(e) => {
+                  setSortSelected(e.target.value);
+                }}
+              >
+                <option value="meta-score">Best</option>
+                <option value="time">Time to Cook</option>
+                <option value="price">Price</option>
+              </SortSelect>
 
-          <Recipes
-            isCookBookOpen={isCookBookOpen}
-            setIsCookBookOpen={setIsCookBookOpen}
-            cookBookRef={cookBookRef}
-            fromCookBook={true}
-          />
-        </>
-      ) : (
-        <Error>No Recipes Saved...</Error>
-      )}
+              <Recipes
+                isCookBookOpen={isCookBookOpen}
+                setIsCookBookOpen={setIsCookBookOpen}
+                cookBookRef={cookBookRef}
+                fromCookBook={true}
+              />
+            </>
+          ) : (
+            <Error>No Recipes Saved...</Error>
+          )}
+        </AnimatePresence>
+      </AnimateSharedLayout>
     </PageContainer>
   );
 };
