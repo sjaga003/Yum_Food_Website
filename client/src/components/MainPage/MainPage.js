@@ -6,7 +6,7 @@ import Contact from './Contact';
 import CookBookSidebar from '../CookBookSidebar';
 import Footer from './Footer';
 import Home from './Home';
-import HowToSection from './HowToSection';
+import HowToSection from './HowToAnimation/HowToSection';
 import Nav from '../Nav';
 import RecipePreview from './RecipePreview';
 import Welcome from './Welcome';
