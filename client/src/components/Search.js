@@ -327,9 +327,7 @@ const SearchButton = styled.button`
   font-family: var(--text-font);
   cursor: pointer;
   border-radius: 0px 8px 8px 0px;
-  &:focus {
-    outline: 0;
-  }
+
   transition: background 0.2s;
   &:hover {
     background: var(--button-hover-color);

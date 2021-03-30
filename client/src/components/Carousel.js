@@ -633,9 +633,6 @@ const CarouselButton = styled(motion.button)`
   font-size: 2.4rem;
   margin: 0rem 0.5rem;
   cursor: pointer;
-  &:focus {
-    outline: 0;
-  }
 `;
 
 const CardBackground = styled(motion.div)`

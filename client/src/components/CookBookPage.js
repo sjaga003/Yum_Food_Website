@@ -103,9 +103,6 @@ const SortSelect = styled.select`
   align-self: flex-start;
   font-size: 1.8rem;
   padding: 0.5rem;
-  &:focus {
-    outline: 0;
-  }
 `;
 
 const PageContainer = styled.div`

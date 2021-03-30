@@ -497,10 +497,7 @@ const ServingContainer = styled(motion.div)`
     background: #e2e8f0;
     border: 0;
     font-size: 1.8rem;
-    &:focus {
-      outline: 0;
-      border: 0;
-    }
+
     &:hover {
       background: #cbd5e0;
     }
