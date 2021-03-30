@@ -66,6 +66,7 @@ const HomeContainer = styled.div`
   }
   @media (${size.sm}) {
     padding: 15vh 5vw;
+    margin-bottom: 0rem;
     align-items: flex-start;
   }
   @media (${size.xs}) {

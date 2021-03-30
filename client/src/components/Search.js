@@ -178,6 +178,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
       <RecipeContainer>
         {recipeCards.recipes.results ? (
           <InfiniteScroll
+            initialLoad={false}
             pageStart={0}
             style={{ overflow: 'unset', width: '100%' }}
             useWindow={true}
