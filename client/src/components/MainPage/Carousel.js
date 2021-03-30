@@ -481,10 +481,10 @@ const Carousel = () => {
           aria-label="Quicksearch Left"
           initial={{
             color: 'var(--highlight-color)',
-            background: 'transparent',
+            background: '#F5A11C00',
           }}
           whileHover={{
-            color: 'white',
+            color: 'var(--bg-color)',
             background: 'var(--highlight-color)',
           }}
           onClick={() => {
@@ -509,10 +509,10 @@ const Carousel = () => {
           aria-label="Quicksearch Right"
           initial={{
             color: 'var(--highlight-color)',
-            background: 'transparent',
+            background: '#F5A11C00',
           }}
           whileHover={{
-            color: 'white',
+            color: 'var(--bg-color)',
             background: 'var(--highlight-color)',
           }}
           onClick={(event) => {
@@ -625,7 +625,7 @@ const ButtonContainer = styled(motion.div)`
 `;
 
 const CarouselButton = styled(motion.button)`
-  background: white;
+  background: var(--bg-color);
   border: 0;
   color: var(--highlight-color);
   border-radius: 50%;

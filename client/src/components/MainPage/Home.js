@@ -119,7 +119,7 @@ const HeroDescription = styled.p`
   color: var(--secondary-color);
   font-size: 2rem;
   width: 75%;
-  margin: 3rem 0 5rem 0;
+  margin: 3rem 0 3rem 0;
 
   @media (${size.xl}) {
   }
@@ -180,7 +180,7 @@ const LearnMoreButton = styled.button`
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
-  padding: 2rem 3rem;
+  padding: 1.5rem 3rem;
   background: var(--highlight-color);
   border-radius: 4px;
   color: var(--bg-color);

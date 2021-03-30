@@ -23,10 +23,10 @@ const Footer = () => {
             <Icon
               initial={{
                 color: 'var(--highlight-color)',
-                background: 'transparent',
+                background: '#F5A11C00',
               }}
               whileHover={{
-                color: 'white',
+                color: 'var(--bg-color)',
                 background: 'var(--highlight-color)',
               }}
             >
@@ -35,10 +35,10 @@ const Footer = () => {
             <Icon
               initial={{
                 color: 'var(--highlight-color)',
-                background: 'transparent',
+                background: '#F5A11C00',
               }}
               whileHover={{
-                color: 'white',
+                color: 'var(--bg-color)',
                 background: 'var(--highlight-color)',
               }}
             >
