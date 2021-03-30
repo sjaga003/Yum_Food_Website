@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import size from '../responsiveStyles';
+import size from '../styles/responsiveStyles';
 import RecipeCard from './RecipeCard/RecipeCard';
 
 const Recipes = ({

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
-import { loadPreviewRecipes } from '../actions/recipeCardsAction';
+import { loadPreviewRecipes } from '../../actions/recipeCardsAction';
 import {
   recipePreviewAppetizer,
   recipePreviewBreakfast,
   recipePreviewDessert,
   recipePreviewPopular,
   recipePreviewVegetarian,
-} from '../recipePreviewData';
-import size from '../responsiveStyles';
-import Recipes from './Recipes';
+} from '../../recipePreviewData';
+import size from '../../styles/responsiveStyles';
+import Recipes from '../Recipes';
 
 const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();

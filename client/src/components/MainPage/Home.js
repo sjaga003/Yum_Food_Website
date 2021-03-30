@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import { clearRecipeCards } from '../actions/recipeCardsAction';
-import HeaderMask from '../images/header_mask.svg';
-import SushiImage from '../images/sushi.jpg';
-import size from '../responsiveStyles';
+import { clearRecipeCards } from '../../actions/recipeCardsAction';
+import HeaderMask from '../../images/header_mask.svg';
+import SushiImage from '../../images/sushi.jpg';
+import size from '../../styles/responsiveStyles';
 
 const Home = () => {
   const location = useLocation();

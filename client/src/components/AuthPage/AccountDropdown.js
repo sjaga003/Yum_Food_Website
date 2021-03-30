@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { logoutUser } from '../../actions/authAction';
-import size from '../../responsiveStyles';
+import size from '../../styles/responsiveStyles';
 
 const AccountDropdown = ({
   user,

@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import CardSave from '../../images/card_save.svg';
-import size from '../../responsiveStyles';
+import size from '../../styles/responsiveStyles';
 
 const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
   const history = useHistory();

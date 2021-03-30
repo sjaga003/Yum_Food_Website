@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import size from '../../../responsiveStyles';
+import size from '../../../styles/responsiveStyles';
 import AllergyMarker from './AllergyMarker';
 import NutritionalInfo from './NutritionalInfo';
 import RecipeDetailIngredient from './RecipeDetailIngredient';

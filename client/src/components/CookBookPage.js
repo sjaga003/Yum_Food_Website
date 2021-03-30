@@ -1,4 +1,4 @@
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { AnimateSharedLayout } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
@@ -11,8 +11,8 @@ import {
   sortRecipesByPrice,
   sortRecipesByTime,
 } from '../actions/recipeCardsAction';
-import size from '../responsiveStyles';
-import NeedAuthModal from './Auth/NeedAuthModal';
+import size from '../styles/responsiveStyles';
+import NeedAuthModal from './AuthPage/NeedAuthModal';
 import Nav from './Nav';
 import Recipes from './Recipes';
 
@@ -65,35 +65,33 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   return (
     <PageContainer>
       <AnimateSharedLayout type="switch">
-        <AnimatePresence>
-          {needAuthOpen && (
-            <NeedAuthModal cantClose={true} setNeedAuthOpen={setNeedAuthOpen} />
-          )}
-          <Nav />
-          <Title>My Recipes</Title>
-          {cookBook ? (
-            <>
-              <SortSelect
-                onChange={(e) => {
-                  setSortSelected(e.target.value);
-                }}
-              >
-                <option value="meta-score">Best</option>
-                <option value="time">Time to Cook</option>
-                <option value="price">Price</option>
-              </SortSelect>
+        {needAuthOpen && (
+          <NeedAuthModal cantClose={true} setNeedAuthOpen={setNeedAuthOpen} />
+        )}
+        <Nav />
+        <Title>My Recipes</Title>
+        {cookBook ? (
+          <>
+            <SortSelect
+              onChange={(e) => {
+                setSortSelected(e.target.value);
+              }}
+            >
+              <option value="meta-score">Best</option>
+              <option value="time">Time to Cook</option>
+              <option value="price">Price</option>
+            </SortSelect>
 
-              <Recipes
-                isCookBookOpen={isCookBookOpen}
-                setIsCookBookOpen={setIsCookBookOpen}
-                cookBookRef={cookBookRef}
-                fromCookBook={true}
-              />
-            </>
-          ) : (
-            <Error>No Recipes Saved...</Error>
-          )}
-        </AnimatePresence>
+            <Recipes
+              isCookBookOpen={isCookBookOpen}
+              setIsCookBookOpen={setIsCookBookOpen}
+              cookBookRef={cookBookRef}
+              fromCookBook={true}
+            />
+          </>
+        ) : (
+          <Error>No Recipes Saved...</Error>
+        )}
       </AnimateSharedLayout>
     </PageContainer>
   );

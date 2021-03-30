@@ -4,7 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import size from '../responsiveStyles';
+import size from '../../styles/responsiveStyles';
 
 const quickSearchCards = [
   {

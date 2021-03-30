@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import HomeBackground from '../images/home_background.svg';
 import SearchBackground from '../images/search_background.svg';
-import size from '../responsiveStyles';
+import size from './responsiveStyles';
 export const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import OpenCardAnimation from './OpenCardAnimation';
 import DragAndDropAnimation from './DragAndDropAnimation';
-import size from '../responsiveStyles';
+import size from '../../styles/responsiveStyles';
 
 const HowToSection = () => {
   const isMobile = useSelector((state) => state.isMobile);

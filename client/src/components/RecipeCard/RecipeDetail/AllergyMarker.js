@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import size from '../../../responsiveStyles';
+import size from '../../../styles/responsiveStyles';
 
 const AllergyMarker = ({ iconName, labelName, external }) => {
   return (

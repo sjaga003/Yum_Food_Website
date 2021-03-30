@@ -15,8 +15,8 @@ import {
   removeFromCookBook,
 } from '../../actions/cookBookAction';
 import MissingImage from '../../images/card_image_missing.svg';
-import size from '../../responsiveStyles';
-import NeedAuthModal from '../Auth/NeedAuthModal';
+import size from '../../styles/responsiveStyles';
+import NeedAuthModal from '../AuthPage/NeedAuthModal';
 import RecipeDetail from './RecipeDetail/RecipeDetail';
 
 const variant = {

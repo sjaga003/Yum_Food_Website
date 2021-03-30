@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled, { css } from 'styled-components';
 import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
-import size from '../../responsiveStyles';
+import size from '../../styles/responsiveStyles';
 import Nav from '../Nav';
 
 const initialFormData = {

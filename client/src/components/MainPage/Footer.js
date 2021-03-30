@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
-import YumLogo from '../images/Yum_Logo.svg';
-import size from '../responsiveStyles';
+import YumLogo from '../../images/Yum_Logo.svg';
+import size from '../../styles/responsiveStyles';
 
 const Footer = () => {
   return (

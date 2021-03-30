@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
-import NeedAuthModal from './Auth/NeedAuthModal';
+import NeedAuthModal from './AuthPage/NeedAuthModal';
 import CookBookCard from './CookBookCard';
 
 const CookBookSidebar = ({

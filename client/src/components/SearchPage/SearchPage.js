@@ -10,11 +10,12 @@ import {
   clearRecipeCards,
   loadAdditionalSearchedRecipes,
   loadSearchedRecipes,
-} from '../actions/recipeCardsAction';
-import size from '../responsiveStyles';
-import CookBookSidebar from './CookBookSidebar';
-import Nav from './Nav';
-import Recipes from './Recipes';
+} from '../../actions/recipeCardsAction';
+import size from '../../styles/responsiveStyles';
+import CookBookSidebar from '../CookBookSidebar';
+import Nav from '../Nav';
+import Recipes from '../Recipes';
+import SearchPill from './SearchPill';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -107,54 +108,24 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <SearchButton>Search</SearchButton>
         </SearchForm>
         <PillContainer>
-          <PillBody
-            onClick={() => {
-              dispatch(loadSearchedRecipes(0, 'Casserole', sortSelected));
-              setSearchQuery('Casserole');
-              setLastSearch('Casserole');
-              history.push({
-                pathname: '/search',
-                search: `?query=Casserole`,
-                state: {
-                  update: true,
-                },
-              });
-            }}
-          >
-            <PillTitle>Casserole</PillTitle>
-          </PillBody>
-          <PillBody
-            onClick={() => {
-              dispatch(loadSearchedRecipes(0, 'Cookies', sortSelected));
-              setSearchQuery('Cookies');
-              setLastSearch('Cookies');
-              history.push({
-                pathname: '/search',
-                search: `?query=Cookies`,
-                state: {
-                  update: true,
-                },
-              });
-            }}
-          >
-            <PillTitle>Cookies</PillTitle>
-          </PillBody>
-          <PillBody
-            onClick={() => {
-              dispatch(loadSearchedRecipes(0, 'Cake', sortSelected));
-              setSearchQuery('Cake');
-              setLastSearch('Cake');
-              history.push({
-                pathname: '/search',
-                search: `?query=Cake`,
-                state: {
-                  update: true,
-                },
-              });
-            }}
-          >
-            <PillTitle>Cake</PillTitle>
-          </PillBody>
+          <SearchPill
+            setSearchQuery={setSearchQuery}
+            setLastSearch={setLastSearch}
+            sortSelected={sortSelected}
+            queryName="Casserole"
+          />
+          <SearchPill
+            setSearchQuery={setSearchQuery}
+            setLastSearch={setLastSearch}
+            sortSelected={sortSelected}
+            queryName="Cookies"
+          />
+          <SearchPill
+            setSearchQuery={setSearchQuery}
+            setLastSearch={setLastSearch}
+            sortSelected={sortSelected}
+            queryName="Cake"
+          />
         </PillContainer>
       </SearchBackground>
 
@@ -225,18 +196,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           ))
         )}
       </RecipeContainer>
-      {/* {items !== undefined && (
-        <InfiniteScroll
-          dataLength={items.length}
-          next={fetchMore}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-        >
-          {items.map((i, index) => (
-            <div key={index}>div - #{index}</div>
-          ))}
-        </InfiniteScroll>
-      )} */}
     </PageContainer>
   );
 };
@@ -469,40 +428,6 @@ const PillContainer = styled.div`
   @media (${size.xs}) {
     flex-wrap: wrap;
   }
-`;
-
-const PillBody = styled.div`
-  background: white;
-  border-radius: 8px;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  border-left: var(--highlight-color) 25px solid;
-  padding: 0rem 2rem;
-  margin-right: 3rem;
-  color: var(--header-color);
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
-  cursor: pointer;
-  transition: border-left 0.2s;
-  &:hover {
-    border-left: var(--button-hover-color) 25px solid;
-  }
-  @media (${size.xl}) {
-  }
-  @media (${size.lg}) {
-  }
-  @media (${size.md}) {
-    padding: 0rem 1.5rem;
-  }
-  @media (${size.sm}) {
-  }
-  @media (${size.xs}) {
-    display: none;
-  }
-`;
-
-const PillTitle = styled.span`
-  font-size: 1.8rem;
 `;
 
 const EndMessage = styled(motion.div)`

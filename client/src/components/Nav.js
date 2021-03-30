@@ -14,8 +14,8 @@ import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
 import YumLogo from '../images/Yum_Logo.svg';
-import size from '../responsiveStyles';
-import AccountDropdown from './Auth/AccountDropdown';
+import size from '../styles/responsiveStyles';
+import AccountDropdown from './AuthPage/AccountDropdown';
 import MobileNav from './MobileNav';
 
 const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {

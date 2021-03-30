@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import WelcomeImage from '../images/welcome_image.jpg';
-import WelcomeMask from '../images/blob.svg';
-import size from '../responsiveStyles';
+import WelcomeImage from '../../images/welcome_image.jpg';
+import WelcomeMask from '../../images/blob.svg';
+import size from '../../styles/responsiveStyles';
 
 const Welcome = () => {
   return (
