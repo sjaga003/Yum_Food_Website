@@ -125,12 +125,14 @@ const Auth = () => {
                   <Input
                     required
                     name="firstName"
+                    id="firstName"
                     onChange={handleChange}
                     onFocus={handleOnFocus}
                     onBlur={handleOnBlur}
                     value={'' || formData.firstName}
                   />
                   <InputLabel
+                    htmlFor="firstName"
                     variants={variant}
                     initial={'initial'}
                     animate={
@@ -144,6 +146,7 @@ const Auth = () => {
                 </InputContainer>
                 <InputContainer>
                   <Input
+                    id="lastName"
                     required
                     name="lastName"
                     onChange={handleChange}
@@ -152,6 +155,7 @@ const Auth = () => {
                     value={'' || formData.lastName}
                   />
                   <InputLabel
+                    htmlFor="lastName"
                     variants={variant}
                     initial={'initial'}
                     animate={
@@ -168,6 +172,7 @@ const Auth = () => {
           )}
           <InputContainer incorrectCredentials={incorrectCredentials}>
             <Input
+              id="email"
               incorrectCredentials={incorrectCredentials}
               required
               name="email"
@@ -178,6 +183,7 @@ const Auth = () => {
               value={'' || formData.email}
             />
             <InputLabel
+              htmlFor="email"
               incorrectCredentials={incorrectCredentials}
               variants={variant}
               initial={'initial'}
@@ -192,6 +198,7 @@ const Auth = () => {
           </InputContainer>
           <InputContainer incorrectCredentials={incorrectCredentials}>
             <InputLabel
+              htmlFor="password"
               incorrectCredentials={incorrectCredentials}
               variants={variant}
               initial={'initial'}
@@ -204,6 +211,7 @@ const Auth = () => {
               Password
             </InputLabel>
             <Input
+              id="password"
               incorrectCredentials={incorrectCredentials}
               required
               name="password"
@@ -221,6 +229,7 @@ const Auth = () => {
           {!isSignedUp && (
             <InputContainer>
               <Input
+                id="repeat_password"
                 required
                 type="password"
                 name="repeatPassword"
@@ -230,6 +239,7 @@ const Auth = () => {
                 value={'' || formData.repeatPassword}
               />
               <InputLabel
+                htmlFor="repeat_password"
                 variants={variant}
                 initial={'initial'}
                 animate={

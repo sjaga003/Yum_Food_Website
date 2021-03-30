@@ -25,7 +25,7 @@ const Home = () => {
           provident totam.
         </HeroDescription>
         <div>
-          <LearnMoreButton href="#">Learn More</LearnMoreButton>
+          <LearnMoreButton aria-label="Learn More">Learn More</LearnMoreButton>
         </div>
       </HomeContent>
       <ImageContainer>
@@ -174,8 +174,10 @@ const HeaderImg = styled.img`
   }
 `;
 
-const LearnMoreButton = styled.a`
+const LearnMoreButton = styled.button`
   margin: 0;
+  border: 0;
+  cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
   padding: 2rem 3rem;

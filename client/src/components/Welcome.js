@@ -8,7 +8,7 @@ const Welcome = () => {
   return (
     <WelcomeSection>
       <ImageContainer>
-        <ImageMask src={WelcomeImage} />
+        <ImageMask src={WelcomeImage} alt="Welcome Image" />
       </ImageContainer>
       <WelcomeText>
         <HeadingText>Welcome</HeadingText>
@@ -24,7 +24,7 @@ const Welcome = () => {
           vitae rem obcaecati alias quibusdam quisquam omnis minus harum. Non
           earum ut in?
         </ContentText>
-        <Button href="#">Click Me</Button>
+        <Button aria-label="Click Me">Click Me</Button>
       </WelcomeText>
     </WelcomeSection>
   );
@@ -179,9 +179,11 @@ const ContentText = styled.span`
   }
 `;
 
-const Button = styled.a`
+const Button = styled.button`
   margin: 0;
   text-decoration: none;
+  border: 0;
+  cursor: pointer;
   font-size: 2rem;
   padding: 1.5rem 3rem;
   background: var(--highlight-color);

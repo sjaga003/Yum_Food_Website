@@ -53,8 +53,11 @@ const Contact = () => {
               onBlur={handleOnBlur}
               onChange={handleOnChange}
               name="name"
+              label="Name"
+              id="name"
             />
             <InputLabel
+              htmlFor="name"
               variants={variant}
               initial={'initial'}
               animate={
@@ -70,12 +73,15 @@ const Contact = () => {
             <ValueInput
               required
               name="email"
+              label="Email"
               type="email"
+              id="email"
               onFocus={handleOnFocus}
               onBlur={handleOnBlur}
               onChange={handleOnChange}
             />
             <InputLabel
+              htmlFor="email"
               variants={variant}
               initial={'initial'}
               animate={
@@ -91,11 +97,14 @@ const Contact = () => {
             <MessageInput
               required
               name="message"
+              label="Message"
+              id="message"
               onFocus={handleOnFocus}
               onBlur={handleOnBlur}
               onChange={handleOnChange}
             />
             <InputLabel
+              htmlFor="message"
               variants={variant}
               initial={'initial'}
               className="textarea-label"
@@ -119,7 +128,7 @@ const Contact = () => {
               Message
             </InputLabel>
           </InputContainer>
-          <Button>Submit {'➞'}</Button>
+          <Button aria-label="Submit">Submit {'➞'}</Button>
         </Form>
       </ContactBox>
     </ContactSection>

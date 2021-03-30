@@ -90,6 +90,8 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
         >
           <SearchContainer>
             <SearchInput
+              id="search"
+              aria-label="search"
               onChange={(e) => setSearchQuery(e.target.value)}
               value={'' || searchQuery}
             />
