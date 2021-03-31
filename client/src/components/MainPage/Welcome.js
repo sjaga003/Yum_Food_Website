@@ -14,17 +14,16 @@ const Welcome = () => {
         <HeadingText>Welcome</HeadingText>
         <SubtitleText>About Yum</SubtitleText>
         <ContentText>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt,
-          doloremque explicabo iure nemo beatae, neque deserunt fuga assumenda
-          enim qui libero vero quaerat aut iste maxime porro! Autem, possimus
-          magni.
+          Yum pulls recipe data from the{' '}
+          <a href="https://spoonacular.com">Spoonacular API</a> and provides
+          users with easy to read, simple recipes. Choose from a wide variety of
+          recipes from a broad range of cultures and traditions.
         </ContentText>
         <ContentText>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita
-          vitae rem obcaecati alias quibusdam quisquam omnis minus harum. Non
-          earum ut in?
+          Looking to eat healthy? Yum provides you with accurate nutrition data
+          and serving sizes. It also displays dietary restrictions so you know
+          which recipes to avoid!
         </ContentText>
-        <Button aria-label="Click Me">Click Me</Button>
       </WelcomeText>
     </WelcomeSection>
   );
@@ -76,7 +75,7 @@ const ImageContainer = styled.div`
 const WelcomeSection = styled.section`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 300px;
   width: 100%;
@@ -94,14 +93,15 @@ const WelcomeSection = styled.section`
   @media (${size.sm}) {
   }
   @media (${size.xs}) {
+    margin-bottom: 100px;
   }
 `;
 const WelcomeText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 45vh;
   width: 50%;
+
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -109,7 +109,7 @@ const WelcomeText = styled.div`
   @media (${size.md}) {
     height: unset;
     width: 100%;
-    padding: 0 5vw;
+
     margin-top: 2rem;
   }
   @media (${size.sm}) {
@@ -162,49 +162,26 @@ const ContentText = styled.span`
   font-size: 1.8rem;
   color: var(--text-color);
   max-width: 55ch;
+  margin-bottom: 1rem;
 
+  a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
   }
   @media (${size.md}) {
     margin: 0;
-    margin-bottom: 3rem;
+
     font-size: 1.8rem;
     max-width: 100%;
   }
   @media (${size.sm}) {
-  }
-  @media (${size.xs}) {
-  }
-`;
-
-const Button = styled.button`
-  margin: 0;
-  text-decoration: none;
-  border: 0;
-  cursor: pointer;
-  font-size: 2rem;
-  padding: 1.5rem 3rem;
-  background: var(--highlight-color);
-  border-radius: 4px;
-  color: var(--bg-color);
-  align-self: flex-start;
-  transition: background 0.2s;
-  &:hover {
-    background: var(--button-hover-color);
-  }
-
-  @media (${size.xl}) {
-  }
-  @media (${size.lg}) {
-  }
-  @media (${size.md}) {
-    font-size: 1.8rem;
-    padding: 1.5rem 2.5rem;
-  }
-  @media (${size.sm}) {
-    padding: 1rem 2rem;
   }
   @media (${size.xs}) {
   }

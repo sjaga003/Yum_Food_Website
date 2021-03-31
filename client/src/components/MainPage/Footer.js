@@ -15,9 +15,8 @@ const Footer = () => {
             <img src={YumLogo} alt="Yum Logo" />
           </Logo>
           <Description>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-            tenetur? Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Consectetur, minus!
+            Yum provides users with easy to access recipes with a simple and
+            responsive design. Browse and save thousands of recipes today!
           </Description>
           <Icons>
             <Icon
@@ -49,9 +48,9 @@ const Footer = () => {
         <Column>
           <Heading>Links</Heading>
 
-          <Link>About Us</Link>
-          <Link>Terms of Use</Link>
-          <Link>Privacy Policy</Link>
+          <Link href="#">About Us</Link>
+          <Link href="#">Terms of Use</Link>
+          <Link href="#">Privacy Policy</Link>
         </Column>
         <Column>
           <Heading>Contact Us</Heading>
@@ -93,6 +92,7 @@ const FooterSection = styled.section`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  color: var(--header-color);
   & > * {
     padding: 0.5rem 0rem;
   }
@@ -179,11 +179,15 @@ const Heading = styled.span`
   font-weight: bold;
 `;
 
-const Link = styled.span`
+const Link = styled.a`
   list-style: none;
   font-family: var(--text-font);
   color: var(--header-color);
   font-size: 1.8rem;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const ContactInfo = styled.span`

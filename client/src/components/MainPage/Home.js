@@ -20,9 +20,9 @@ const Home = () => {
       <HomeContent>
         <Hero>Recipes At Your Fingertips</Hero>
         <HeroDescription>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-          eaque architecto voluptatem eius quasi veritatis. Dolor eius dolores
-          provident totam.
+          Browse thousands of recipes to find new inspiration for all your
+          cooking creations. Running low on time? Save the recipes to your
+          personal recipe book for later use!
         </HeroDescription>
         <div>
           <LearnMoreButton aria-label="Learn More">Learn More</LearnMoreButton>
@@ -118,7 +118,8 @@ const HeroDescription = styled.p`
   font-family: var(--text-font);
   color: var(--secondary-color);
   font-size: 2rem;
-  width: 75%;
+  width: 90%;
+  max-width: 50ch;
   margin: 3rem 0 3rem 0;
 
   @media (${size.xl}) {

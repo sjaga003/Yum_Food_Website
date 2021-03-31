@@ -10,12 +10,13 @@ import HowToSection from './HowToAnimation/HowToSection';
 import Nav from '../Nav';
 import RecipePreview from './RecipePreview';
 import Welcome from './Welcome';
+import styled from 'styled-components';
 
 const MainPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const isMobile = useSelector((state) => state.isMobile);
 
   return (
-    <>
+    <MainContainer>
       <Nav
         isCookBookOpen={isCookBookOpen}
         setIsCookBookOpen={setIsCookBookOpen}
@@ -23,7 +24,6 @@ const MainPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
       <Home />
       <Welcome />
       <HowToSection />
-      <Carousel />
       <AnimateSharedLayout type="switch">
         {!isMobile && (
           <CookBookSidebar
@@ -41,10 +41,15 @@ const MainPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           setIsCookBookOpen={setIsCookBookOpen}
         />
       </AnimateSharedLayout>
+      <Carousel />
       <Contact />
       <Footer />
-    </>
+    </MainContainer>
   );
 };
+
+const MainContainer = styled.div`
+  width: 100%;
+`;
 
 export default MainPage;

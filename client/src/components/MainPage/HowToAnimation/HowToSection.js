@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import OpenCardAnimation from './OpenCardAnimation';
 import DragAndDropAnimation from './DragAndDropAnimation';
 import size from '../../../styles/responsiveStyles';
+import { Link } from 'react-router-dom';
 
 const HowToSection = () => {
   const isMobile = useSelector((state) => state.isMobile);
@@ -14,10 +15,13 @@ const HowToSection = () => {
         <HeadingText>Our Services</HeadingText>
         <SubtitleText>How It Works</SubtitleText>
         <ContentText>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt,
-          doloremque explicabo iure nemo beatae, neque deserunt fuga assumenda
-          enim qui libero vero quaerat aut iste maxime porro! Autem, possimus
-          magni.
+          Click on a recipe card to view the full recipe instructions,
+          ingredients, and nutrition information.{' '}
+          <Link to="/auth">Login or create an account</Link> to save and access
+          your recipes.
+          {!isMobile
+            ? ' Drag the card to recipe sidebar on the right to add it to your recipe list.'
+            : ' Click the plus symbol to add the recipe to your recipe list.'}
         </ContentText>
       </TextContainer>
       {!isMobile ? <DragAndDropAnimation /> : <OpenCardAnimation />}
@@ -54,7 +58,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   width: 50%;
-  padding: 0 5rem;
+  padding: 0 5rem 0 0rem;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -115,7 +119,13 @@ const ContentText = styled.span`
   font-size: 1.8rem;
   color: var(--text-color);
   max-width: 55ch;
-
+  a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
