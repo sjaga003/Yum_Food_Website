@@ -6,18 +6,24 @@ import size from '../../styles/responsiveStyles';
 
 const Welcome = () => {
   return (
-    <WelcomeSection>
+    <WelcomeSection data-testid="welcome-container">
       <ImageContainer>
-        <ImageMask src={WelcomeImage} alt="Welcome Image" />
+        <ImageMask
+          data-testid="welcome-image"
+          src={WelcomeImage}
+          alt="Welcome Image"
+        />
       </ImageContainer>
       <WelcomeText>
         <HeadingText>Welcome</HeadingText>
         <SubtitleText>About Yum</SubtitleText>
         <ContentText>
           Yum pulls recipe data from the{' '}
-          <a href="https://spoonacular.com">Spoonacular API</a> and provides
-          users with easy to read, simple recipes. Choose from a wide variety of
-          recipes from a broad range of cultures and traditions.
+          <a data-testid="welcome-link" href="https://spoonacular.com">
+            Spoonacular API
+          </a>{' '}
+          and provides users with easy to read, simple recipes. Choose from a
+          wide variety of recipes from a broad range of cultures and traditions.
         </ContentText>
         <ContentText>
           Looking to eat healthy? Yum provides you with accurate nutrition data

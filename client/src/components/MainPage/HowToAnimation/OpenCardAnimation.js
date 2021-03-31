@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import size from '../../../styles/responsiveStyles';
 const OpenCardAnimation = () => {
   return (
-    <SVGContainer>
+    <SVGContainer data-testid="howto-animation-open">
       <svg
         viewBox="0 0 726 526"
         fill="none"

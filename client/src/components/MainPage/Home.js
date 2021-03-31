@@ -17,7 +17,7 @@ const Home = () => {
   }, [location.pathname, dispatch]);
 
   return (
-    <HomeContainer>
+    <HomeContainer data-testid="home-container">
       <HomeContent>
         <Hero>Recipes At Your Fingertips</Hero>
         <HeroDescription>
@@ -27,6 +27,7 @@ const Home = () => {
         </HeroDescription>
         <div>
           <LearnMoreButton
+            data-testid="home-button"
             spy={true}
             smooth={true}
             to="HowTo"
@@ -38,7 +39,12 @@ const Home = () => {
         </div>
       </HomeContent>
       <ImageContainer>
-        <HeaderImg draggable={false} src={SushiImage} alt="Header" />
+        <HeaderImg
+          data-testid="home-image"
+          draggable={false}
+          src={SushiImage}
+          alt="Header"
+        />
       </ImageContainer>
     </HomeContainer>
   );

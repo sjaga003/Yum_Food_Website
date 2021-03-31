@@ -4,7 +4,7 @@ import size from '../../../styles/responsiveStyles';
 
 const DragAndDropAnimation = () => {
   return (
-    <SVGContainer>
+    <SVGContainer data-testid="howto-animation-drag">
       <svg
         height="526"
         viewBox="0 0 729 526"

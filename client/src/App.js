@@ -74,8 +74,9 @@ function App() {
             </Content>
           </Route>
           <Route path="/auth">
-            <GlobalStyle background="auth" />
-            <Auth />
+            HELLO
+            {/* <GlobalStyle background="auth" />
+            <Auth /> */}
           </Route>
         </Switch>
       </BrowserRouter>

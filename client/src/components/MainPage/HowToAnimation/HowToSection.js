@@ -10,15 +10,17 @@ const HowToSection = () => {
   const isMobile = useSelector((state) => state.isMobile);
 
   return (
-    <Section name="HowTo">
+    <Section name="HowTo" data-testid="howto-container">
       <TextContainer>
         <HeadingText>Our Services</HeadingText>
         <SubtitleText>How It Works</SubtitleText>
         <ContentText>
           Click on a recipe card to view the full recipe instructions,
           ingredients, and nutrition information.{' '}
-          <Link to="/auth">Login or create an account</Link> to save and access
-          your recipes.
+          <Link data-testid="howto-link" to="/auth">
+            Login or create an account
+          </Link>{' '}
+          to save and access your recipes.
           {!isMobile
             ? ' Drag the card to recipe sidebar on the right to add it to your recipe list.'
             : ' Click the plus symbol to add the recipe to your recipe list.'}

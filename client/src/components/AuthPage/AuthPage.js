@@ -119,7 +119,7 @@ const Auth = () => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer data-testid="auth-container">
       <Nav />
 
       <Card>

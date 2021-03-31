@@ -1,6 +1,6 @@
-const initialState = { recipes: [], isLoading: true, isDone: false };
+export const initialState = { recipes: [], isLoading: true, isDone: false };
 
-const recipeCardsReducer = (state = initialState, action) => {
+export const recipeCardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'recipeCards/loadRandomRecipes':
       return {
