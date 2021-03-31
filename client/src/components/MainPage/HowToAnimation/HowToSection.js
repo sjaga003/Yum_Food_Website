@@ -68,6 +68,7 @@ const TextContainer = styled.div`
   @media (${size.md}) {
     height: unset;
     width: 100%;
+    padding: 0 5vw;
 
     margin-top: 2rem;
   }

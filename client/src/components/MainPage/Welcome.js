@@ -107,7 +107,7 @@ const WelcomeText = styled.div`
   flex-direction: column;
   justify-content: space-around;
   width: 50%;
-
+  padding: 0 5vw;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -115,7 +115,6 @@ const WelcomeText = styled.div`
   @media (${size.md}) {
     height: unset;
     width: 100%;
-
     margin-top: 2rem;
   }
   @media (${size.sm}) {
