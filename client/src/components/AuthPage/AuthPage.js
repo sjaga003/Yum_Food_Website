@@ -48,6 +48,16 @@ const Auth = () => {
     }
   };
 
+  const guestLogIn = (e) => {
+    dispatch(
+      authSignIn(
+        { email: 'guest@yum.com', password: 'guest' },
+        history,
+        setIncorrectCredentials
+      )
+    );
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -274,6 +284,11 @@ const Auth = () => {
             cookiePolicy="single_host_origin"
           />
         </Form>
+
+        <ModeButton onClick={(e) => guestLogIn(e)}>
+          Sign In as a Guest
+        </ModeButton>
+
         <ModeButton onClick={() => switchMode()}>
           {isSignedUp
             ? `Don't have an account? Sign Up `
@@ -508,6 +523,10 @@ const ModeButton = styled(Button)`
   background: none;
   color: var(--text-color);
   transition: none;
+  & + & {
+    margin-top: 0rem;
+  }
+
   &:hover {
     background: none;
   }
