@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
+import { Link } from 'react-scroll';
 import styled from 'styled-components';
 import { clearRecipeCards } from '../../actions/recipeCardsAction';
 import HeaderMask from '../../images/header_mask.svg';
@@ -25,7 +26,15 @@ const Home = () => {
           personal recipe book for later use!
         </HeroDescription>
         <div>
-          <LearnMoreButton aria-label="Learn More">Learn More</LearnMoreButton>
+          <LearnMoreButton
+            spy={true}
+            smooth={true}
+            to="HowTo"
+            offset={-50}
+            aria-label="Learn More"
+          >
+            Learn More
+          </LearnMoreButton>
         </div>
       </HomeContent>
       <ImageContainer>
@@ -175,7 +184,7 @@ const HeaderImg = styled.img`
   }
 `;
 
-const LearnMoreButton = styled.button`
+const LearnMoreButton = styled(Link)`
   margin: 0;
   border: 0;
   cursor: pointer;

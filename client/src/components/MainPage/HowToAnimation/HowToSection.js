@@ -10,7 +10,7 @@ const HowToSection = () => {
   const isMobile = useSelector((state) => state.isMobile);
 
   return (
-    <Section>
+    <Section name="HowTo">
       <TextContainer>
         <HeadingText>Our Services</HeadingText>
         <SubtitleText>How It Works</SubtitleText>
