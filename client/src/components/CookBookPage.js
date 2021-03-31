@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import { fetchToCookBook } from '../actions/cookBookAction';
 import {
-  clearRecipeCards,
-  setRecipeCards,
+  fetchToCookBook,
   sortRecipesByMeta,
   sortRecipesByPrice,
   sortRecipesByTime,
-} from '../actions/recipeCardsAction';
+} from '../actions/cookBookAction';
+import { clearRecipeCards, setRecipeCards } from '../actions/recipeCardsAction';
 import size from '../styles/responsiveStyles';
 import NeedAuthModal from './AuthPage/NeedAuthModal';
 import Nav from './Nav';

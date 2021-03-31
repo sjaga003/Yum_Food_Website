@@ -55,24 +55,6 @@ export const loadPreviewRecipes = (recipes) => {
   };
 };
 
-export const sortRecipesByTime = () => {
-  return {
-    type: 'recipeCards/sortRecipesByTime',
-  };
-};
-
-export const sortRecipesByMeta = () => {
-  return {
-    type: 'recipeCards/sortRecipesByMeta',
-  };
-};
-
-export const sortRecipesByPrice = () => {
-  return {
-    type: 'recipeCards/sortRecipesByPrice',
-  };
-};
-
 export const clearRecipeCards = () => {
   return {
     type: 'recipeCards/clearRecipeCards',

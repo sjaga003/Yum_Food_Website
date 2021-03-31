@@ -21,6 +21,7 @@ const Recipes = ({
       >
         <CardContainer>
           {fromCookBook &&
+            cookBook &&
             cookBook.map((recipe, index) => {
               return (
                 <RecipeCard

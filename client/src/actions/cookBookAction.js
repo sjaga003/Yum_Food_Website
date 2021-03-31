@@ -45,3 +45,21 @@ export const fetchToCookBook = () => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const sortRecipesByTime = () => {
+  return {
+    type: 'cookBook/sortRecipesByTime',
+  };
+};
+
+export const sortRecipesByMeta = () => {
+  return {
+    type: 'cookBook/sortRecipesByMeta',
+  };
+};
+
+export const sortRecipesByPrice = () => {
+  return {
+    type: 'cookBook/sortRecipesByPrice',
+  };
+};
