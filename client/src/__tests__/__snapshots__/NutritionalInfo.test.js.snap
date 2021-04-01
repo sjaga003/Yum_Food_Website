@@ -1,0 +1,1061 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render macros chart 1`] = `
+<div
+  data-testid="macros-chart"
+  style="transform: unset;"
+>
+  <div
+    class="recharts-wrapper"
+    style="position: relative; cursor: default; width: 400px; height: 250px;"
+  >
+    <svg
+      class="recharts-surface"
+      cx="50%"
+      cy="50%"
+      height="250"
+      version="1.1"
+      viewBox="0 0 400 250"
+      width="400"
+    >
+      <defs>
+        <clippath
+          id="recharts13-clip"
+        >
+          <rect
+            height="240"
+            width="390"
+            x="5"
+            y="5"
+          />
+        </clippath>
+      </defs>
+      <g
+        class="recharts-layer recharts-pie"
+      >
+        <g
+          class="recharts-layer"
+        >
+          <g
+            class="recharts-layer recharts-pie-sector"
+          />
+          <g
+            class="recharts-layer recharts-pie-sector"
+          />
+          <g
+            class="recharts-layer recharts-pie-sector"
+          />
+        </g>
+      </g>
+    </svg>
+    <div
+      class="recharts-legend-wrapper"
+      style="position: absolute; width: 390px; height: auto; left: 5px; bottom: 5px;"
+    >
+      <ul
+        class="recharts-default-legend"
+        style="padding: 0px; margin: 0px; text-align: center;"
+      >
+        <li
+          class="recharts-legend-item legend-item-0"
+          style="display: inline-block; margin-right: 10px;"
+        >
+          <svg
+            class="recharts-surface"
+            height="14"
+            style="display: inline-block; vertical-align: middle; margin-right: 4px;"
+            version="1.1"
+            viewBox="0 0 32 32"
+            width="14"
+          >
+            <path
+              class="recharts-legend-icon"
+              d="M0,4h32v24h-32z"
+              fill="#5ad"
+              stroke="none"
+            />
+          </svg>
+          <span
+            class="recharts-legend-item-text"
+            style="color: rgb(85, 170, 221);"
+          >
+            Fat
+          </span>
+        </li>
+        <li
+          class="recharts-legend-item legend-item-1"
+          style="display: inline-block; margin-right: 10px;"
+        >
+          <svg
+            class="recharts-surface"
+            height="14"
+            style="display: inline-block; vertical-align: middle; margin-right: 4px;"
+            version="1.1"
+            viewBox="0 0 32 32"
+            width="14"
+          >
+            <path
+              class="recharts-legend-icon"
+              d="M0,4h32v24h-32z"
+              fill="#e55"
+              stroke="none"
+            />
+          </svg>
+          <span
+            class="recharts-legend-item-text"
+            style="color: rgb(238, 85, 85);"
+          >
+            Carbohydrates
+          </span>
+        </li>
+        <li
+          class="recharts-legend-item legend-item-2"
+          style="display: inline-block; margin-right: 10px;"
+        >
+          <svg
+            class="recharts-surface"
+            height="14"
+            style="display: inline-block; vertical-align: middle; margin-right: 4px;"
+            version="1.1"
+            viewBox="0 0 32 32"
+            width="14"
+          >
+            <path
+              class="recharts-legend-icon"
+              d="M0,4h32v24h-32z"
+              fill="#8a0"
+              stroke="none"
+            />
+          </svg>
+          <span
+            class="recharts-legend-item-text"
+            style="color: rgb(136, 170, 0);"
+          >
+            Protein
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="recharts-tooltip-wrapper"
+      style="transform: translate(undefinedpx, undefinedpx); pointer-events: none; visibility: hidden; position: absolute; top: 0px; left: 0px;"
+    >
+      <div
+        class="recharts-default-tooltip"
+        style="margin: 0px; padding: 10px; background-color: rgb(255, 255, 255); border: 1px solid #ccc; white-space: nowrap;"
+      >
+        <p
+          class="recharts-tooltip-label"
+          style="margin: 0px;"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render mineral chart 1`] = `
+<div
+  data-testid="mineral-chart"
+  style="transform: unset;"
+>
+  <div
+    class="recharts-wrapper"
+    style="position: relative; cursor: default; width: 400px; height: 250px;"
+  >
+    <svg
+      class="recharts-surface"
+      cx="50%"
+      cy="50%"
+      height="250"
+      version="1.1"
+      viewBox="0 0 400 250"
+      width="400"
+    >
+      <defs>
+        <clippath
+          id="recharts11-clip"
+        >
+          <rect
+            height="240"
+            width="390"
+            x="5"
+            y="5"
+          />
+        </clippath>
+      </defs>
+      <g
+        class="recharts-polar-grid"
+      >
+        <g
+          class="recharts-polar-grid-angle"
+        >
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="200"
+            x2="200"
+            y1="113"
+            y2="35"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="207.71345131623846"
+            x2="257.85088487178854"
+            y1="115.80746668257227"
+            y2="56.05600011929198"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="211.8176930361465"
+            x2="288.6326977710987"
+            y1="122.91622186799684"
+            y2="109.37166400997627"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="210.39230484541326"
+            x2="277.9422863405995"
+            y1="131"
+            y2="170"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="204.10424171990803"
+            x2="230.78181289931018"
+            y1="136.2763114494309"
+            y2="209.57233587073176"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="195.89575828009197"
+            x2="169.21818710068982"
+            y1="136.2763114494309"
+            y2="209.57233587073176"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="189.60769515458674"
+            x2="122.05771365940052"
+            y1="131"
+            y2="170"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="188.1823069638535"
+            x2="111.36730222890128"
+            y1="122.91622186799684"
+            y2="109.37166400997626"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="192.28654868376154"
+            x2="142.14911512821146"
+            y1="115.80746668257227"
+            y2="56.056000119291994"
+          />
+        </g>
+        <g
+          class="recharts-polar-grid-concentric"
+        >
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,113L 207.71345131623846,115.80746668257227L 211.8176930361465,122.91622186799684L 210.39230484541326,131L 204.10424171990803,136.2763114494309L 195.89575828009197,136.2763114494309L 189.60769515458674,131L 188.1823069638535,122.91622186799684L 192.28654868376154,115.80746668257227Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,93.5L 220.247809705126,100.8696000417522L 231.02144421988456,119.53008240349169L 227.27980021920982,140.75L 210.77363451475856,154.60031755475612L 189.22636548524144,154.60031755475612L 172.72019978079018,140.75L 168.97855578011544,119.53008240349169L 179.752190294874,100.8696000417522Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,74L 232.7821680940135,85.93173340093213L 250.2251954036226,116.14394293898656L 244.16729559300637,150.5L 217.4430273096091,172.9243236600813L 182.5569726903909,172.9243236600813L 155.83270440699363,150.5L 149.7748045963774,116.14394293898654L 167.2178319059865,85.93173340093213Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,54.5L 245.31652648290103,70.99386676011204L 269.42894658736066,112.7578034744814L 261.0547909668029,160.25L 224.11242010445966,191.24832976540654L 175.88757989554034,191.24832976540654L 138.94520903319707,160.25L 130.57105341263934,112.7578034744814L 154.68347351709897,70.99386676011206Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,35L 257.85088487178854,56.05600011929198L 288.6326977710987,109.37166400997627L 277.9422863405995,170L 230.78181289931018,209.57233587073176L 169.21818710068982,209.57233587073176L 122.05771365940052,170L 111.36730222890128,109.37166400997626L 142.14911512821146,56.056000119291994Z"
+            fill="none"
+            stroke="#ccc"
+          />
+        </g>
+      </g>
+      <g
+        class="recharts-layer recharts-polar-angle-axis"
+      >
+        <path
+          class="recharts-polygon angleAxis"
+          cx="200"
+          cy="125"
+          d="M200,35L257.85088487178854,56.05600011929198L288.6326977710987,109.37166400997627L277.9422863405995,170L230.78181289931018,209.57233587073176L169.21818710068982,209.57233587073176L122.05771365940052,170L111.36730222890128,109.37166400997626L142.14911512821146,56.056000119291994L200,35Z"
+          fill="none"
+          orientation="outer"
+          radius="90"
+          type="category"
+        />
+        <g
+          class="recharts-layer recharts-polar-angle-axis-ticks"
+        >
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="200"
+              x2="200"
+              y1="35"
+              y2="27"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="middle"
+              type="category"
+              x="200"
+              y="27"
+            >
+              <tspan
+                dy="0em"
+                x="200"
+              >
+                Manganese
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="257.85088487178854"
+              x2="262.9931857492809"
+              y1="56.05600011929198"
+              y2="49.92764457434015"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="start"
+              type="category"
+              x="262.9931857492809"
+              y="49.92764457434015"
+            >
+              <tspan
+                dy="0em"
+                x="262.9931857492809"
+              >
+                Copper
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="288.6326977710987"
+              x2="296.51115979519636"
+              y1="109.37166400997627"
+              y2="107.98247858864083"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="start"
+              type="category"
+              x="296.51115979519636"
+              y="107.98247858864083"
+            >
+              <tspan
+                dy="0em"
+                x="296.51115979519636"
+              >
+                Magnesium
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="277.9422863405995"
+              x2="284.870489570875"
+              y1="170"
+              y2="174"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="start"
+              type="category"
+              x="284.870489570875"
+              y="174"
+            >
+              <tspan
+                dy="0em"
+                x="284.870489570875"
+              >
+                Phosphorus
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="230.78181289931018"
+              x2="233.51797404591554"
+              y1="209.57233587073176"
+              y2="217.089876837019"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="start"
+              type="category"
+              x="233.51797404591554"
+              y="217.089876837019"
+            >
+              <tspan
+                dy="0em"
+                x="233.51797404591554"
+              >
+                Iron
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="169.21818710068982"
+              x2="166.48202595408446"
+              y1="209.57233587073176"
+              y2="217.089876837019"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="end"
+              type="category"
+              x="166.48202595408446"
+              y="217.089876837019"
+            >
+              <tspan
+                dy="0em"
+                x="166.48202595408446"
+              >
+                Potassium
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="122.05771365940052"
+              x2="115.129510429125"
+              y1="170"
+              y2="174"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="end"
+              type="category"
+              x="115.129510429125"
+              y="174"
+            >
+              <tspan
+                dy="0em"
+                x="115.129510429125"
+              >
+                Calcium
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="111.36730222890128"
+              x2="103.48884020480361"
+              y1="109.37166400997626"
+              y2="107.98247858864082"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="end"
+              type="category"
+              x="103.48884020480361"
+              y="107.98247858864082"
+            >
+              <tspan
+                dy="0em"
+                x="103.48884020480361"
+              >
+                Zinc
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="142.14911512821146"
+              x2="137.00681425071912"
+              y1="56.056000119291994"
+              y2="49.927644574340164"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="end"
+              type="category"
+              x="137.00681425071912"
+              y="49.927644574340164"
+            >
+              <tspan
+                dy="0em"
+                x="137.00681425071912"
+              >
+                Selenium
+              </tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+      <g
+        class="recharts-layer recharts-polar-radius-axis"
+      />
+      <g
+        class="recharts-layer recharts-radar"
+      >
+        <g
+          class="recharts-layer recharts-radar-polygon"
+        >
+          <path
+            class="recharts-polygon"
+            d="M200,125L200,125L200,125L200,125L200,125L200,125L200,125L200,125L200,125L200,125Z"
+            fill="#e98a4b"
+            fill-opacity="0.6"
+            name="Percent of Daily Needs"
+            stroke="#e98a4b"
+          />
+        </g>
+      </g>
+    </svg>
+    <div
+      class="recharts-tooltip-wrapper"
+      style="transform: translate(undefinedpx, undefinedpx); pointer-events: none; visibility: hidden; position: absolute; top: 0px; left: 0px;"
+    >
+      <div
+        class="recharts-default-tooltip"
+        style="margin: 0px; padding: 10px; background-color: rgb(255, 255, 255); border: 1px solid #ccc; white-space: nowrap;"
+      >
+        <p
+          class="recharts-tooltip-label"
+          style="margin: 0px;"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render vitamin chart 1`] = `
+<div
+  data-testid="vitamin-chart"
+  style="transform: unset; order: 3;"
+>
+  <div
+    class="recharts-wrapper"
+    style="position: relative; cursor: default; width: 400px; height: 250px;"
+  >
+    <svg
+      class="recharts-surface"
+      cx="50%"
+      cy="50%"
+      height="250"
+      version="1.1"
+      viewBox="0 0 400 250"
+      width="400"
+    >
+      <defs>
+        <clippath
+          id="recharts3-clip"
+        >
+          <rect
+            height="240"
+            width="390"
+            x="5"
+            y="5"
+          />
+        </clippath>
+      </defs>
+      <g
+        class="recharts-polar-grid"
+      >
+        <g
+          class="recharts-polar-grid-angle"
+        >
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="200"
+            x2="200"
+            y1="113"
+            y2="35"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="211.41267819554184"
+            x2="285.5950864665638"
+            y1="121.29179606750063"
+            y2="97.18847050625473"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="207.05342302750967"
+            x2="252.90067270632258"
+            y1="134.70820393249937"
+            y2="197.81152949374527"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="192.94657697249033"
+            x2="147.09932729367742"
+            y1="134.70820393249937"
+            y2="197.81152949374527"
+          />
+          <line
+            cx="200"
+            cy="125"
+            stroke="#ccc"
+            x1="188.58732180445816"
+            x2="114.40491353343617"
+            y1="121.29179606750063"
+            y2="97.18847050625475"
+          />
+        </g>
+        <g
+          class="recharts-polar-grid-concentric"
+        >
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,113L 211.41267819554184,121.29179606750063L 207.05342302750967,134.70820393249937L 192.94657697249033,134.70820393249937L 188.58732180445816,121.29179606750063Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,93.5L 229.95828026329733,115.26596467718916L 218.51523544721292,150.48403532281085L 181.4847645527871,150.48403532281085L 170.04171973670265,115.26596467718916Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,74L 248.50388233105284,109.24013328687768L 229.97704786691614,166.25986671312234L 170.0229521330839,166.25986671312234L 151.49611766894716,109.2401332868777Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,54.5L 267.0494843988083,103.21430189656621L 241.43886028661936,182.0356981034338L 158.56113971338067,182.0356981034338L 132.95051560119168,103.21430189656621Z"
+            fill="none"
+            stroke="#ccc"
+          />
+          <path
+            class="recharts-polar-grid-concentric-polygon"
+            cx="200"
+            cy="125"
+            d="M 200,35L 285.5950864665638,97.18847050625473L 252.90067270632258,197.81152949374527L 147.09932729367742,197.81152949374527L 114.40491353343617,97.18847050625475Z"
+            fill="none"
+            stroke="#ccc"
+          />
+        </g>
+      </g>
+      <g
+        class="recharts-layer recharts-polar-angle-axis"
+      >
+        <path
+          class="recharts-polygon angleAxis"
+          cx="200"
+          cy="125"
+          d="M200,35L285.5950864665638,97.18847050625473L252.90067270632258,197.81152949374527L147.09932729367742,197.81152949374527L114.40491353343617,97.18847050625475L200,35Z"
+          fill="none"
+          orientation="outer"
+          radius="90"
+          type="category"
+        />
+        <g
+          class="recharts-layer recharts-polar-angle-axis-ticks"
+        >
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="200"
+              x2="200"
+              y1="35"
+              y2="27"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="middle"
+              type="category"
+              x="200"
+              y="27"
+            >
+              <tspan
+                dy="0em"
+                x="200"
+              >
+                Vitamin C
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="285.5950864665638"
+              x2="293.20353859692506"
+              y1="97.18847050625473"
+              y2="94.71633455125516"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="start"
+              type="category"
+              x="293.20353859692506"
+              y="94.71633455125516"
+            >
+              <tspan
+                dy="0em"
+                x="293.20353859692506"
+              >
+                Vitamin K
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="252.90067270632258"
+              x2="257.60295472466237"
+              y1="197.81152949374527"
+              y2="204.28366544874484"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="start"
+              type="category"
+              x="257.60295472466237"
+              y="204.28366544874484"
+            >
+              <tspan
+                dy="0em"
+                x="257.60295472466237"
+              >
+                Vitamin B6
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="147.09932729367742"
+              x2="142.39704527533763"
+              y1="197.81152949374527"
+              y2="204.28366544874484"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="end"
+              type="category"
+              x="142.39704527533763"
+              y="204.28366544874484"
+            >
+              <tspan
+                dy="0em"
+                x="142.39704527533763"
+              >
+                Vitamin A
+              </tspan>
+            </text>
+          </g>
+          <g
+            class="recharts-layer recharts-polar-angle-axis-tick"
+          >
+            <line
+              class="angleAxis"
+              cx="200"
+              cy="125"
+              fill="none"
+              orientation="outer"
+              radius="90"
+              type="category"
+              x1="114.40491353343617"
+              x2="106.79646140307494"
+              y1="97.18847050625475"
+              y2="94.71633455125516"
+            />
+            <text
+              class="recharts-text recharts-polar-angle-axis-tick-value"
+              cx="200"
+              cy="125"
+              orientation="outer"
+              radius="90"
+              stroke="none"
+              text-anchor="end"
+              type="category"
+              x="106.79646140307494"
+              y="94.71633455125516"
+            >
+              <tspan
+                dy="0em"
+                x="106.79646140307494"
+              >
+                Vitamin E
+              </tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+      <g
+        class="recharts-layer recharts-polar-radius-axis"
+      />
+      <g
+        class="recharts-layer recharts-radar"
+      >
+        <g
+          class="recharts-layer recharts-radar-polygon"
+        >
+          <path
+            class="recharts-polygon"
+            d="M200,125L200,125L200,125L200,125L200,125L200,125Z"
+            fill="#8884d8"
+            fill-opacity="0.6"
+            name="Percent of Daily Needs"
+            stroke="#8884d8"
+          />
+        </g>
+      </g>
+    </svg>
+    <div
+      class="recharts-tooltip-wrapper"
+      style="transform: translate(undefinedpx, undefinedpx); pointer-events: none; visibility: hidden; position: absolute; top: 0px; left: 0px;"
+    >
+      <div
+        class="recharts-default-tooltip"
+        style="margin: 0px; padding: 10px; background-color: rgb(255, 255, 255); border: 1px solid #ccc; white-space: nowrap;"
+      >
+        <p
+          class="recharts-tooltip-label"
+          style="margin: 0px;"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

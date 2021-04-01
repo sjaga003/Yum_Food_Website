@@ -22,7 +22,7 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
         }
       }}
     >
-      <Card>
+      <Card data-testid="need-auth-container">
         <CardSection>
           <div>
             <HeadingText>Want More?</HeadingText>
@@ -33,12 +33,12 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
             then save them to your personal recipe list!
           </ContentText>
 
-          <Link to="/auth">
+          <Link to="/auth" data-testid="need-auth-button">
             <Button>Sign Up or Sign In </Button>
           </Link>
         </CardSection>
         <CardSection>
-          <img src={CardSave} alt="Card Save" />
+          <img data-testid="need-auth-image" src={CardSave} alt="Card Save" />
         </CardSection>
       </Card>
     </CardShadow>

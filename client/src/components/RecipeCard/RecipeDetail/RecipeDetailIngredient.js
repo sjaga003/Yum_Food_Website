@@ -11,9 +11,10 @@ const RecipeDetailIngredient = ({
   ingredientsList,
 }) => {
   return (
-    <IngredientCard>
+    <IngredientCard data-testid="ingredient-container">
       <IngredientImage>
         <img
+          data-testid="ingredient-image"
           src={
             ingredientsList.find(
               (el) =>
@@ -34,8 +35,8 @@ const RecipeDetailIngredient = ({
           alt={item.name}
         />
       </IngredientImage>
-      <IngredientName>{item.name}</IngredientName>
-      <IngredientAmount>
+      <IngredientName data-testid="ingredient-name">{item.name}</IngredientName>
+      <IngredientAmount data-testid="ingredient-amount">
         {Math.round(
           ((item.amount / defaultServing) * serving + Number.EPSILON) * 100
         ) / 100}{' '}

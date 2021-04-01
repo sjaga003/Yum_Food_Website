@@ -66,10 +66,14 @@ const RecipeDetail = ({
         }
       }}
     >
-      <Card layoutId={`recipeCard-${recipe.id}`}>
+      <Card
+        data-testid="recipe-detail-container"
+        layoutId={`recipeCard-${recipe.id}`}
+      >
         <CardContent>
           <TopRow>
             <FontAwesomeIcon
+              data-testid="recipe-detail-close"
               onClick={() => {
                 setRecipeCardState({ ...recipeCardState, isDetailOpen: false });
                 document.body.style.overflowY = 'auto';
@@ -163,6 +167,7 @@ const RecipeDetail = ({
                     <StatData>
                       <ServingContainer>
                         <button
+                          data-testid="serving-size-minus"
                           onClick={() =>
                             servingSize > 1
                               ? setServingSize(servingSize - 1)
@@ -172,12 +177,16 @@ const RecipeDetail = ({
                           -
                         </button>
                         <input
+                          data-testid="serving-size-input"
                           readOnly={true}
                           type="number"
                           value={servingSize}
                           style={{ color: 'var(--header-color)' }}
                         />
-                        <button onClick={() => setServingSize(servingSize + 1)}>
+                        <button
+                          data-testid="serving-size-plus"
+                          onClick={() => setServingSize(servingSize + 1)}
+                        >
                           +
                         </button>
                       </ServingContainer>

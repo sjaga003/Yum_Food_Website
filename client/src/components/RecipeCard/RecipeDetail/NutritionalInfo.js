@@ -143,6 +143,7 @@ const NutritionalInfo = ({ recipe }) => {
   return (
     <>
       <div
+        data-testid="vitamin-chart"
         style={{
           transform: changeSize ? 'scale(0.8)' : 'unset',
           order: isMobile ? -1 : 3,
@@ -195,7 +196,10 @@ const NutritionalInfo = ({ recipe }) => {
           ''
         )}
       </div>
-      <div style={{ transform: changeSize ? 'scale(0.8)' : 'unset' }}>
+      <div
+        data-testid="mineral-chart"
+        style={{ transform: changeSize ? 'scale(0.8)' : 'unset' }}
+      >
         {nutrientData.minerals ? (
           nutrientData.minerals.length > 2 ? (
             <RadarChart
@@ -243,7 +247,10 @@ const NutritionalInfo = ({ recipe }) => {
           ''
         )}
       </div>
-      <div style={{ transform: changeSize ? 'scale(0.8)' : 'unset' }}>
+      <div
+        data-testid="macros-chart"
+        style={{ transform: changeSize ? 'scale(0.8)' : 'unset' }}
+      >
         <PieChart width={400} height={250}>
           <Pie
             data={nutrientData.macros}

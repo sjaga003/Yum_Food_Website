@@ -3,11 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 import size from '../../../styles/responsiveStyles';
 
-const RecipeDetailInstruction = ({ instruction, recipe }) => {
+const RecipeDetailInstruction = ({ instruction }) => {
   return (
-    <RecipeInstruction>
-      <InstructionNumber>#{instruction.number}</InstructionNumber>
-      <InstructionText>{instruction.step}</InstructionText>
+    <RecipeInstruction data-testid="instruction-container">
+      <InstructionNumber data-testid="instruction-number">
+        #{instruction.number}
+      </InstructionNumber>
+      <InstructionText data-testid="instruction-text">
+        {instruction.step}
+      </InstructionText>
     </RecipeInstruction>
   );
 };

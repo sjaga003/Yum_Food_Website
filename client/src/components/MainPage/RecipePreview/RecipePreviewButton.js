@@ -14,6 +14,7 @@ const RecipePreviewButton = ({
 
   return (
     <Button
+      data-testid="recipe-preview-button"
       name={name}
       active={activeButton === name}
       onClick={() => {

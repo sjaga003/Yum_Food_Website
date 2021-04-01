@@ -35,6 +35,7 @@ const RecipeCard = ({
   setIsCookBookOpen,
   fromCookBook,
   databaseId,
+  testing,
 }) => {
   const recipeDetails = useSelector((state) => state.recipeCards);
   const user = useSelector((state) => state.auth.authData);
@@ -94,7 +95,8 @@ const RecipeCard = ({
   const onCardClick = () => {
     if (
       cardRef.current.style.transform ===
-      'translate3d(0px, 0px, 0px) scale(1, 1)'
+        'translate3d(0px, 0px, 0px) scale(1, 1)' ||
+      testing
     ) {
       setRecipeDetail(
         recipeDetails.recipes.results.find(
@@ -148,7 +150,7 @@ const RecipeCard = ({
         onDragEnd={endDrag}
         layout
         layoutId={`recipeCard-${recipe.id}`}
-        data-testid="recipeCard"
+        data-testid="recipe-card"
         data-recipe-id={recipe.id}
         variants={variant}
         initial="hidden"
@@ -159,9 +161,11 @@ const RecipeCard = ({
           {!imageLoaded && <Spinner size="4x" icon={faSync} spin />}
           {fromCookBook && (
             <DeleteContainer
+              data-testid="recipe-card-cookbook-delete"
               className="deleteContainer"
               onClick={(e) => {
                 e.stopPropagation();
+                console.log('JELLLO');
                 dispatch(removeFromCookBook(databaseId));
               }}
             >
@@ -170,6 +174,7 @@ const RecipeCard = ({
           )}
           {isMobile && !fromCookBook && (
             <MobileButtonContainer
+              data-testid="recipe-card-mobile-add-button"
               onClick={(e) => {
                 e.stopPropagation();
                 if (!user) {
@@ -186,7 +191,7 @@ const RecipeCard = ({
           <FoodImage
             style={!imageLoaded ? { display: 'none' } : { display: 'block' }}
             draggable={false}
-            data-testid="recipeCardImage"
+            data-testid="recipe-card-image"
             src={recipe.image ? recipe.image : MissingImage}
             onLoad={() => setImageLoaded(true)}
             alt={`${recipe.title}`}

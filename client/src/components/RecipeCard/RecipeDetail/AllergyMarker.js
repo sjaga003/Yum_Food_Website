@@ -6,11 +6,17 @@ import size from '../../../styles/responsiveStyles';
 
 const AllergyMarker = ({ iconName, labelName, external }) => {
   return (
-    <AllergyContainer>
-      <AllergyIconContainer>
-        {external ? iconName : <AllergyIcon icon={iconName} />}
+    <AllergyContainer data-testid="allergy-marker-container">
+      <AllergyIconContainer data-testid="allergy-marker-icon-container">
+        {external ? (
+          iconName
+        ) : (
+          <AllergyIcon data-testid="allergy-marker-icon" icon={iconName} />
+        )}
       </AllergyIconContainer>
-      <AllergyLabel>{labelName}</AllergyLabel>
+      <AllergyLabel data-testid="allergy-marker-label">
+        {labelName}
+      </AllergyLabel>
     </AllergyContainer>
   );
 };

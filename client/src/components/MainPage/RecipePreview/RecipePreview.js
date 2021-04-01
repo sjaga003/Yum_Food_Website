@@ -25,7 +25,7 @@ const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const [activeButton, setActiveButton] = useState('Popular');
 
   return (
-    <RecipePreviewSection>
+    <RecipePreviewSection data-testid="recipe-preview-container">
       <Navigation>
         <Header>
           <Heading>Explore</Heading> <SubHeading>Our Recipes</SubHeading>
