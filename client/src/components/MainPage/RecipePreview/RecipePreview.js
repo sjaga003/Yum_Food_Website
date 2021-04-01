@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styled, { css } from 'styled-components';
-import { loadPreviewRecipes } from '../../actions/recipeCardsAction';
+import styled from 'styled-components';
+import { loadPreviewRecipes } from '../../../actions/recipeCardsAction';
 import {
   recipePreviewAppetizer,
   recipePreviewBreakfast,
   recipePreviewDessert,
   recipePreviewPopular,
   recipePreviewVegetarian,
-} from '../../recipePreviewData';
-import size from '../../styles/responsiveStyles';
-import Recipes from '../Recipes';
+} from '../../../recipePreviewData';
+import size from '../../../styles/responsiveStyles';
+import Recipes from '../../Recipes';
+import RecipePreviewButton from './RecipePreviewButton';
 
 const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
@@ -30,56 +31,36 @@ const RecipePreview = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
           <Heading>Explore</Heading> <SubHeading>Our Recipes</SubHeading>
         </Header>
         <ButtonContainer>
-          <Button
-            name="Popular"
-            active={activeButton === 'Popular'}
-            onClick={() => {
-              dispatch(loadPreviewRecipes(recipePreviewPopular()));
-              setActiveButton('Popular');
-            }}
-          >
-            Popular
-          </Button>
-          <Button
-            name="Breakfast"
-            active={activeButton === 'Breakfast'}
-            onClick={() => {
-              dispatch(loadPreviewRecipes(recipePreviewBreakfast()));
-              setActiveButton('Breakfast');
-            }}
-          >
-            Breakfast
-          </Button>
-          <Button
-            name="Appetizer"
-            active={activeButton === 'Appetizer'}
-            onClick={() => {
-              dispatch(loadPreviewRecipes(recipePreviewAppetizer()));
-              setActiveButton('Appetizer');
-            }}
-          >
-            Appetizer
-          </Button>
-          <Button
-            name="Dessert"
-            active={activeButton === 'Dessert'}
-            onClick={() => {
-              dispatch(loadPreviewRecipes(recipePreviewDessert()));
-              setActiveButton('Dessert');
-            }}
-          >
-            Dessert
-          </Button>
-          <Button
-            name="Vegetarian"
-            active={activeButton === 'Vegetarian'}
-            onClick={() => {
-              dispatch(loadPreviewRecipes(recipePreviewVegetarian()));
-              setActiveButton('Vegetarian');
-            }}
-          >
-            Vegetarian
-          </Button>
+          <RecipePreviewButton
+            name={'Popular'}
+            recipes={recipePreviewPopular()}
+            activeButton={activeButton}
+            setActiveButton={setActiveButton}
+          />
+          <RecipePreviewButton
+            name={'Breakfast'}
+            recipes={recipePreviewBreakfast()}
+            activeButton={activeButton}
+            setActiveButton={setActiveButton}
+          />
+          <RecipePreviewButton
+            name={'Appetizer'}
+            recipes={recipePreviewAppetizer()}
+            activeButton={activeButton}
+            setActiveButton={setActiveButton}
+          />
+          <RecipePreviewButton
+            name={'Dessert'}
+            recipes={recipePreviewDessert()}
+            activeButton={activeButton}
+            setActiveButton={setActiveButton}
+          />
+          <RecipePreviewButton
+            name={'Vegetarian'}
+            recipes={recipePreviewVegetarian()}
+            activeButton={activeButton}
+            setActiveButton={setActiveButton}
+          />
         </ButtonContainer>
       </Navigation>
 
@@ -175,36 +156,6 @@ const ButtonContainer = styled.div`
   }
   @media (${size.md}) {
     width: 100%;
-  }
-  @media (${size.sm}) {
-  }
-  @media (${size.xs}) {
-  }
-`;
-
-const Button = styled.button`
-  border: 0;
-  padding: 1rem 2rem;
-  font-family: var(--text-font);
-  font-size: 1.8rem;
-  cursor: pointer;
-  outline: none;
-  background: transparent;
-  color: var(--text-color);
-
-  ${({ active }) =>
-    active &&
-    css`
-      background: var(--highlight-color);
-      color: white;
-    `}
-
-  @media (${size.xl}) {
-  }
-  @media (${size.lg}) {
-    flex-grow: 2;
-  }
-  @media (${size.md}) {
   }
   @media (${size.sm}) {
   }

@@ -8,7 +8,7 @@ import Footer from './Footer';
 import Home from './Home';
 import HowToSection from './HowToAnimation/HowToSection';
 import Nav from '../Nav';
-import RecipePreview from './RecipePreview';
+import RecipePreview from './RecipePreview/RecipePreview';
 import Welcome from './Welcome';
 import styled from 'styled-components';
 
