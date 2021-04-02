@@ -473,11 +473,12 @@ const Carousel = () => {
   }, [position, controls]);
 
   return (
-    <CarouselContainer>
+    <CarouselContainer data-testid="carousel-container">
       <HeadingText>In a rush</HeadingText>
       <SubtitleText>Quicksearch</SubtitleText>
       <ButtonContainer>
         <CarouselButton
+          data-testid="carousel-left"
           aria-label="Quicksearch Left"
           initial={{
             color: 'var(--highlight-color)',
@@ -506,6 +507,7 @@ const Carousel = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
         </CarouselButton>
         <CarouselButton
+          data-testid="carousel-right"
           aria-label="Quicksearch Right"
           initial={{
             color: 'var(--highlight-color)',
@@ -546,6 +548,7 @@ const Carousel = () => {
         >
           {quickSearchCards.map((item, index) => (
             <CarouselDiv
+              data-testid={`carousel-card-${item.name}`}
               key={`carouselCard-${item.name}`}
               style={{ background: item }}
               initial={{
@@ -559,6 +562,7 @@ const Carousel = () => {
             >
               {index === position.index ? (
                 <Link
+                  data-testid={`carousel-link-${item.name}`}
                   draggable={false}
                   style={{ textDecoration: 'none' }}
                   to={`/search?query=${item.name}`}

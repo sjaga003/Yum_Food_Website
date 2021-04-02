@@ -80,7 +80,7 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   }
 
   return (
-    <Navigation id="navbar">
+    <Navigation data-testid="nav-container" id="navbar">
       <LeftContainer>
         {isMobile && (
           <>
@@ -91,19 +91,31 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
         )}
 
         <Logo onClick={() => animateScroll.scrollToTop()}>
-          <img src={YumLogo} alt="Yum Logo" />
+          <img data-testid="nav-logo" src={YumLogo} alt="Yum Logo" />
         </Logo>
       </LeftContainer>
       <NavLinks>
         {!isMobile && (
           <>
-            <NavItem to="/">
+            <NavItem
+              data-testid="nav-home"
+              onClick={() => animateScroll.scrollToTop()}
+              to="/"
+            >
               <NavIcon icon={faHome} /> Home
             </NavItem>
-            <NavItem to="/cookbook">
+            <NavItem
+              data-testid="nav-cookbook"
+              onClick={() => animateScroll.scrollToTop()}
+              to="/cookbook"
+            >
               <NavIcon icon={faBookOpen} /> My Recipes
             </NavItem>
-            <NavItem to="/search">
+            <NavItem
+              data-testid="nav-search"
+              onClick={() => animateScroll.scrollToTop()}
+              to="/search"
+            >
               <NavIcon icon={faSearch} /> Search
             </NavItem>
           </>
@@ -135,7 +147,11 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
             </LoginContainer>
           </>
         ) : (
-          <NavItem to="/auth">
+          <NavItem
+            data-testid="nav-auth"
+            onClick={() => animateScroll.scrollToTop()}
+            to="/auth"
+          >
             <NavIcon icon={faUserCircle} />
             Login
           </NavItem>

@@ -23,6 +23,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
     <>
       {isOpen && <Background onClick={() => setIsOpen(false)} />}
       <CardContainer
+        data-testid="nav-burger"
         initial={{ left: -500 }}
         animate={
           isOpen

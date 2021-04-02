@@ -3,15 +3,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import size from '../../styles/responsiveStyles';
 
-const Contact = () => {
-  const [contactFormData, setContactFormData] = useState({
+const Contact = ({ mockHandleSubmit }) => {
+  const initialContactFormData = {
     name: '',
     nameIsFocused: false,
     email: '',
     emailIsFocused: false,
     message: '',
     messageIsFocused: false,
-  });
+  };
+
+  const [contactFormData, setContactFormData] = useState(
+    initialContactFormData
+  );
 
   const handleOnChange = (e) => {
     setContactFormData({ ...contactFormData, [e.target.name]: e.target.value });
@@ -23,6 +27,15 @@ const Contact = () => {
   const handleOnBlur = (e) => {
     const focusName = `${e.target.name}IsFocused`;
     setContactFormData({ ...contactFormData, [focusName]: false });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      mockHandleSubmit();
+    } catch (error) {}
+
+    setContactFormData(initialContactFormData);
   };
 
   const variant = {
@@ -41,17 +54,23 @@ const Contact = () => {
   };
 
   return (
-    <ContactSection>
+    <ContactSection data-testid="contact-container">
       <ContactBox>
         <HeadingText>Have Questions?</HeadingText>
         <SubtitleText>Contact Us</SubtitleText>
-        <Form autoComplete="off">
+        <Form
+          data-testid="contact-form"
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
           <InputContainer>
             <ValueInput
+              data-testid="contact-name"
               required
               onFocus={handleOnFocus}
               onBlur={handleOnBlur}
               onChange={handleOnChange}
+              value={'' || contactFormData.name}
               name="name"
               label="Name"
               id="name"
@@ -71,11 +90,13 @@ const Contact = () => {
           </InputContainer>
           <InputContainer>
             <ValueInput
+              data-testid="contact-email"
               required
               name="email"
               label="Email"
               type="email"
               id="email"
+              value={'' || contactFormData.email}
               onFocus={handleOnFocus}
               onBlur={handleOnBlur}
               onChange={handleOnChange}
@@ -95,10 +116,12 @@ const Contact = () => {
           </InputContainer>
           <InputContainer>
             <MessageInput
+              data-testid="contact-message"
               required
               name="message"
               label="Message"
               id="message"
+              value={'' || contactFormData.message}
               onFocus={handleOnFocus}
               onBlur={handleOnBlur}
               onChange={handleOnChange}
@@ -128,7 +151,13 @@ const Contact = () => {
               Message
             </InputLabel>
           </InputContainer>
-          <Button aria-label="Submit">Submit {'➞'}</Button>
+          <Button
+            type="submit"
+            data-testid="contact-submit"
+            aria-label="Submit"
+          >
+            Submit {'➞'}
+          </Button>
         </Form>
       </ContactBox>
     </ContactSection>

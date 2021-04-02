@@ -9,10 +9,10 @@ import size from '../../styles/responsiveStyles';
 const Footer = () => {
   return (
     <>
-      <FooterSection>
+      <FooterSection data-testid="footer-container">
         <Column>
           <Logo>
-            <img src={YumLogo} alt="Yum Logo" />
+            <img data-testid="footer-image" src={YumLogo} alt="Yum Logo" />
           </Logo>
           <Description>
             Yum provides users with easy to access recipes with a simple and
@@ -29,7 +29,9 @@ const Footer = () => {
                 background: 'var(--highlight-color)',
               }}
             >
-              <FaIcon icon={faGithubAlt} />
+              <a data-testid="footer-github" href="https://github.com/sjaga003">
+                <FaIcon icon={faGithubAlt} />
+              </a>
             </Icon>
             <Icon
               initial={{
@@ -41,7 +43,12 @@ const Footer = () => {
                 background: 'var(--highlight-color)',
               }}
             >
-              <FaIcon icon={faLinkedinIn} />
+              <a
+                data-testid="footer-linkedin"
+                href="https://www.linkedin.com/in/suhas-jagannath/"
+              >
+                <FaIcon icon={faLinkedinIn} />
+              </a>
             </Icon>
           </Icons>
         </Column>
@@ -165,6 +172,9 @@ const Icon = styled(motion.li)`
   align-items: center;
   border-radius: 50%;
   border: 2px solid var(--highlight-color);
+  a {
+    color: inherit;
+  }
 `;
 
 const FaIcon = styled(FontAwesomeIcon)`
