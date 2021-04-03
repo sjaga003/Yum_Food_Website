@@ -61,11 +61,10 @@ const Contact = ({ mockHandleSubmit }) => {
         <Form
           data-testid="contact-form"
           autoComplete="off"
-          name="Yum-Contact"
-          method="POST"
-          netlify="true"
+          name="contact"
+          data-netlify="true"
         >
-          <input type="hidden" name="form-name" value="Yum-Contact" />
+          <input type="hidden" name="form-name" value="contact" />
           <InputContainer>
             <ValueInput
               data-testid="contact-name"
