@@ -1,15 +1,14 @@
 import { AnimateSharedLayout } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
 import styled from 'styled-components';
 import {
   fetchToCookBook,
+  setCookBook,
   sortRecipesByMeta,
   sortRecipesByPrice,
   sortRecipesByTime,
 } from '../actions/cookBookAction';
-import { clearRecipeCards, setRecipeCards } from '../actions/recipeCardsAction';
 import size from '../styles/responsiveStyles';
 import NeedAuthModal from './AuthPage/NeedAuthModal';
 import Nav from './Nav';
@@ -19,61 +18,42 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.authData);
   const cookBook = useSelector((state) => state.cookBook);
-  const [sortSelected, setSortSelected] = useState('meta-score');
-  const [needAuthOpen, setNeedAuthOpen] = useState(false);
-
-  const location = useLocation();
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
-    dispatch(clearRecipeCards());
-  }, [location.pathname, dispatch]);
+    console.log('open');
+    if (typeof window !== `undefined`) {
+      window.scrollTo(0, 0);
+    }
 
-  useEffect(() => {
-    const recipeObjects = cookBook.reduce((acc, curr) => {
-      acc.push(curr.recipeObject);
-      return acc;
-    }, []);
-
-    console.log(recipeObjects);
-    dispatch(setRecipeCards(recipeObjects));
-  }, [cookBook, dispatch]);
+    dispatch(fetchToCookBook(true));
+  }, []);
 
   useEffect(() => {
     if (user) {
-      setNeedAuthOpen(false);
-      if (!cookBook.length) {
-        dispatch(fetchToCookBook());
-      }
+      document.body.style.overflowY = 'auto';
     } else {
-      setNeedAuthOpen(true);
+      document.body.style.overflowY = 'hidden';
     }
-  }, [user, dispatch, cookBook.length]);
-
-  useEffect(() => {
-    if (sortSelected === 'time') {
-      dispatch(sortRecipesByTime());
-    } else if (sortSelected === 'meta-score') {
-      dispatch(sortRecipesByMeta());
-    } else if (sortSelected === 'price') {
-      dispatch(sortRecipesByPrice());
-    }
-  }, [sortSelected, dispatch]);
+  }, [user]);
 
   return (
     <PageContainer>
       <AnimateSharedLayout type="switch">
-        {needAuthOpen && (
-          <NeedAuthModal cantClose={true} setNeedAuthOpen={setNeedAuthOpen} />
-        )}
+        {!user && <NeedAuthModal cantClose={true} />}
         <Nav />
         <Title>My Recipes</Title>
         {cookBook ? (
           <>
             <SortSelect
+              onLoad={() => dispatch(sortRecipesByMeta())}
               onChange={(e) => {
-                setSortSelected(e.target.value);
+                if (e.target.value === 'time') {
+                  dispatch(sortRecipesByTime());
+                } else if (e.target.value === 'meta-score') {
+                  dispatch(sortRecipesByMeta());
+                } else if (e.target.value === 'price') {
+                  dispatch(sortRecipesByPrice());
+                }
               }}
             >
               <option value="meta-score">Best</option>

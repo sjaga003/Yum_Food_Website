@@ -1,13 +1,24 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEye,
+  faEyeSlash,
+  faLock,
+  faSyncAlt,
+  faUnlock,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled, { css } from 'styled-components';
-import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
+import {
+  authSignIn,
+  authSignUp,
+  getAuthData,
+  logoutUser,
+} from '../../actions/authAction';
 import size from '../../styles/responsiveStyles';
 import Nav from '../Nav';
 
@@ -35,11 +46,23 @@ const Auth = () => {
 
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
+  const [accessingDatabase, setAccessingDatabase] = useState(false);
+
+  const user = useSelector((state) => state.auth.authData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (isSignedUp) {
-      dispatch(authSignIn(formData, history, setIncorrectCredentials));
-      console.log(incorrectCredentials);
+      dispatch(
+        authSignIn(
+          formData,
+          history,
+          setIncorrectCredentials,
+          setAccessingDatabase
+        )
+      );
+
       if (!incorrectCredentials) {
         setFormData(initialFormData);
       }
@@ -53,7 +76,8 @@ const Auth = () => {
       authSignIn(
         { email: 'guest@yum.com', password: 'guest' },
         history,
-        setIncorrectCredentials
+        setIncorrectCredentials,
+        setAccessingDatabase
       )
     );
   };
@@ -95,6 +119,11 @@ const Auth = () => {
     console.error('Google Sign In was unsuccessful');
   };
 
+  const logout = () => {
+    dispatch(logoutUser());
+    history.push('/');
+  };
+
   useEffect(() => {
     if (formData.password === formData.repeatPassword) {
       setPasswordMatch(true);
@@ -102,6 +131,12 @@ const Auth = () => {
       setPasswordMatch(false);
     }
   }, [formData.password, formData.repeatPassword]);
+
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   const variant = {
     active: {
@@ -121,179 +156,200 @@ const Auth = () => {
   return (
     <PageContainer data-testid="auth-container">
       <Nav />
-
       <Card>
         <UserImage>
-          <FontAwesomeIcon icon={faLock} />
+          <FontAwesomeIcon icon={!user ? faLock : faUnlock} />
         </UserImage>
-        <Title>{isSignedUp ? 'Sign In' : 'Sign Up'}</Title>
-        <Form onSubmit={handleSubmit}>
-          {!isSignedUp && (
-            <>
-              <InputRow>
-                <InputContainer>
-                  <Input
-                    required
-                    name="firstName"
-                    id="firstName"
-                    onChange={handleChange}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    value={'' || formData.firstName}
-                  />
-                  <InputLabel
-                    htmlFor="firstName"
-                    variants={variant}
-                    initial={'initial'}
-                    animate={
-                      formData.firstName !== '' || formData.firstNameIsFocused
-                        ? 'active'
-                        : 'initial'
-                    }
-                  >
-                    First Name
-                  </InputLabel>
-                </InputContainer>
-                <InputContainer>
-                  <Input
-                    id="lastName"
-                    required
-                    name="lastName"
-                    onChange={handleChange}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    value={'' || formData.lastName}
-                  />
-                  <InputLabel
-                    htmlFor="lastName"
-                    variants={variant}
-                    initial={'initial'}
-                    animate={
-                      formData.lastName !== '' || formData.lastNameIsFocused
-                        ? 'active'
-                        : 'initial'
-                    }
-                  >
-                    Last Name
-                  </InputLabel>
-                </InputContainer>
-              </InputRow>
-            </>
-          )}
-          <InputContainer incorrectCredentials={incorrectCredentials}>
-            <Input
-              id="email"
-              incorrectCredentials={incorrectCredentials}
-              required
-              name="email"
-              type="email"
-              onChange={handleChange}
-              onFocus={handleOnFocus}
-              onBlur={handleOnBlur}
-              value={'' || formData.email}
-            />
-            <InputLabel
-              htmlFor="email"
-              incorrectCredentials={incorrectCredentials}
-              variants={variant}
-              initial={'initial'}
-              animate={
-                formData.email !== '' || formData.emailIsFocused
-                  ? 'active'
-                  : 'initial'
-              }
-            >
-              Email
-            </InputLabel>
-          </InputContainer>
-          <InputContainer incorrectCredentials={incorrectCredentials}>
-            <InputLabel
-              htmlFor="password"
-              incorrectCredentials={incorrectCredentials}
-              variants={variant}
-              initial={'initial'}
-              animate={
-                formData.password !== '' || formData.passwordIsFocused
-                  ? 'active'
-                  : 'initial'
-              }
-            >
-              Password
-            </InputLabel>
-            <Input
-              id="password"
-              incorrectCredentials={incorrectCredentials}
-              required
-              name="password"
-              type={showPassword ? 'text' : 'password'}
-              onChange={handleChange}
-              onFocus={handleOnFocus}
-              onBlur={handleOnBlur}
-              value={'' || formData.password}
-            />
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          </InputContainer>
-          {!isSignedUp && (
-            <InputContainer>
-              <Input
-                id="repeat_password"
-                required
-                type="password"
-                name="repeatPassword"
-                onChange={handleChange}
-                onFocus={handleOnFocus}
-                onBlur={handleOnBlur}
-                value={'' || formData.repeatPassword}
-              />
-              <InputLabel
-                htmlFor="repeat_password"
-                variants={variant}
-                initial={'initial'}
-                animate={
-                  formData.repeatPassword !== '' ||
-                  formData.repeatPasswordIsFocused
-                    ? 'active'
-                    : 'initial'
-                }
+        {!user ? (
+          <>
+            <Title>{isSignedUp ? 'Sign In' : 'Sign Up'}</Title>
+            <Form onSubmit={handleSubmit}>
+              {accessingDatabase && (
+                <Spinner>
+                  <FontAwesomeIcon size="2x" icon={faSyncAlt} spin />
+                </Spinner>
+              )}
+
+              {!isSignedUp && (
+                <>
+                  <InputRow>
+                    <InputContainer accessingDatabase={accessingDatabase}>
+                      <Input
+                        required
+                        name="firstName"
+                        id="firstName"
+                        onChange={handleChange}
+                        onFocus={handleOnFocus}
+                        onBlur={handleOnBlur}
+                        value={'' || formData.firstName}
+                      />
+                      <InputLabel
+                        htmlFor="firstName"
+                        variants={variant}
+                        initial={'initial'}
+                        animate={
+                          formData.firstName !== '' ||
+                          formData.firstNameIsFocused
+                            ? 'active'
+                            : 'initial'
+                        }
+                      >
+                        First Name
+                      </InputLabel>
+                    </InputContainer>
+                    <InputContainer accessingDatabase={accessingDatabase}>
+                      <Input
+                        id="lastName"
+                        required
+                        name="lastName"
+                        onChange={handleChange}
+                        onFocus={handleOnFocus}
+                        onBlur={handleOnBlur}
+                        value={'' || formData.lastName}
+                      />
+                      <InputLabel
+                        htmlFor="lastName"
+                        variants={variant}
+                        initial={'initial'}
+                        animate={
+                          formData.lastName !== '' || formData.lastNameIsFocused
+                            ? 'active'
+                            : 'initial'
+                        }
+                      >
+                        Last Name
+                      </InputLabel>
+                    </InputContainer>
+                  </InputRow>
+                </>
+              )}
+              <InputContainer
+                accessingDatabase={accessingDatabase}
+                incorrectCredentials={incorrectCredentials}
               >
-                Repeat Password
-              </InputLabel>
-            </InputContainer>
-          )}
-          {isSignedUp && incorrectCredentials && (
-            <IncorrectError>Incorrect Username or Password</IncorrectError>
-          )}
-          <Button type="submit" disabled={!isSignedUp ? !passwordMatch : false}>
-            {isSignedUp ? 'Sign In' : 'Sign Up'}
-          </Button>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_ID}
-            render={(renderProps) => (
+                <Input
+                  id="email"
+                  incorrectCredentials={incorrectCredentials}
+                  required
+                  name="email"
+                  type="email"
+                  onChange={handleChange}
+                  onFocus={handleOnFocus}
+                  onBlur={handleOnBlur}
+                  value={'' || formData.email}
+                />
+                <InputLabel
+                  htmlFor="email"
+                  incorrectCredentials={incorrectCredentials}
+                  variants={variant}
+                  initial={'initial'}
+                  animate={
+                    formData.email !== '' || formData.emailIsFocused
+                      ? 'active'
+                      : 'initial'
+                  }
+                >
+                  Email
+                </InputLabel>
+              </InputContainer>
+              <InputContainer
+                accessingDatabase={accessingDatabase}
+                incorrectCredentials={incorrectCredentials}
+              >
+                <InputLabel
+                  htmlFor="password"
+                  incorrectCredentials={incorrectCredentials}
+                  variants={variant}
+                  initial={'initial'}
+                  animate={
+                    formData.password !== '' || formData.passwordIsFocused
+                      ? 'active'
+                      : 'initial'
+                  }
+                >
+                  Password
+                </InputLabel>
+                <Input
+                  id="password"
+                  incorrectCredentials={incorrectCredentials}
+                  required
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleChange}
+                  onFocus={handleOnFocus}
+                  onBlur={handleOnBlur}
+                  value={'' || formData.password}
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEyeSlash : faEye}
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </InputContainer>
+              {!isSignedUp && (
+                <InputContainer accessingDatabase={accessingDatabase}>
+                  <Input
+                    id="repeat_password"
+                    required
+                    type="password"
+                    name="repeatPassword"
+                    onChange={handleChange}
+                    onFocus={handleOnFocus}
+                    onBlur={handleOnBlur}
+                    value={'' || formData.repeatPassword}
+                  />
+                  <InputLabel
+                    htmlFor="repeat_password"
+                    variants={variant}
+                    initial={'initial'}
+                    animate={
+                      formData.repeatPassword !== '' ||
+                      formData.repeatPasswordIsFocused
+                        ? 'active'
+                        : 'initial'
+                    }
+                  >
+                    Repeat Password
+                  </InputLabel>
+                </InputContainer>
+              )}
+              {isSignedUp && incorrectCredentials && (
+                <IncorrectError>Incorrect Username or Password</IncorrectError>
+              )}
               <Button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
+                type="submit"
+                disabled={!isSignedUp ? !passwordMatch : false}
               >
-                <FontAwesomeIcon icon={faGoogle} /> Sign In With Google
+                {isSignedUp ? 'Sign In' : 'Sign Up'}
               </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
-          />
-        </Form>
+              <GoogleLogin
+                clientId={process.env.REACT_APP_GOOGLE_ID}
+                render={(renderProps) => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    <FontAwesomeIcon icon={faGoogle} /> Sign In With Google
+                  </Button>
+                )}
+                onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy="single_host_origin"
+              />
+            </Form>
 
-        <ModeButton onClick={(e) => guestLogIn(e)}>
-          Sign In as a Guest
-        </ModeButton>
+            <ModeButton onClick={(e) => guestLogIn(e)}>
+              Sign In as a Guest
+            </ModeButton>
 
-        <ModeButton onClick={() => switchMode()}>
-          {isSignedUp
-            ? `Don't have an account? Sign Up `
-            : `Already have an account? Sign In`}
-        </ModeButton>
+            <ModeButton onClick={() => switchMode()}>
+              {isSignedUp
+                ? `Don't have an account? Sign Up `
+                : `Already have an account? Sign In`}
+            </ModeButton>
+          </>
+        ) : (
+          <Title>Currently Signed In</Title>
+        )}
       </Card>
     </PageContainer>
   );
@@ -390,10 +446,19 @@ const Title = styled.span`
 
 const Form = styled.form`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+`;
+
+const Spinner = styled.div`
+  color: var(--secondary-color);
+  display: flex;
+  align-self: center;
+  position: absolute;
+  top: 20%;
 `;
 
 const Input = styled.input`
@@ -441,6 +506,12 @@ const InputContainer = styled.div`
   align-items: stretch;
   width: 100%;
   margin-top: 1.5rem;
+  ${({ accessingDatabase }) =>
+    accessingDatabase &&
+    css`
+      visibility: hidden;
+    `}
+
   & svg {
     position: absolute;
     color: var(--highlight-color);

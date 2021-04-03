@@ -11,63 +11,71 @@ const Footer = () => {
     <>
       <FooterSection data-testid="footer-container">
         <Column>
-          <Logo>
-            <img data-testid="footer-image" src={YumLogo} alt="Yum Logo" />
-          </Logo>
-          <Description>
-            Yum provides users with easy to access recipes with a simple and
-            responsive design. Browse and save thousands of recipes today!
-          </Description>
-          <Icons>
-            <Icon
-              initial={{
-                color: 'var(--highlight-color)',
-                background: '#F5A11C00',
-              }}
-              whileHover={{
-                color: 'var(--bg-color)',
-                background: 'var(--highlight-color)',
-              }}
-            >
-              <a data-testid="footer-github" href="https://github.com/sjaga003">
-                <FaIcon icon={faGithubAlt} />
-              </a>
-            </Icon>
-            <Icon
-              initial={{
-                color: 'var(--highlight-color)',
-                background: '#F5A11C00',
-              }}
-              whileHover={{
-                color: 'var(--bg-color)',
-                background: 'var(--highlight-color)',
-              }}
-            >
-              <a
-                data-testid="footer-linkedin"
-                href="https://www.linkedin.com/in/suhas-jagannath/"
+          <List>
+            <Logo>
+              <img data-testid="footer-image" src={YumLogo} alt="Yum Logo" />
+            </Logo>
+            <Description>
+              Yum provides users with easy to access recipes with a simple and
+              responsive design. Browse and save thousands of recipes today!
+            </Description>
+            <Icons>
+              <Icon
+                initial={{
+                  color: 'var(--highlight-color)',
+                  background: '#F5A11C00',
+                }}
+                whileHover={{
+                  color: 'var(--bg-color)',
+                  background: 'var(--highlight-color)',
+                }}
               >
-                <FaIcon icon={faLinkedinIn} />
-              </a>
-            </Icon>
-          </Icons>
+                <a
+                  data-testid="footer-github"
+                  href="https://github.com/sjaga003"
+                >
+                  <FaIcon icon={faGithubAlt} />
+                </a>
+              </Icon>
+              <Icon
+                initial={{
+                  color: 'var(--highlight-color)',
+                  background: '#F5A11C00',
+                }}
+                whileHover={{
+                  color: 'var(--bg-color)',
+                  background: 'var(--highlight-color)',
+                }}
+              >
+                <a
+                  data-testid="footer-linkedin"
+                  href="https://www.linkedin.com/in/suhas-jagannath/"
+                >
+                  <FaIcon icon={faLinkedinIn} />
+                </a>
+              </Icon>
+            </Icons>
+          </List>
         </Column>
         <Column>
-          <Heading>Links</Heading>
-
-          <Link href="#">About Us</Link>
-          <Link href="#">Terms of Use</Link>
-          <Link href="#">Privacy Policy</Link>
+          <List>
+            <Heading>Links</Heading>
+            <Link href="#">About Us</Link>
+            <Link href="#">Terms of Use</Link>
+            <Link href="#">Privacy Policy</Link>
+          </List>
         </Column>
         <Column>
-          <Heading>Contact Us</Heading>
-          <ContactInfo>1800-123-4567</ContactInfo>
-          <ContactInfo>info@yum.com</ContactInfo>
-          <Address>
-            <span>1600 Pennsylvania Avenue </span>
-            <span>N.W. Washington</span>
-            <span>DC 20500</span>
-          </Address>
+          <List>
+            <Heading>Contact Us</Heading>
+            <ContactInfo>1800-123-4567</ContactInfo>
+            <ContactInfo>info@yum.com</ContactInfo>
+            <Address>
+              <span>1600 Pennsylvania Avenue </span>
+              <span>N.W. Washington</span>
+              <span>DC 20500</span>
+            </Address>
+          </List>
         </Column>
       </FooterSection>
     </>
@@ -78,7 +86,8 @@ const FooterSection = styled.section`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 5rem 3rem;
+  padding: 5rem 0rem;
+
   @media (${size.xl}) {
   }
   @media (${size.lg}) {
@@ -99,6 +108,8 @@ const FooterSection = styled.section`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 33.3%;
   color: var(--header-color);
   & > * {
     padding: 0.5rem 0rem;
@@ -116,6 +127,11 @@ const Column = styled.div`
   }
   @media (${size.xs}) {
   }
+`;
+
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Logo = styled.div`
@@ -150,6 +166,7 @@ const Icons = styled.ul`
   max-width: 10.5rem;
   color: var(--highlight-color);
   cursor: pointer;
+  margin-top: 1rem;
   @media (${size.xl}) {
   }
   @media (${size.lg}) {

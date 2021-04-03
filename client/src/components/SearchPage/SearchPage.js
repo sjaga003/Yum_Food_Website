@@ -1,4 +1,4 @@
-import { faStop, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faStop, faSyncAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
@@ -33,7 +33,12 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
 
   const recipeCards = useSelector((state) => state.recipeCards);
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
+    if (typeof window !== `undefined`) {
+      window.scrollTo(0, 0);
+    }
     dispatch(clearRecipeCards());
     if (searchQuery) {
       dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
@@ -163,7 +168,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             }
             loader={
               <Loader key={'Loader'}>
-                <FontAwesomeIcon icon={faSync} spin />
+                <FontAwesomeIcon icon={faSyncAlt} spin />
               </Loader>
             }
           >
@@ -191,7 +196,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
             </EndMessage>
           ) : (
             <Loader>
-              <FontAwesomeIcon icon={faSync} spin />
+              <FontAwesomeIcon icon={faSyncAlt} spin />
             </Loader>
           ))
         )}

@@ -1,11 +1,14 @@
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import CardSave from '../../images/card_save.svg';
 import size from '../../styles/responsiveStyles';
 
-const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
+const NeedAuthModal = ({ cantClose }) => {
   const history = useHistory();
 
   return (
@@ -16,8 +19,6 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
           document.body.style.overflowY = 'auto';
           if (cantClose) {
             history.push('/');
-          } else {
-            setNeedAuthOpen(false);
           }
         }
       }}
@@ -37,6 +38,16 @@ const NeedAuthModal = ({ setNeedAuthOpen, cantClose }) => {
             <Button>Sign Up or Sign In </Button>
           </Link>
         </CardSection>
+        <CloseButton
+          onClick={() => {
+            document.body.style.overflowY = 'auto';
+            if (cantClose) {
+              history.push('/');
+            }
+          }}
+        >
+          <FontAwesomeIcon icon={faTimes} />
+        </CloseButton>
         <CardSection>
           <img data-testid="need-auth-image" src={CardSave} alt="Card Save" />
         </CardSection>
@@ -57,6 +68,7 @@ const Card = styled.div`
   font-family: var(--header-font);
   font-size: 3.6rem;
   border-radius: 6px;
+  position: relative;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   user-select: none;
   & > div:first-child {
@@ -205,6 +217,23 @@ const Button = styled.button`
     padding: 1rem 2rem;
   }
   @media (${size.xs}) {
+  }
+`;
+
+const CloseButton = styled.span`
+  position: absolute;
+  height: 3rem;
+  width: 3rem;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  svg {
+    height: 3rem;
+    width: 3rem;
+    color: var(--text-color);
   }
 `;
 

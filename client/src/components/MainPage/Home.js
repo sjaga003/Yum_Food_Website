@@ -69,6 +69,7 @@ const HomeContainer = styled.div`
     height: 50vh;
   }
   @media (${size.md}) {
+    margin-top: 0rem;
     background: rgb(227, 139, 0);
     background: linear-gradient(
       365deg,

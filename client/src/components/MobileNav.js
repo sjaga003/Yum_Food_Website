@@ -7,10 +7,16 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { animateScroll } from 'react-scroll';
+import { setCookBook } from '../actions/cookBookAction';
+import { useDispatch } from 'react-redux';
 
 const MobileNav = ({ isOpen, setIsOpen }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = 'hidden';
@@ -48,13 +54,36 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
           </TopRow>
 
           <NavLinks>
-            <NavItem to="/">
+            <NavItem
+              to="/"
+              onClick={() =>
+                history.location.pathname === '/'
+                  ? animateScroll.scrollToTop()
+                  : ''
+              }
+            >
               <NavIcon icon={faHome} /> Home
             </NavItem>
-            <NavItem to="/cookbook">
+            <NavItem
+              to="/cookbook"
+              onClick={() => {
+                if (history.location.pathname === '/cookbook') {
+                  animateScroll.scrollToTop();
+                } else {
+                  dispatch(setCookBook([]));
+                }
+              }}
+            >
               <NavIcon icon={faBookOpen} /> My Recipes
             </NavItem>
-            <NavItem to="/search">
+            <NavItem
+              to="/search"
+              onClick={() =>
+                history.location.pathname === '/search'
+                  ? animateScroll.scrollToTop()
+                  : ''
+              }
+            >
               <NavIcon icon={faSearch} /> Search
             </NavItem>
           </NavLinks>

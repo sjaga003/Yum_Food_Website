@@ -20,17 +20,6 @@ const CookBookSidebar = ({
 
   const [needAuthOpen, setNeedAuthOpen] = useState(false);
 
-  useEffect(() => {
-    //Added deps to remove ESLint Warning
-    //Only supposed to run once on first render []
-    setIsCookBookOpen(false);
-    if (user) {
-      dispatch(fetchToCookBook());
-    } else {
-      dispatch(setCookBook([]));
-    }
-  }, [dispatch, setIsCookBookOpen, user]);
-
   return (
     <>
       {needAuthOpen && <NeedAuthModal setNeedAuthOpen={setNeedAuthOpen} />}
