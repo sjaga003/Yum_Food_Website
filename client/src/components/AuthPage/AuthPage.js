@@ -13,12 +13,7 @@ import { GoogleLogin } from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled, { css } from 'styled-components';
-import {
-  authSignIn,
-  authSignUp,
-  getAuthData,
-  logoutUser,
-} from '../../actions/authAction';
+import { authSignIn, authSignUp, getAuthData } from '../../actions/authAction';
 import size from '../../styles/responsiveStyles';
 import Nav from '../Nav';
 
@@ -117,11 +112,6 @@ const Auth = () => {
 
   const googleFailure = () => {
     console.error('Google Sign In was unsuccessful');
-  };
-
-  const logout = () => {
-    dispatch(logoutUser());
-    history.push('/');
   };
 
   useEffect(() => {

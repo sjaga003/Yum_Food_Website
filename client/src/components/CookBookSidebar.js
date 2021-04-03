@@ -1,11 +1,10 @@
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
 import NeedAuthModal from './AuthPage/NeedAuthModal';
 import CookBookCard from './CookBookCard';
 
@@ -16,7 +15,6 @@ const CookBookSidebar = ({
 }) => {
   const cookBook = useSelector((state) => state.cookBook);
   const user = useSelector((state) => state.auth.authData);
-  const dispatch = useDispatch();
 
   const [needAuthOpen, setNeedAuthOpen] = useState(false);
 

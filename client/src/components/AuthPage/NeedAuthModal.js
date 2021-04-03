@@ -8,8 +8,16 @@ import styled from 'styled-components';
 import CardSave from '../../images/card_save.svg';
 import size from '../../styles/responsiveStyles';
 
-const NeedAuthModal = ({ cantClose }) => {
+const NeedAuthModal = ({ cantClose, setNeedAuthOpen }) => {
   const history = useHistory();
+  const user = useSelector((state) => state.auth.authData);
+  useEffect(() => {
+    if (user) {
+      document.body.style.overflowY = 'auto';
+    } else {
+      document.body.style.overflowY = 'hidden';
+    }
+  }, [user]);
 
   return (
     <CardShadow
@@ -17,6 +25,7 @@ const NeedAuthModal = ({ cantClose }) => {
       onClick={(e) => {
         if (e.target.classList.contains('shadow')) {
           document.body.style.overflowY = 'auto';
+          setNeedAuthOpen(false);
           if (cantClose) {
             history.push('/');
           }
@@ -41,6 +50,7 @@ const NeedAuthModal = ({ cantClose }) => {
         <CloseButton
           onClick={() => {
             document.body.style.overflowY = 'auto';
+            setNeedAuthOpen(false);
             if (cantClose) {
               history.push('/');
             }
