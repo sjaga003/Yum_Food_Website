@@ -13,7 +13,7 @@ export const getRecipes = async (req, res) => {
 
 export const createRecipe = async (req, res) => {
   const body = req.body;
-  console.log(body);
+  // console.log(body);
   const existingRecipe = await Recipe.findOne({
     recipeObject: body.recipeObject,
   });
@@ -21,7 +21,6 @@ export const createRecipe = async (req, res) => {
 
   if (existingRecipe) {
     newRecipe = existingRecipe;
-    console.log('existing recipe');
   } else {
     newRecipe = new Recipe(body);
   }

@@ -20,7 +20,6 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const [needAuthOpen, setNeedAuthOpen] = useState(false); // eslint-disable-line
 
   useEffect(() => {
-    console.log('open');
     if (typeof window !== `undefined`) {
       window.scrollTo(0, 0);
     }

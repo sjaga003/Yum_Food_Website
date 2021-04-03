@@ -165,7 +165,7 @@ const RecipeCard = ({
               className="deleteContainer"
               onClick={(e) => {
                 e.stopPropagation();
-                console.log('JELLLO');
+
                 dispatch(removeFromCookBook(databaseId));
               }}
             >

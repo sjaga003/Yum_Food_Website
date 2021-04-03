@@ -432,7 +432,6 @@ const Carousel = () => {
     const bounds = boundsRef.current.getBoundingClientRect();
     const boundsCenterX = bounds.left + bounds.width / 2;
     const boundsCenterY = bounds.top + bounds.height / 2;
-    console.log(bounds);
 
     const itemCoords = generateItemCoords(
       cardRef,
@@ -453,7 +452,6 @@ const Carousel = () => {
         fromDrag: true,
       });
     }
-    console.log(closestValue);
   };
 
   useEffect(() => {
