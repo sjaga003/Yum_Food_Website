@@ -1,5 +1,5 @@
 import { AnimateSharedLayout } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from './Carousel';
 import Contact from './Contact';
@@ -15,6 +15,11 @@ import styled from 'styled-components';
 const MainPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const isMobile = useSelector((state) => state.isMobile);
 
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
   return (
     <MainContainer>
       <Nav

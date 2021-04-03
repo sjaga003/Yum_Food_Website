@@ -13,9 +13,14 @@ export const setCookBook = (updatedValue) => {
 
 export const addToCookBook = (recipe) => async (dispatch) => {
   try {
+    await dispatch({
+      type: 'cookBook/addToCookBook',
+      payload: { recipeObject: recipe },
+    });
     const { data } = await addRecipeToDatabase({ recipeObject: recipe });
     dispatch({
-      type: 'cookBook/addToCookBook',
+      //Need this so that the CookBook UI shows card while its waiting for database data
+      type: 'cookBook/modifyCookBookValue',
       payload: data,
     });
   } catch (error) {
@@ -36,9 +41,15 @@ export const removeFromCookBook = (databaseId) => async (dispatch) => {
   }
 };
 
-export const fetchToCookBook = () => async (dispatch) => {
+export const fetchToCookBook = (firstLoad) => async (dispatch) => {
   try {
-    const { data } = await fetchAllRecipes();
+    let { data } = await fetchAllRecipes();
+
+    if (firstLoad) {
+      data = data.sort(
+        (a, b) => a.recipeObject.healthScore - b.recipeObject.healthScore
+      );
+    }
 
     dispatch({ type: 'cookBook/fetchAllRecipes', payload: data });
   } catch (error) {

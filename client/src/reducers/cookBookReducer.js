@@ -6,6 +6,13 @@ const cookBookReducer = (state = intitalState, action) => {
       return action.payload;
     case 'cookBook/addToCookBook':
       return [...state, action.payload];
+    case 'cookBook/modifyCookBookValue':
+      state[
+        state.findIndex(
+          (item) => item.recipeObject.id === action.payload.recipeObject.id
+        )
+      ] = action.payload;
+      return state;
     case 'cookBook/removeFromCookBook':
       return state.filter((item) => item._id !== action.payload);
     case 'cookBook/fetchAllRecipes':

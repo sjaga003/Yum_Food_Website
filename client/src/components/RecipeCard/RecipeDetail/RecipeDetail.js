@@ -2,7 +2,7 @@ import {
   faBreadSlice,
   faLeaf,
   faSeedling,
-  faSync,
+  faSyncAlt,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -250,7 +250,7 @@ const RecipeDetail = ({
         }}
         layoutId={`recipeCard-${recipeId}`}
       >
-        <SpinnerIcon size="lg" icon={faSync} spin />
+        <SpinnerIcon size="lg" icon={faSyncAlt} spin />
       </Card>
     </CardShadow>
   );
@@ -289,6 +289,28 @@ const CardShadow = styled(motion.div)`
     display: none;
   }
   overflow-y: scroll;
+  @media (${size.xl}) {
+  }
+  @media (${size.lg}) {
+  }
+  @media (${size.md}) {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--highlight-color);
+    }
+    &::-webkit-scrollbar-track {
+      background: #e2e2e2;
+    }
+    &::-webkit-resizer {
+      display: none;
+    }
+  }
+  @media (${size.sm}) {
+  }
+  @media (${size.xs}) {
+  }
 `;
 
 const Card = styled(motion.div)`

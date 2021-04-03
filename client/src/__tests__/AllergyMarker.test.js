@@ -1,4 +1,4 @@
-import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import '@testing-library/jest-dom/extend-expect';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
@@ -32,7 +32,11 @@ const renderWithRedux = (
 beforeEach(() => {
   const component = renderWithRedux(
     renderWithRouter(
-      <AllergyMarker labelName="test-name" external={false} iconName={faSync} />
+      <AllergyMarker
+        labelName="test-name"
+        external={false}
+        iconName={faSyncAlt}
+      />
     ),
     {}
   );

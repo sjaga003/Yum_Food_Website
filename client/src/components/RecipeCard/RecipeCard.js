@@ -2,7 +2,7 @@ import {} from '@fortawesome/free-regular-svg-icons';
 import {
   faHeart,
   faPlus,
-  faSync,
+  faSyncAlt,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -158,7 +158,7 @@ const RecipeCard = ({
         onClick={onCardClick}
       >
         <ImageContainer>
-          {!imageLoaded && <Spinner size="4x" icon={faSync} spin />}
+          {!imageLoaded && <Spinner size="4x" icon={faSyncAlt} spin />}
           {fromCookBook && (
             <DeleteContainer
               data-testid="recipe-card-cookbook-delete"

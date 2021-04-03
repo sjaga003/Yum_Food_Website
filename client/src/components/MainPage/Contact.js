@@ -62,7 +62,10 @@ const Contact = ({ mockHandleSubmit }) => {
           data-testid="contact-form"
           autoComplete="off"
           onSubmit={handleSubmit}
+          netlify
+          name="Yum-Contact"
         >
+          <input type="hidden" name="form-name" value="Yum-Contact" />
           <InputContainer>
             <ValueInput
               data-testid="contact-name"

@@ -13,6 +13,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 import { logoutUser } from '../actions/authAction';
+import { fetchToCookBook, setCookBook } from '../actions/cookBookAction';
 import YumLogo from '../images/Yum_Logo.svg';
 import size from '../styles/responsiveStyles';
 import AccountDropdown from './AuthPage/AccountDropdown';
@@ -30,6 +31,7 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
   useEffect(() => {
     //Added deps to remove ESLint Warning
     //Only supposed to run once on first render []
+
     const token = user?.token;
 
     if (token) {
@@ -47,6 +49,18 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
+
+    if (history.location.pathname !== '/cookbook') {
+      try {
+        setIsCookBookOpen(false);
+      } catch (error) {}
+
+      if (user) {
+        dispatch(fetchToCookBook());
+      } else {
+        dispatch(setCookBook([]));
+      }
+    }
   }, [dispatch, history, setIsCookBookOpen, user?.token]);
 
   if (typeof document !== `undefined`) {
@@ -90,8 +104,17 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
           </>
         )}
 
-        <Logo onClick={() => animateScroll.scrollToTop()}>
-          <img data-testid="nav-logo" src={YumLogo} alt="Yum Logo" />
+        <Logo>
+          <NavLink
+            onClick={() =>
+              history.location.pathname === '/'
+                ? animateScroll.scrollToTop()
+                : ''
+            }
+            to="/"
+          >
+            <img data-testid="nav-logo" src={YumLogo} alt="Yum Logo" />
+          </NavLink>
         </Logo>
       </LeftContainer>
       <NavLinks>
@@ -99,21 +122,35 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
           <>
             <NavItem
               data-testid="nav-home"
-              onClick={() => animateScroll.scrollToTop()}
+              onClick={() =>
+                history.location.pathname === '/'
+                  ? animateScroll.scrollToTop()
+                  : ''
+              }
               to="/"
             >
               <NavIcon icon={faHome} /> Home
             </NavItem>
             <NavItem
               data-testid="nav-cookbook"
-              onClick={() => animateScroll.scrollToTop()}
+              onClick={() => {
+                if (history.location.pathname === '/cookbook') {
+                  animateScroll.scrollToTop();
+                } else {
+                  dispatch(setCookBook([]));
+                }
+              }}
               to="/cookbook"
             >
               <NavIcon icon={faBookOpen} /> My Recipes
             </NavItem>
             <NavItem
               data-testid="nav-search"
-              onClick={() => animateScroll.scrollToTop()}
+              onClick={() =>
+                history.location.pathname === '/search'
+                  ? animateScroll.scrollToTop()
+                  : ''
+              }
               to="/search"
             >
               <NavIcon icon={faSearch} /> Search
