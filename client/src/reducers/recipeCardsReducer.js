@@ -9,7 +9,6 @@ export const recipeCardsReducer = (state = initialState, action) => {
         isLoading: false,
       };
     case 'recipeCards/loadSearchedRecipes':
-      console.log(state);
       return {
         ...state,
         recipes: action.payload.recipes,
@@ -23,7 +22,6 @@ export const recipeCardsReducer = (state = initialState, action) => {
         isLoading: false,
       };
     case 'recipeCards/loadAdditionalSearchedRecipes':
-      console.log(state);
       return {
         ...state,
         recipes: {
@@ -45,7 +43,6 @@ export const recipeCardsReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case 'recipeCards/setRecipeCards':
-      console.log(action.payload);
       return {
         ...state,
         recipes: {

@@ -107,10 +107,6 @@ const NutritionalInfo = ({ recipe }) => {
     setNutrientData(getNutrientData());
   }, [recipe.nutrition.nutrients]);
 
-  useEffect(() => {
-    console.log(nutrientData);
-  }, [nutrientData]);
-
   const COLORS = ['#5ad', '#e55', '#8a0'];
   const RADIAN = Math.PI / 180;
 

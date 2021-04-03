@@ -76,7 +76,7 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
         <SearchForm
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(searchQuery);
+
             dispatch(loadSearchedRecipes(0, searchQuery, sortSelected));
 
             // dispatch(loadPreviewRecipes(recipePreviewPopular()));
@@ -89,9 +89,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
               },
             });
             setSearchQuery('');
-
-            console.log('HERE');
-            console.log(!recipeCards.isDone);
           }}
         >
           <SearchContainer>
@@ -142,7 +139,6 @@ const Search = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
               recipeCards.recipes.results &&
               recipeCards.recipes.results.length
             ) {
-              console.log('reset');
               dispatch(clearRecipeCards());
               dispatch(loadSearchedRecipes(0, lastSearch, e.target.value));
             }

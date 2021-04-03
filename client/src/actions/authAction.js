@@ -36,7 +36,6 @@ export const authSignIn = (
 export const authSignUp = (formData, history) => async (dispatch) => {
   try {
     //sign up the user
-    console.log('HERE');
     const { data } = await signUp(formData);
     dispatch({ type: 'auth/getAuthData', payload: data });
     history.push('/');

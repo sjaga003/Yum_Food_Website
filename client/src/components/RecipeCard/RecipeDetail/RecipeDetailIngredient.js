@@ -72,6 +72,7 @@ const IngredientCard = styled(motion.div)`
   @media (${size.xs}) {
     height: 13rem;
     width: 13rem;
+    padding: 0.5rem;
   }
 `;
 const IngredientImage = styled(motion.div)`
@@ -119,6 +120,7 @@ const IngredientName = styled(motion.span)`
     font-size: 1.4rem;
   }
   @media (${size.xs}) {
+    font-size: 1.1rem;
   }
 `;
 
@@ -137,6 +139,7 @@ const IngredientAmount = styled(motion.div)`
     font-size: 1.4rem;
   }
   @media (${size.xs}) {
+    font-size: 1.1rem;
   }
 `;
 

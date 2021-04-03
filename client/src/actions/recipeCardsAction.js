@@ -17,12 +17,10 @@ export const loadSearchedRecipes = (
   query,
   sortType = 'meta-score'
 ) => async (dispatch) => {
-  console.log('before');
   const searchedRecipeData = await axios.get(
     searchURL(offset, query, sortType)
   );
-  console.log('hi');
-  console.log(searchedRecipeData);
+
   dispatch({
     type: 'recipeCards/loadSearchedRecipes',
     payload: {

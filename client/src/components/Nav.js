@@ -37,7 +37,6 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
     if (token) {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) {
-        console.log('expired');
         dispatch(logoutUser());
         history.push('/');
         setUser(null);
