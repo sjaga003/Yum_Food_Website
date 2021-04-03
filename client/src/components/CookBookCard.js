@@ -64,6 +64,8 @@ const CookBookCard = ({ databaseEntry }) => {
         </FoodInfo>{' '}
         <CloseContainer
           onClick={(e) => {
+            console.log(`clicked`);
+            console.log(databaseEntry);
             dispatch(removeFromCookBook(databaseEntry._id));
             e.stopPropagation();
           }}

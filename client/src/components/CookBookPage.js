@@ -1,10 +1,9 @@
 import { AnimateSharedLayout } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
   fetchToCookBook,
-  setCookBook,
   sortRecipesByMeta,
   sortRecipesByPrice,
   sortRecipesByTime,
@@ -18,6 +17,7 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.authData);
   const cookBook = useSelector((state) => state.cookBook);
+  const [needAuthOpen, setNeedAuthOpen] = useState(false); // eslint-disable-line
 
   useEffect(() => {
     console.log('open');
@@ -26,20 +26,14 @@ const CookBookPage = ({ isCookBookOpen, setIsCookBookOpen, cookBookRef }) => {
     }
 
     dispatch(fetchToCookBook(true));
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      document.body.style.overflowY = 'auto';
-    } else {
-      document.body.style.overflowY = 'hidden';
-    }
-  }, [user]);
+  }, [dispatch]);
 
   return (
     <PageContainer>
       <AnimateSharedLayout type="switch">
-        {!user && <NeedAuthModal cantClose={true} />}
+        {!user && (
+          <NeedAuthModal setNeedAuthOpen={setNeedAuthOpen} cantClose={true} />
+        )}
         <Nav />
         <Title>My Recipes</Title>
         {cookBook ? (

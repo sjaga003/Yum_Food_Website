@@ -61,7 +61,7 @@ const Nav = ({ isCookBookOpen, setIsCookBookOpen }) => {
         dispatch(setCookBook([]));
       }
     }
-  }, [dispatch, history, setIsCookBookOpen, user?.token]);
+  }, [dispatch, history, setIsCookBookOpen, user?.token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (typeof document !== `undefined`) {
     var prevScrollpos = window.pageYOffset;
