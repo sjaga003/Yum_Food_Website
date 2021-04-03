@@ -63,6 +63,7 @@ const Contact = ({ mockHandleSubmit }) => {
           autoComplete="off"
           name="contact"
           data-netlify="true"
+          method="POST"
         >
           <input type="hidden" name="form-name" value="contact" />
           <InputContainer>
