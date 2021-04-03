@@ -43,7 +43,11 @@ const NeedAuthModal = ({ cantClose, setNeedAuthOpen }) => {
             then save them to your personal recipe list!
           </ContentText>
 
-          <Link to="/auth" data-testid="need-auth-button">
+          <Link
+            onClick={() => (document.body.style.overflowY = 'auto')}
+            to="/auth"
+            data-testid="need-auth-button"
+          >
             <Button>Sign Up or Sign In </Button>
           </Link>
         </CardSection>

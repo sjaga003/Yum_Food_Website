@@ -37,7 +37,9 @@ const RecipeCard = ({
   databaseId,
   testing,
 }) => {
-  const recipeDetails = useSelector((state) => state.recipeCards);
+  const recipeDetails = useSelector((state) =>
+    fromCookBook ? state.cookBook : state.recipeCards
+  );
   const user = useSelector((state) => state.auth.authData);
   const dispatch = useDispatch();
   const cardRef = useRef();
@@ -98,11 +100,18 @@ const RecipeCard = ({
         'translate3d(0px, 0px, 0px) scale(1, 1)' ||
       testing
     ) {
-      setRecipeDetail(
-        recipeDetails.recipes.results.find(
-          (element) => element.id === recipe.id
-        )
-      );
+      if (fromCookBook) {
+        setRecipeDetail(
+          recipeDetails.find((element) => element.recipeObject.id === recipe.id)
+            .recipeObject
+        );
+      } else {
+        setRecipeDetail(
+          recipeDetails.recipes.results.find(
+            (element) => element.id === recipe.id
+          )
+        );
+      }
 
       setRecipeCardState({ ...recipeCardState, isDetailOpen: true });
       document.body.style.overflowY = 'hidden';
