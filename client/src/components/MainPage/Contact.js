@@ -30,7 +30,7 @@ const Contact = ({ mockHandleSubmit }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       mockHandleSubmit();
     } catch (error) {}
@@ -62,8 +62,9 @@ const Contact = ({ mockHandleSubmit }) => {
           data-testid="contact-form"
           autoComplete="off"
           onSubmit={handleSubmit}
-          netlify
           name="Yum-Contact"
+          method="POST"
+          netlify="true"
         >
           <input type="hidden" name="form-name" value="Yum-Contact" />
           <InputContainer>
