@@ -29,14 +29,14 @@ const Contact = ({ mockHandleSubmit }) => {
     setContactFormData({ ...contactFormData, [focusName]: false });
   };
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    try {
-      mockHandleSubmit();
-    } catch (error) {}
+  // const handleSubmit = (e) => {
+  //   // e.preventDefault();
+  //   try {
+  //     mockHandleSubmit();
+  //   } catch (error) {}
 
-    setContactFormData(initialContactFormData);
-  };
+  //   setContactFormData(initialContactFormData);
+  // };
 
   const variant = {
     active: {
@@ -61,7 +61,6 @@ const Contact = ({ mockHandleSubmit }) => {
         <Form
           data-testid="contact-form"
           autoComplete="off"
-          onSubmit={handleSubmit}
           name="Yum-Contact"
           method="POST"
           netlify="true"
