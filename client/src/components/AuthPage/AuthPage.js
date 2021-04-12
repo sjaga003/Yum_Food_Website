@@ -157,6 +157,7 @@ const Auth = () => {
               {accessingDatabase && (
                 <Spinner>
                   <FontAwesomeIcon size="2x" icon={faSyncAlt} spin />
+                  <span>This may take a moment...</span>
                 </Spinner>
               )}
 
@@ -446,9 +447,15 @@ const Form = styled.form`
 const Spinner = styled.div`
   color: var(--secondary-color);
   display: flex;
+  flex-direction: column;
+  align-items: center;
   align-self: center;
   position: absolute;
-  top: 20%;
+  top: 14%;
+  & span {
+    font-size: 2.4rem;
+    margin-top: 1rem;
+  }
 `;
 
 const Input = styled.input`
