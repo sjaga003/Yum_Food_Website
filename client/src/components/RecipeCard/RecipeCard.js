@@ -124,7 +124,7 @@ const RecipeCard = ({
     }
 
     if (!fromCookBook) {
-      return needAuthOpen ? false : true;
+      return true;
     } else {
       return false;
     }
@@ -144,7 +144,9 @@ const RecipeCard = ({
       <Card
         ref={cardRef}
         drag={handleDrag()}
-        dragConstraints={cardRef}
+        dragConstraints={
+          user ? cardRef : { left: 0.1, right: 0.1, top: 0.1, bottom: 0.1 }
+        }
         dragElastic={user ? 1 : 0}
         onDragStart={() => {
           if (user) {
