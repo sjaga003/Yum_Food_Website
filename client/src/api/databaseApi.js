@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'https://yum-food-website.herokuapp.com' });
+const API = axios.create({ baseURL: 'https://yum-food-backend.onrender.com' });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
