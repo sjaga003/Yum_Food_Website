@@ -17,7 +17,7 @@ app.use('/recipes', recipeRoutes);
 app.use('/users', userRoutes);
 
 //connect to mongoose
-const CONNECTION_URL = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.x4w0b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const CONNECTION_URL = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.${process.env.MONGO_DB_URI}.mongodb.net?appName=Cluster0`;
 
 mongoose
   .connect(CONNECTION_URL, {
